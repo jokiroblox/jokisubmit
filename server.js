@@ -11,7 +11,7 @@ app.use(express.static('public')); // Folder untuk file statis
 
 app.post('/generate-qris', (req, res) => {
     const nominal = req.body.nominal;
-    const qris = '00020101021126570011ID........'; // Ganti dengan QRIS yang valid
+    const qris = '00020101021126570011ID'; // Ganti dengan QRIS yang valid
 
     // Buat QRIS
     const result = qrisDinamis.makeFile(qris, { nominal: nominal, path: 'output/qris.jpg' });
