@@ -4,15 +4,18 @@ document.getElementById('paymentForm').addEventListener('submit', function(event
     
     const nominal = document.getElementById('nominal').value;
 
-    // Anda perlu mengganti ini dengan QRIS yang valid
-    const qris = '00020101021126570011ID........'; 
-
-    // Logika untuk membuat QRIS
-    // Ini tidak akan berfungsi di browser tanpa bundler
-    const result = qrisDinamis.makeFile(qris, { nominal: nominal, path: 'output/qris.jpg' });
-
-    // Tampilkan QRIS
-    const img = document.getElementById('qrisImage');
-    img.src = 'output/qris.jpg'; // Pastikan path ini sesuai dengan lokasi file
-    img.style.display = 'block';
+    fetch('/generate-qris', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ nominal: nominal })
+    })
+    .then(response => response.json())
+    .then(data => {
+        const img = document.getElementById('qrisImage');
+        img.src = data.url; // Menggunakan URL yang dikirim dari server
+        img.style.display = 'block';
+    })
+    .catch(error => console.error('Error:', error));
 });
