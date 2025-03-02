@@ -1,21 +1,14 @@
-// app.js
 document.getElementById('paymentForm').addEventListener('submit', function(event) {
     event.preventDefault();
     
     const nominal = document.getElementById('nominal').value;
+    const qris = '00020101021126570011ID'; // Ganti dengan QRIS statis Anda
 
-    fetch('/generate-qris', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ nominal: nominal })
-    })
-    .then(response => response.json())
-    .then(data => {
-        const img = document.getElementById('qrisImage');
-        img.src = data.url; // Menggunakan URL yang dikirim dari server
-        img.style.display = 'block';
-    })
-    .catch(error => console.error('Error:', error));
+    // Menggunakan qris-dinamis untuk membuat QRIS dinamis
+    const result = qrisDinamis.makeString(qris, { nominal: nominal });
+
+    // Tampilkan QRIS
+    const img = document.getElementById('qrisImage');
+    img.src = 'data:image/png;base64,' + result; // Menggunakan base64 untuk menampilkan QRIS
+    img.style.display = 'block';
 });
