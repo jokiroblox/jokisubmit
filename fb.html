@@ -1,41 +1,64 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>LinkVault — Cloud</title>
+  <title>LinkVault — Supabase (Full, Tanpa <dialog>)</title>
   <style>
-    :root{ --bg:#0b0c0f; --card:#111218; --fg:#f3f4f6; --muted:#a0a6b3; --bd:#1b1d24; --pri:#4f8cff; --pri-2:#396fe0; --red:#ef4444; }
-    @media (prefers-color-scheme: light){ :root{ --bg:#f7f7fb; --card:#ffffff; --fg:#0f1222; --muted:#5b6472; --bd:#e7e7ef; --pri:#1e66ff; --pri-2:#134bcc; --red:#dc2626; }}
-    *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto}
+    :root{ --bg:#0b0c0f; --card:#111218; --fg:#f3f4f6; --muted:#a0a6b3; --bd:#1b1d24; --pri:#4f8cff; --pri-2:#396fe0; --red:#ef4444; --ok:#22c55e }
+    @media (prefers-color-scheme: light){ :root{ --bg:#f7f7fb; --card:#ffffff; --fg:#0f1222; --muted:#5b6472; --bd:#e7e7ef; --pri:#1e66ff; --pri-2:#134bcc; --red:#dc2626; --ok:#16a34a } }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto}
     .container{max-width:1040px;margin:0 auto;padding:24px}
-    header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    header{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
     h1{margin:0;font-size:26px}
-    .muted{color:var(--muted)} .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap} .grow{flex:1}
-    input,textarea,select,button{border-radius:12px;border:1px solid var(--bd);background:var(--card);color:var(--fg);padding:10px 12px}
-    button.primary{background:var(--pri);border-color:var(--pri-2);color:#fff}
+    .muted{color:var(--muted)}
+    .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    .grow{flex:1}
+    input,textarea,select,button{border-radius:12px;border:1px solid var(--bd);background:var(--card);color:var(--fg);padding:10px 12px;outline:none}
+    input:focus,textarea:focus,select:focus{border-color:var(--pri); box-shadow:0 0 0 3px color-mix(in srgb, var(--pri) 30%, transparent)}
+    button{cursor:pointer}
+    .primary{background:var(--pri);border-color:var(--pri-2);color:#fff}
+    .danger{border-color: color-mix(in srgb, var(--red) 40%, var(--bd)); color: var(--red)}
+
+    .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+    .chip{border:1px solid var(--bd);padding:6px 10px;border-radius:999px;font-size:12px;display:inline-flex;gap:8px;align-items:center}
+    .chip .x{border:1px solid var(--bd);border-radius:999px;padding:0 6px}
+
+    .stats{margin-top:6px;color:var(--muted)}
+
     .grid{display:grid;grid-template-columns:repeat(1,minmax(0,1fr));gap:12px;margin-top:16px}
     @media(min-width:700px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-    @media(min-width:980px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+    @media(min-width:980px){.grid.compact{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
     .card{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:14px}
-    .title{display:flex;justify-content:space-between;gap:8px} .title h3{margin:0;font-size:16px;word-break:break-word}
+    .title{display:flex;justify-content:space-between;gap:8px}
+    .title h3{margin:0;font-size:16px;word-break:break-word}
     .tags{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0}
     .tag{border:1px solid var(--bd);padding:3px 8px;border-radius:999px;font-size:12px;opacity:.9}
     .note{color:var(--muted);font-size:14px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
     .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
     .meta{font-size:12px;color:var(--muted);margin-top:6px}
     .empty{border:1px dashed var(--bd);border-radius:16px;padding:28px;text-align:center}
-    dialog{border:none;border-radius:16px;padding:0;background:var(--card);color:var(--fg);width:min(560px,calc(100% - 32px))}
-    dialog::backdrop{background:rgba(0,0,0,.5)} .dlg{padding:16px}
+
+    /* Modal (tanpa <dialog>) */
+    .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none}
+    .modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);background:var(--card);color:var(--fg);border:1px solid var(--bd);border-radius:16px;width:min(560px,calc(100% - 32px));display:none}
+    .modal .box{padding:16px}
+    .modal.show, .modal-backdrop.show{display:block}
+
+    .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--card);border:1px solid var(--bd);padding:10px 14px;border-radius:12px;opacity:0;transition:.2s}
+    .toast.show{opacity:1}
   </style>
-  <script src="https://esm.sh/@supabase/supabase-js@2"></script>
+  <!-- Supabase JS (CDN stabil) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
   <div class="container">
     <header>
       <div>
-        <h1>LinkVault — Cloud</h1>
-        <div class="muted">Simpan link ke database Supabase. Login → kelola → akses dari perangkat mana pun.</div>
+        <h1>LinkVault</h1>
+        <div class="muted">Simpan link di <strong>Supabase</strong>. Login dengan Magic Link. Modal custom (tanpa <code><dialog></code>).</div>
       </div>
       <div class="row">
         <input id="email" type="email" placeholder="email kamu" />
@@ -55,26 +78,30 @@
       <button id="addBtn" class="primary">+ Tambah</button>
     </section>
 
-    <div id="tagFilters" class="row" style="margin-top:10px;flex-wrap:wrap"></div>
-    <div id="stats" class="muted" style="margin-top:6px"></div>
+    <div id="tagFilters" class="chips"></div>
+    <div id="stats" class="stats"></div>
 
     <section id="list" class="grid"></section>
   </div>
 
-  <!-- Form Dialog -->
-  <dialog id="formDlg">
-    <form method="dialog" id="form" class="dlg">
-      <h3 id="dlgTitle">Tambah Link</h3>
+  <!-- Modal tanpa <dialog> -->
+  <div id="backdrop" class="modal-backdrop" role="presentation"></div>
+  <div id="modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="box">
+      <h3 id="modalTitle" style="margin:0 0 10px 0">Tambah Link</h3>
       <div class="row"><input id="f_title" placeholder="Judul (opsional)"></div>
       <div class="row"><input id="f_url" placeholder="https://…" required></div>
       <div class="row"><input id="f_tags" placeholder="#belajar, #kerja"></div>
       <div class="row"><textarea id="f_notes" rows="3" placeholder="Catatan"></textarea></div>
-      <div class="row" style="justify-content:space-between">
-        <button value="cancel">Batal</button>
-        <button type="submit" class="primary" id="saveBtn">Simpan</button>
+      <div class="row" style="justify-content:space-between;margin-top:6px">
+        <button id="cancelBtn">Batal</button>
+        <div class="row">
+          <button id="saveBtn" class="primary">Simpan</button>
+        </div>
       </div>
-    </form>
-  </dialog>
+      <div id="err" style="color:var(--red);font-size:13px;display:none;margin-top:6px"></div>
+    </div>
+  </div>
 
   <template id="cardTpl">
     <article class="card">
@@ -88,108 +115,135 @@
         <a class="openBtn" target="_blank" rel="noreferrer"><button class="primary">Buka</button></a>
         <button class="copyBtn">Salin URL</button>
         <button class="editBtn">Ubah</button>
-        <button class="delBtn" style="border-color:var(--red);color:var(--red)">Hapus</button>
+        <button class="delBtn danger">Hapus</button>
       </div>
       <div class="meta"></div>
     </article>
   </template>
 
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
   <script>
-  // ---------------------- CONFIGURASI SUPABASE ----------------------
-  const SUPABASE_URL = "https://YOUR_PROJECT_ID.supabase.co"; // ganti
-  const SUPABASE_ANON_KEY = "YOUR_ANON_PUBLIC_KEY"; // ganti (AMAN jika RLS aktif)
-  const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  document.addEventListener('DOMContentLoaded', () => {
+    // ====== KONFIGURASI SUPABASE ======
+    const SUPABASE_URL = "https://bgpevrklpyfzmpuieybx.supabase.co"; // Ganti
+    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJncGV2cmtscHlmem1wdWlleWJ4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA2Njk4OTEsImV4cCI6MjA3NjI0NTg5MX0.zgqo8Zmi4MhDhY9JDz8xogiR_EHyXJhoofP9Xagg1uY";           // Ganti (AMAN jika RLS aktif)
+    const sb = (window.supabase && window.supabase.createClient)
+      ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+      : null;
 
-  // ---------------------- STATE & ELEMENTS ----------------------
-  const $=s=>document.querySelector(s);
-  const state={ user:null, links:[], query:"", sortBy:"created_desc", activeTags:[], editing:null };
-  const els={ email:'#email', login:'#loginBtn', logout:'#logoutBtn', q:'#q', sort:'#sort', add:'#addBtn', list:'#list', stats:'#stats', tagFilters:'#tagFilters', dlg:'#formDlg', form:'#form', title:'#f_title', url:'#f_url', tags:'#f_tags', notes:'#f_notes', dlgTitle:'#dlgTitle' };
-  for(const k in els) els[k]=$(els[k]);
+    // ====== STATE & ELEM ======
+    const $=sel=>document.querySelector(sel);
+    const state={ user:null, links:[], query:'', sortBy:'created_desc', compact:false, activeTags:[], editing:null };
+    const els={ email:'#email', login:'#loginBtn', logout:'#logoutBtn', q:'#q', sort:'#sort', add:'#addBtn', list:'#list', stats:'#stats', tagFilters:'#tagFilters' };
+    for(const k in els) els[k]=$(els[k]);
+    const tpl=$('#cardTpl');
 
-  // ---------------------- AUTH ----------------------
-  async function refreshUser(){ const { data } = await sb.auth.getUser(); state.user=data.user; els.logout.style.display = state.user ? '' : 'none'; }
-  els.login.onclick = async()=>{
-    const email = els.email.value.trim(); if(!email) return alert('Isi email dulu ya');
-    const { error } = await sb.auth.signInWithOtp({ email });
-    if(error) alert(error.message); else alert('Magic link terkirim! Buka email kamu dan klik linknya. Setelah itu reload halaman ini.');
-  };
-  els.logout.onclick = async()=>{ await sb.auth.signOut(); location.reload(); };
+    // Modal refs
+    const modal=$('#modal'); const backdrop=$('#backdrop');
+    const fTitle=$('#f_title'), fUrl=$('#f_url'), fTags=$('#f_tags'), fNotes=$('#f_notes');
+    const btnCancel=$('#cancelBtn'), btnSave=$('#saveBtn');
+    const err=$('#err');
 
-  // ---------------------- CRUD ----------------------
-  const uid = ()=> crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).slice(2)+Date.now().toString(36);
-  const normTags = s => (s||'').split(/[,#\n\s]+/).map(t=>t.trim().toLowerCase()).filter(Boolean);
-  const validUrl = u=>{ try{const x=new URL(u);return /^https?:/i.test(x.protocol) }catch{return false} };
+    // Utils
+    const uid = ()=> (crypto.randomUUID?crypto.randomUUID():Math.random().toString(36).slice(2)+Date.now().toString(36));
+    const normTags = s => (s||'').split(/[,#\n\s]+/).map(t=>t.trim().toLowerCase()).filter(Boolean);
+    const validUrl = u=>{ try{const x=new URL(u); return /^https?:/i.test(x.protocol) && x.hostname }catch{ return false } };
+    const toast=(msg)=>{const t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(toast._t);toast._t=setTimeout(()=>t.classList.remove('show'),1600)};
 
-  async function loadLinks(){
-    if(!state.user){ state.links=[]; render(); return }
-    const { data, error } = await sb.from('links').select('*').order('created', { ascending:false });
-    if(error){ console.error(error); return }
-    state.links = data;
-    render();
-  }
-
-  async function upsertLink(item){
-    if(!state.user) return alert('Harus login dulu');
-    const row = { id: item.id||uid(), user_id: state.user.id, title: item.title||null, url: item.url, tags: item.tags||[], notes: item.notes||null, favorite: !!item.favorite, created: item.created ? new Date(item.created).toISOString() : new Date().toISOString() };
-    const { error } = await sb.from('links').upsert(row);
-    if(error){ alert(error.message); return }
-    await loadLinks();
-  }
-
-  async function deleteLink(id){
-    if(!confirm('Hapus link ini?')) return;
-    const { error } = await sb.from('links').delete().eq('id', id);
-    if(error){ alert(error.message); return }
-    await loadLinks();
-  }
-
-  // ---------------------- UI LOGIC ----------------------
-  function allTags(){ const s=new Set(); state.links.forEach(l=> (l.tags||[]).forEach(t=>s.add(t))); return Array.from(s).sort(); }
-  function filtered(){ let out=[...state.links]; const q=state.query.trim().toLowerCase(); if(q){ out=out.filter(l=> (l.title||'').toLowerCase().includes(q)||(l.url||'').toLowerCase().includes(q)||(l.notes||'').toLowerCase().includes(q)||(l.tags||[]).some(t=>t.includes(q))); }
-    if(state.activeTags.length){ out=out.filter(l=> state.activeTags.every(t=> l.tags?.includes(t))); }
-    switch(state.sortBy){ case 'created_asc': out.sort((a,b)=> new Date(a.created)-new Date(b.created)); break; case 'title_asc': out.sort((a,b)=>(a.title||'').localeCompare(b.title||'')); break; case 'title_desc': out.sort((a,b)=>(b.title||'').localeCompare(a.title||'')); break; default: out.sort((a,b)=> new Date(b.created)-new Date(a.created)); }
-    return out }
-
-  function render(){
-    // tags
-    const tags = allTags();
-    els.tagFilters.innerHTML='';
-    tags.forEach(t=>{ const b=document.createElement('button'); b.textContent = (state.activeTags.includes(t)?'✓ ':'#')+t; b.onclick=()=>{ if(state.activeTags.includes(t)) state.activeTags=state.activeTags.filter(x=>x!==t); else state.activeTags.push(t); render(); }; els.tagFilters.appendChild(b); });
-
-    // stats
-    const favs = state.links.filter(l=>l.favorite).length; els.stats.textContent = `${state.links.length} link • ${tags.length} tag • ${favs} favorit`;
-
-    // list
-    const data = filtered(); els.list.innerHTML='';
-    if(!data.length){ const d=document.createElement('div'); d.className='empty'; d.innerHTML='<div style="font-size:20px">🔗</div><div class="muted">Belum ada data atau belum login.</div>'; els.list.appendChild(d); return }
-
-    const tpl = document.querySelector('#cardTpl');
-    data.forEach(l=>{
-      const frag=tpl.content.cloneNode(true);
-      frag.querySelector('.card-title').textContent = l.title||l.url;
-      frag.querySelector('.note').textContent = l.notes||'';
-      frag.querySelector('.openBtn').href = l.url;
-      frag.querySelector('.meta').textContent = new Date(l.created).toLocaleString();
-      const favBtn = frag.querySelector('.favBtn'); favBtn.style.color = l.favorite?'gold':'var(--muted)'; favBtn.onclick=()=>{ upsertLink({ ...l, favorite: !l.favorite }) };
-      const tagsWrap = frag.querySelector('.tags'); (l.tags||[]).forEach(t=>{ const e=document.createElement('span'); e.className='tag'; e.textContent='#'+t; tagsWrap.appendChild(e); });
-      frag.querySelector('.copyBtn').onclick=()=> navigator.clipboard.writeText(l.url);
-      frag.querySelector('.editBtn').onclick=()=> openForm(l);
-      frag.querySelector('.delBtn').onclick=()=> deleteLink(l.id);
-      els.list.appendChild(frag);
+    // ====== AUTH ======
+    async function refreshUser(){
+      if(!sb){ els.stats.textContent = 'Supabase belum siap. Cek CDN/URL/KEY.'; return; }
+      const { data:{ user } } = await sb.auth.getUser();
+      state.user=user||null; els.logout.style.display = state.user? '' : 'none';
+    }
+    els.login.addEventListener('click', async()=>{
+      if(!sb) return alert('Library Supabase belum termuat. Cek koneksi/CDN.');
+      const email = els.email.value.trim(); if(!email) return alert('Isi email dulu ya');
+      const { error } = await sb.auth.signInWithOtp({ email });
+      if(error) alert(error.message); else alert('Magic link terkirim. Cek email kamu, klik linknya, lalu reload halaman ini.');
     });
-  }
+    els.logout.addEventListener('click', async()=>{ if(!sb) return; await sb.auth.signOut(); location.reload(); });
 
-  function openForm(item){ state.editing=item||null; els.dlg.showModal(); els.dlgTitle.textContent = item?'Ubah Link':'Tambah Link'; els.title.value=item?.title||''; els.url.value=item?.url||''; els.tags.value=(item?.tags||[]).join(', '); els.notes.value=item?.notes||''; }
-  function submitForm(ev){ ev.preventDefault(); const url=els.url.value.trim(); if(!validUrl(url)) return alert('URL harus http(s)://'); const item={ id: state.editing?.id, title: els.title.value.trim(), url, tags: normTags(els.tags.value), notes: els.notes.value.trim(), favorite: state.editing?.favorite||false, created: state.editing?.created||Date.now() }; upsertLink(item); els.dlg.close(); }
+    // ====== CRUD (Supabase) ======
+    async function loadLinks(){
+      if(!sb){ state.links=[]; render(); return; }
+      if(!state.user){ state.links=[]; render(); return; }
+      const { data, error } = await sb.from('links').select('*').order('created', { ascending:false });
+      if(error){ console.error(error); toast('Gagal ambil data'); return }
+      state.links = data.map(r=>({ ...r, created: r.created ? new Date(r.created).getTime() : Date.now() }));
+      render();
+    }
 
-  // Events
-  els.q.oninput = e=>{ state.query=e.target.value; render() };
-  els.sort.onchange = e=>{ state.sortBy=e.target.value; render() };
-  els.add.onclick = ()=> openForm(null);
-  els.form.addEventListener('submit', submitForm);
+    async function upsertLink(item){
+      if(!sb) return alert('Supabase belum siap.');
+      if(!state.user) return alert('Harus login dulu');
+      const row = { id: item.id || uid(), user_id: state.user.id, title: item.title || null, url: item.url, tags: item.tags || [], notes: item.notes || null, favorite: !!item.favorite, created: item.created ? new Date(item.created).toISOString() : new Date().toISOString() };
+      const { error } = await sb.from('links').upsert(row);
+      if(error){ alert(error.message); return }
+      await loadLinks();
+      toast(item.id? 'Perubahan disimpan' : 'Link ditambahkan');
+    }
 
-  // Boot
-  (async function init(){ await refreshUser(); await loadLinks(); })();
+    async function deleteLink(id){
+      if(!sb) return alert('Supabase belum siap.');
+      if(!confirm('Hapus link ini?')) return;
+      const { error } = await sb.from('links').delete().eq('id', id);
+      if(error){ alert(error.message); return }
+      await loadLinks();
+      toast('Link dihapus');
+    }
+
+    // ====== UI ======
+    const allTags=()=>{const s=new Set(); state.links.forEach(l=> (l.tags||[]).forEach(t=>s.add(t))); return Array.from(s).sort()};
+    const filtered=()=>{ let out=[...state.links]; const q=state.query.trim().toLowerCase(); if(q){ out=out.filter(l=> (l.title||'').toLowerCase().includes(q)||(l.url||'').toLowerCase().includes(q)||(l.notes||'').toLowerCase().includes(q)||(l.tags||[]).some(t=>t.includes(q))); }
+      if(state.activeTags.length){ out=out.filter(l=> state.activeTags.every(t=> l.tags?.includes(t))) }
+      switch(state.sortBy){ case 'created_asc': out.sort((a,b)=>a.created-b.created); break; case 'title_asc': out.sort((a,b)=>(a.title||'').localeCompare(b.title||'')); break; case 'title_desc': out.sort((a,b)=>(b.title||'').localeCompare(a.title||'')); break; default: out.sort((a,b)=>b.created-a.created); }
+      return out };
+
+    function render(){
+      // tags
+      const tags=allTags(); els.tagFilters.innerHTML=''; tags.forEach(t=>{ const chip=document.createElement('span'); chip.className='chip'; chip.textContent='#'+t; const x=document.createElement('button'); x.className='x'; x.textContent = state.activeTags.includes(t)?'✓':'+'; x.onclick=()=>{ if(state.activeTags.includes(t)) state.activeTags=state.activeTags.filter(x=>x!==t); else state.activeTags.push(t); render(); }; chip.appendChild(x); els.tagFilters.appendChild(chip); });
+      // stats
+      const favs=state.links.filter(l=>l.favorite).length; els.stats.textContent=`${state.links.length} link • ${tags.length} tag • ${favs} favorit ${state.user? '' : '• (belum login)'}`;
+      // list
+      const data=filtered(); els.list.innerHTML=''; if(!data.length){ const d=document.createElement('div'); d.className='empty'; d.innerHTML='<div style="font-size:20px">🔗</div><div class="muted">Belum ada data atau belum login.</div>'; els.list.appendChild(d); return }
+      data.forEach(l=>{
+        const frag=tpl.content.cloneNode(true);
+        frag.querySelector('.card-title').textContent=l.title||l.url;
+        frag.querySelector('.note').textContent=l.notes||'';
+        frag.querySelector('.openBtn').href=l.url;
+        frag.querySelector('.meta').textContent='Ditambahkan: '+ new Date(l.created).toLocaleString();
+        const favBtn=frag.querySelector('.favBtn'); favBtn.style.color=l.favorite?'gold':'var(--muted)'; favBtn.onclick=()=> upsertLink({ ...l, favorite: !l.favorite });
+        const tagsWrap=frag.querySelector('.tags'); (l.tags||[]).forEach(t=>{ const e=document.createElement('span'); e.className='tag'; e.textContent='#'+t; tagsWrap.appendChild(e) });
+        frag.querySelector('.copyBtn').onclick=()=> navigator.clipboard.writeText(l.url).then(()=>toast('URL disalin'));
+        frag.querySelector('.editBtn').onclick=()=> openModal(l);
+        frag.querySelector('.delBtn').onclick=()=> deleteLink(l.id);
+        els.list.appendChild(frag);
+      })
+    }
+
+    function openModal(item){ state.editing=item||null; $('#modalTitle').textContent=item?'Ubah Link':'Tambah Link'; fTitle.value=item?.title||''; fUrl.value=item?.url||''; fTags.value=(item?.tags||[]).join(', '); fNotes.value=item?.notes||''; err.style.display='none'; modal.classList.add('show'); backdrop.classList.add('show'); setTimeout(()=>fUrl.focus(),0) }
+    function closeModal(){ modal.classList.remove('show'); backdrop.classList.remove('show') }
+
+    // Submit form
+    btnSave.addEventListener('click', async (e)=>{
+      e.preventDefault(); const url=fUrl.value.trim(); if(!validUrl(url)){ err.textContent='URL tidak valid. Sertakan http(s)://'; err.style.display='block'; return }
+      const item={ id: state.editing?.id, title: fTitle.value.trim(), url, tags: normTags(fTags.value), notes: fNotes.value.trim(), favorite: state.editing?.favorite||false, created: state.editing?.created || Date.now() };
+      await upsertLink(item); closeModal();
+    });
+    btnCancel.addEventListener('click', (e)=>{ e.preventDefault(); closeModal(); });
+    backdrop.addEventListener('click', closeModal);
+    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && modal.classList.contains('show')) closeModal(); });
+
+    // Actions top bar (berfungsi meski Supabase belum siap)
+    els.add.addEventListener('click', ()=> openModal(null));
+    els.q.addEventListener('input', e=>{ state.query=e.target.value; render(); });
+    els.sort.addEventListener('change', e=>{ state.sortBy=e.target.value; render(); });
+
+    // Boot
+    (async function init(){ await refreshUser(); await loadLinks(); })();
+  });
   </script>
 </body>
 </html>
