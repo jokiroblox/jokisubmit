@@ -1,248 +1,193 @@
 <!doctype html>
-<html lang="id">
+<html lang="id" data-theme="light">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Joki Submit Gunung</title>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-:root{
-  --bg:#0b0d10; --card:#12161B; --text:#EAF0F4; --muted:#9AA7B2;
-  --brand:#25D366; --accent:#4FC3F7; --stroke:#22303A;
-  --shadow: 0 10px 30px rgba(0,0,0,.35); --radius:16px;
-}
-*{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-html,body{height:100%}
-body{
-  margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial;
-  background:
-    radial-gradient(1200px 600px at 80% -20%, rgba(79,195,247,.18), transparent 60%),
-    radial-gradient(900px 600px at -10% 10%, rgba(37,211,102,.10), transparent 60%),
-    var(--bg);
-  color:var(--text);
-}
-.container{max-width:1100px;margin:auto;padding:28px 12px 72px}
-header{display:flex;align-items:center;gap:12px;margin-bottom:22px}
-.brand-logo{width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg, var(--accent), var(--brand));box-shadow:0 6px 18px rgba(79,195,247,.25)}
-h1{font-size:1.6rem;margin:0}
-.tagline{color:var(--muted);font-size:.95rem}
-
-/* === GRID 3 KOLOM (desktop & Android) === */
-.grid{
-  display:grid; grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:12px; align-items:stretch;
-}
-
-/* KARTU */
-.card{
-  background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0)) , var(--card);
-  border:1px solid var(--stroke); border-radius:var(--radius); overflow:hidden;
-  box-shadow:var(--shadow); display:flex; flex-direction:column; min-height:100%;
-  transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
-}
-.card:hover{transform:translateY(-3px);border-color:#2A3A45;box-shadow:0 16px 40px rgba(0,0,0,.45)}
-.thumb{position:relative;aspect-ratio:1/1;overflow:hidden;background:#0e1216}
-.thumb img{width:100%;height:100%;object-fit:cover}
-.pill{position:absolute;top:10px;left:10px;background:rgba(0,0,0,.55);backdrop-filter:blur(6px);color:#E7F6EE;border:1px solid rgba(255,255,255,.08);font-size:.78rem;padding:5px 9px;border-radius:999px}
-
-/* isi kartu */
-.content{padding:12px;display:flex;flex-direction:column;gap:8px;flex:1;min-height:170px}
-.title{
-  font-size:1rem;margin:0;
-  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.2em;
-}
-.price{
-  font-weight:700;font-size:1.02rem;
-  background:linear-gradient(90deg, #B9F6CA, #81D4FA);
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-}
-.desc{
-  color:var(--muted);font-size:.9rem;
-  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
-}
-
-/* tombol beli tunggal */
-.actions{margin-top:auto}
-.btn{
-  width:100%;
-  appearance:none;border:1px solid #2A3A45;background:#0E1419;color:var(--text);
-  padding:10px 12px;border-radius:12px;font-weight:700;cursor:pointer;
-  display:inline-flex;align-items:center;gap:8px;justify-content:center;
-  transition:transform .08s ease, background .2s ease, border-color .2s ease;
-  text-decoration:none;min-height:46px;line-height:1.2;
-}
-.btn:hover{background:#121A21;border-color:#3A4A56}
-.btn:active{transform:translateY(1px)}
-.btn-primary{background:linear-gradient(180deg, rgba(37,211,102,.16), rgba(37,211,102,.10));border:1px solid rgba(37,211,102,.45)}
-.btn-primary:hover{background:linear-gradient(180deg, rgba(37,211,102,.24), rgba(37,211,102,.12));border-color:rgba(37,211,102,.65)}
-.btn svg{width:18px;height:18px}
-.btn-text{max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
-
-/* === Sosmed (rapi di Android) === */
-.section-title{
-  margin:28px 0 12px;
-  font-size:1.05rem;
-  color:var(--muted);
-  text-align:center; /* ini yang bikin teks di tengah */
-}
-.socials{
-  display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
-  gap:12px;
-}
-.socials a{
-  display:inline-flex;align-items:center;gap:10px;
-  padding:10px 14px;border-radius:12px;
-  background:#12161B;border:1px solid var(--stroke);color:var(--text);
-  font-weight:600;text-decoration:none;min-height:44px;justify-content:center;
-  transition:background .2s ease,border-color .2s ease;
-}
-.socials a:hover{background:#1a1f24;border-color:#2A3A45}
-.socials svg{width:20px;height:20px;flex:0 0 20px}
-.social-handle{max-width:260px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-
-/* === Footer / Copyright (rapi & tengah) === */
-footer{
-  margin-top:26px;padding-top:14px;
-  border-top:1px solid var(--stroke);
-  color:var(--muted);font-size:.9rem;
-  display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;
-  text-align:center;
-}
-
-/* layar kecil */
-@media (max-width:480px){
-  .container{padding:22px 10px 64px}
-  .content{gap:6px;padding:10px;min-height:160px}
-  .title{font-size:.95rem}
-  .price{font-size:.98rem}
-  .btn{padding:9px 10px;min-height:44px}
-  .pill{font-size:.72rem;padding:4px 8px}
-  .socials a{padding:9px 12px}
-}
-@media (max-width:330px){
-  .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .socials{grid-template-columns:1fr}
-}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Profil Saya — Situs Pribadi Sederhana</title>
+  <meta name="description" content="Situs profil sederhana dan responsif dengan foto, portofolio investasi, galeri, dan kontak langsung ke WhatsApp." />
+  <style>
+    :root{
+      --bg:#f7f9fc;--paper:#ffffff;--ink:#0b1220;--muted:#5b6470;--line:#e7ebf3;--brand:#1a73e8;--brand-2:#2f86ff;--radius:16px;--shadow:0 14px 30px rgba(29,42,64,.08);
+    }
+    [data-theme="dark"]{--bg:#0b0d12;--paper:#111522;--ink:#ecf2ff;--muted:#9aa6c1;--line:#222a3b;--brand:#4f8cff;--brand-2:#71a1ff;--shadow:0 18px 40px rgba(0,0,0,.45)}
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;background:var(--bg);color:var(--ink);line-height:1.6}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:1080px;margin-inline:auto;padding:0 20px}
+    .btn{appearance:none;border:1px solid var(--line);background:var(--paper);color:var(--ink);padding:12px 16px;border-radius:12px;font-weight:700;cursor:pointer;box-shadow:var(--shadow);min-height:44px;line-height:1}
+    .btn.primary{background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#fff;border-color:transparent}
+    .tag{display:inline-block;font-size:12px;padding:6px 10px;border-radius:999px;background:#eef4ff;border:1px solid var(--line);color:#2b5abf}
+    [data-theme="dark"] .tag{background:#1a2340;color:#b8c8ff}
+    header{position:sticky;top:0;z-index:50;background:color-mix(in oklab,var(--paper) 85%,transparent);backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid var(--line)}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;min-height:64px}
+    .brand{display:flex;align-items:center;gap:10px}
+    .logo{width:36px;height:36px;border-radius:12px;color:#fff;font-weight:800;display:grid;place-items:center;background:linear-gradient(135deg,var(--brand),var(--brand-2));box-shadow:var(--shadow)}
+    .links{display:flex;gap:18px;color:var(--muted);font-size:14px;flex:1;justify-content:center;flex-wrap:wrap}
+    .links a{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;border:1px solid transparent}
+    .links a:hover{color:var(--ink);background:color-mix(in oklab,var(--paper) 80%,transparent);border-color:var(--line)}
+    .links a.active{color:#fff;background:linear-gradient(135deg,var(--brand),var(--brand-2));border-color:transparent}
+    .links a:hover{color:var(--ink)}
+    .hero{padding:46px 0}
+    .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:22px;align-items:center}
+    @media(max-width:980px){.hero-grid{grid-template-columns:1fr}}
+    .card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+    .card-body{padding:20px}
+    .title{font-size:clamp(26px,4vw,40px);line-height:1.15;margin:8px 0}
+    .muted{color:var(--muted)}
+    .meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+    .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+    .photo-wrap{display:grid;place-items:center;padding:18px}
+    .photo{width:100%;max-width:400px;aspect-ratio:1/1;height:auto;border-radius:20px;object-fit:cover;border:1px solid var(--line);box-shadow:var(--shadow)}
+    @media(max-width:460px){.photo{max-width:100%}}
+    section{padding:34px 0;scroll-margin-top:80px}
+    h2{margin:0 0 8px;font-size:26px}
+    .lead{color:var(--muted);font-size:14px}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    @media(max-width:900px){.grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:600px){.grid{grid-template-columns:1fr}}
+    .item{padding:16px;border:1px solid var(--line);border-radius:12px;background:var(--paper)}
+    .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px}
+    .gallery img{width:100%;aspect-ratio:4/3;height:auto;object-fit:cover;border-radius:10px;border:1px solid var(--line)}
+    .form{display:grid;gap:10px}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    @media(max-width:720px){.row{grid-template-columns:1fr}}
+    input,textarea{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--paper);color:var(--ink)}
+    textarea{min-height:120px;resize:vertical}
+    footer{border-top:1px solid var(--line);padding:16px 0;color:var(--muted);font-size:14px}
+  </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <div class="brand-logo" aria-hidden="true"></div>
-      <div>
-        <h1>Harga Joki Submit Gunung Roblox</h1>
-        <div class="tagline">Joki gunung aman terpercaya 100% Murah dan cepat, Klik Buy untuk pesan joki submit gunung</div>
-      </div>
-    </header>
-
-    <!-- Katalog -->
-    <section class="grid" id="catalog"></section>
-
-    <!-- Sosmed -->
-    <div class="section-title">Ikuti kami di sosial media</div>
-    <div class="socials">
-      <!-- Ganti username & tautan -->
-      <a href="https://www.tiktok.com/@rhmdev" target="_blank" rel="noopener">
-        <!-- Ikon TikTok (simplified) -->
-        <svg viewBox="0 0 48 48" aria-hidden="true"><path fill="currentColor" d="M28 6h6c.3 4.7 3.2 8.4 8 9.4V21c-3.3.3-6.2-1-8-2.8V33c0 7-6 12-13 12S8 40 8 33s6-12 13-12c1 0 2 .1 3 .3V27c-1-.4-2-.6-3-.6-4 0-7 3-7 6.6S17 40 21 40s7-3 7-6.6V6Z"/></svg>
-        <span class="social-handle">Tiktok</span>
-      </a>
-      <a href="https://www.instagram.com/rohimdev" target="_blank" rel="noopener">
-        <!-- Ikon Instagram (simplified) -->
-        <svg viewBox="0 0 48 48" aria-hidden="true"><path fill="currentColor" d="M16 6h16a10 10 0 0 1 10 10v16a10 10 0 0 1-10 10H16A10 10 0 0 1 6 32V16A10 10 0 0 1 16 6Zm8 9a9 9 0 1 0 0 18 9 9 0 0 0 0-18Zm13-1a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/><circle fill="currentColor" cx="24" cy="24" r="6"/></svg>
-        <span class="social-handle">instagram</span>
-      </a>
-    </div>
-
-    <!-- Footer -->
-    <footer>
-      <span>© <span id="year"></span> Submit Gunung Roblox</span>
-      <span>Semua harga dapat berubah sewaktu-waktu.</span>
-    </footer>
-  </div>
-
-  <!-- Template Kartu -->
-  <template id="card-template">
-    <article class="card">
-      <div class="thumb">
-        <img alt="" loading="lazy" decoding="async">
-        <span class="pill">Ready Stock</span>
-      </div>
-      <div class="content">
-        <h3 class="title"></h3>
-        <div class="price"></div>
-        <div class="desc"></div>
-        <div class="actions">
-          <a class="btn btn-primary buy-btn" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M12.04 2a10 10 0 0 0-8.9 14.5L2 22l5.7-1.1A10 10 0 1 0 12.04 2zm0 2a8 8 0 0 1 6.86 12l.38.38-3.22-.63a6.7 6.7 0 0 1-3.11.79 8 8 0 1 1-.91-12.54zM8.6 8.5c.13-.29.4-.65.7-.59.18.04.42.16.85.9.43.74.69 1.6.76 1.73.07.13.06.25 0 .34-.07.09-.42.5-.57.66-.15.16-.3.14-.5.08-.2-.06-.86-.32-1.64-.98-.77-.66-1.3-1.47-1.45-1.67-.14-.2-.02-.32.04-.38.07-.06.16-.15.25-.25.09-.1.2-.1.3-.06.1.03.25.1.44.2.2.12.45.32.82.82z"/>
-            </svg>
-            <span class="btn-text">Beli via WhatsApp</span>
-          </a>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <div class="logo">HM</div>
+        <div>
+          <div style="font-weight:800">Nama Anda</div>
+          <div class="muted" style="font-size:12px">Kota, Indonesia</div>
         </div>
       </div>
-    </article>
-  </template>
+      <nav class="links">
+        <a href="#tentang">Tentang</a>
+        <a href="#investasi">Investasi</a>
+        <a href="#galeri">Galeri</a>
+        <a href="#kontak">Kontak</a>
+      </nav>
+      <button class="btn" id="themeBtn" aria-label="Ganti tema">🌙</button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="card" id="tentang">
+        <div class="card-body">
+          <span class="tag">Profil</span>
+          <h1 class="title">Halo, saya <span style="color:var(--brand)">Nama Anda</span></h1>
+          <p class="muted">Saya orang yang senang belajar hal baru dan suka bekerja rapi. Di halaman ini, saya menampilkan informasi singkat tentang diri saya, investasi, kegiatan, dan cara menghubungi saya.</p>
+          <div class="meta">
+            <span class="tag">Disiplin</span>
+            <span class="tag">Tepat Waktu</span>
+            <span class="tag">Mudah Beradaptasi</span>
+          </div>
+          <div class="actions">
+            <a class="btn primary" href="https://wa.me/6281234567890?text=Halo%20saya%20melihat%20profil%20Anda">Hubungi Saya di WhatsApp</a>
+          </div>
+        </div>
+      </div>
+      <aside class="card photo-wrap">
+        <img class="photo" id="foto" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=800&auto=format&fit=crop" alt="Foto diri 400x400" width="400" height="400" />
+      </aside>
+    </div>
+  </section>
+
+  <section id="investasi">
+    <div class="container">
+      <h2>Portofolio Aset Investasi</h2>
+      <div class="lead">Ringkasan distribusi aset investasi pribadi saya.</div>
+      <div class="card" style="margin-top:12px">
+        <div class="card-body">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;text-align:center">
+            <div>
+              <h3 style="margin:0;color:var(--brand)">Crypto</h3>
+              <p class="muted">Bitcoin (BTC), Ethereum (ETH)</p>
+              <div style="font-size:28px;font-weight:700">40%</div>
+            </div>
+            <div>
+              <h3 style="margin:0;color:var(--brand)">Rupiah (IDR)</h3>
+              <p class="muted">Tabungan dan deposito</p>
+              <div style="font-size:28px;font-weight:700">35%</div>
+            </div>
+            <div>
+              <h3 style="margin:0;color:var(--brand)">Saham</h3>
+              <p class="muted">Perusahaan lokal & global</p>
+              <div style="font-size:28px;font-weight:700">25%</div>
+            </div>
+          </div>
+          <div style="margin-top:18px;font-size:14px;color:var(--muted);text-align:center">Distribusi ini hanya contoh dan dapat berubah sesuai kondisi pasar serta strategi investasi pribadi.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="galeri">
+    <div class="container">
+      <h2>Galeri</h2>
+      <div class="lead">Foto kegiatan atau hasil karya sederhana.</div>
+      <div class="gallery" style="margin-top:12px">
+        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=800&auto=format&fit=crop" alt="Kegiatan 1">
+        <img src="https://images.unsplash.com/photo-1517263904808-5dc91e3e7044?q=80&w=800&auto=format&fit=crop" alt="Kegiatan 2">
+        <img src="https://images.unsplash.com/photo-1532635042-97d02b0c5930?q=80&w=800&auto=format&fit=crop" alt="Kegiatan 3">
+        <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?q=80&w=800&auto=format&fit=crop" alt="Kegiatan 4">
+      </div>
+    </div>
+  </section>
+
+  <section id="kontak">
+    <div class="container">
+      <h2>Kontak</h2>
+      <div class="lead">Klik tombol di bawah untuk langsung terhubung ke WhatsApp saya.</div>
+      <div class="card" style="margin-top:12px;text-align:center;padding:24px">
+        <a class="btn primary" href="https://wa.me/6281234567890?text=Halo%20saya%20melihat%20profil%20Anda">💬 Hubungi via WhatsApp</a>
+        <p class="muted" style="margin-top:10px;font-size:13px">Saya akan segera membalas pesan Anda.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container" style="display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap">
+      <div>© <span id="tahun"></span> Nama Anda. Semua hak dilindungi.</div>
+      <div class="muted" style="display:flex;gap:12px;flex-wrap:wrap">
+        <a href="mailto:halo@contoh.com">halo@contoh.com</a>
+        <span>•</span>
+        <a href="https://wa.me/6281234567890">+62 812-3456-7890</a>
+      </div>
+    </div>
+  </footer>
 
   <script>
-    const WHATSAPP_NUMBER = '6285142079087'; // ganti nomor kamu (tanpa +)
-    const products = [
-      { name: 'Submit Daun', price: 10000,
-        img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-WICLmNljNNgPsTG3-orhCvKrjRU57tLTfF6P31X4Qie8n_wS0m-W8fA0&s=10?q=80&w=1200&auto=format&fit=crop',
-        desc: 'Joki 25x submit' },
-      { name: 'Submit Antartika Expedition', price: 20000,
-        img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT27qt9kDZyQnOrPi4mhVxw1TbWi2xjL0YAaY_eUV58k8sIvgZ4m3RV_JEW&s=10?q=80&w=1200&auto=format&fit=crop',
-        desc: 'Joki 10x submit' },
-      { name: 'Submit Merapi', price: 10000,
-        img: 'https://tr.rbxcdn.com/180DAY-212838749e1902282ff0c615b70e803f/512/512/Image/Webp/noFilter=10?q=80&w=1200&auto=format&fit=crop',
-        desc: 'Joki 25x submit' },
-      { name: 'Submit Arunika', price: 10000,
-        img: 'https://tr.rbxcdn.com/180DAY-2ca52906a080dc627a71bae2deb22843/512/512/Image/Webp/noFilter=80&w=1200&auto=format&fit=crop',
-        desc: 'Joki 25x submit' },
-      { name: 'Submit Yagataw', price: 10000,
-        img: 'https://tr.rbxcdn.com/180DAY-f1807a7c88120164bf8a3a7583a686f3/768/432/Image/Webp/noFilter?q=80&w=1200&auto=format&fit=crop',
-        desc: 'Joki 25x submit' },
-      { name: 'Submit Horeg', price: 10000,
-        img: 'https://tr.rbxcdn.com/180DAY-4a4e333b7a80f1a75caf3fb5e7681d25/512/512/Image/Webp/noFilter?q=80&w=1200&auto=format&fit=crop',
-        desc: 'Joki Submit 25x' }
-    ];
-
-    const idr = n => new Intl.NumberFormat('id-ID',{style:'currency',currency:'IDR',maximumFractionDigits:0}).format(n);
-    const waText = (p) => [
-      'Halo, saya mau pesan:',
-      `• Nama: ${p.name}`,
-      `• Harga: ${idr(p.price)}`,
-      p.desc ? `• Deskripsi: ${p.desc}` : '',
-      '',
-      'Jokiin min'
-    ].filter(Boolean).join('\n');
-    const waLink = (p) => `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(waText(p))}`;
-
-    const $catalog = document.getElementById('catalog');
-    const tpl = document.getElementById('card-template');
-
-    products.forEach(p=>{
-      const $card = tpl.content.cloneNode(true);
-      const img = $card.querySelector('.thumb img');
-      img.src = p.img; img.alt = p.name;
-
-      $card.querySelector('.title').textContent = p.name;
-      $card.querySelector('.price').textContent = idr(p.price);
-      $card.querySelector('.desc').textContent = p.desc || '';
-
-      const buyBtn = $card.querySelector('.buy-btn');
-      const btnText = $card.querySelector('.btn-text');
-      btnText.textContent = `Buy ${p.name} (${idr(p.price)})`;
-      buyBtn.href = waLink(p);
-      buyBtn.setAttribute('aria-label', `Beli ${p.name} harga ${idr(p.price)}. ${p.desc ? 'Deskripsi: '+p.desc : ''} via WhatsApp`);
-
-      $catalog.appendChild($card);
-    });
-
-    document.getElementById('year').textContent = new Date().getFullYear();
+    document.getElementById('tahun').textContent=new Date().getFullYear();
+    const root=document.documentElement;const btn=document.getElementById('themeBtn');
+    const saved=localStorage.getItem('tema');if(saved){root.setAttribute('data-theme',saved);btn.textContent=saved==='dark'?'🌙':'🌞';}
+    btn.addEventListener('click',()=>{const next=root.getAttribute('data-theme')==='dark'?'light':'dark';root.setAttribute('data-theme',next);btn.textContent=next==='dark'?'🌙':'🌞';localStorage.setItem('tema',next)});
+    // Highlight menu aktif saat scroll
+    const navLinks=[...document.querySelectorAll('.links a')];
+    const sections=navLinks.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    function setActive(){
+      const offset=90;
+      let current=sections[0];
+      for(const s of sections){
+        const top=s.getBoundingClientRect().top;
+        if(top - offset <= 0) current=s; else break;
+      }
+      navLinks.forEach(a=>a.classList.remove('active'));
+      if(current){
+        const active=document.querySelector(`.links a[href="#${current.id}"]`);
+        active && active.classList.add('active');
+      }
+    }
+    window.addEventListener('scroll', setActive, {passive:true});
+    window.addEventListener('load', setActive);
   </script>
 </body>
 </html>
