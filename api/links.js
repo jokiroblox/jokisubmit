@@ -5,7 +5,7 @@ export const config = { runtime: 'nodejs' };
 
 const BLOB_FILENAME = 'links.json';
 const ALLOWED_ORIGINS = [
-  'https://jokisubmit.vercel.app/',
+  'https://jokisubmit.vercel.app',
   'https://rohim.my.id'
 ];
 
