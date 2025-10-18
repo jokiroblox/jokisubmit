@@ -1,118 +1,88 @@
 // /api/links.js
-import { list, put, del, head, get } from '@vercel/blob';
+import { list, put } from '@vercel/blob';
 
-export const config = {
-  runtime: 'edge', // cepat & hemat
-};
+export const config = { runtime: 'nodejs20.x' };
 
 const BLOB_FILENAME = 'links.json';
 const ALLOWED_ORIGINS = [
-  'https://rohim.my.id',
-  'https://jokisubmit.vercel.app/'
+  'https://jokisubmit.vercel.app/',
+  'https://rohim.my.id'
 ];
 
-async function ensureJson(blobUrl, env) {
-  // kalau file belum ada, create kosong
-  try {
-    const res = await fetch(blobUrl, { method: 'HEAD' });
-    if (res.ok) return blobUrl;
-  } catch {}
-  // create baru
-  const init = JSON.stringify({ links: [] }, null, 2);
-  const created = await put(BLOB_FILENAME, init, {
-    access: 'private', // tidak bisa dibaca langsung, hanya via API
-    token: process.env.BLOB_READ_WRITE_TOKEN
+function ok(res, json, cors) {
+  res.setHeader('Content-Type', 'application/json');
+  if (cors) { res.setHeader('Access-Control-Allow-Origin', cors); res.setHeader('Vary', 'Origin'); }
+  res.status(200).send(JSON.stringify(json));
+}
+function bad(res, msg, code=400) { res.status(code).json({ error: msg }); }
+
+async function ensureJson(env) {
+  const files = await list({ token: env.BLOB_READ_WRITE_TOKEN });
+  const item = files.blobs.find(b => b.pathname === BLOB_FILENAME);
+  if (item) return item.url;
+  const created = await put(BLOB_FILENAME, JSON.stringify({ links: [] }, null, 2), {
+    access: 'private', token: env.BLOB_READ_WRITE_TOKEN
   });
   return created.url;
 }
-
 async function loadAll(env) {
-  // cari blob bernama links.json
-  const files = await list({ token: env.BLOB_READ_WRITE_TOKEN });
-  const item = files.blobs.find(b => b.pathname === BLOB_FILENAME);
-  const url = item ? item.url : await ensureJson('', env);
-  const res = await fetch(url);
-  if (!res.ok) return { links: [] , url };
-  const json = await res.json().catch(async () => JSON.parse(await res.text()));
+  const url = await ensureJson(env);
+  const r = await fetch(url);
+  const json = await r.json().catch(async () => JSON.parse(await r.text()));
   return { ...(typeof json === 'object' ? json : { links: [] }), url };
 }
-
-async function saveAll(url, data, env) {
-  const body = JSON.stringify(data, null, 2);
-  const saved = await put(BLOB_FILENAME, body, {
-    access: 'private',
-    token: env.BLOB_READ_WRITE_TOKEN
+async function saveAll(data, env) {
+  await put(BLOB_FILENAME, JSON.stringify(data, null, 2), {
+    access: 'private', token: env.BLOB_READ_WRITE_TOKEN
   });
-  return saved.url;
 }
 
-function ok(json, init={}) { return new Response(JSON.stringify(json), { status: 200, headers: { 'Content-Type': 'application/json', ...init.headers } }); }
-function bad(msg, code=400) { return new Response(JSON.stringify({ error: msg }), { status: code, headers: { 'Content-Type': 'application/json' } }); }
-
-export default async function handler(req) {
-  const { method, headers } = req;
-  const origin = headers.get('origin') || '';
-
-  // CORS preflight
-  if (method === 'OPTIONS') {
+export default async function handler(req, res) {
+  const origin = req.headers.origin || '';
+  if (req.method === 'OPTIONS') {
     const allow = ALLOWED_ORIGINS.includes(origin);
-    return new Response(null, {
-      status: 204,
-      headers: {
-        'Access-Control-Allow-Origin': allow ? origin : '*',
-        'Access-Control-Allow-Methods': 'GET,POST,DELETE,OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type',
-      },
-    });
+    res.setHeader('Access-Control-Allow-Origin', allow ? origin : '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET,POST,DELETE,OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    return res.status(204).end();
   }
 
-  // Allow GET from anywhere (read-only), write ops only from allowed origins
-  const allowOrigin = (method === 'GET') || ALLOWED_ORIGINS.includes(origin);
-  const corsHeaders = {
-    'Access-Control-Allow-Origin': allowOrigin ? origin || '*' : 'null',
-    'Vary': 'Origin',
-  };
-  if (!allowOrigin) return bad('Origin not allowed', 403);
+  const cors = (req.method === 'GET') ? (origin || '*') :
+               (ALLOWED_ORIGINS.includes(origin) ? origin : null);
+  if (!cors) return bad(res, 'Origin not allowed', 403);
 
-  // Need token for Blob RW
-  if (!process.env.BLOB_READ_WRITE_TOKEN) {
-    return bad('Missing BLOB_READ_WRITE_TOKEN', 500);
-  }
-
-  // Load data
+  if (!process.env.BLOB_READ_WRITE_TOKEN) return bad(res, 'Missing BLOB_READ_WRITE_TOKEN', 500);
   const env = { BLOB_READ_WRITE_TOKEN: process.env.BLOB_READ_WRITE_TOKEN };
+
   const { links, url } = await loadAll(env);
 
-  if (method === 'GET') {
-    return ok({ links }, { headers: corsHeaders });
-  }
+  if (req.method === 'GET') return ok(res, { links }, cors);
 
-  if (method === 'POST') {
-    const body = await req.json().catch(() => ({}));
+  if (req.method === 'POST') {
+    const body = req.body || {};
+    if (!body.url) return bad(res, 'Invalid payload');
     const now = Date.now();
-    let updated = [...links];
-
-    if (!body || !body.url) return bad('Invalid payload', 400);
-
-    // upsert by id
-    if (!body.id) body.id = Math.random().toString(36).slice(2) + now.toString(36);
-    if (!body.created) body.created = now;
-
-    const idx = updated.findIndex(x => x.id === body.id);
-    if (idx >= 0) updated[idx] = body; else updated.unshift(body);
-
-    await saveAll(url, { links: updated }, env);
-    return ok({ ok: true }, { headers: corsHeaders });
+    const item = {
+      id: body.id ?? (Math.random().toString(36).slice(2)+now.toString(36)),
+      title: body.title || null,
+      url: body.url, tags: Array.isArray(body.tags)? body.tags: [],
+      notes: body.notes || null, favorite: !!body.favorite,
+      created: body.created ?? now
+    };
+    const updated = [...links];
+    const i = updated.findIndex(x=>x.id===item.id);
+    if (i>=0) updated[i]=item; else updated.unshift(item);
+    await saveAll({ links: updated }, env);
+    return ok(res, { ok:true }, cors);
   }
 
-  if (method === 'DELETE') {
-    const { searchParams } = new URL(req.url);
-    const id = searchParams.get('id');
-    if (!id) return bad('Missing id', 400);
-    const updated = links.filter(l => l.id !== id);
-    await saveAll(url, { links: updated }, env);
-    return ok({ ok: true }, { headers: corsHeaders });
+  if (req.method === 'DELETE') {
+    const id = req.query.id;
+    if (!id) return bad(res, 'Missing id');
+    const updated = links.filter(l=>l.id!==id);
+    await saveAll({ links: updated }, env);
+    return ok(res, { ok:true }, cors);
   }
 
-  return bad('Method not allowed', 405);
+  return bad(res, 'Method not allowed', 405);
 }
