@@ -3,79 +3,63 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>LinkVault — Supabase (Full, Tanpa <dialog>)</title>
+  <title>LinkVault — Vercel Blob (Tanpa Login)</title>
   <style>
-    :root{ --bg:#0b0c0f; --card:#111218; --fg:#f3f4f6; --muted:#a0a6b3; --bd:#1b1d24; --pri:#4f8cff; --pri-2:#396fe0; --red:#ef4444; --ok:#22c55e }
-    @media (prefers-color-scheme: light){ :root{ --bg:#f7f7fb; --card:#ffffff; --fg:#0f1222; --muted:#5b6472; --bd:#e7e7ef; --pri:#1e66ff; --pri-2:#134bcc; --red:#dc2626; --ok:#16a34a } }
-    *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto}
+    :root{ --bg:#0b0c0f; --card:#111218; --fg:#f3f4f6; --muted:#a0a6b3; --bd:#1b1d24; --pri:#4f8cff; --pri-2:#396fe0; --red:#ef4444 }
+    @media (prefers-color-scheme: light){ :root{ --bg:#f7f7fb; --card:#ffffff; --fg:#0f1222; --muted:#5b6472; --bd:#e7e7ef; --pri:#1e66ff; --pri-2:#134bcc; --red:#dc2626 } }
+    *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto}
     .container{max-width:1040px;margin:0 auto;padding:24px}
     header{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-    h1{margin:0;font-size:26px}
-    .muted{color:var(--muted)}
-    .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-    .grow{flex:1}
+    h1{margin:0;font-size:26px}.muted{color:var(--muted)}
+    .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.grow{flex:1}
     input,textarea,select,button{border-radius:12px;border:1px solid var(--bd);background:var(--card);color:var(--fg);padding:10px 12px;outline:none}
     input:focus,textarea:focus,select:focus{border-color:var(--pri); box-shadow:0 0 0 3px color-mix(in srgb, var(--pri) 30%, transparent)}
-    button{cursor:pointer}
-    .primary{background:var(--pri);border-color:var(--pri-2);color:#fff}
-    .danger{border-color: color-mix(in srgb, var(--red) 40%, var(--bd)); color: var(--red)}
-
+    button{cursor:pointer}.primary{background:var(--pri);border-color:var(--pri-2);color:#fff}
     .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
     .chip{border:1px solid var(--bd);padding:6px 10px;border-radius:999px;font-size:12px;display:inline-flex;gap:8px;align-items:center}
     .chip .x{border:1px solid var(--bd);border-radius:999px;padding:0 6px}
-
     .stats{margin-top:6px;color:var(--muted)}
-
     .grid{display:grid;grid-template-columns:repeat(1,minmax(0,1fr));gap:12px;margin-top:16px}
     @media(min-width:700px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
     @media(min-width:980px){.grid.compact{grid-template-columns:repeat(3,minmax(0,1fr))}}
-
     .card{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:14px}
-    .title{display:flex;justify-content:space-between;gap:8px}
-    .title h3{margin:0;font-size:16px;word-break:break-word}
-    .tags{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0}
-    .tag{border:1px solid var(--bd);padding:3px 8px;border-radius:999px;font-size:12px;opacity:.9}
+    .title{display:flex;justify-content:space-between;gap:8px}.title h3{margin:0;font-size:16px;word-break:break-word}
+    .tags{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0}.tag{border:1px solid var(--bd);padding:3px 8px;border-radius:999px;font-size:12px;opacity:.9}
     .note{color:var(--muted);font-size:14px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-    .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
-    .meta{font-size:12px;color:var(--muted);margin-top:6px}
+    .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.meta{font-size:12px;color:var(--muted);margin-top:6px}
     .empty{border:1px dashed var(--bd);border-radius:16px;padding:28px;text-align:center}
-
-    /* Modal (tanpa <dialog>) */
     .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none}
     .modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);background:var(--card);color:var(--fg);border:1px solid var(--bd);border-radius:16px;width:min(560px,calc(100% - 32px));display:none}
-    .modal .box{padding:16px}
-    .modal.show, .modal-backdrop.show{display:block}
-
+    .modal .box{padding:16px}.modal.show, .modal-backdrop.show{display:block}
     .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--card);border:1px solid var(--bd);padding:10px 14px;border-radius:12px;opacity:0;transition:.2s}
     .toast.show{opacity:1}
   </style>
-  <!-- Supabase JS (CDN stabil) -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
   <div class="container">
     <header>
       <div>
         <h1>LinkVault</h1>
-        <div class="muted">Simpan link di <strong>Supabase</strong>. Login dengan Magic Link. Modal custom (tanpa <code><dialog></code>).</div>
+        <div class="muted">Tanpa login — data tersimpan di cloud (Vercel Blob) dan dibagi untuk semua pengunjung domain ini.</div>
       </div>
       <div class="row">
-        <input id="email" type="email" placeholder="email kamu" />
-        <button id="loginBtn" class="primary">Kirim Magic Link</button>
-        <button id="logoutBtn" style="display:none">Keluar</button>
+        <label class="muted">Urutkan</label>
+        <select id="sort">
+          <option value="created_desc">Terbaru</option>
+          <option value="created_asc">Terlama</option>
+          <option value="title_asc">Judul A→Z</option>
+          <option value="title_desc">Judul Z→A</option>
+        </select>
+        <button id="compactBtn">Mode ringkas: OFF</button>
       </div>
     </header>
 
     <section class="row" style="margin-top:14px">
-      <input id="q" class="grow" type="text" placeholder="Cari judul/URL/tag/catatan…" />
-      <select id="sort">
-        <option value="created_desc">Terbaru</option>
-        <option value="created_asc">Terlama</option>
-        <option value="title_asc">Judul A→Z</option>
-        <option value="title_desc">Judul Z→A</option>
-      </select>
-      <button id="addBtn" class="primary">+ Tambah</button>
+      <input id="q" class="grow" type="text" placeholder="Cari judul/URL/tag/catatan…"/>
+      <button id="addBtn" class="primary" onclick="window._openModal && window._openModal()">+ Tambah</button>
+      <button id="exportBtn">Ekspor</button>
+      <input id="importInput" type="file" accept="application/json" hidden>
+      <button id="importBtn">Impor</button>
     </section>
 
     <div id="tagFilters" class="chips"></div>
@@ -84,7 +68,6 @@
     <section id="list" class="grid"></section>
   </div>
 
-  <!-- Modal tanpa <dialog> -->
   <div id="backdrop" class="modal-backdrop" role="presentation"></div>
   <div id="modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <div class="box">
@@ -95,9 +78,7 @@
       <div class="row"><textarea id="f_notes" rows="3" placeholder="Catatan"></textarea></div>
       <div class="row" style="justify-content:space-between;margin-top:6px">
         <button id="cancelBtn">Batal</button>
-        <div class="row">
-          <button id="saveBtn" class="primary">Simpan</button>
-        </div>
+        <div class="row"><button id="saveBtn" class="primary">Simpan</button></div>
       </div>
       <div id="err" style="color:var(--red);font-size:13px;display:none;margin-top:6px"></div>
     </div>
@@ -125,124 +106,120 @@
 
   <script>
   document.addEventListener('DOMContentLoaded', () => {
-    // ====== KONFIGURASI SUPABASE ======
-    const SUPABASE_URL = "https://bgpevrklpyfzmpuieybx.supabase.co"; // Ganti
-    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJncGV2cmtscHlmem1wdWlleWJ4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA2Njk4OTEsImV4cCI6MjA3NjI0NTg5MX0.zgqo8Zmi4MhDhY9JDz8xogiR_EHyXJhoofP9Xagg1uY";           // Ganti (AMAN jika RLS aktif)
-    const sb = (window.supabase && window.supabase.createClient)
-      ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
-      : null;
-
-    // ====== STATE & ELEM ======
-    const $=sel=>document.querySelector(sel);
-    const state={ user:null, links:[], query:'', sortBy:'created_desc', compact:false, activeTags:[], editing:null };
-    const els={ email:'#email', login:'#loginBtn', logout:'#logoutBtn', q:'#q', sort:'#sort', add:'#addBtn', list:'#list', stats:'#stats', tagFilters:'#tagFilters' };
+    const $=s=>document.querySelector(s);
+    const state={ links:[], query:'', sortBy:'created_desc', compact:false, activeTags:[], editing:null };
+    const els={ q:'#q', sort:'#sort', add:'#addBtn', list:'#list', stats:'#stats', tagFilters:'#tagFilters', compact:'#compactBtn', export:'#exportBtn', import:'#importBtn', importInput:'#importInput' };
     for(const k in els) els[k]=$(els[k]);
     const tpl=$('#cardTpl');
-
-    // Modal refs
-    const modal=$('#modal'); const backdrop=$('#backdrop');
+    const modal=$('#modal'), backdrop=$('#backdrop');
     const fTitle=$('#f_title'), fUrl=$('#f_url'), fTags=$('#f_tags'), fNotes=$('#f_notes');
     const btnCancel=$('#cancelBtn'), btnSave=$('#saveBtn');
     const err=$('#err');
-
-    // Utils
+    const toast=(m)=>{const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(toast._t);toast._t=setTimeout(()=>t.classList.remove('show'),1600)};
     const uid = ()=> (crypto.randomUUID?crypto.randomUUID():Math.random().toString(36).slice(2)+Date.now().toString(36));
     const normTags = s => (s||'').split(/[,#\n\s]+/).map(t=>t.trim().toLowerCase()).filter(Boolean);
     const validUrl = u=>{ try{const x=new URL(u); return /^https?:/i.test(x.protocol) && x.hostname }catch{ return false } };
-    const toast=(msg)=>{const t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(toast._t);toast._t=setTimeout(()=>t.classList.remove('show'),1600)};
 
-    // ====== AUTH ======
-    async function refreshUser(){
-      if(!sb){ els.stats.textContent = 'Supabase belum siap. Cek CDN/URL/KEY.'; return; }
-      const { data:{ user } } = await sb.auth.getUser();
-      state.user=user||null; els.logout.style.display = state.user? '' : 'none';
+    // ==== API helpers ====
+    async function apiList(){
+      const res = await fetch('/api/links', { method:'GET' });
+      if(!res.ok) throw new Error('Gagal ambil data');
+      return await res.json(); // {links:[...]}
     }
-    els.login.addEventListener('click', async()=>{
-      if(!sb) return alert('Library Supabase belum termuat. Cek koneksi/CDN.');
-      const email = els.email.value.trim(); if(!email) return alert('Isi email dulu ya');
-      const { error } = await sb.auth.signInWithOtp({ email });
-      if(error) alert(error.message); else alert('Magic link terkirim. Cek email kamu, klik linknya, lalu reload halaman ini.');
-    });
-    els.logout.addEventListener('click', async()=>{ if(!sb) return; await sb.auth.signOut(); location.reload(); });
-
-    // ====== CRUD (Supabase) ======
-    async function loadLinks(){
-      if(!sb){ state.links=[]; render(); return; }
-      if(!state.user){ state.links=[]; render(); return; }
-      const { data, error } = await sb.from('links').select('*').order('created', { ascending:false });
-      if(error){ console.error(error); toast('Gagal ambil data'); return }
-      state.links = data.map(r=>({ ...r, created: r.created ? new Date(r.created).getTime() : Date.now() }));
-      render();
+    async function apiUpsert(item){
+      const res = await fetch('/api/links', {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify(item)
+      });
+      if(!res.ok) throw new Error('Gagal simpan');
+      return await res.json();
+    }
+    async function apiDelete(id){
+      const res = await fetch('/api/links?id='+encodeURIComponent(id), { method:'DELETE' });
+      if(!res.ok) throw new Error('Gagal hapus');
+      return await res.json();
     }
 
-    async function upsertLink(item){
-      if(!sb) return alert('Supabase belum siap.');
-      if(!state.user) return alert('Harus login dulu');
-      const row = { id: item.id || uid(), user_id: state.user.id, title: item.title || null, url: item.url, tags: item.tags || [], notes: item.notes || null, favorite: !!item.favorite, created: item.created ? new Date(item.created).toISOString() : new Date().toISOString() };
-      const { error } = await sb.from('links').upsert(row);
-      if(error){ alert(error.message); return }
-      await loadLinks();
-      toast(item.id? 'Perubahan disimpan' : 'Link ditambahkan');
-    }
-
-    async function deleteLink(id){
-      if(!sb) return alert('Supabase belum siap.');
-      if(!confirm('Hapus link ini?')) return;
-      const { error } = await sb.from('links').delete().eq('id', id);
-      if(error){ alert(error.message); return }
-      await loadLinks();
-      toast('Link dihapus');
-    }
-
-    // ====== UI ======
+    // ==== UI ====
     const allTags=()=>{const s=new Set(); state.links.forEach(l=> (l.tags||[]).forEach(t=>s.add(t))); return Array.from(s).sort()};
-    const filtered=()=>{ let out=[...state.links]; const q=state.query.trim().toLowerCase(); if(q){ out=out.filter(l=> (l.title||'').toLowerCase().includes(q)||(l.url||'').toLowerCase().includes(q)||(l.notes||'').toLowerCase().includes(q)||(l.tags||[]).some(t=>t.includes(q))); }
-      if(state.activeTags.length){ out=out.filter(l=> state.activeTags.every(t=> l.tags?.includes(t))) }
+    const filtered=()=>{ let out=[...state.links]; const q=state.query.trim().toLowerCase();
+      if(q){ out=out.filter(l=> (l.title||'').toLowerCase().includes(q)||(l.url||'').toLowerCase().includes(q)||(l.notes||'').toLowerCase().includes(q)||(l.tags||[]).some(t=>t.includes(q))); }
+      if(state.activeTags.length) out=out.filter(l=> state.activeTags.every(t=> l.tags?.includes(t)));
       switch(state.sortBy){ case 'created_asc': out.sort((a,b)=>a.created-b.created); break; case 'title_asc': out.sort((a,b)=>(a.title||'').localeCompare(b.title||'')); break; case 'title_desc': out.sort((a,b)=>(b.title||'').localeCompare(a.title||'')); break; default: out.sort((a,b)=>b.created-a.created); }
-      return out };
+      return out;
+    };
 
     function render(){
-      // tags
-      const tags=allTags(); els.tagFilters.innerHTML=''; tags.forEach(t=>{ const chip=document.createElement('span'); chip.className='chip'; chip.textContent='#'+t; const x=document.createElement('button'); x.className='x'; x.textContent = state.activeTags.includes(t)?'✓':'+'; x.onclick=()=>{ if(state.activeTags.includes(t)) state.activeTags=state.activeTags.filter(x=>x!==t); else state.activeTags.push(t); render(); }; chip.appendChild(x); els.tagFilters.appendChild(chip); });
-      // stats
-      const favs=state.links.filter(l=>l.favorite).length; els.stats.textContent=`${state.links.length} link • ${tags.length} tag • ${favs} favorit ${state.user? '' : '• (belum login)'}`;
-      // list
-      const data=filtered(); els.list.innerHTML=''; if(!data.length){ const d=document.createElement('div'); d.className='empty'; d.innerHTML='<div style="font-size:20px">🔗</div><div class="muted">Belum ada data atau belum login.</div>'; els.list.appendChild(d); return }
+      $('#list').classList.toggle('compact', state.compact);
+      els.compact.textContent='Mode ringkas: '+(state.compact?'ON':'OFF');
+      const tags=allTags(); els.tagFilters.innerHTML='';
+      tags.forEach(t=>{ const chip=document.createElement('span'); chip.className='chip'; chip.textContent='#'+t;
+        const x=document.createElement('button'); x.className='x'; x.textContent= state.activeTags.includes(t)?'✓':'+';
+        x.onclick=()=>{ if(state.activeTags.includes(t)) state.activeTags=state.activeTags.filter(x=>x!==t); else state.activeTags.push(t); render(); };
+        chip.appendChild(x); els.tagFilters.appendChild(chip);
+      });
+      const favs=state.links.filter(l=>l.favorite).length; els.stats.textContent=`${state.links.length} link • ${tags.length} tag • ${favs} favorit`;
+      const data=filtered(); els.list.innerHTML='';
+      if(!data.length){ const d=document.createElement('div'); d.className='empty'; d.innerHTML='<div style="font-size:20px">🔗</div><div class="muted">Belum ada data.</div>'; els.list.appendChild(d); return }
       data.forEach(l=>{
         const frag=tpl.content.cloneNode(true);
         frag.querySelector('.card-title').textContent=l.title||l.url;
         frag.querySelector('.note').textContent=l.notes||'';
         frag.querySelector('.openBtn').href=l.url;
         frag.querySelector('.meta').textContent='Ditambahkan: '+ new Date(l.created).toLocaleString();
-        const favBtn=frag.querySelector('.favBtn'); favBtn.style.color=l.favorite?'gold':'var(--muted)'; favBtn.onclick=()=> upsertLink({ ...l, favorite: !l.favorite });
+        const favBtn=frag.querySelector('.favBtn'); favBtn.style.color=l.favorite?'gold':'var(--muted)';
+        favBtn.onclick=async()=>{ try{ await apiUpsert({...l, favorite:!l.favorite}); await boot(); } catch(e){ toast(e.message) } };
         const tagsWrap=frag.querySelector('.tags'); (l.tags||[]).forEach(t=>{ const e=document.createElement('span'); e.className='tag'; e.textContent='#'+t; tagsWrap.appendChild(e) });
         frag.querySelector('.copyBtn').onclick=()=> navigator.clipboard.writeText(l.url).then(()=>toast('URL disalin'));
         frag.querySelector('.editBtn').onclick=()=> openModal(l);
-        frag.querySelector('.delBtn').onclick=()=> deleteLink(l.id);
+        frag.querySelector('.delBtn').onclick=async()=>{ if(!confirm('Hapus link ini?')) return; try{ await apiDelete(l.id); await boot(); } catch(e){ toast(e.message) } };
         els.list.appendChild(frag);
-      })
+      });
     }
 
-    function openModal(item){ state.editing=item||null; $('#modalTitle').textContent=item?'Ubah Link':'Tambah Link'; fTitle.value=item?.title||''; fUrl.value=item?.url||''; fTags.value=(item?.tags||[]).join(', '); fNotes.value=item?.notes||''; err.style.display='none'; modal.classList.add('show'); backdrop.classList.add('show'); setTimeout(()=>fUrl.focus(),0) }
+    function openModal(item){ state.editing=item||null; $('#modalTitle').textContent=item?'Ubah Link':'Tambah Link';
+      fTitle.value=item?.title||''; fUrl.value=item?.url||''; fTags.value=(item?.tags||[]).join(', '); fNotes.value=item?.notes||'';
+      err.style.display='none'; modal.classList.add('show'); backdrop.classList.add('show'); setTimeout(()=>fUrl.focus(),0);
+    }
     function closeModal(){ modal.classList.remove('show'); backdrop.classList.remove('show') }
+    window._openModal = () => openModal(null); // fallback onclick untuk GitHub Pages/tema SPA
 
-    // Submit form
     btnSave.addEventListener('click', async (e)=>{
       e.preventDefault(); const url=fUrl.value.trim(); if(!validUrl(url)){ err.textContent='URL tidak valid. Sertakan http(s)://'; err.style.display='block'; return }
-      const item={ id: state.editing?.id, title: fTitle.value.trim(), url, tags: normTags(fTags.value), notes: fNotes.value.trim(), favorite: state.editing?.favorite||false, created: state.editing?.created || Date.now() };
-      await upsertLink(item); closeModal();
+      const item={ id: state.editing?.id || uid(), title: fTitle.value.trim(), url, tags: normTags(fTags.value), notes: fNotes.value.trim(), favorite: state.editing?.favorite||false, created: state.editing?.created || Date.now() };
+      try{ await apiUpsert(item); closeModal(); await boot(); toast(state.editing?'Perubahan disimpan':'Link ditambahkan'); } catch(e){ toast(e.message) }
     });
     btnCancel.addEventListener('click', (e)=>{ e.preventDefault(); closeModal(); });
     backdrop.addEventListener('click', closeModal);
     document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && modal.classList.contains('show')) closeModal(); });
 
-    // Actions top bar (berfungsi meski Supabase belum siap)
-    els.add.addEventListener('click', ()=> openModal(null));
     els.q.addEventListener('input', e=>{ state.query=e.target.value; render(); });
     els.sort.addEventListener('change', e=>{ state.sortBy=e.target.value; render(); });
+    els.compact.addEventListener('click', ()=>{ state.compact=!state.compact; render(); });
 
-    // Boot
-    (async function init(){ await refreshUser(); await loadLinks(); })();
+    els.export.addEventListener('click', ()=>{
+      const payload=JSON.stringify({version:1, exportedAt:new Date().toISOString(), links:state.links}, null, 2);
+      const blob=new Blob([payload],{type:'application/json;charset=utf-8'}); const url=URL.createObjectURL(blob);
+      const a=document.createElement('a'); a.href=url; a.download='linkvault-export-'+new Date().toISOString().slice(0,10)+'.json'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+    });
+    els.import.addEventListener('click', ()=> els.importInput.click());
+    els.importInput.addEventListener('change', async (e)=>{
+      const f=e.target.files?.[0]; if(!f) return; const r=new FileReader();
+      r.onload=async()=>{ try{ const obj=JSON.parse(r.result); if(!obj||!Array.isArray(obj.links)) throw new Error('Format tidak valid'); 
+        // merge sederhana: timpa semuanya
+        const all = obj.links.map(l => ({...l, created: l.created ?? Date.now()}));
+        // simpan sebagai batch: panggil API satu per satu (sederhana)
+        for(const it of all) await apiUpsert(it);
+        await boot(); toast('Impor berhasil'); }catch(err){ toast('Gagal impor: '+err.message) } };
+      r.readAsText(f);
+    });
+
+    async function boot(){
+      try{ const data = await apiList(); state.links = (data.links||[]).map(l=> ({...l, created: typeof l.created==='number'? l.created : new Date(l.created||Date.now()).getTime()})); render(); }
+      catch(e){ toast(e.message); state.links=[]; render(); }
+    }
+    boot();
   });
   </script>
 </body>
