@@ -1,5 +1,4 @@
 {
-  "name": "fb-linkvault",
   "private": true,
   "type": "module",
   "dependencies": {
