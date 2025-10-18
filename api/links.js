@@ -5,8 +5,8 @@ export const config = { runtime: 'nodejs' };
 
 const BLOB_FILENAME = 'links.json';
 const ALLOWED_ORIGINS = [
-  'https://jokisubmit.vercel.app',
-  'https://rohim.my.id'
+  'https://jokisubmit.vercel.app', // ganti setalah deploy tahu URL-nya
+  // 'https://rohim.my.id'        // tambah jika pakai custom domain
 ];
 
 function ok(res, json, cors) {
@@ -20,6 +20,7 @@ async function ensureJson(env) {
   const files = await list({ token: env.BLOB_READ_WRITE_TOKEN });
   const item = files.blobs.find(b => b.pathname === BLOB_FILENAME);
   if (item) return item.url;
+
   const created = await put(BLOB_FILENAME, JSON.stringify({ links: [] }, null, 2), {
     access: 'private', token: env.BLOB_READ_WRITE_TOKEN
   });
@@ -39,6 +40,8 @@ async function saveAll(data, env) {
 
 export default async function handler(req, res) {
   const origin = req.headers.origin || '';
+
+  // CORS preflight
   if (req.method === 'OPTIONS') {
     const allow = ALLOWED_ORIGINS.includes(origin);
     res.setHeader('Access-Control-Allow-Origin', allow ? origin : '*');
@@ -47,14 +50,15 @@ export default async function handler(req, res) {
     return res.status(204).end();
   }
 
-  const cors = (req.method === 'GET') ? (origin || '*') :
-               (ALLOWED_ORIGINS.includes(origin) ? origin : null);
+  // izinkan GET dari mana saja; tulis hanya dari origin terdaftar
+  const cors = (req.method === 'GET') ? (origin || '*')
+    : (ALLOWED_ORIGINS.includes(origin) ? origin : null);
   if (!cors) return bad(res, 'Origin not allowed', 403);
 
   if (!process.env.BLOB_READ_WRITE_TOKEN) return bad(res, 'Missing BLOB_READ_WRITE_TOKEN', 500);
   const env = { BLOB_READ_WRITE_TOKEN: process.env.BLOB_READ_WRITE_TOKEN };
 
-  const { links, url } = await loadAll(env);
+  const { links } = await loadAll(env);
 
   if (req.method === 'GET') return ok(res, { links }, cors);
 
@@ -69,9 +73,7 @@ export default async function handler(req, res) {
       notes: body.notes || null, favorite: !!body.favorite,
       created: body.created ?? now
     };
-    const updated = [...links];
-    const i = updated.findIndex(x=>x.id===item.id);
-    if (i>=0) updated[i]=item; else updated.unshift(item);
+    const updated = [item, ...links.filter(x=>x.id!==item.id)];
     await saveAll({ links: updated }, env);
     return ok(res, { ok:true }, cors);
   }
