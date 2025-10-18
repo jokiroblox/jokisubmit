@@ -1,7 +1,7 @@
 // /api/links.js
 import { list, put } from '@vercel/blob';
 
-export const config = { runtime: 'nodejs20.x' };
+export const config = { runtime: 'nodejs' };
 
 const BLOB_FILENAME = 'links.json';
 const ALLOWED_ORIGINS = [
