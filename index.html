@@ -1,193 +1,467 @@
-<!doctype html>
-<html lang="id" data-theme="light">
+<!DOCTYPE html>
+<html lang="id">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Profil Saya — Situs Pribadi Sederhana</title>
-  <meta name="description" content="Situs profil sederhana dan responsif dengan foto, portofolio investasi, galeri, dan kontak langsung ke WhatsApp." />
+  <title>BIODATA ROHIM</title>
+  <meta name="description" content="Portofolio web developer dengan tema pendakian gunung—proyek, keterampilan, target puncak, dan kontak." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --bg:#f7f9fc;--paper:#ffffff;--ink:#0b1220;--muted:#5b6470;--line:#e7ebf3;--brand:#1a73e8;--brand-2:#2f86ff;--radius:16px;--shadow:0 14px 30px rgba(29,42,64,.08);
+    :root {
+      --bg: #0b1220;
+      --bg-2: #0f172a;
+      --card: #111827;
+      --card-2: #0b1220;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --brand: #38bdf8; /* sky-400 */
+      --brand-2: #22d3ee; /* cyan-400 */
+      --accent: #34d399; /* emerald-400 */
+      --warning: #fbbf24; /* amber-400 */
+      --danger: #f87171; /* red-400 */
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 18px;
     }
-    [data-theme="dark"]{--bg:#0b0d12;--paper:#111522;--ink:#ecf2ff;--muted:#9aa6c1;--line:#222a3b;--brand:#4f8cff;--brand-2:#71a1ff;--shadow:0 18px 40px rgba(0,0,0,.45)}
     *{box-sizing:border-box}
-    html,body{height:100%}
-    html{scroll-behavior:smooth}
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;background:var(--bg);color:var(--ink);line-height:1.6}
-    a{color:inherit;text-decoration:none}
-    .container{max-width:1080px;margin-inline:auto;padding:0 20px}
-    .btn{appearance:none;border:1px solid var(--line);background:var(--paper);color:var(--ink);padding:12px 16px;border-radius:12px;font-weight:700;cursor:pointer;box-shadow:var(--shadow);min-height:44px;line-height:1}
-    .btn.primary{background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#fff;border-color:transparent}
-    .tag{display:inline-block;font-size:12px;padding:6px 10px;border-radius:999px;background:#eef4ff;border:1px solid var(--line);color:#2b5abf}
-    [data-theme="dark"] .tag{background:#1a2340;color:#b8c8ff}
-    header{position:sticky;top:0;z-index:50;background:color-mix(in oklab,var(--paper) 85%,transparent);backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid var(--line)}
-    .nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;min-height:64px}
-    .brand{display:flex;align-items:center;gap:10px}
-    .logo{width:36px;height:36px;border-radius:12px;color:#fff;font-weight:800;display:grid;place-items:center;background:linear-gradient(135deg,var(--brand),var(--brand-2));box-shadow:var(--shadow)}
-    .links{display:flex;gap:18px;color:var(--muted);font-size:14px;flex:1;justify-content:center;flex-wrap:wrap}
-    .links a{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;border:1px solid transparent}
-    .links a:hover{color:var(--ink);background:color-mix(in oklab,var(--paper) 80%,transparent);border-color:var(--line)}
-    .links a.active{color:#fff;background:linear-gradient(135deg,var(--brand),var(--brand-2));border-color:transparent}
-    .links a:hover{color:var(--ink)}
-    .hero{padding:46px 0}
-    .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:22px;align-items:center}
-    @media(max-width:980px){.hero-grid{grid-template-columns:1fr}}
-    .card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
-    .card-body{padding:20px}
-    .title{font-size:clamp(26px,4vw,40px);line-height:1.15;margin:8px 0}
+    html,body{margin:0;padding:0;background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;scroll-behavior:smooth}
+    a{color:var(--brand)}
+    img{max-width:100%;display:block}
+    .container{max-width:1160px;margin:0 auto;padding:0 20px}
+    .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 16px;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#001018;text-decoration:none;font-weight:700;box-shadow:var(--shadow);border:0;cursor:pointer}
+    .btn.secondary{background:transparent;color:var(--text);border:1px solid rgba(255,255,255,.15)}
+    .btn.ghost{background:rgba(255,255,255,.06);color:var(--text)}
+    .btn svg{width:18px;height:18px}
+    .badge{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.08);color:var(--text);font-size:12px;border:1px solid rgba(255,255,255,.12)}
+    .section{padding:90px 0}
+    .title{font-size:32px;line-height:1.15;margin:0 0 16px;font-weight:800}
+    .subtitle{margin:0 0 26px;color:var(--muted)}
+    .grid{display:grid;gap:20px}
+    .grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+    @media (max-width: 960px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}}
+
+    /* NAV */
+    .nav{position:sticky;top:0;z-index:50;background:rgba(11,18,32,.7);backdrop-filter:saturate(140%) blur(14px);border-bottom:1px solid rgba(255,255,255,.06)}
+    .nav-inner{height:62px;display:flex;align-items:center;justify-content:space-between}
+    .nav .menu{display:flex;gap:18px}
+    /* Mobile nav */
+    .hamb{display:none;background:transparent;border:1px solid rgba(255,255,255,.18);color:var(--text);padding:8px 10px;border-radius:10px}
+    .hamb:focus{outline:none;box-shadow:0 0 0 3px rgba(56,189,248,.35)}
+    @media (max-width: 960px){
+      .hamb{display:block}
+      .nav .menu{display:none;position:absolute;top:62px;left:16px;right:16px;background:rgba(15,23,42,.96);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:10px;flex-direction:column;gap:8px}
+      .nav .menu.open{display:flex}
+    }
+    @media (max-width:480px){
+      .btn{width:100%;justify-content:center}
+    }
+
+    /* HERO */
+    .hero{position:relative;overflow:hidden}
+    .hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=2400&auto=format&fit=crop') center/cover no-repeat;filter:saturate(105%) contrast(105%)}
+    .hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,18,32,.65) 0%, rgba(11,18,32,.9) 55%, #0f172a 100%)}
+    .hero-inner{position:relative;padding:120px 0 90px}
+    .hero h1{font-size:clamp(24px,5vw,46px);line-height:1.2;margin:0 0 16px;text-wrap:balance}
+    .hero p{color:#c1c7d0;max-width:720px}
+    .pill{display:inline-flex;align-items:center;gap:10px;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.15);font-size:12px;margin-bottom:16px}
+
+    /* PROFILE CARD */
+    .profile{display:flex;align-items:center;gap:22px;background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.09);padding:16px;border-radius:var(--radius);box-shadow:var(--shadow)}
+    .profile .avatar{width:92px;height:92px;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.2);object-fit:cover}
+    .profile .meta{font-size:14px;color:var(--muted)}
+
+    /* CARDS */
+    .card{background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);box-shadow:var(--shadow)}
+    .card .card-body{padding:18px}
+    .card h3{margin:0 0 10px;font-size:18px}
+    .card p{margin:0;color:#cbd5e1}
+
+    /* SKILLS */
+    .skill{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);padding:12px;border-radius:12px}
+    .meter{height:8px;background:rgba(255,255,255,.08);border-radius:6px;overflow:hidden;margin-top:8px}
+    .meter > span{display:block;height:100%;background:linear-gradient(90deg,var(--brand),var(--accent))}
+
+    /* TIMELINE */
+    .timeline{position:relative;padding-left:20px}
+    .timeline:before{content:"";position:absolute;left:9px;top:0;bottom:0;width:2px;background:rgba(255,255,255,.12)}
+    .tl-item{position:relative;margin:0 0 20px;padding-left:18px}
+    .tl-dot{position:absolute;left:-2px;top:4px;width:12px;height:12px;border-radius:999px;background:linear-gradient(135deg,var(--brand),var(--brand-2));box-shadow:0 0 0 3px rgba(56,189,248,.2)}
+
+    /* GALLERY */
+    .gallery img{border-radius:14px;border:1px solid rgba(255,255,255,.08);width:100%;aspect-ratio:4/3;object-fit:cover}
+
+    /* TABLE */
+    table{width:100%;border-collapse:separate;border-spacing:0 10px}
+    th,td{text-align:left;padding:12px 14px}
+    thead th{color:#a3aab8;font-size:13px}
+    tbody tr{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)}
+    tbody tr td:first-child{border-top-left-radius:12px;border-bottom-left-radius:12px}
+    tbody tr td:last-child{border-top-right-radius:12px;border-bottom-right-radius:12px}
+
+    /* FOOTER */
+    footer{padding:40px 0;color:#a3aab8;border-top:1px solid rgba(255,255,255,.08);background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02))}
+
+    /* UTIL */
+    .spacer{height:10px}
     .muted{color:var(--muted)}
-    .meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
-    .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-    .photo-wrap{display:grid;place-items:center;padding:18px}
-    .photo{width:100%;max-width:400px;aspect-ratio:1/1;height:auto;border-radius:20px;object-fit:cover;border:1px solid var(--line);box-shadow:var(--shadow)}
-    @media(max-width:460px){.photo{max-width:100%}}
-    section{padding:34px 0;scroll-margin-top:80px}
-    h2{margin:0 0 8px;font-size:26px}
-    .lead{color:var(--muted);font-size:14px}
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-    @media(max-width:900px){.grid{grid-template-columns:1fr 1fr}}
-    @media(max-width:600px){.grid{grid-template-columns:1fr}}
-    .item{padding:16px;border:1px solid var(--line);border-radius:12px;background:var(--paper)}
-    .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px}
-    .gallery img{width:100%;aspect-ratio:4/3;height:auto;object-fit:cover;border-radius:10px;border:1px solid var(--line)}
-    .form{display:grid;gap:10px}
-    .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-    @media(max-width:720px){.row{grid-template-columns:1fr}}
-    input,textarea{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--paper);color:var(--ink)}
-    textarea{min-height:120px;resize:vertical}
-    footer{border-top:1px solid var(--line);padding:16px 0;color:var(--muted);font-size:14px}
-  </style>
+    .center{display:flex;align-items:center;justify-content:center}
+    /* ===== Mobile polish & Android tweaks ===== */
+    @media (max-width:960px){
+      .container{padding:0 14px}
+      .section{padding:84px 0}
+      .hero-inner{padding:96px 0 72px}
+      .profile{flex-direction:column;align-items:flex-start;gap:14px}
+      .grid-2,.grid-3,.grid-4{grid-template-columns:1fr}
+      .nav .menu{position:fixed;inset:62px 0 0 0;display:none;background:rgba(15,23,42,.98);border-top:1px solid rgba(255,255,255,.08);border-radius:0;padding:16px 20px;flex-direction:column;gap:6px}
+      .nav .menu a{padding:12px 10px;border-radius:10px}
+      .nav .menu.open{display:flex}
+    }
+    @media (max-width:480px){
+      .section{padding:72px 0}
+      .hero-inner{padding:86px 0 60px}
+      .subtitle{font-size:14px}
+      .btn{width:100%;justify-content:center;padding:12px 14px}
+      .gallery{gap:12px}
+      .profile .avatar{width:80px;height:80px}
+    }
+  /* === Navbar redesign for Android/mobile === */
+    .nav{position:sticky;top:0;z-index:90;background:rgba(11,18,32,.82);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.08);box-shadow:0 6px 18px rgba(0,0,0,.25)}
+    .nav-inner{height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 8px}
+    .brand{font-weight:800;letter-spacing:.2px}
+    .hamb{display:none;min-width:44px;min-height:44px;border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:8px 12px;font-size:14px;background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));color:var(--text)}
+    .hamb:active{transform:translateY(1px)}
+    .nav .menu{display:flex;gap:18px}
+    .nav .menu a{display:block;padding:10px 12px;border-radius:10px;color:var(--text);font-weight:600;white-space:nowrap}
+    .nav .menu a:hover{background:rgba(255,255,255,.06)}
+    @media (max-width:960px){
+      .hamb{display:block}
+      .nav .menu{position:fixed;inset:64px 12px auto 12px;display:none;flex-direction:column;gap:8px;padding:10px;border-radius:14px;background:rgba(15,23,42,.98);border:1px solid rgba(255,255,255,.08);box-shadow:0 20px 60px rgba(0,0,0,.45);opacity:0;transform:translateY(-8px);transition:opacity .2s ease, transform .25s ease}
+      .nav .menu a{padding:14px 16px;font-size:16px;white-space:normal}
+      .nav .menu.open{display:flex;opacity:1;transform:none}
+    }
+</style>
 </head>
 <body>
-  <header>
-    <div class="container nav">
-      <div class="brand">
-        <div class="logo">R</div>
-        <div>
-          <div style="font-weight:800">Rohim</div>
-          <div class="muted" style="font-size:12px">Pontianak, Indonesia</div>
-        </div>
-      </div>
-      <nav class="links">
+  <!-- NAVBAR -->
+  <header class="nav">
+    <div class="container nav-inner">
+      <a href="#home" aria-label="Ke beranda">Portofolio</a>
+      <button id="hamb" class="hamb" aria-label="Buka menu" aria-expanded="false" aria-controls="mainmenu">☰ Menu</button>
+      <nav id="mainmenu" class="menu" aria-label="Navigasi utama">
         <a href="#tentang">Tentang</a>
-        <a href="#investasi">Investasi</a>
+        <a href="#layanan">Layanan</a>
+        <a href="#proyek">Proyek</a>
+        <a href="#keterampilan">Keterampilan</a>
+        <a href="#target">Target Gunung</a>
+        <a href="#summit">Summit</a>
         <a href="#galeri">Galeri</a>
         <a href="#kontak">Kontak</a>
       </nav>
-      <button class="btn" id="themeBtn" aria-label="Ganti tema">🌙</button>
     </div>
   </header>
 
-  <section class="hero">
-    <div class="container hero-grid">
-      <div class="card" id="tentang">
-        <div class="card-body">
-          <span class="tag">Profil</span>
-          <h1 class="title">Halo, saya <span style="color:var(--brand)">Rohim</span></h1>
-          <p class="muted">Saya orang yang senang belajar hal baru dan suka bekerja rapi. Di halaman ini, saya menampilkan informasi singkat tentang diri saya, investasi, kegiatan, dan cara menghubungi saya.</p>
-          <div class="meta">
-            <span class="tag">Disiplin</span>
-            <span class="tag">Tepat Waktu</span>
-            <span class="tag">Mudah Beradaptasi</span>
-          </div>
-          <div class="actions">
-            <a class="btn primary" href="https://wa.me/6281234567890?text=Halo%20saya%20melihat%20profil%20Anda">Hubungi Saya di WhatsApp</a>
-          </div>
-        </div>
-      </div>
-      <aside class="card photo-wrap">
-        <img class="photo" id="foto" src="/daun/rohimdev_1760376014_3742627734108750526_4915565064.webp" alt="Foto diri 400x400" width="400" height="400" />
-      </aside>
-    </div>
-  </section>
+  <!-- HERO -->
+  <section id="home" class="hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <div class="container hero-inner">
+      <div class="pill">Pendaki - Investment - Gaming</div>
+      <h1>Halo, saya <span style="background:linear-gradient(90deg,#fff, var(--brand));-webkit-background-clip:text;background-clip:text;color:transparent">Rohim</span>.<br/>Saya membangun website Pribadi saya untuk pengalaman hidup.</h1>
+      <p class="subtitle">Fokus pada kehidupan dan kemampuan saya Investasi Crypto,Saham,Forex</p>
 
-  <section id="investasi">
-    <div class="container">
-      <h2>Portofolio Aset Investasi</h2>
-      <div class="lead">Ringkasan distribusi aset investasi pribadi saya.</div>
-      <div class="card" style="margin-top:12px">
-        <div class="card-body">
-          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;text-align:center">
+      <div class="grid grid-2" style="align-items:center;margin-top:28px">
+        <div>
+          <div class="profile">
+            <img class="avatar" id="avatar" src="/daun/rohimdev_1760376014_3742627734108750526_4915565064.webp" alt="Foto profil" loading="lazy"/>
             <div>
-              <h3 style="margin:0;color:var(--brand)">Crypto</h3>
-              <p class="muted">Bitcoin (BTC), Ethereum (ETH)</p>
-              <div style="font-size:28px;font-weight:700">40%</div>
-            </div>
-            <div>
-              <h3 style="margin:0;color:var(--brand)">Rupiah (IDR)</h3>
-              <p class="muted">Tabungan dan deposito</p>
-              <div style="font-size:28px;font-weight:700">35%</div>
-            </div>
-            <div>
-              <h3 style="margin:0;color:var(--brand)">Saham</h3>
-              <p class="muted">Perusahaan lokal & global</p>
-              <div style="font-size:28px;font-weight:700">25%</div>
+              <strong>Rohim</strong>
+              <div class="meta">Strong • Indonesia</div>
             </div>
           </div>
-          <div style="margin-top:18px;font-size:14px;color:var(--muted);text-align:center">Distribusi ini hanya contoh dan dapat berubah sesuai kondisi pasar serta strategi investasi pribadi.</div>
+          <div class="spacer"></div>
+          <a class="btn" href="#proyek">Lihat Proyek</a>
+          <a class="btn secondary" href="#target">Target Gunung</a>
+          <a class="btn secondary" href="#kontak">Hubungi Saya</a>
+        </div>
+        <div>
+          <svg viewBox="0 0 1440 380" role="img" aria-label="Siluet pegunungan">
+            <defs>
+              <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0%" stop-color="#22d3ee" stop-opacity=".9"/>
+                <stop offset="100%" stop-color="#38bdf8" stop-opacity=".2"/>
+              </linearGradient>
+            </defs>
+            <path fill="url(#g1)" d="M0,300 L120,260 L260,310 L390,240 L520,280 L680,210 L820,300 L980,250 L1120,320 L1260,270 L1440,320 L1440,380 L0,380 Z"/>
+          </svg>
+          <p class="muted">“Kualitas kode yang baik itu seperti jalur pendakian yang rapi—membuat perjalanan menjadi aman dan menyenangkan.”</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="galeri">
+  <!-- ABOUT -->
+  <section id="tentang" class="section">
     <div class="container">
-      <h2>Galeri</h2>
-      <div class="lead">Foto kegiatan atau hasil karya sederhana.</div>
-      <div class="gallery" style="margin-top:12px">
-        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=800&auto=format&fit=crop" alt="Kegiatan 1">
-        <img src="https://images.unsplash.com/photo-1517263904808-5dc91e3e7044?q=80&w=800&auto=format&fit=crop" alt="Kegiatan 2">
-        <img src="https://images.unsplash.com/photo-1532635042-97d02b0c5930?q=80&w=800&auto=format&fit=crop" alt="Kegiatan 3">
-        <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?q=80&w=800&auto=format&fit=crop" alt="Kegiatan 4">
+      <h2 class="title">Tentang Saya</h2>
+      <p class="subtitle">Saya seorang pengembang web yang menyukai pengalaman cepat dan elegan. Tahun ini saya menargetkan satu puncak baru untuk ditaklukkan, sambil terus mengasah keterampilan frontend & UX.</p>
+
+      <div class="grid grid-3">
+        <div class="card"><div class="card-body">
+          <h3>Nilai</h3>
+          <p>Performa, aksesibilitas, konsistensi desain, dan kolaborasi yang sehat.</p>
+        </div></div>
+        <div class="card"><div class="card-body">
+          <h3>Tech Stack</h3>
+          <p>HTML • CSS • JavaScript • TypeScript • React • Next.js • Node • REST • Git</p>
+        </div></div>
+        <div class="card"><div class="card-body">
+          <h3>Hobi</h3>
+          <p>Hiking, fotografi lanskap, dan menulis catatan perjalanan.</p>
+        </div></div>
       </div>
     </div>
   </section>
 
-  <section id="kontak">
+  <!-- SERVICES -->
+  <section id="layanan" class="section" style="padding-top:0">
     <div class="container">
-      <h2>Kontak</h2>
-      <div class="lead">Klik tombol di bawah untuk langsung terhubung ke WhatsApp saya.</div>
-      <div class="card" style="margin-top:12px;text-align:center;padding:24px">
-        <a class="btn primary" href="https://wa.me/6281234567890?text=Halo%20saya%20melihat%20profil%20Anda">💬 Hubungi via WhatsApp</a>
-        <p class="muted" style="margin-top:10px;font-size:13px">Saya akan segera membalas pesan Anda.</p>
+      <h2 class="title">Layanan</h2>
+      <p class="subtitle">Saya membantu brand dan UMKM memiliki kehadiran digital yang kuat.</p>
+      <div class="grid grid-3">
+        <div class="card"><div class="card-body">
+          <h3>Landing Page</h3>
+          <p>Desain hero berani, CTA jelas, konversi terukur, SEO dasar.</p>
+        </div></div>
+        <div class="card"><div class="card-body">
+          <h3>Company Profile</h3>
+          <p>Halaman informatif, cepat, dan mudah dikelola tim non‑teknis.</p>
+        </div></div>
+        <div class="card"><div class="card-body">
+          <h3>E‑Commerce Ringan</h3>
+          <p>Katalog, filter produk, checkout terintegrasi, dan pelacakan pesanan.</p>
+        </div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="proyek" class="section">
+    <div class="container">
+      <h2 class="title">Proyek Pilihan</h2>
+      <p class="subtitle">Koleksi pekerjaan terbaru—fokus pada UI bersih dan load time singkat.</p>
+      <div class="grid grid-3">
+        <article class="card">
+          <div class="card-body">
+            <h3>Website Toko Outdoor</h3>
+            <p>E‑commerce ringan untuk perlengkapan hiking. Filter gear & pembayaran.</p>
+            <div class="actions"><a class="btn" href="#" target="_blank" rel="noreferrer">Kunjungi</a></div>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card-body">
+            <h3>Blog Pendakian Minimalis</h3>
+            <p>Halaman pos markdown, SSG cepat, dan struktur SEO yang rapi.</p>
+            <div class="actions"><a class="btn" href="#" target="_blank" rel="noreferrer">Baca</a></div>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card-body">
+            <h3>Landing Page Event Trail Run</h3>
+            <p>Hero kuat, CTA jelas, dan formulir pendaftaran responsif.</p>
+            <div class="actions"><a class="btn" href="#" target="_blank" rel="noreferrer">Lihat</a></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="keterampilan" class="section">
+    <div class="container">
+      <h2 class="title">Keterampilan</h2>
+      <p class="subtitle">Level perkiraan berdasarkan pengalaman proyek dan studi mandiri.</p>
+      <div class="grid grid-3">
+        <div class="skill">
+          <div>Gaming</div>
+          <div class="meter"><span style="width:95%"></span></div>
+        </div>
+        <div class="skill">
+          <div>Pendaki</div>
+          <div class="meter"><span style="width:10%"></span></div>
+        </div>
+        <div class="skill">
+          <div>Trading</div>
+          <div class="meter"><span style="width:20%"></span></div>
+        </div>
+        <div class="skill">
+          <div>Forex</div>
+          <div class="meter"><span style="width:10%"></span></div>
+        </div>
+        <div class="skill">
+          <div>Futures</div>
+          <div class="meter"><span style="width:10%"></span></div>
+        </div>
+        <div class="skill">
+          <div>Saham</div>
+          <div class="meter"><span style="width:10%"></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MOUNTAIN GOALS / TIMELINE -->
+  <section id="target" class="section">
+    <div class="container">
+      <h2 class="title">Target Pendakian & Progres</h2>
+      <p class="subtitle">Daftar puncak yang ingin saya taklukkan dan catatan persiapan.</p>
+
+      <div class="grid grid-3">
+        <div class="card"><div class="card-body">
+          <h3>Agung (3.031 m)</h3>
+          <p>Status: <span class="badge">Target Q4 2025</span></p>
+          <p>Catatan: Gunung dibali</p>
+        </div></div>
+        <div class="card"><div class="card-body">
+          <h3>Rinjani (3.726 m)</h3>
+          <p>Status: <span class="badge">Selesai 2024</span></p>
+          <p>Catatan: Summit via Sembalun, dokumentasi lengkap.</p>
+        </div></div>
+        <div class="card"><div class="card-body">
+          <h3>Kerinci (3.805 m)</h3>
+          <p>Status: <span class="badge">Target 2026</span></p>
+          <p>Catatan: Aklimatisasi & logistik (izin TNKS, porter).</p>
+        </div></div>
+      </div>
+
+      <div class="spacer"></div>
+      <h3 class="subtitle" style="margin-top:10px">Timeline Latihan 4 Minggu</h3>
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-dot"></div><strong>Minggu 1:</strong> Jalan menanjak 3×/minggu (30–45 menit), fokus cardio.</div>
+        <div class="tl-item"><div class="tl-dot"></div><strong>Minggu 2:</strong> Daypack 5–7 kg, jalur tanah/undakan.</div>
+        <div class="tl-item"><div class="tl-dot"></div><strong>Minggu 3:</strong> Trek 6–10 km; simulasi elevasi.</div>
+        <div class="tl-item"><div class="tl-dot"></div><strong>Minggu 4:</strong> Long hike 12–15 km; review perlengkapan inti.</div>
+      </div>
+
+      <div class="spacer"></div>
+      <h3 class="subtitle" style="margin-top:10px">Checklist Gear Inti</h3>
+      <table aria-label="Checklist perlengkapan pendakian">
+        <thead>
+          <tr><th>Item</th><th>Keterangan</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <!-- SUMMIT (baruu, sebelum ⏳ ✔galeri) -->
+          <tr><td>Sepatu hiking</td><td>Solit kuat, antiselip</td><td>⏳</td></tr>
+          <tr><td>Carrier 40–60L</td><td>Back support nyaman</td><td>⏳</td></tr>
+          <tr><td>Jaket tahan angin</td><td>Water resistant</td><td>⏳</td></tr>
+          <tr><td>Headlamp</td><td>Battery cadangan</td><td>⏳</td></tr>
+          <tr><td>Botol hidrasi</td><td>Min. 1,5L</td><td>⏳</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- SUMMIT (baruu, sebelum galeri) -->
+  <section id="summit" class="section">
+    <div class="container">
+      <h2 class="title">Summit</h2>
+      <p class="subtitle">Gunung-gunung yang sudah saya daki dan pengalaman singkatnya.</p>
+      <div class="grid grid-3">
+        <div class="card">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1477414348463-c0eb7f1359b6?q=80&w=800&auto=format&fit=crop" alt="Gunung Semeru" style="border-radius:12px 12px 0 0;aspect-ratio:4/3;object-fit:cover">
+          <div class="card-body">
+            <h3>Gunung Semeru</h3>
+            <p class="muted">Pendakian menuju Mahameru dengan trek pasir menantang dan view kawah aktif.</p>
+            <p>Rating: ⭐⭐⭐⭐☆ (4.5/5)</p>
+          </div>
+        </div>
+        <div class="card">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1520975916090-3105956dac38?q=80&w=800&auto=format&fit=crop" alt="Gunung Rinjani" style="border-radius:12px 12px 0 0;aspect-ratio:4/3;object-fit:cover">
+          <div class="card-body">
+            <h3>Gunung Rinjani</h3>
+            <p class="muted">Panorama Segara Anak dan sunrise dramatis dari puncak.</p>
+            <p>Rating: ⭐⭐⭐⭐⭐ (5/5)</p>
+          </div>
+        </div>
+        <div class="card">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=800&auto=format&fit=crop" alt="Gunung Kerinci" style="border-radius:12px 12px 0 0;aspect-ratio:4/3;object-fit:cover">
+          <div class="card-body">
+            <h3>Gunung Kerinci</h3>
+            <p class="muted">Pendakian panjang, hutan lebat, dan pemandangan epik dari puncak.</p>
+            <p>Rating: ⭐⭐⭐⭐☆ (4.2/5)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="galeri" class="section">
+    <div class="container">
+      <h2 class="title">Galeri</h2>
+      <p class="subtitle">Beberapa momen pendakian favorit</p>
+      <div class="grid grid-3 gallery">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=800&auto=format&fit=crop" alt="Sunrise di pegunungan"/>
+        <img loading="lazy" src="https://images.unsplash.com/photo-1477414348463-c0eb7f1359b6?q=80&w=800&auto=format&fit=crop" alt="Hutan berkabut"/>
+        <img loading="lazy" src="https://images.unsplash.com/photo-1520975916090-3105956dac38?q=80&w=800&auto=format&fit=crop" alt="Camp di atas awan"/>
+        <img loading="lazy" src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?q=80&w=800&auto=format&fit=crop" alt="Golden hour"/>
+        <img loading="lazy" src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=800&auto=format&fit=crop" alt="Lembah hijau"/>
+        <img loading="lazy" src="https://images.unsplash.com/photo-1445307806294-bff7f67ff225?q=80&w=800&auto=format&fit=crop" alt="Kabut tipis"/>
+        <img loading="lazy" src="https://images.unsplash.com/photo-1499346030926-9a72daac6c63?q=80&w=800&auto=format&fit=crop" alt="Danau alpine"/>
+        <img loading="lazy" src="https://images.unsplash.com/photo-1454496522488-7a8e488e8606?q=80&w=800&auto=format&fit=crop" alt="Bintang di atas tenda"/>
+        <img loading="lazy" src="https://images.unsplash.com/photo-1536240478700-b869070f9279?q=80&w=800&auto=format&fit=crop" alt="Jalur menuju puncak"/>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="kontak" class="section">
+    <div class="container">
+      <h2 class="title">Kontak</h2>
+      <p class="subtitle">Tertarik bekerja sama? Kirim pesan cepat melalui formulir di bawah.</p>
+      <div class="grid grid-2">
+        <form class="card" onsubmit="event.preventDefault(); alert('Terima kasih! Pesan Anda sudah direkam (demo).');">
+          <div class="card-body">
+            <div class="grid" style="gap:12px">
+              <label>Nama<br><input required type="text" placeholder="Nama Anda" style="width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.04);color:var(--text)"></label>
+              <label>Email<br><input required type="email" placeholder="email@domain.com" style="width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.04);color:var(--text)"></label>
+              <label>Pesan<br><textarea required rows="4" placeholder="Tulis pesan Anda..." style="width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.04);color:var(--text)"></textarea></label>
+              <button class="btn" type="submit">Kirim Pesan</button>
+            </div>
+          </div>
+        </form>
+        <div>
+          <div class="card"><div class="card-body">
+            <h3>Email</h3>
+            <p><a href="mailto:emailanda@domain.com">jeluni17@gmail.com</a></p>
+            <h3 style="margin-top:14px">GitHub</h3>
+            <p><a href="https://www.instagram.com/rohimdev" target="_blank" rel="noreferrer">instagram.com/rohimdev</a></p>
+            <h3 style="margin-top:14px">Lokasi</h3>
+            <p>Indonesia • Kalimantan Barat</p>
+          </div></div>
+        </div>
       </div>
     </div>
   </section>
 
   <footer>
-    <div class="container" style="display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap">
-      <div>© <span id="tahun"></span> Nama Anda. Semua hak dilindungi.</div>
-      <div class="muted" style="display:flex;gap:12px;flex-wrap:wrap">
-        <a href="mailto:halo@contoh.com">halo@contoh.com</a>
-        <span>•</span>
-        <a href="https://wa.me/6281234567890">+62 812-3456-7890</a>
-      </div>
-    </div>
+    <div class="container center">© <span id="year"></span> Nama Anda • Tema: Pendakian • Dibuat dengan HTML+CSS</div>
   </footer>
 
   <script>
-    document.getElementById('tahun').textContent=new Date().getFullYear();
-    const root=document.documentElement;const btn=document.getElementById('themeBtn');
-    const saved=localStorage.getItem('tema');if(saved){root.setAttribute('data-theme',saved);btn.textContent=saved==='dark'?'🌙':'🌞';}
-    btn.addEventListener('click',()=>{const next=root.getAttribute('data-theme')==='dark'?'light':'dark';root.setAttribute('data-theme',next);btn.textContent=next==='dark'?'🌙':'🌞';localStorage.setItem('tema',next)});
-    // Highlight menu aktif saat scroll
-    const navLinks=[...document.querySelectorAll('.links a')];
-    const sections=navLinks.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
-    function setActive(){
-      const offset=90;
-      let current=sections[0];
-      for(const s of sections){
-        const top=s.getBoundingClientRect().top;
-        if(top - offset <= 0) current=s; else break;
-      }
-      navLinks.forEach(a=>a.classList.remove('active'));
-      if(current){
-        const active=document.querySelector(`.links a[href="#${current.id}"]`);
-        active && active.classList.add('active');
-      }
+    // Tahun otomatis
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Hamburger toggle + update label + prevent background scroll
+    const hamb = document.getElementById('hamb');
+    const menu = document.getElementById('mainmenu');
+    if(hamb && menu){
+      const setLabel = (open) => { hamb.textContent = open ? '✕ Tutup' : '☰ Menu'; hamb.setAttribute('aria-expanded', String(open)); document.body.style.overflow = open ? 'hidden' : ''; };
+      hamb.addEventListener('click', () => { const open = menu.classList.toggle('open'); setLabel(open); });
+      menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { menu.classList.remove('open'); setLabel(false); }));
     }
-    window.addEventListener('scroll', setActive, {passive:true});
-    window.addEventListener('load', setActive);
   </script>
 </body>
 </html>
