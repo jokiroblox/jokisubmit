@@ -142,6 +142,21 @@
       .nav .menu a{padding:14px 16px;font-size:16px;white-space:normal}
       .nav .menu.open{display:flex;opacity:1;transform:none}
     }
+
+/* === Mini Audio Player (floating) === */
+.audioplayer{
+  position:fixed; right:16px; bottom:16px; z-index:95;
+  display:flex; align-items:center; gap:10px;
+  background:rgba(15,23,42,.9); border:1px solid rgba(255,255,255,.1);
+  backdrop-filter:blur(10px); padding:8px 12px; border-radius:14px;
+  box-shadow:0 10px 30px rgba(0,0,0,.35)
+}
+.audioplayer button{
+  min-width:40px; min-height:40px; border:0; border-radius:10px; cursor:pointer;
+  font-weight:700; background:linear-gradient(135deg,var(--brand),var(--brand-2)); color:#001018
+}
+.audioplayer .status{ color:var(--muted); font-size:13px }
+@media (max-width:480px){ .audioplayer{ right:12px; bottom:12px; padding:8px } }
 </style>
 </head>
 <body>
@@ -446,7 +461,16 @@
     </div>
   </section>
 
-  <footer>
+  
+<!-- Floating Audio Player -->
+<div class="audioplayer" id="audioplayer" aria-live="polite">
+  <button id="audioToggle" aria-label="Putar Musik">▶</button>
+  <span class="status" id="audioStatus">Memuat musik…</span>
+  <!-- GANTI src di bawah ini dengan link MP3 kamu -->
+  <audio id="bgm" src="daun/wwd.mp3juice.blog - 2 23 AM しゃろう (64 KBps).mp3" preload="auto" loop></audio>
+</div>
+
+<footer>
     <div class="container center">© <span id="year"></span> Nama Anda • Tema: Pendakian • Dibuat dengan HTML+CSS</div>
   </footer>
 
@@ -463,5 +487,44 @@
       menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { menu.classList.remove('open'); setLabel(false); }));
     }
   </script>
+
+<script>
+// === Autoplay dengan fallback interaksi pertama + tombol ▶/⏸ ===
+(function(){
+  const audio = document.getElementById('bgm');
+  const btn   = document.getElementById('audioToggle');
+  const stat  = document.getElementById('audioStatus');
+  if(!audio || !btn || !stat) return;
+
+  audio.volume = 0.6;
+
+  function updateUI(){
+    if(audio.paused){ btn.textContent = '▶'; stat.textContent = 'Ketuk untuk putar musik'; }
+    else{ btn.textContent = '⏸'; stat.textContent = 'Memutar…'; }
+  }
+
+  function tryPlay(){
+    const p = audio.play();
+    if(p && p.catch){
+      p.then(updateUI).catch(()=>{ stat.textContent = 'Ketuk untuk putar musik'; });
+    }else{
+      updateUI();
+    }
+  }
+
+  // Coba play saat siap
+  document.addEventListener('DOMContentLoaded', tryPlay, { once:true });
+  audio.addEventListener('canplay', tryPlay, { once:true });
+
+  // Fallback: play pada interaksi pertama (Android/iOS policy)
+  const events = ['pointerdown','touchstart','click','keydown','wheel','scroll','visibilitychange'];
+  const handler = () => { tryPlay(); events.forEach(e => window.removeEventListener(e, handler, true)); };
+  events.forEach(e => window.addEventListener(e, handler, true));
+
+  // Tombol play/pause
+  btn.addEventListener('click', ()=>{ audio.paused ? audio.play().then(updateUI) : (audio.pause(), updateUI()); });
+})();
+</script>
+
 </body>
 </html>
