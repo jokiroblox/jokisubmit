@@ -1,530 +1,518 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>BIODATA ROHIM</title>
-  <meta name="description" content="Portofolio web developer dengan tema pendakian gunung—proyek, keterampilan, target puncak, dan kontak." />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🏍️ Impian Harley-Davidson</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #0b1220;
-      --bg-2: #0f172a;
-      --card: #111827;
-      --card-2: #0b1220;
-      --text: #e5e7eb;
-      --muted: #9ca3af;
-      --brand: #38bdf8; /* sky-400 */
-      --brand-2: #22d3ee; /* cyan-400 */
-      --accent: #34d399; /* emerald-400 */
-      --warning: #fbbf24; /* amber-400 */
-      --danger: #f87171; /* red-400 */
-      --shadow: 0 10px 30px rgba(0,0,0,.35);
-      --radius: 18px;
-    }
-    *{box-sizing:border-box}
-    html,body{margin:0;padding:0;background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;scroll-behavior:smooth}
-    a{color:var(--brand)}
-    img{max-width:100%;display:block}
-    .container{max-width:1160px;margin:0 auto;padding:0 20px}
-    .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 16px;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#001018;text-decoration:none;font-weight:700;box-shadow:var(--shadow);border:0;cursor:pointer}
-    .btn.secondary{background:transparent;color:var(--text);border:1px solid rgba(255,255,255,.15)}
-    .btn.ghost{background:rgba(255,255,255,.06);color:var(--text)}
-    .btn svg{width:18px;height:18px}
-    .badge{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.08);color:var(--text);font-size:12px;border:1px solid rgba(255,255,255,.12)}
-    .section{padding:90px 0}
-    .title{font-size:32px;line-height:1.15;margin:0 0 16px;font-weight:800}
-    .subtitle{margin:0 0 26px;color:var(--muted)}
-    .grid{display:grid;gap:20px}
-    .grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
-    .grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
-    .grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}
-    @media (max-width: 960px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}}
-
-    /* NAV */
-    .nav{position:sticky;top:0;z-index:50;background:rgba(11,18,32,.7);backdrop-filter:saturate(140%) blur(14px);border-bottom:1px solid rgba(255,255,255,.06)}
-    .nav-inner{height:62px;display:flex;align-items:center;justify-content:space-between}
-    .nav .menu{display:flex;gap:18px}
-    /* Mobile nav */
-    .hamb{display:none;background:transparent;border:1px solid rgba(255,255,255,.18);color:var(--text);padding:8px 10px;border-radius:10px}
-    .hamb:focus{outline:none;box-shadow:0 0 0 3px rgba(56,189,248,.35)}
-    @media (max-width: 960px){
-      .hamb{display:block}
-      .nav .menu{display:none;position:absolute;top:62px;left:16px;right:16px;background:rgba(15,23,42,.96);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:10px;flex-direction:column;gap:8px}
-      .nav .menu.open{display:flex}
-    }
-    @media (max-width:480px){
-      .btn{width:100%;justify-content:center}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    /* HERO */
-    .hero{position:relative;overflow:hidden}
-    .hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=2400&auto=format&fit=crop') center/cover no-repeat;filter:saturate(105%) contrast(105%)}
-    .hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,18,32,.65) 0%, rgba(11,18,32,.9) 55%, #0f172a 100%)}
-    .hero-inner{position:relative;padding:120px 0 90px}
-    .hero h1{font-size:clamp(24px,5vw,46px);line-height:1.2;margin:0 0 16px;text-wrap:balance}
-    .hero p{color:#c1c7d0;max-width:720px}
-    .pill{display:inline-flex;align-items:center;gap:10px;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.15);font-size:12px;margin-bottom:16px}
-
-    /* PROFILE CARD */
-    .profile{display:flex;align-items:center;gap:22px;background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.09);padding:16px;border-radius:var(--radius);box-shadow:var(--shadow)}
-    .profile .avatar{width:92px;height:92px;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.2);object-fit:cover}
-    .profile .meta{font-size:14px;color:var(--muted)}
-
-    /* CARDS */
-    .card{background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);box-shadow:var(--shadow)}
-    .card .card-body{padding:18px}
-    .card h3{margin:0 0 10px;font-size:18px}
-    .card p{margin:0;color:#cbd5e1}
-
-    /* SKILLS */
-    .skill{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);padding:12px;border-radius:12px}
-    .meter{height:8px;background:rgba(255,255,255,.08);border-radius:6px;overflow:hidden;margin-top:8px}
-    .meter > span{display:block;height:100%;background:linear-gradient(90deg,var(--brand),var(--accent))}
-
-    /* TIMELINE */
-    .timeline{position:relative;padding-left:20px}
-    .timeline:before{content:"";position:absolute;left:9px;top:0;bottom:0;width:2px;background:rgba(255,255,255,.12)}
-    .tl-item{position:relative;margin:0 0 20px;padding-left:18px}
-    .tl-dot{position:absolute;left:-2px;top:4px;width:12px;height:12px;border-radius:999px;background:linear-gradient(135deg,var(--brand),var(--brand-2));box-shadow:0 0 0 3px rgba(56,189,248,.2)}
-
-    /* GALLERY */
-    .gallery img{border-radius:14px;border:1px solid rgba(255,255,255,.08);width:100%;aspect-ratio:4/3;object-fit:cover}
-
-    /* TABLE */
-    table{width:100%;border-collapse:separate;border-spacing:0 10px}
-    th,td{text-align:left;padding:12px 14px}
-    thead th{color:#a3aab8;font-size:13px}
-    tbody tr{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)}
-    tbody tr td:first-child{border-top-left-radius:12px;border-bottom-left-radius:12px}
-    tbody tr td:last-child{border-top-right-radius:12px;border-bottom-right-radius:12px}
-
-    /* FOOTER */
-    footer{padding:40px 0;color:#a3aab8;border-top:1px solid rgba(255,255,255,.08);background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02))}
-
-    /* UTIL */
-    .spacer{height:10px}
-    .muted{color:var(--muted)}
-    .center{display:flex;align-items:center;justify-content:center}
-    /* ===== Mobile polish & Android tweaks ===== */
-    @media (max-width:960px){
-      .container{padding:0 14px}
-      .section{padding:84px 0}
-      .hero-inner{padding:96px 0 72px}
-      .profile{flex-direction:column;align-items:flex-start;gap:14px}
-      .grid-2,.grid-3,.grid-4{grid-template-columns:1fr}
-      .nav .menu{position:fixed;inset:62px 0 0 0;display:none;background:rgba(15,23,42,.98);border-top:1px solid rgba(255,255,255,.08);border-radius:0;padding:16px 20px;flex-direction:column;gap:6px}
-      .nav .menu a{padding:12px 10px;border-radius:10px}
-      .nav .menu.open{display:flex}
-    }
-    @media (max-width:480px){
-      .section{padding:72px 0}
-      .hero-inner{padding:86px 0 60px}
-      .subtitle{font-size:14px}
-      .btn{width:100%;justify-content:center;padding:12px 14px}
-      .gallery{gap:12px}
-      .profile .avatar{width:80px;height:80px}
-    }
-  /* === Navbar redesign for Android/mobile === */
-    .nav{position:sticky;top:0;z-index:90;background:rgba(11,18,32,.82);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.08);box-shadow:0 6px 18px rgba(0,0,0,.25)}
-    .nav-inner{height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 8px}
-    .brand{font-weight:800;letter-spacing:.2px}
-    .hamb{display:none;min-width:44px;min-height:44px;border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:8px 12px;font-size:14px;background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));color:var(--text)}
-    .hamb:active{transform:translateY(1px)}
-    .nav .menu{display:flex;gap:18px}
-    .nav .menu a{display:block;padding:10px 12px;border-radius:10px;color:var(--text);font-weight:600;white-space:nowrap}
-    .nav .menu a:hover{background:rgba(255,255,255,.06)}
-    @media (max-width:960px){
-      .hamb{display:block}
-      .nav .menu{position:fixed;inset:64px 12px auto 12px;display:none;flex-direction:column;gap:8px;padding:10px;border-radius:14px;background:rgba(15,23,42,.98);border:1px solid rgba(255,255,255,.08);box-shadow:0 20px 60px rgba(0,0,0,.45);opacity:0;transform:translateY(-8px);transition:opacity .2s ease, transform .25s ease}
-      .nav .menu a{padding:14px 16px;font-size:16px;white-space:normal}
-      .nav .menu.open{display:flex;opacity:1;transform:none}
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0f0f0f 100%);
+      color: #e0e0e0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      overflow-x: hidden;
     }
 
-/* === Mini Audio Player (floating) === */
-.audioplayer{
-  position:fixed; right:16px; bottom:16px; z-index:95;
-  display:flex; align-items:center; gap:10px;
-  background:rgba(15,23,42,.9); border:1px solid rgba(255,255,255,.1);
-  backdrop-filter:blur(10px); padding:8px 12px; border-radius:14px;
-  box-shadow:0 10px 30px rgba(0,0,0,.35)
-}
-.audioplayer button{
-  min-width:40px; min-height:40px; border:0; border-radius:10px; cursor:pointer;
-  font-weight:700; background:linear-gradient(135deg,var(--brand),var(--brand-2)); color:#001018
-}
-.audioplayer .status{ color:var(--muted); font-size:13px }
-@media (max-width:480px){ .audioplayer{ right:12px; bottom:12px; padding:8px } }
-</style>
+    .container {
+      background: linear-gradient(145deg, #1a1a1a, #252525);
+      border-radius: 24px;
+      padding: 40px 30px;
+      width: 100%;
+      max-width: 480px;
+      box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.7),
+        0 0 40px rgba(255, 140, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      text-align: center;
+      position: relative;
+      border: 1px solid rgba(255, 140, 0, 0.2);
+    }
+
+    /* Header */
+    .header {
+      margin-bottom: 25px;
+    }
+
+    .header h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.8rem;
+      color: #ff8c00;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      text-shadow: 0 0 20px rgba(255, 140, 0, 0.5);
+      margin-bottom: 5px;
+    }
+
+    .header p {
+      color: #888;
+      font-size: 0.9rem;
+      font-weight: 300;
+    }
+
+    /* Gambar Motor */
+    .motor-image {
+      width: 100%;
+      max-width: 350px;
+      margin: 0 auto 30px;
+      position: relative;
+    }
+
+    .motor-image img {
+      width: 100%;
+      height: auto;
+      border-radius: 16px;
+      box-shadow: 
+        0 10px 40px rgba(0, 0, 0, 0.6),
+        0 0 30px rgba(255, 140, 0, 0.2);
+      transition: transform 0.5s ease, box-shadow 0.5s ease;
+    }
+
+    .motor-image img:hover {
+      transform: scale(1.03);
+      box-shadow: 
+        0 15px 50px rgba(0, 0, 0, 0.7),
+        0 0 50px rgba(255, 140, 0, 0.4);
+    }
+
+    .motor-image::before {
+      content: '';
+      position: absolute;
+      top: -3px;
+      left: -3px;
+      right: -3px;
+      bottom: -3px;
+      background: linear-gradient(45deg, #ff8c00, #ff4500, #ff8c00, #ffa500);
+      border-radius: 18px;
+      z-index: -1;
+      opacity: 0.7;
+      filter: blur(8px);
+    }
+
+    /* Circle Progress - Persentase Tengah */
+    .circle-progress-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 30px 0;
+    }
+
+    .circle-progress {
+      position: relative;
+      width: 200px;
+      height: 200px;
+    }
+
+    .circle-progress svg {
+      transform: rotate(-90deg);
+      width: 200px;
+      height: 200px;
+    }
+
+    .circle-bg {
+      fill: none;
+      stroke: #2a2a2a;
+      stroke-width: 12;
+    }
+
+    .circle-fill {
+      fill: none;
+      stroke: url(#gradient);
+      stroke-width: 12;
+      stroke-linecap: round;
+      stroke-dasharray: 565.48;
+      stroke-dashoffset: 565.48;
+      transition: stroke-dashoffset 2s ease-in-out;
+    }
+
+    .percentage-display {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    .percentage-number {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 3rem;
+      font-weight: 900;
+      color: #ff8c00;
+      text-shadow: 0 0 30px rgba(255, 140, 0, 0.7);
+      line-height: 1;
+    }
+
+    .percentage-symbol {
+      font-size: 1.5rem;
+      color: #ff6600;
+    }
+
+    .percentage-label {
+      font-size: 0.85rem;
+      color: #888;
+      margin-top: 5px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    /* Progress Bar Horizontal */
+    .progress-bar-container {
+      margin: 25px 0;
+    }
+
+    .progress-bar-label {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      font-size: 0.8rem;
+      color: #666;
+    }
+
+    .progress-bar {
+      height: 12px;
+      background: linear-gradient(90deg, #1a1a1a, #2a2a2a);
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.5);
+    }
+
+    .progress-fill {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, #ff4500, #ff8c00, #ffa500);
+      border-radius: 10px;
+      transition: width 2s ease-in-out;
+      position: relative;
+      box-shadow: 0 0 15px rgba(255, 140, 0, 0.6);
+    }
+
+    .progress-fill::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(255, 255, 255, 0.3) 50%, 
+        transparent 100%);
+      animation: shimmer 2s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    /* Detail Cards */
+    .details {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-top: 25px;
+    }
+
+    .detail-card {
+      background: linear-gradient(145deg, #1e1e1e, #2a2a2a);
+      padding: 20px 15px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 140, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .detail-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(255, 140, 0, 0.3);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .detail-card .icon {
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+    }
+
+    .detail-card .label {
+      font-size: 0.75rem;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 5px;
+    }
+
+    .detail-card .value {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1rem;
+      color: #ff8c00;
+      font-weight: 700;
+    }
+
+    /* Sisa yang Dibutuhkan */
+    .remaining {
+      margin-top: 25px;
+      padding: 20px;
+      background: linear-gradient(145deg, #2a1a1a, #1a1a1a);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 100, 0, 0.2);
+    }
+
+    .remaining .label {
+      font-size: 0.8rem;
+      color: #888;
+      margin-bottom: 5px;
+    }
+
+    .remaining .value {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.4rem;
+      color: #ff6347;
+      font-weight: 700;
+    }
+
+    /* Motivasi */
+    .motivation {
+      margin-top: 25px;
+      padding: 15px;
+      background: rgba(255, 140, 0, 0.1);
+      border-radius: 12px;
+      border-left: 4px solid #ff8c00;
+    }
+
+    .motivation p {
+      font-size: 0.9rem;
+      color: #ccc;
+      font-style: italic;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 30px;
+      font-size: 0.75rem;
+      color: #444;
+      border-top: 1px solid #2a2a2a;
+      padding-top: 20px;
+    }
+
+    footer span {
+      color: #ff8c00;
+    }
+
+    /* Glowing Effect */
+    .glow {
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 10px rgba(255, 140, 0, 0.5);
+      }
+      to {
+        text-shadow: 0 0 30px rgba(255, 140, 0, 0.9), 0 0 50px rgba(255, 100, 0, 0.5);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      .container {
+        padding: 25px 20px;
+      }
+      
+      .header h1 {
+        font-size: 1.4rem;
+      }
+      
+      .circle-progress {
+        width: 160px;
+        height: 160px;
+      }
+      
+      .circle-progress svg {
+        width: 160px;
+        height: 160px;
+      }
+      
+      .percentage-number {
+        font-size: 2.2rem;
+      }
+      
+      .detail-card .value {
+        font-size: 0.85rem;
+      }
+    }
+  </style>
 </head>
 <body>
-  <!-- NAVBAR -->
-  <header class="nav">
-    <div class="container nav-inner">
-      <a href="#home" aria-label="Ke beranda">Portofolio</a>
-      <button id="hamb" class="hamb" aria-label="Buka menu" aria-expanded="false" aria-controls="mainmenu">☰ Menu</button>
-      <nav id="mainmenu" class="menu" aria-label="Navigasi utama">
-        <a href="#tentang">Tentang</a>
-        <a href="#layanan">Layanan</a>
-        <a href="#proyek">Proyek</a>
-        <a href="#keterampilan">Keterampilan</a>
-        <a href="#target">Target Gunung</a>
-        <a href="#summit">Summit</a>
-        <a href="#galeri">Galeri</a>
-        <a href="#kontak">Kontak</a>
-      </nav>
+
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <h1 class="glow">🏍️ MY DREAM 2026/2027</h1>
+      <p>Harley-Davidson Fat Boy</p>
     </div>
-  </header>
 
-  <!-- HERO -->
-  <section id="home" class="hero">
-    <div class="hero-bg" aria-hidden="true"></div>
-    <div class="hero-overlay" aria-hidden="true"></div>
-    <div class="container hero-inner">
-      <div class="pill">Pendaki - Investment - Gaming</div>
-      <h1>Halo, saya <span style="background:linear-gradient(90deg,#fff, var(--brand));-webkit-background-clip:text;background-clip:text;color:transparent">Rohim</span>.<br/>Saya membangun website Pribadi saya untuk pengalaman hidup.</h1>
-      <p class="subtitle">Fokus pada kehidupan dan kemampuan saya Investasi Crypto,Saham,Forex</p>
+    <!-- Gambar Motor Harley -->
+    <div class="motor-image">
+      <img src="https://d2bywgumb0o70j.cloudfront.net/2019/10/07/01d91472ee3a0822ba21838fe29b1912_8950a810afdcdff1.png" 
+           alt="Harley-Davidson" 
+           onerror="this.src='https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=600&h=400&fit=crop'">
+    </div>
 
-      <div class="grid grid-2" style="align-items:center;margin-top:28px">
-        <div>
-          <div class="profile">
-            <img class="avatar" id="avatar" src="/daun/rohimdev_1760376014_3742627734108750526_4915565064.webp" alt="Foto profil" loading="lazy"/>
-            <div>
-              <strong>Rohim</strong>
-              <div class="meta">Strong • Indonesia</div>
-            </div>
+    <!-- Circle Progress dengan Persentase di Tengah -->
+    <div class="circle-progress-container">
+      <div class="circle-progress">
+        <svg viewBox="0 0 200 200">
+          <defs>
+            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#ff4500"/>
+              <stop offset="50%" stop-color="#ff8c00"/>
+              <stop offset="100%" stop-color="#ffa500"/>
+            </linearGradient>
+          </defs>
+          <circle class="circle-bg" cx="100" cy="100" r="90"/>
+          <circle class="circle-fill" id="circleFill" cx="100" cy="100" r="90"/>
+        </svg>
+        <div class="percentage-display">
+          <div class="percentage-number glow">
+            <span id="percentageValue">0</span><span class="percentage-symbol">%</span>
           </div>
-          <div class="spacer"></div>
-          <a class="btn" href="#proyek">Lihat Proyek</a>
-          <a class="btn secondary" href="#target">Target Gunung</a>
-          <a class="btn secondary" href="#kontak">Hubungi Saya</a>
-        </div>
-        <div>
-          <svg viewBox="0 0 1440 380" role="img" aria-label="Siluet pegunungan">
-            <defs>
-              <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1">
-                <stop offset="0%" stop-color="#22d3ee" stop-opacity=".9"/>
-                <stop offset="100%" stop-color="#38bdf8" stop-opacity=".2"/>
-              </linearGradient>
-            </defs>
-            <path fill="url(#g1)" d="M0,300 L120,260 L260,310 L390,240 L520,280 L680,210 L820,300 L980,250 L1120,320 L1260,270 L1440,320 L1440,380 L0,380 Z"/>
-          </svg>
-          <p class="muted">“Kualitas kode yang baik itu seperti jalur pendakian yang rapi—membuat perjalanan menjadi aman dan menyenangkan.”</p>
+          <div class="percentage-label">Tercapai</div>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- ABOUT -->
-  <section id="tentang" class="section">
-    <div class="container">
-      <h2 class="title">Tentang Saya</h2>
-      <p class="subtitle">Saya seorang pengembang web yang menyukai pengalaman cepat dan elegan. Tahun ini saya menargetkan satu puncak baru untuk ditaklukkan, sambil terus mengasah keterampilan frontend & UX.</p>
-
-      <div class="grid grid-3">
-        <div class="card"><div class="card-body">
-          <h3>Nilai</h3>
-          <p>Performa, aksesibilitas, konsistensi desain, dan kolaborasi yang sehat.</p>
-        </div></div>
-        <div class="card"><div class="card-body">
-          <h3>Tech Stack</h3>
-          <p>HTML • CSS • JavaScript • TypeScript • React • Next.js • Node • REST • Git</p>
-        </div></div>
-        <div class="card"><div class="card-body">
-          <h3>Hobi</h3>
-          <p>Hiking, fotografi lanskap, dan menulis catatan perjalanan.</p>
-        </div></div>
+    <!-- Progress Bar Horizontal -->
+    <div class="progress-bar-container">
+      <div class="progress-bar-label">
+        <span>Mulai</span>
+        <span>Target</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
       </div>
     </div>
-  </section>
 
-  <!-- SERVICES -->
-  <section id="layanan" class="section" style="padding-top:0">
-    <div class="container">
-      <h2 class="title">Layanan</h2>
-      <p class="subtitle">Saya membantu brand dan UMKM memiliki kehadiran digital yang kuat.</p>
-      <div class="grid grid-3">
-        <div class="card"><div class="card-body">
-          <h3>Landing Page</h3>
-          <p>Desain hero berani, CTA jelas, konversi terukur, SEO dasar.</p>
-        </div></div>
-        <div class="card"><div class="card-body">
-          <h3>Company Profile</h3>
-          <p>Halaman informatif, cepat, dan mudah dikelola tim non‑teknis.</p>
-        </div></div>
-        <div class="card"><div class="card-body">
-          <h3>E‑Commerce Ringan</h3>
-          <p>Katalog, filter produk, checkout terintegrasi, dan pelacakan pesanan.</p>
-        </div></div>
+    <!-- Detail Saldo & Target -->
+    <div class="details">
+      <div class="detail-card">
+        <div class="icon">💰</div>
+        <div class="label">Saldo Saat Ini</div>
+        <div class="value" id="currentBalance">Rp 0</div>
+      </div>
+      <div class="detail-card">
+        <div class="icon">🎯</div>
+        <div class="label">Harga Target</div>
+        <div class="value" id="targetPrice">Rp 0</div>
       </div>
     </div>
-  </section>
 
-  <!-- PROJECTS -->
-  <section id="proyek" class="section">
-    <div class="container">
-      <h2 class="title">Proyek Pilihan</h2>
-      <p class="subtitle">Koleksi pekerjaan terbaru—fokus pada UI bersih dan load time singkat.</p>
-      <div class="grid grid-3">
-        <article class="card">
-          <div class="card-body">
-            <h3>Website Toko Outdoor</h3>
-            <p>E‑commerce ringan untuk perlengkapan hiking. Filter gear & pembayaran.</p>
-            <div class="actions"><a class="btn" href="#" target="_blank" rel="noreferrer">Kunjungi</a></div>
-          </div>
-        </article>
-        <article class="card">
-          <div class="card-body">
-            <h3>Blog Pendakian Minimalis</h3>
-            <p>Halaman pos markdown, SSG cepat, dan struktur SEO yang rapi.</p>
-            <div class="actions"><a class="btn" href="#" target="_blank" rel="noreferrer">Baca</a></div>
-          </div>
-        </article>
-        <article class="card">
-          <div class="card-body">
-            <h3>Landing Page Event Trail Run</h3>
-            <p>Hero kuat, CTA jelas, dan formulir pendaftaran responsif.</p>
-            <div class="actions"><a class="btn" href="#" target="_blank" rel="noreferrer">Lihat</a></div>
-          </div>
-        </article>
-      </div>
+    <!-- Sisa yang Dibutuhkan -->
+    <div class="remaining">
+      <div class="label">💪 Sisa yang Dibutuhkan</div>
+      <div class="value" id="remainingAmount">Rp 0</div>
     </div>
-  </section>
 
-  <!-- SKILLS -->
-  <section id="keterampilan" class="section">
-    <div class="container">
-      <h2 class="title">Keterampilan</h2>
-      <p class="subtitle">Level perkiraan berdasarkan pengalaman proyek dan studi mandiri.</p>
-      <div class="grid grid-3">
-        <div class="skill">
-          <div>Gaming</div>
-          <div class="meter"><span style="width:95%"></span></div>
-        </div>
-        <div class="skill">
-          <div>Pendaki</div>
-          <div class="meter"><span style="width:10%"></span></div>
-        </div>
-        <div class="skill">
-          <div>Trading</div>
-          <div class="meter"><span style="width:20%"></span></div>
-        </div>
-        <div class="skill">
-          <div>Forex</div>
-          <div class="meter"><span style="width:10%"></span></div>
-        </div>
-        <div class="skill">
-          <div>Futures</div>
-          <div class="meter"><span style="width:10%"></span></div>
-        </div>
-        <div class="skill">
-          <div>Saham</div>
-          <div class="meter"><span style="width:10%"></span></div>
-        </div>
-      </div>
+    <!-- Motivasi -->
+    <div class="motivation">
+      <p id="motivationText">"Setiap rupiah yang kamu tabung adalah selangkah lebih dekat ke impianmu!"</p>
     </div>
-  </section>
 
-  <!-- MOUNTAIN GOALS / TIMELINE -->
-  <section id="target" class="section">
-    <div class="container">
-      <h2 class="title">Target Pendakian & Progres</h2>
-      <p class="subtitle">Daftar puncak yang ingin saya taklukkan dan catatan persiapan.</p>
-
-      <div class="grid grid-3">
-        <div class="card"><div class="card-body">
-          <h3>Agung (3.031 m)</h3>
-          <p>Status: <span class="badge">Target Q4 2025</span></p>
-          <p>Catatan: Gunung dibali</p>
-        </div></div>
-        <div class="card"><div class="card-body">
-          <h3>Rinjani (3.726 m)</h3>
-          <p>Status: <span class="badge">Selesai 2024</span></p>
-          <p>Catatan: Summit via Sembalun, dokumentasi lengkap.</p>
-        </div></div>
-        <div class="card"><div class="card-body">
-          <h3>Kerinci (3.805 m)</h3>
-          <p>Status: <span class="badge">Target 2026</span></p>
-          <p>Catatan: Aklimatisasi & logistik (izin TNKS, porter).</p>
-        </div></div>
-      </div>
-
-      <div class="spacer"></div>
-      <h3 class="subtitle" style="margin-top:10px">Timeline Latihan 4 Minggu</h3>
-      <div class="timeline">
-        <div class="tl-item"><div class="tl-dot"></div><strong>Minggu 1:</strong> Jalan menanjak 3×/minggu (30–45 menit), fokus cardio.</div>
-        <div class="tl-item"><div class="tl-dot"></div><strong>Minggu 2:</strong> Daypack 5–7 kg, jalur tanah/undakan.</div>
-        <div class="tl-item"><div class="tl-dot"></div><strong>Minggu 3:</strong> Trek 6–10 km; simulasi elevasi.</div>
-        <div class="tl-item"><div class="tl-dot"></div><strong>Minggu 4:</strong> Long hike 12–15 km; review perlengkapan inti.</div>
-      </div>
-
-      <div class="spacer"></div>
-      <h3 class="subtitle" style="margin-top:10px">Checklist Gear Inti</h3>
-      <table aria-label="Checklist perlengkapan pendakian">
-        <thead>
-          <tr><th>Item</th><th>Keterangan</th><th>Status</th></tr>
-        </thead>
-        <tbody>
-          <!-- SUMMIT (baruu, sebelum ⏳ ✔galeri) -->
-          <tr><td>Sepatu hiking</td><td>Solit kuat, antiselip</td><td>⏳</td></tr>
-          <tr><td>Carrier 40–60L</td><td>Back support nyaman</td><td>⏳</td></tr>
-          <tr><td>Jaket tahan angin</td><td>Water resistant</td><td>⏳</td></tr>
-          <tr><td>Headlamp</td><td>Battery cadangan</td><td>⏳</td></tr>
-          <tr><td>Botol hidrasi</td><td>Min. 1,5L</td><td>⏳</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <!-- SUMMIT (baruu, sebelum galeri) -->
-  <section id="summit" class="section">
-    <div class="container">
-      <h2 class="title">Summit</h2>
-      <p class="subtitle">Gunung-gunung yang sudah saya daki dan pengalaman singkatnya.</p>
-      <div class="grid grid-3">
-        <div class="card">
-          <img loading="lazy" src="https://images.unsplash.com/photo-1477414348463-c0eb7f1359b6?q=80&w=800&auto=format&fit=crop" alt="Gunung Semeru" style="border-radius:12px 12px 0 0;aspect-ratio:4/3;object-fit:cover">
-          <div class="card-body">
-            <h3>Gunung Semeru</h3>
-            <p class="muted">Pendakian menuju Mahameru dengan trek pasir menantang dan view kawah aktif.</p>
-            <p>Rating: ⭐⭐⭐⭐☆ (4.5/5)</p>
-          </div>
-        </div>
-        <div class="card">
-          <img loading="lazy" src="https://images.unsplash.com/photo-1520975916090-3105956dac38?q=80&w=800&auto=format&fit=crop" alt="Gunung Rinjani" style="border-radius:12px 12px 0 0;aspect-ratio:4/3;object-fit:cover">
-          <div class="card-body">
-            <h3>Gunung Rinjani</h3>
-            <p class="muted">Panorama Segara Anak dan sunrise dramatis dari puncak.</p>
-            <p>Rating: ⭐⭐⭐⭐⭐ (5/5)</p>
-          </div>
-        </div>
-        <div class="card">
-          <img loading="lazy" src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=800&auto=format&fit=crop" alt="Gunung Kerinci" style="border-radius:12px 12px 0 0;aspect-ratio:4/3;object-fit:cover">
-          <div class="card-body">
-            <h3>Gunung Kerinci</h3>
-            <p class="muted">Pendakian panjang, hutan lebat, dan pemandangan epik dari puncak.</p>
-            <p>Rating: ⭐⭐⭐⭐☆ (4.2/5)</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- GALLERY -->
-  <section id="galeri" class="section">
-    <div class="container">
-      <h2 class="title">Galeri</h2>
-      <p class="subtitle">Beberapa momen pendakian favorit</p>
-      <div class="grid grid-3 gallery">
-        <img loading="lazy" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=800&auto=format&fit=crop" alt="Sunrise di pegunungan"/>
-        <img loading="lazy" src="https://images.unsplash.com/photo-1477414348463-c0eb7f1359b6?q=80&w=800&auto=format&fit=crop" alt="Hutan berkabut"/>
-        <img loading="lazy" src="https://images.unsplash.com/photo-1520975916090-3105956dac38?q=80&w=800&auto=format&fit=crop" alt="Camp di atas awan"/>
-        <img loading="lazy" src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?q=80&w=800&auto=format&fit=crop" alt="Golden hour"/>
-        <img loading="lazy" src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=800&auto=format&fit=crop" alt="Lembah hijau"/>
-        <img loading="lazy" src="https://images.unsplash.com/photo-1445307806294-bff7f67ff225?q=80&w=800&auto=format&fit=crop" alt="Kabut tipis"/>
-        <img loading="lazy" src="https://images.unsplash.com/photo-1499346030926-9a72daac6c63?q=80&w=800&auto=format&fit=crop" alt="Danau alpine"/>
-        <img loading="lazy" src="https://images.unsplash.com/photo-1454496522488-7a8e488e8606?q=80&w=800&auto=format&fit=crop" alt="Bintang di atas tenda"/>
-        <img loading="lazy" src="https://images.unsplash.com/photo-1536240478700-b869070f9279?q=80&w=800&auto=format&fit=crop" alt="Jalur menuju puncak"/>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="kontak" class="section">
-    <div class="container">
-      <h2 class="title">Kontak</h2>
-      <p class="subtitle">Tertarik bekerja sama? Kirim pesan cepat melalui formulir di bawah.</p>
-      <div class="grid grid-2">
-        <form class="card" onsubmit="event.preventDefault(); alert('Terima kasih! Pesan Anda sudah direkam (demo).');">
-          <div class="card-body">
-            <div class="grid" style="gap:12px">
-              <label>Nama<br><input required type="text" placeholder="Nama Anda" style="width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.04);color:var(--text)"></label>
-              <label>Email<br><input required type="email" placeholder="email@domain.com" style="width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.04);color:var(--text)"></label>
-              <label>Pesan<br><textarea required rows="4" placeholder="Tulis pesan Anda..." style="width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.04);color:var(--text)"></textarea></label>
-              <button class="btn" type="submit">Kirim Pesan</button>
-            </div>
-          </div>
-        </form>
-        <div>
-          <div class="card"><div class="card-body">
-            <h3>Email</h3>
-            <p><a href="mailto:emailanda@domain.com">jeluni17@gmail.com</a></p>
-            <h3 style="margin-top:14px">GitHub</h3>
-            <p><a href="https://www.instagram.com/rohimdev" target="_blank" rel="noreferrer">instagram.com/rohimdev</a></p>
-            <h3 style="margin-top:14px">Lokasi</h3>
-            <p>Indonesia • Kalimantan Barat</p>
-          </div></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  
-<!-- Floating Audio Player -->
-<div class="audioplayer" id="audioplayer" aria-live="polite">
-  <button id="audioToggle" aria-label="Putar Musik">▶</button>
-  <span class="status" id="audioStatus">Memuat musik…</span>
-  <!-- GANTI src di bawah ini dengan link MP3 kamu -->
-  <audio id="bgm" src="daun/wwd.mp3juice.blog - 2 23 AM しゃろう (64 KBps).mp3" preload="auto" loop></audio>
-</div>
-
-<footer>
-    <div class="container center">© <span id="year"></span> Nama Anda • Tema: Pendakian • Dibuat dengan HTML+CSS</div>
-  </footer>
+    <!-- Footer -->
+    <footer>
+      &copy; 2025 | Dibuat dengan <span>❤️</span> untuk sang pemimpi
+    </footer>
+  </div>
 
   <script>
-    // Tahun otomatis
-    document.getElementById('year').textContent = new Date().getFullYear();
+    // ============================================
+    // 🔧 KONFIGURASI - UBAH NILAI DI SINI!
+    // ============================================
+    const currentBalance = 2000000;  // Saldo kamu saat ini (Rp 150 juta)
+    const targetPrice = 300000000;      // Harga Harley-Davidson (Rp 850 juta)
+    // ============================================
 
-    // Hamburger toggle + update label + prevent background scroll
-    const hamb = document.getElementById('hamb');
-    const menu = document.getElementById('mainmenu');
-    if(hamb && menu){
-      const setLabel = (open) => { hamb.textContent = open ? '✕ Tutup' : '☰ Menu'; hamb.setAttribute('aria-expanded', String(open)); document.body.style.overflow = open ? 'hidden' : ''; };
-      hamb.addEventListener('click', () => { const open = menu.classList.toggle('open'); setLabel(open); });
-      menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { menu.classList.remove('open'); setLabel(false); }));
+    // Hitung persentase
+    let percentage = (currentBalance / targetPrice) * 100;
+    if (percentage > 100) percentage = 100;
+
+    // Hitung sisa yang dibutuhkan
+    const remaining = targetPrice - currentBalance;
+
+    // Format angka ke Rupiah
+    const formatRupiah = (angka) => {
+      return new Intl.NumberFormat('id-ID', {
+        style: 'currency',
+        currency: 'IDR',
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0
+      }).format(angka);
+    };
+
+    // Update DOM
+    document.getElementById('currentBalance').textContent = formatRupiah(currentBalance);
+    document.getElementById('targetPrice').textContent = formatRupiah(targetPrice);
+    document.getElementById('remainingAmount').textContent = remaining > 0 ? formatRupiah(remaining) : 'Rp 0';
+
+    // Animasi Circle Progress
+    const circleFill = document.getElementById('circleFill');
+    const circumference = 2 * Math.PI * 90; // 565.48
+    const offset = circumference - (percentage / 100) * circumference;
+
+    // Animasi Persentase Counter
+    const percentageElement = document.getElementById('percentageValue');
+    let currentPercent = 0;
+    const duration = 2000;
+    const increment = percentage / (duration / 16);
+
+    function animatePercentage() {
+      currentPercent += increment;
+      if (currentPercent >= percentage) {
+        currentPercent = percentage;
+        percentageElement.textContent = percentage.toFixed(1);
+      } else {
+        percentageElement.textContent = Math.floor(currentPercent);
+        requestAnimationFrame(animatePercentage);
+      }
+    }
+
+    // Jalankan animasi setelah halaman dimuat
+    setTimeout(() => {
+      // Animasi circle
+      circleFill.style.strokeDashoffset = offset;
+      
+      // Animasi progress bar
+      document.getElementById('progressFill').style.width = `${percentage}%`;
+      
+      // Animasi counter
+      animatePercentage();
+    }, 500);
+
+    // Motivasi berdasarkan persentase
+    const motivationTexts = [
+      { min: 0, max: 10, text: '"Perjalanan seribu mil dimulai dari langkah pertama. Terus menabung!"' },
+      { min: 10, max: 25, text: '"Kamu sudah mulai! Konsistensi adalah kuncinya. 💪"' },
+      { min: 25, max: 50, text: '"Seperempat jalan sudah! Harley-Davidson semakin dekat!"' },
+      { min: 50, max: 75, text: '"SETENGAH JALAN! Kamu luar biasa, jangan berhenti!"' },
+      { min: 75, max: 90, text: '"Hampir sampai! Suara mesin Harley sudah terdengar!"' },
+      { min: 90, max: 99, text: '"TINGGAL SEDIKIT LAGI! Mimpimu di depan mata!"' },
+      { min: 100, max: 100, text: '"🎉 SELAMAT! Saatnya beli Harley-Davidson impianmu!"' }
+    ];
+
+    const motivation = motivationTexts.find(m => percentage >= m.min && percentage <= m.max);
+    if (motivation) {
+      document.getElementById('motivationText').textContent = motivation.text;
     }
   </script>
-
-<script>
-// === Autoplay dengan fallback interaksi pertama + tombol ▶/⏸ ===
-(function(){
-  const audio = document.getElementById('bgm');
-  const btn   = document.getElementById('audioToggle');
-  const stat  = document.getElementById('audioStatus');
-  if(!audio || !btn || !stat) return;
-
-  audio.volume = 0.6;
-
-  function updateUI(){
-    if(audio.paused){ btn.textContent = '▶'; stat.textContent = 'Ketuk untuk putar musik'; }
-    else{ btn.textContent = '⏸'; stat.textContent = 'Memutar…'; }
-  }
-
-  function tryPlay(){
-    const p = audio.play();
-    if(p && p.catch){
-      p.then(updateUI).catch(()=>{ stat.textContent = 'Ketuk untuk putar musik'; });
-    }else{
-      updateUI();
-    }
-  }
-
-  // Coba play saat siap
-  document.addEventListener('DOMContentLoaded', tryPlay, { once:true });
-  audio.addEventListener('canplay', tryPlay, { once:true });
-
-  // Fallback: play pada interaksi pertama (Android/iOS policy)
-  const events = ['pointerdown','touchstart','click','keydown','wheel','scroll','visibilitychange'];
-  const handler = () => { tryPlay(); events.forEach(e => window.removeEventListener(e, handler, true)); };
-  events.forEach(e => window.addEventListener(e, handler, true));
-
-  // Tombol play/pause
-  btn.addEventListener('click', ()=>{ audio.paused ? audio.play().then(updateUI) : (audio.pause(), updateUI()); });
-})();
-</script>
 
 </body>
 </html>
