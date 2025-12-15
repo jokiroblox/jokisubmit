@@ -26,66 +26,89 @@
             min-height: 100vh;
         }
 
-        /* Login */
         .login-screen {
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 20px;
+            background: linear-gradient(135deg, #0a0a0f, #1a1a2e);
         }
         .login-box {
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: 24px;
-            padding: 50px 40px;
+            padding: 40px;
             max-width: 400px;
             width: 100%;
             text-align: center;
         }
         .login-logo {
-            width: 80px; height: 80px;
+            width: 70px; height: 70px;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 20px;
+            border-radius: 18px;
             display: flex; align-items: center; justify-content: center;
-            font-size: 2.5rem;
-            margin: 0 auto 25px;
+            font-size: 2rem;
+            margin: 0 auto 20px;
         }
-        .login-title { font-size: 1.8rem; margin-bottom: 10px; }
-        .login-subtitle { color: var(--text-secondary); margin-bottom: 30px; }
+        .login-title { font-size: 1.6rem; margin-bottom: 8px; }
+        .login-subtitle { color: var(--text-secondary); margin-bottom: 25px; font-size: 0.95rem; }
         .login-input {
             width: 100%;
-            padding: 16px;
+            padding: 14px;
             background: var(--bg-dark);
             border: 2px solid var(--border);
-            border-radius: 14px;
+            border-radius: 12px;
             color: var(--text-primary);
-            font-size: 1.1rem;
-            margin-bottom: 20px;
+            font-size: 1rem;
+            margin-bottom: 15px;
             text-align: center;
-            letter-spacing: 3px;
         }
         .login-input:focus { outline: none; border-color: var(--primary); }
         .login-btn {
             width: 100%;
-            padding: 16px;
+            padding: 14px;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             border: none;
-            border-radius: 14px;
+            border-radius: 12px;
             color: white;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
+            transition: all 0.3s;
         }
-        .login-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,212,170,0.3); }
-        .login-error { color: var(--danger); margin-top: 15px; display: none; }
+        .login-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0,212,170,0.3); }
+        .login-error {
+            color: var(--danger);
+            margin-top: 12px;
+            padding: 10px;
+            background: rgba(239,68,68,0.1);
+            border-radius: 8px;
+            display: none;
+            font-size: 0.9rem;
+        }
+        .login-hint {
+            margin-top: 20px;
+            padding: 12px;
+            background: rgba(0,212,170,0.1);
+            border: 1px solid rgba(0,212,170,0.3);
+            border-radius: 10px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        .login-hint code {
+            background: var(--bg-dark);
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: var(--primary);
+        }
 
-        /* Admin Panel */
         .admin-panel { display: none; }
+        
         header {
             background: var(--bg-card);
             border-bottom: 1px solid var(--border);
-            padding: 15px 0;
+            padding: 12px 0;
             position: sticky;
             top: 0;
             z-index: 100;
@@ -97,20 +120,22 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
         }
         .logo {
             display: flex;
             align-items: center;
-            gap: 12px;
-            font-size: 1.4rem;
+            gap: 10px;
+            font-size: 1.3rem;
             font-weight: 700;
         }
         .logo-icon {
-            width: 42px; height: 42px;
+            width: 38px; height: 38px;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 12px;
+            border-radius: 10px;
             display: flex; align-items: center; justify-content: center;
-            font-size: 1.3rem;
+            font-size: 1.1rem;
         }
         .logo span {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
@@ -118,233 +143,327 @@
             -webkit-text-fill-color: transparent;
         }
         .admin-badge {
-            padding: 6px 14px;
-            background: linear-gradient(135deg, var(--danger), #dc2626);
-            border-radius: 20px;
-            font-size: 0.75rem;
+            padding: 4px 10px;
+            background: var(--danger);
+            border-radius: 15px;
+            font-size: 0.7rem;
             font-weight: 600;
-            margin-left: 10px;
+            margin-left: 8px;
         }
-        .header-actions { display: flex; gap: 12px; }
+        .header-btns { display: flex; gap: 10px; flex-wrap: wrap; }
         .header-btn {
-            padding: 10px 20px;
+            padding: 8px 16px;
             background: var(--bg-dark);
             border: 1px solid var(--border);
-            border-radius: 10px;
+            border-radius: 8px;
             color: var(--text-secondary);
-            font-weight: 500;
+            font-size: 0.85rem;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             text-decoration: none;
             transition: all 0.3s;
         }
         .header-btn:hover { border-color: var(--primary); color: var(--primary); }
-        .header-btn.logout { border-color: var(--danger); color: var(--danger); }
+        .header-btn.logout:hover { border-color: var(--danger); color: var(--danger); }
 
-        .container { max-width: 1400px; margin: 0 auto; padding: 30px 20px; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 25px 20px; }
 
-        /* Stats */
+        /* Database Status */
+        .db-status {
+            padding: 15px 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .db-status.connected {
+            background: rgba(16,185,129,0.15);
+            border: 1px solid var(--success);
+        }
+        .db-status.disconnected {
+            background: rgba(245,158,11,0.15);
+            border: 1px solid var(--warning);
+        }
+        .db-status.error {
+            background: rgba(239,68,68,0.15);
+            border: 1px solid var(--danger);
+        }
+        .db-status i { font-size: 1.2rem; }
+        .db-status.connected i { color: var(--success); }
+        .db-status.disconnected i { color: var(--warning); }
+        .db-status.error i { color: var(--danger); }
+        .db-status-text { flex: 1; }
+        .db-status-text strong { display: block; margin-bottom: 2px; }
+        .db-status-text small { color: var(--text-secondary); font-size: 0.8rem; }
+        .db-status .test-btn {
+            padding: 8px 16px;
+            background: var(--bg-dark);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+        .db-status .test-btn:hover { border-color: var(--primary); color: var(--primary); }
+
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin-bottom: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin-bottom: 25px;
         }
         .stat-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 20px;
+            border-radius: 14px;
+            padding: 18px;
             text-align: center;
         }
-        .stat-card i { font-size: 1.5rem; color: var(--primary); margin-bottom: 10px; }
-        .stat-card .value { font-size: 1.8rem; font-weight: 700; }
-        .stat-card .label { color: var(--text-secondary); font-size: 0.85rem; }
+        .stat-card i { font-size: 1.3rem; color: var(--primary); margin-bottom: 8px; display: block; }
+        .stat-card .value { font-size: 1.6rem; font-weight: 700; }
+        .stat-card .label { color: var(--text-secondary); font-size: 0.8rem; }
 
-        /* Grid */
         .admin-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 25px;
         }
         .card {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 30px;
+            border-radius: 18px;
+            padding: 22px;
         }
         .card-title {
-            font-size: 1.3rem;
-            margin-bottom: 25px;
+            font-size: 1.15rem;
+            margin-bottom: 18px;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
         }
         .card-title i { color: var(--primary); }
 
-        /* Form */
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; color: var(--text-secondary); font-weight: 500; margin-bottom: 8px; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label {
+            display: block;
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-bottom: 6px;
+            font-size: 0.85rem;
+        }
         .form-group input, .form-group select, .form-group textarea {
             width: 100%;
-            padding: 14px 16px;
+            padding: 11px 13px;
             background: var(--bg-dark);
             border: 1px solid var(--border);
-            border-radius: 12px;
+            border-radius: 10px;
             color: var(--text-primary);
-            font-size: 1rem;
+            font-size: 0.95rem;
+            transition: all 0.3s;
         }
         .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
             outline: none;
             border-color: var(--primary);
         }
-        .form-group textarea { resize: vertical; min-height: 100px; }
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .form-group textarea { resize: vertical; min-height: 70px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 
-        /* Image Upload */
         .image-upload {
             border: 2px dashed var(--border);
-            border-radius: 16px;
-            padding: 30px;
+            border-radius: 12px;
+            padding: 22px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s;
         }
         .image-upload:hover { border-color: var(--primary); background: rgba(0,212,170,0.05); }
-        .image-upload.has-image { padding: 10px; }
+        .image-upload.has-image { padding: 8px; border-style: solid; border-color: var(--success); }
         .image-upload input { display: none; }
-        .image-upload i { font-size: 2.5rem; color: var(--primary); margin-bottom: 12px; }
-        .image-upload p { color: var(--text-secondary); }
-        .image-preview { max-width: 100%; max-height: 200px; border-radius: 12px; display: none; }
+        .image-upload i { font-size: 1.8rem; color: var(--primary); margin-bottom: 8px; }
+        .image-upload p { color: var(--text-secondary); font-size: 0.85rem; }
+        .image-preview { max-width: 100%; max-height: 150px; border-radius: 8px; display: none; }
         .image-upload.has-image .upload-placeholder { display: none; }
-        .image-upload.has-image .image-preview { display: block; }
+        .image-upload.has-image .image-preview { display: block; margin: 0 auto; }
 
-        /* Signal Type */
-        .signal-type-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        .signal-type-option {
-            padding: 18px;
+        .signal-type-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .type-option {
+            padding: 14px;
             background: var(--bg-dark);
             border: 2px solid var(--border);
-            border-radius: 14px;
+            border-radius: 10px;
             cursor: pointer;
             text-align: center;
             transition: all 0.3s;
         }
-        .signal-type-option:hover { border-color: var(--primary); }
-        .signal-type-option.selected.buy { border-color: var(--success); background: rgba(16,185,129,0.15); }
-        .signal-type-option.selected.sell { border-color: var(--danger); background: rgba(239,68,68,0.15); }
-        .signal-type-option i { font-size: 1.8rem; margin-bottom: 8px; }
-        .signal-type-option.buy i { color: var(--success); }
-        .signal-type-option.sell i { color: var(--danger); }
-        .signal-type-option span { font-weight: 600; }
+        .type-option:hover { border-color: var(--text-secondary); }
+        .type-option.selected.buy { border-color: var(--success); background: rgba(16,185,129,0.12); }
+        .type-option.selected.sell { border-color: var(--danger); background: rgba(239,68,68,0.12); }
+        .type-option i { font-size: 1.4rem; margin-bottom: 4px; display: block; }
+        .type-option.buy i { color: var(--success); }
+        .type-option.sell i { color: var(--danger); }
+        .type-option span { font-weight: 600; font-size: 0.85rem; }
 
-        /* Buttons */
         .btn-primary {
             width: 100%;
-            padding: 16px;
+            padding: 13px;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             border: none;
-            border-radius: 14px;
+            border-radius: 10px;
             color: white;
-            font-size: 1.1rem;
+            font-size: 0.95rem;
             font-weight: 600;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 8px;
+            transition: all 0.3s;
         }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,212,170,0.3); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,212,170,0.3); }
+        .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
         .btn-secondary {
-            padding: 12px 24px;
+            padding: 10px 18px;
             background: transparent;
             border: 1px solid var(--border);
-            border-radius: 10px;
+            border-radius: 8px;
             color: var(--text-secondary);
-            font-weight: 500;
+            font-size: 0.85rem;
             cursor: pointer;
         }
         .btn-secondary:hover { border-color: var(--primary); color: var(--primary); }
         .btn-danger {
-            padding: 10px 16px;
+            padding: 7px 12px;
             background: transparent;
             border: 1px solid var(--danger);
-            border-radius: 8px;
+            border-radius: 6px;
             color: var(--danger);
             cursor: pointer;
+            font-size: 0.8rem;
         }
         .btn-danger:hover { background: var(--danger); color: white; }
 
-        /* Signal List */
-        .signal-list { max-height: 500px; overflow-y: auto; }
+        .signal-list { max-height: 550px; overflow-y: auto; }
         .signal-item {
             display: flex;
-            gap: 15px;
-            padding: 15px;
+            gap: 12px;
+            padding: 12px;
             background: var(--bg-dark);
-            border-radius: 14px;
-            margin-bottom: 12px;
+            border-radius: 10px;
+            margin-bottom: 10px;
             align-items: center;
         }
-        .signal-item-image { width: 60px; height: 60px; border-radius: 10px; object-fit: cover; }
-        .signal-item-info { flex: 1; }
+        .signal-item:hover { background: #1a1a25; }
+        .signal-item img {
+            width: 50px; height: 50px;
+            border-radius: 8px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+        .signal-item-info { flex: 1; min-width: 0; }
         .signal-item-pair {
             font-weight: 700;
-            font-size: 1.1rem;
-            margin-bottom: 5px;
+            font-size: 0.95rem;
+            margin-bottom: 3px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .signal-badge {
+            padding: 2px 8px;
+            border-radius: 8px;
+            font-size: 0.6rem;
+            font-weight: 600;
+        }
+        .signal-badge.buy { background: rgba(16,185,129,0.2); color: var(--success); }
+        .signal-badge.sell { background: rgba(239,68,68,0.2); color: var(--danger); }
+        .signal-item-details { font-size: 0.75rem; color: var(--text-secondary); }
+        .signal-item-time { font-size: 0.7rem; color: var(--text-secondary); margin-top: 2px; }
+
+        .empty-list { text-align: center; padding: 35px 15px; color: var(--text-secondary); }
+        .empty-list i { font-size: 2.5rem; margin-bottom: 12px; opacity: 0.3; display: block; }
+
+        .toast {
+            position: fixed;
+            bottom: 25px; right: 25px;
+            padding: 14px 22px;
+            background: var(--success);
+            color: white;
+            border-radius: 10px;
+            font-weight: 600;
             display: flex;
             align-items: center;
             gap: 10px;
-        }
-        .signal-item-badge {
-            padding: 3px 10px;
-            border-radius: 12px;
-            font-size: 0.7rem;
-            font-weight: 600;
-        }
-        .signal-item-badge.buy { background: rgba(16,185,129,0.2); color: var(--success); }
-        .signal-item-badge.sell { background: rgba(239,68,68,0.2); color: var(--danger); }
-        .signal-item-details { font-size: 0.85rem; color: var(--text-secondary); }
-        .signal-item-time { font-size: 0.75rem; color: var(--text-secondary); margin-top: 5px; }
-
-        /* Empty */
-        .empty-list { text-align: center; padding: 40px; color: var(--text-secondary); }
-        .empty-list i { font-size: 3rem; margin-bottom: 15px; opacity: 0.5; }
-
-        /* Toast */
-        .toast {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            padding: 16px 28px;
-            background: var(--success);
-            color: white;
-            border-radius: 14px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 12px;
             transform: translateX(150%);
-            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            transition: transform 0.4s cubic-bezier(0.68,-0.55,0.265,1.55);
             z-index: 3000;
+            font-size: 0.9rem;
         }
         .toast.show { transform: translateX(0); }
         .toast.error { background: var(--danger); }
+        .toast.warning { background: var(--warning); }
 
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .admin-grid { grid-template-columns: 1fr; }
+        /* Debug Console */
+        .debug-console {
+            background: #1a1a1a;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            margin-top: 20px;
+            overflow: hidden;
         }
-        @media (max-width: 768px) {
-            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+        .debug-header {
+            background: var(--bg-dark);
+            padding: 10px 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .debug-header button {
+            padding: 5px 10px;
+            background: var(--border);
+            border: none;
+            border-radius: 5px;
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            cursor: pointer;
+        }
+        .debug-logs {
+            padding: 10px;
+            max-height: 150px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 0.75rem;
+        }
+        .debug-log {
+            padding: 4px 8px;
+            margin-bottom: 4px;
+            border-radius: 4px;
+        }
+        .debug-log.success { background: rgba(16,185,129,0.15); color: var(--success); }
+        .debug-log.error { background: rgba(239,68,68,0.15); color: var(--danger); }
+        .debug-log.info { background: rgba(0,212,170,0.1); color: var(--primary); }
+        .debug-log.warning { background: rgba(245,158,11,0.15); color: var(--warning); }
+
+        @media (max-width: 800px) {
+            .admin-grid { grid-template-columns: 1fr; }
             .form-row { grid-template-columns: 1fr; }
         }
+        @media (max-width: 500px) {
+            .login-box { padding: 25px 20px; }
+            .card { padding: 18px 15px; }
+            .header-content { justify-content: center; }
+        }
 
-        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: var(--bg-dark); }
-        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
     </style>
 </head>
 <body>
@@ -354,14 +473,17 @@
         <div class="login-box">
             <div class="login-logo">🔐</div>
             <h1 class="login-title">Admin Panel</h1>
-            <p class="login-subtitle">Masukkan password admin</p>
-            <input type="password" class="login-input" id="passwordInput" placeholder="••••••••" onkeypress="if(event.key==='Enter')attemptLogin()">
-            <button class="login-btn" onclick="attemptLogin()">
+            <p class="login-subtitle">Masukkan password untuk akses</p>
+            <input type="password" class="login-input" id="passwordInput" placeholder="Password" autofocus>
+            <button class="login-btn" id="loginBtn" onclick="login()">
                 <i class="fas fa-sign-in-alt"></i> Login
             </button>
             <p class="login-error" id="loginError">
-                <i class="fas fa-exclamation-circle"></i> Password salah!
+                <i class="fas fa-times-circle"></i> Password salah!
             </p>
+            <div class="login-hint">
+                💡 Default: <code>admin123</code>
+            </div>
         </div>
     </div>
 
@@ -371,13 +493,16 @@
             <div class="header-content">
                 <div class="logo">
                     <div class="logo-icon">📊</div>
-                    <span>CryptoSignal Pro</span>
+                    <span>CryptoSignal</span>
                     <span class="admin-badge">ADMIN</span>
                 </div>
-                <div class="header-actions">
+                <div class="header-btns">
                     <a href="index.html" class="header-btn" target="_blank">
-                        <i class="fas fa-external-link-alt"></i> View Public
+                        <i class="fas fa-external-link-alt"></i> Public
                     </a>
+                    <button class="header-btn" onclick="testDatabase()">
+                        <i class="fas fa-database"></i> Test DB
+                    </button>
                     <button class="header-btn logout" onclick="logout()">
                         <i class="fas fa-sign-out-alt"></i> Logout
                     </button>
@@ -386,6 +511,18 @@
         </header>
 
         <div class="container">
+            <!-- Database Status -->
+            <div class="db-status disconnected" id="dbStatus">
+                <i class="fas fa-database"></i>
+                <div class="db-status-text">
+                    <strong id="dbStatusTitle">Memeriksa database...</strong>
+                    <small id="dbStatusDesc">Menghubungkan ke JSONBin</small>
+                </div>
+                <button class="test-btn" onclick="testDatabase()">
+                    <i class="fas fa-sync-alt"></i> Test Koneksi
+                </button>
+            </div>
+
             <!-- Stats -->
             <div class="stats-grid">
                 <div class="stat-card">
@@ -404,16 +541,16 @@
                     <div class="label">Sell</div>
                 </div>
                 <div class="stat-card">
-                    <i class="fas fa-calendar-day"></i>
+                    <i class="fas fa-calendar"></i>
                     <div class="value" id="statToday">0</div>
-                    <div class="label">Today</div>
+                    <div class="label">Hari Ini</div>
                 </div>
             </div>
 
             <div class="admin-grid">
-                <!-- Create Form -->
+                <!-- Form -->
                 <div class="card">
-                    <h2 class="card-title"><i class="fas fa-plus-circle"></i> Buat Signal Baru</h2>
+                    <h2 class="card-title"><i class="fas fa-plus-circle"></i> Buat Signal</h2>
                     <form id="signalForm" onsubmit="createSignal(event)">
                         <div class="form-group">
                             <label>Trading Pair *</label>
@@ -423,7 +560,7 @@
                             <div class="form-group">
                                 <label>Market</label>
                                 <select id="marketType">
-                                    <option value="crypto">Cryptocurrency</option>
+                                    <option value="crypto">Crypto</option>
                                     <option value="forex">Forex</option>
                                     <option value="stocks">Stocks</option>
                                 </select>
@@ -440,13 +577,13 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>Signal Type *</label>
+                            <label>Tipe *</label>
                             <div class="signal-type-grid">
-                                <div class="signal-type-option buy selected" onclick="selectType('buy')">
+                                <div class="type-option buy selected" onclick="selectType('buy')">
                                     <i class="fas fa-arrow-trend-up"></i>
                                     <span>BUY</span>
                                 </div>
-                                <div class="signal-type-option sell" onclick="selectType('sell')">
+                                <div class="type-option sell" onclick="selectType('sell')">
                                     <i class="fas fa-arrow-trend-down"></i>
                                     <span>SELL</span>
                                 </div>
@@ -469,34 +606,50 @@
                         </div>
                         <div class="form-group">
                             <label>Chart Image *</label>
-                            <div class="image-upload" onclick="document.getElementById('chartImage').click()">
+                            <div class="image-upload" id="imageUpload" onclick="document.getElementById('chartImage').click()">
                                 <input type="file" id="chartImage" accept="image/*" onchange="previewImage(event)">
                                 <div class="upload-placeholder">
                                     <i class="fas fa-cloud-upload-alt"></i>
-                                    <p>Klik untuk upload</p>
+                                    <p>Klik upload gambar</p>
                                 </div>
-                                <img class="image-preview" id="imagePreview">
+                                <img class="image-preview" id="imagePreview" alt="Preview">
                             </div>
                         </div>
                         <div class="form-group">
                             <label>Analisis *</label>
-                            <textarea id="description" placeholder="Jelaskan setup trading..." required></textarea>
+                            <textarea id="description" placeholder="Jelaskan analisis..." required></textarea>
                         </div>
-                        <button type="submit" class="btn-primary">
+                        <button type="submit" class="btn-primary" id="publishBtn">
                             <i class="fas fa-paper-plane"></i> Publish Signal
                         </button>
-                        <div style="margin-top:15px;text-align:center;">
+                        <div style="margin-top:12px;text-align:center;">
                             <button type="button" class="btn-secondary" onclick="resetForm()">
                                 <i class="fas fa-redo"></i> Reset
                             </button>
                         </div>
                     </form>
+
+                    <!-- Debug Console -->
+                    <div class="debug-console">
+                        <div class="debug-header">
+                            <span>📋 Debug Console</span>
+                            <button onclick="clearLogs()">Clear</button>
+                        </div>
+                        <div class="debug-logs" id="debugLogs">
+                            <div class="debug-log info">Siap menerima perintah...</div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Signal List -->
                 <div class="card">
-                    <h2 class="card-title"><i class="fas fa-list"></i> Manage Signals</h2>
-                    <div class="signal-list" id="signalList"></div>
+                    <h2 class="card-title"><i class="fas fa-list"></i> Signals (<span id="signalCount">0</span>)</h2>
+                    <div class="signal-list" id="signalList">
+                        <div class="empty-list">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            <p>Memuat...</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -504,22 +657,46 @@
 
     <!-- Toast -->
     <div class="toast" id="toast">
-        <i class="fas fa-check-circle"></i>
-        <span id="toastMessage">Success!</span>
+        <i class="fas fa-check-circle" id="toastIcon"></i>
+        <span id="toastMsg">Success!</span>
     </div>
 
-    <!-- Load Config -->
-    <script src="config.js"></script>
-    
     <script>
-        let signals = [];
+        // ================================================================
+        // ⚙️ KONFIGURASI - ISI DENGAN DATA JSONBIN ANDA!
+        // ================================================================
+        const CONFIG = {
+            // Password admin
+            ADMIN_PASSWORD: 'admin123',
+            
+            // JSONBin.io - ISI INI!
+            // Cara dapat:
+            // 1. Buka https://jsonbin.io dan daftar
+            // 2. Buat Bin baru isi: {"signals":[]}
+            // 3. Copy Bin ID dari URL
+            // 4. Copy API Key dari menu API Keys
+            
+            JSONBIN_BIN_ID: '',    // <-- ISI BIN ID DISINI (contoh: '683f1a2b3c4d5e6f')
+            JSONBIN_API_KEY: '',   // <-- ISI API KEY DISINI (contoh: '$2a$10$xxx...')
+        };
+        // ================================================================
 
-        // ========== LOGIN ==========
-        function attemptLogin() {
+        let signals = [];
+        let dbConnected = false;
+
+        // Enter key login
+        document.getElementById('passwordInput').addEventListener('keypress', e => {
+            if (e.key === 'Enter') login();
+        });
+
+        // ==================== LOGIN ====================
+        function login() {
             const pw = document.getElementById('passwordInput').value;
             if (pw === CONFIG.ADMIN_PASSWORD) {
                 document.getElementById('loginScreen').style.display = 'none';
                 document.getElementById('adminPanel').style.display = 'block';
+                log('Login berhasil!', 'success');
+                checkDatabase();
                 loadSignals();
             } else {
                 document.getElementById('loginError').style.display = 'block';
@@ -533,106 +710,211 @@
             document.getElementById('passwordInput').value = '';
         }
 
-        // ========== LOAD ==========
-        async function loadSignals() {
+        // ==================== DATABASE CHECK ====================
+        function checkDatabase() {
+            const status = document.getElementById('dbStatus');
+            const title = document.getElementById('dbStatusTitle');
+            const desc = document.getElementById('dbStatusDesc');
+
+            if (!CONFIG.JSONBIN_BIN_ID || !CONFIG.JSONBIN_API_KEY) {
+                status.className = 'db-status disconnected';
+                title.textContent = '⚠️ Database Belum Dikonfigurasi';
+                desc.innerHTML = 'Isi <code>JSONBIN_BIN_ID</code> dan <code>JSONBIN_API_KEY</code> di bagian CONFIG';
+                log('JSONBin belum dikonfigurasi!', 'warning');
+                dbConnected = false;
+            } else {
+                testDatabase();
+            }
+        }
+
+        async function testDatabase() {
+            const status = document.getElementById('dbStatus');
+            const title = document.getElementById('dbStatusTitle');
+            const desc = document.getElementById('dbStatusDesc');
+
+            if (!CONFIG.JSONBIN_BIN_ID || !CONFIG.JSONBIN_API_KEY) {
+                toast('Isi Bin ID dan API Key dulu!', 'error');
+                return;
+            }
+
+            title.textContent = '🔄 Menghubungkan...';
+            desc.textContent = 'Testing koneksi ke JSONBin';
+            log('Testing koneksi ke JSONBin...', 'info');
+
             try {
-                if (CONFIG.JSONBIN_BIN_ID && CONFIG.JSONBIN_BIN_ID !== 'PASTE_BIN_ID_DISINI') {
+                const res = await fetch(`https://api.jsonbin.io/v3/b/${CONFIG.JSONBIN_BIN_ID}/latest`, {
+                    headers: { 'X-Master-Key': CONFIG.JSONBIN_API_KEY }
+                });
+
+                if (res.ok) {
+                    const data = await res.json();
+                    status.className = 'db-status connected';
+                    title.textContent = '✅ Database Terhubung';
+                    desc.textContent = `Bin ID: ${CONFIG.JSONBIN_BIN_ID.substring(0, 10)}... | ${(data.record.signals || []).length} signals`;
+                    dbConnected = true;
+                    log('Database terhubung! ✅', 'success');
+                    toast('Database terhubung!', 'success');
+                } else {
+                    throw new Error(`HTTP ${res.status}`);
+                }
+            } catch (err) {
+                status.className = 'db-status error';
+                title.textContent = '❌ Koneksi Gagal';
+                desc.textContent = `Error: ${err.message}. Cek Bin ID dan API Key`;
+                dbConnected = false;
+                log(`Error: ${err.message}`, 'error');
+                toast('Gagal terhubung ke database', 'error');
+            }
+        }
+
+        // ==================== LOAD SIGNALS ====================
+        async function loadSignals() {
+            log('Memuat signals...', 'info');
+
+            try {
+                if (CONFIG.JSONBIN_BIN_ID && CONFIG.JSONBIN_API_KEY) {
                     const res = await fetch(`https://api.jsonbin.io/v3/b/${CONFIG.JSONBIN_BIN_ID}/latest`, {
                         headers: { 'X-Master-Key': CONFIG.JSONBIN_API_KEY }
                     });
                     if (res.ok) {
                         const data = await res.json();
                         signals = data.record.signals || [];
+                        log(`Loaded ${signals.length} signals dari JSONBin`, 'success');
+                    } else {
+                        throw new Error('JSONBin error');
                     }
                 } else {
                     signals = JSON.parse(localStorage.getItem('tradingSignals')) || [];
+                    log(`Loaded ${signals.length} signals dari localStorage`, 'info');
                 }
-            } catch (e) {
+            } catch (err) {
+                log(`Load error: ${err.message}`, 'error');
                 signals = JSON.parse(localStorage.getItem('tradingSignals')) || [];
             }
+
             renderList();
             updateStats();
         }
 
-        // ========== SAVE ==========
+        // ==================== SAVE SIGNALS ====================
         async function saveSignals() {
+            // Always save to localStorage
             localStorage.setItem('tradingSignals', JSON.stringify(signals));
-            
-            if (CONFIG.JSONBIN_BIN_ID && CONFIG.JSONBIN_BIN_ID !== 'PASTE_BIN_ID_DISINI') {
+            log('Saved to localStorage ✓', 'info');
+
+            // Try JSONBin
+            if (CONFIG.JSONBIN_BIN_ID && CONFIG.JSONBIN_API_KEY) {
+                log('Saving to JSONBin...', 'info');
                 try {
-                    await fetch(`https://api.jsonbin.io/v3/b/${CONFIG.JSONBIN_BIN_ID}`, {
+                    const res = await fetch(`https://api.jsonbin.io/v3/b/${CONFIG.JSONBIN_BIN_ID}`, {
                         method: 'PUT',
                         headers: {
                             'Content-Type': 'application/json',
                             'X-Master-Key': CONFIG.JSONBIN_API_KEY
                         },
-                        body: JSON.stringify({ signals })
+                        body: JSON.stringify({ signals: signals })
                     });
-                } catch (e) {
-                    console.error('Save error:', e);
+
+                    if (res.ok) {
+                        log('Saved to JSONBin ✅', 'success');
+                        return true;
+                    } else {
+                        const errData = await res.json();
+                        throw new Error(errData.message || `HTTP ${res.status}`);
+                    }
+                } catch (err) {
+                    log(`JSONBin save error: ${err.message}`, 'error');
+                    toast('Gagal save ke database!', 'error');
+                    return false;
                 }
+            } else {
+                log('JSONBin tidak dikonfigurasi, hanya save ke localStorage', 'warning');
+                return true;
             }
         }
 
-        // ========== CREATE ==========
-        function createSignal(e) {
+        // ==================== CREATE SIGNAL ====================
+        async function createSignal(e) {
             e.preventDefault();
-            const img = document.getElementById('imagePreview');
-            if (!img.src) {
-                showToast('Upload gambar!', true);
+
+            const imagePreview = document.getElementById('imagePreview');
+            const publishBtn = document.getElementById('publishBtn');
+
+            if (!imagePreview.src || imagePreview.src === '' || imagePreview.src === window.location.href) {
+                toast('Upload gambar chart!', 'error');
+                log('Error: Gambar belum diupload', 'error');
                 return;
             }
 
+            publishBtn.disabled = true;
+            publishBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Menyimpan...';
+            log('Membuat signal baru...', 'info');
+
             const signal = {
                 id: Date.now(),
-                pair: document.getElementById('pair').value.toUpperCase(),
+                pair: document.getElementById('pair').value.toUpperCase().trim(),
                 marketType: document.getElementById('marketType').value,
                 timeframe: document.getElementById('timeframe').value,
                 type: document.getElementById('signalType').value,
-                entry: document.getElementById('entry').value,
-                takeProfit: document.getElementById('takeProfit').value,
-                stopLoss: document.getElementById('stopLoss').value,
-                description: document.getElementById('description').value,
-                image: img.src,
+                entry: document.getElementById('entry').value.trim(),
+                takeProfit: document.getElementById('takeProfit').value.trim(),
+                stopLoss: document.getElementById('stopLoss').value.trim(),
+                description: document.getElementById('description').value.trim(),
+                image: imagePreview.src,
                 timestamp: Date.now()
             };
 
             signals.unshift(signal);
-            saveSignals();
+            log(`Signal ${signal.pair} dibuat`, 'info');
+
+            const saved = await saveSignals();
+
             renderList();
             updateStats();
             resetForm();
-            showToast('Signal published! 🚀');
-        }
 
-        // ========== DELETE ==========
-        function deleteSignal(id) {
-            if (confirm('Hapus signal ini?')) {
-                signals = signals.filter(s => s.id !== id);
-                saveSignals();
-                renderList();
-                updateStats();
-                showToast('Deleted!');
+            publishBtn.disabled = false;
+            publishBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Publish Signal';
+
+            if (saved) {
+                toast('Signal berhasil dipublish! 🚀', 'success');
+                log('Signal published successfully! 🚀', 'success');
             }
         }
 
-        // ========== RENDER ==========
+        // ==================== DELETE SIGNAL ====================
+        async function deleteSignal(id) {
+            if (!confirm('Hapus signal ini?')) return;
+
+            signals = signals.filter(s => s.id !== id);
+            log(`Signal ${id} dihapus`, 'info');
+
+            await saveSignals();
+            renderList();
+            updateStats();
+            toast('Signal dihapus');
+        }
+
+        // ==================== RENDER ====================
         function renderList() {
             const list = document.getElementById('signalList');
+            document.getElementById('signalCount').textContent = signals.length;
+
             if (signals.length === 0) {
                 list.innerHTML = '<div class="empty-list"><i class="fas fa-inbox"></i><p>Belum ada signal</p></div>';
                 return;
             }
+
             list.innerHTML = signals.map(s => `
                 <div class="signal-item">
-                    <img src="${s.image}" class="signal-item-image">
+                    <img src="${s.image}" alt="${s.pair}" onerror="this.src='https://via.placeholder.com/50?text=Err'">
                     <div class="signal-item-info">
                         <div class="signal-item-pair">
                             ${s.pair}
-                            <span class="signal-item-badge ${s.type}">${s.type.toUpperCase()}</span>
+                            <span class="signal-badge ${s.type}">${s.type.toUpperCase()}</span>
                         </div>
-                        <div class="signal-item-details">E: ${s.entry} | TP: ${s.takeProfit} | SL: ${s.stopLoss}</div>
-                        <div class="signal-item-time">${new Date(s.timestamp).toLocaleString('id-ID')}</div>
+                        <div class="signal-item-details">E:${s.entry} TP:${s.takeProfit} SL:${s.stopLoss}</div>
+                        <div class="signal-item-time">${timeAgo(s.timestamp)}</div>
                     </div>
                     <button class="btn-danger" onclick="deleteSignal(${s.id})"><i class="fas fa-trash"></i></button>
                 </div>
@@ -647,38 +929,77 @@
             document.getElementById('statToday').textContent = signals.filter(s => s.timestamp >= today).length;
         }
 
-        // ========== HELPERS ==========
+        // ==================== HELPERS ====================
         function selectType(type) {
-            document.querySelectorAll('.signal-type-option').forEach(o => o.classList.remove('selected'));
-            document.querySelector(`.signal-type-option.${type}`).classList.add('selected');
+            document.querySelectorAll('.type-option').forEach(o => o.classList.remove('selected'));
+            document.querySelector(`.type-option.${type}`).classList.add('selected');
             document.getElementById('signalType').value = type;
         }
 
         function previewImage(e) {
             const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = ev => {
-                    document.getElementById('imagePreview').src = ev.target.result;
-                    document.querySelector('.image-upload').classList.add('has-image');
-                };
-                reader.readAsDataURL(file);
+            if (!file) return;
+            if (file.size > 5 * 1024 * 1024) {
+                toast('File terlalu besar! Max 5MB', 'error');
+                return;
             }
+            const reader = new FileReader();
+            reader.onload = ev => {
+                document.getElementById('imagePreview').src = ev.target.result;
+                document.getElementById('imageUpload').classList.add('has-image');
+                log('Image loaded ✓', 'success');
+            };
+            reader.readAsDataURL(file);
         }
 
         function resetForm() {
             document.getElementById('signalForm').reset();
             document.getElementById('imagePreview').src = '';
-            document.querySelector('.image-upload').classList.remove('has-image');
+            document.getElementById('imageUpload').classList.remove('has-image');
             selectType('buy');
         }
 
-        function showToast(msg, err = false) {
+        function timeAgo(ts) {
+            const m = Math.floor((Date.now() - ts) / 60000);
+            const h = Math.floor(m / 60);
+            const d = Math.floor(h / 24);
+            if (d > 0) return `${d} hari lalu`;
+            if (h > 0) return `${h} jam lalu`;
+            if (m > 0) return `${m} menit lalu`;
+            return 'Baru saja';
+        }
+
+        function toast(msg, type = 'success') {
             const t = document.getElementById('toast');
-            document.getElementById('toastMessage').textContent = msg;
-            t.classList.toggle('error', err);
+            const icon = document.getElementById('toastIcon');
+            document.getElementById('toastMsg').textContent = msg;
+            
+            t.className = 'toast';
+            if (type === 'error') {
+                t.classList.add('error');
+                icon.className = 'fas fa-times-circle';
+            } else if (type === 'warning') {
+                t.classList.add('warning');
+                icon.className = 'fas fa-exclamation-triangle';
+            } else {
+                icon.className = 'fas fa-check-circle';
+            }
+            
             t.classList.add('show');
             setTimeout(() => t.classList.remove('show'), 3000);
+        }
+
+        // Debug logging
+        function log(msg, type = 'info') {
+            const logs = document.getElementById('debugLogs');
+            const time = new Date().toLocaleTimeString();
+            logs.innerHTML += `<div class="debug-log ${type}">[${time}] ${msg}</div>`;
+            logs.scrollTop = logs.scrollHeight;
+            console.log(`[${type.toUpperCase()}] ${msg}`);
+        }
+
+        function clearLogs() {
+            document.getElementById('debugLogs').innerHTML = '<div class="debug-log info">Console cleared</div>';
         }
     </script>
 </body>
