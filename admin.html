@@ -37,7 +37,7 @@
         .login-box {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 24px;
+            border-radius: 20px;
             padding: 40px;
             max-width: 400px;
             width: 100%;
@@ -46,13 +46,13 @@
         .login-logo {
             width: 70px; height: 70px;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 18px;
+            border-radius: 16px;
             display: flex; align-items: center; justify-content: center;
             font-size: 2rem;
             margin: 0 auto 20px;
         }
-        .login-title { font-size: 1.6rem; margin-bottom: 8px; }
-        .login-subtitle { color: var(--text-secondary); margin-bottom: 25px; font-size: 0.95rem; }
+        .login-title { font-size: 1.5rem; margin-bottom: 8px; }
+        .login-subtitle { color: var(--text-secondary); margin-bottom: 25px; }
         .login-input {
             width: 100%;
             padding: 14px;
@@ -75,9 +75,8 @@
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
         }
-        .login-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0,212,170,0.3); }
+        .login-btn:hover { transform: translateY(-2px); }
         .login-error {
             color: var(--danger);
             margin-top: 12px;
@@ -85,13 +84,11 @@
             background: rgba(239,68,68,0.1);
             border-radius: 8px;
             display: none;
-            font-size: 0.9rem;
         }
         .login-hint {
             margin-top: 20px;
             padding: 12px;
             background: rgba(0,212,170,0.1);
-            border: 1px solid rgba(0,212,170,0.3);
             border-radius: 10px;
             font-size: 0.8rem;
             color: var(--text-secondary);
@@ -114,28 +111,27 @@
             z-index: 100;
         }
         .header-content {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 12px;
+            gap: 10px;
         }
         .logo {
             display: flex;
             align-items: center;
             gap: 10px;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: 700;
         }
         .logo-icon {
-            width: 38px; height: 38px;
+            width: 36px; height: 36px;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             border-radius: 10px;
             display: flex; align-items: center; justify-content: center;
-            font-size: 1.1rem;
         }
         .logo span {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
@@ -145,34 +141,32 @@
         .admin-badge {
             padding: 4px 10px;
             background: var(--danger);
-            border-radius: 15px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            margin-left: 8px;
+            border-radius: 12px;
+            font-size: 0.65rem;
+            margin-left: 6px;
         }
-        .header-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+        .header-btns { display: flex; gap: 8px; }
         .header-btn {
-            padding: 8px 16px;
+            padding: 8px 14px;
             background: var(--bg-dark);
             border: 1px solid var(--border);
             border-radius: 8px;
             color: var(--text-secondary);
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
             text-decoration: none;
-            transition: all 0.3s;
         }
         .header-btn:hover { border-color: var(--primary); color: var(--primary); }
         .header-btn.logout:hover { border-color: var(--danger); color: var(--danger); }
 
-        .container { max-width: 1400px; margin: 0 auto; padding: 25px 20px; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
 
-        /* Database Status */
-        .db-status {
-            padding: 15px 20px;
+        /* Status Box */
+        .status-box {
+            padding: 15px;
             border-radius: 12px;
             margin-bottom: 20px;
             display: flex;
@@ -180,288 +174,257 @@
             gap: 12px;
             flex-wrap: wrap;
         }
-        .db-status.connected {
-            background: rgba(16,185,129,0.15);
-            border: 1px solid var(--success);
-        }
-        .db-status.disconnected {
-            background: rgba(245,158,11,0.15);
-            border: 1px solid var(--warning);
-        }
-        .db-status.error {
-            background: rgba(239,68,68,0.15);
-            border: 1px solid var(--danger);
-        }
-        .db-status i { font-size: 1.2rem; }
-        .db-status.connected i { color: var(--success); }
-        .db-status.disconnected i { color: var(--warning); }
-        .db-status.error i { color: var(--danger); }
-        .db-status-text { flex: 1; }
-        .db-status-text strong { display: block; margin-bottom: 2px; }
-        .db-status-text small { color: var(--text-secondary); font-size: 0.8rem; }
-        .db-status .test-btn {
-            padding: 8px 16px;
-            background: var(--bg-dark);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            color: var(--text-secondary);
-            font-size: 0.8rem;
-            cursor: pointer;
-        }
-        .db-status .test-btn:hover { border-color: var(--primary); color: var(--primary); }
+        .status-box.success { background: rgba(16,185,129,0.15); border: 1px solid var(--success); }
+        .status-box.warning { background: rgba(245,158,11,0.15); border: 1px solid var(--warning); }
+        .status-box.error { background: rgba(239,68,68,0.15); border: 1px solid var(--danger); }
+        .status-box i { font-size: 1.2rem; }
+        .status-box.success i { color: var(--success); }
+        .status-box.warning i { color: var(--warning); }
+        .status-box.error i { color: var(--danger); }
+        .status-text { flex: 1; }
+        .status-text strong { display: block; }
+        .status-text small { color: var(--text-secondary); font-size: 0.75rem; }
 
-        .stats-grid {
+        /* Stats */
+        .stats-row {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
             gap: 12px;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
-        .stat-card {
+        .stat-box {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 18px;
+            border-radius: 12px;
+            padding: 15px;
             text-align: center;
         }
-        .stat-card i { font-size: 1.3rem; color: var(--primary); margin-bottom: 8px; display: block; }
-        .stat-card .value { font-size: 1.6rem; font-weight: 700; }
-        .stat-card .label { color: var(--text-secondary); font-size: 0.8rem; }
+        .stat-box i { color: var(--primary); margin-bottom: 5px; }
+        .stat-box .num { font-size: 1.5rem; font-weight: 700; }
+        .stat-box .lbl { font-size: 0.75rem; color: var(--text-secondary); }
 
-        .admin-grid {
+        /* Grid */
+        .main-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-            gap: 25px;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
         }
+        @media (max-width: 900px) {
+            .main-grid { grid-template-columns: 1fr; }
+        }
+
         .card {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 18px;
-            padding: 22px;
+            border-radius: 16px;
+            padding: 20px;
         }
         .card-title {
-            font-size: 1.15rem;
-            margin-bottom: 18px;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             padding-bottom: 12px;
             border-bottom: 1px solid var(--border);
         }
         .card-title i { color: var(--primary); }
 
-        .form-group { margin-bottom: 15px; }
+        /* Form */
+        .form-group { margin-bottom: 12px; }
         .form-group label {
             display: block;
             color: var(--text-secondary);
-            font-weight: 500;
-            margin-bottom: 6px;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
+            margin-bottom: 5px;
         }
         .form-group input, .form-group select, .form-group textarea {
             width: 100%;
-            padding: 11px 13px;
+            padding: 10px 12px;
             background: var(--bg-dark);
             border: 1px solid var(--border);
-            border-radius: 10px;
+            border-radius: 8px;
             color: var(--text-primary);
-            font-size: 0.95rem;
-            transition: all 0.3s;
+            font-size: 0.9rem;
         }
         .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
             outline: none;
             border-color: var(--primary);
         }
-        .form-group textarea { resize: vertical; min-height: 70px; }
+        .form-group textarea { resize: vertical; min-height: 60px; }
         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 
-        .image-upload {
+        /* Image Upload */
+        .img-upload {
             border: 2px dashed var(--border);
-            border-radius: 12px;
-            padding: 22px;
+            border-radius: 10px;
+            padding: 20px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s;
         }
-        .image-upload:hover { border-color: var(--primary); background: rgba(0,212,170,0.05); }
-        .image-upload.has-image { padding: 8px; border-style: solid; border-color: var(--success); }
-        .image-upload input { display: none; }
-        .image-upload i { font-size: 1.8rem; color: var(--primary); margin-bottom: 8px; }
-        .image-upload p { color: var(--text-secondary); font-size: 0.85rem; }
-        .image-preview { max-width: 100%; max-height: 150px; border-radius: 8px; display: none; }
-        .image-upload.has-image .upload-placeholder { display: none; }
-        .image-upload.has-image .image-preview { display: block; margin: 0 auto; }
+        .img-upload:hover { border-color: var(--primary); }
+        .img-upload.has-img { padding: 8px; border-style: solid; border-color: var(--success); }
+        .img-upload input { display: none; }
+        .img-upload i { font-size: 1.5rem; color: var(--primary); }
+        .img-upload p { color: var(--text-secondary); font-size: 0.8rem; margin-top: 5px; }
+        .img-preview { max-width: 100%; max-height: 120px; border-radius: 6px; display: none; }
+        .img-upload.has-img .upload-ph { display: none; }
+        .img-upload.has-img .img-preview { display: block; margin: 0 auto; }
 
-        .signal-type-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .type-option {
-            padding: 14px;
+        /* Signal Type */
+        .type-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        .type-opt {
+            padding: 12px;
             background: var(--bg-dark);
             border: 2px solid var(--border);
             border-radius: 10px;
             cursor: pointer;
             text-align: center;
-            transition: all 0.3s;
         }
-        .type-option:hover { border-color: var(--text-secondary); }
-        .type-option.selected.buy { border-color: var(--success); background: rgba(16,185,129,0.12); }
-        .type-option.selected.sell { border-color: var(--danger); background: rgba(239,68,68,0.12); }
-        .type-option i { font-size: 1.4rem; margin-bottom: 4px; display: block; }
-        .type-option.buy i { color: var(--success); }
-        .type-option.sell i { color: var(--danger); }
-        .type-option span { font-weight: 600; font-size: 0.85rem; }
+        .type-opt:hover { border-color: var(--text-secondary); }
+        .type-opt.sel.buy { border-color: var(--success); background: rgba(16,185,129,0.1); }
+        .type-opt.sel.sell { border-color: var(--danger); background: rgba(239,68,68,0.1); }
+        .type-opt i { font-size: 1.2rem; }
+        .type-opt.buy i { color: var(--success); }
+        .type-opt.sell i { color: var(--danger); }
+        .type-opt span { display: block; font-size: 0.8rem; font-weight: 600; margin-top: 3px; }
 
+        /* Buttons */
         .btn-primary {
             width: 100%;
-            padding: 13px;
+            padding: 12px;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             border: none;
             border-radius: 10px;
             color: white;
-            font-size: 0.95rem;
             font-weight: 600;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            transition: all 0.3s;
         }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,212,170,0.3); }
+        .btn-primary:hover { transform: translateY(-2px); }
         .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
         .btn-secondary {
-            padding: 10px 18px;
+            padding: 8px 16px;
             background: transparent;
             border: 1px solid var(--border);
             border-radius: 8px;
             color: var(--text-secondary);
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             cursor: pointer;
         }
         .btn-secondary:hover { border-color: var(--primary); color: var(--primary); }
         .btn-danger {
-            padding: 7px 12px;
+            padding: 6px 10px;
             background: transparent;
             border: 1px solid var(--danger);
             border-radius: 6px;
             color: var(--danger);
             cursor: pointer;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
         }
         .btn-danger:hover { background: var(--danger); color: white; }
 
-        .signal-list { max-height: 550px; overflow-y: auto; }
+        /* Signal List */
+        .signal-list { max-height: 450px; overflow-y: auto; }
         .signal-item {
             display: flex;
-            gap: 12px;
-            padding: 12px;
+            gap: 10px;
+            padding: 10px;
             background: var(--bg-dark);
             border-radius: 10px;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             align-items: center;
         }
-        .signal-item:hover { background: #1a1a25; }
         .signal-item img {
-            width: 50px; height: 50px;
-            border-radius: 8px;
+            width: 45px; height: 45px;
+            border-radius: 6px;
             object-fit: cover;
-            flex-shrink: 0;
         }
-        .signal-item-info { flex: 1; min-width: 0; }
+        .signal-item-info { flex: 1; }
         .signal-item-pair {
             font-weight: 700;
-            font-size: 0.95rem;
-            margin-bottom: 3px;
+            font-size: 0.9rem;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
         }
-        .signal-badge {
-            padding: 2px 8px;
-            border-radius: 8px;
+        .badge {
+            padding: 2px 6px;
+            border-radius: 6px;
             font-size: 0.6rem;
             font-weight: 600;
         }
-        .signal-badge.buy { background: rgba(16,185,129,0.2); color: var(--success); }
-        .signal-badge.sell { background: rgba(239,68,68,0.2); color: var(--danger); }
-        .signal-item-details { font-size: 0.75rem; color: var(--text-secondary); }
-        .signal-item-time { font-size: 0.7rem; color: var(--text-secondary); margin-top: 2px; }
+        .badge.buy { background: rgba(16,185,129,0.2); color: var(--success); }
+        .badge.sell { background: rgba(239,68,68,0.2); color: var(--danger); }
+        .signal-item-details { font-size: 0.7rem; color: var(--text-secondary); }
+        .signal-item-time { font-size: 0.65rem; color: var(--text-secondary); }
 
-        .empty-list { text-align: center; padding: 35px 15px; color: var(--text-secondary); }
-        .empty-list i { font-size: 2.5rem; margin-bottom: 12px; opacity: 0.3; display: block; }
+        .empty-list { text-align: center; padding: 30px; color: var(--text-secondary); }
+        .empty-list i { font-size: 2rem; margin-bottom: 10px; opacity: 0.3; }
 
+        /* Console */
+        .console {
+            background: #111;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            margin-top: 15px;
+            overflow: hidden;
+        }
+        .console-header {
+            background: #1a1a1a;
+            padding: 8px 12px;
+            font-size: 0.75rem;
+            display: flex;
+            justify-content: space-between;
+        }
+        .console-header button {
+            padding: 3px 8px;
+            background: var(--border);
+            border: none;
+            border-radius: 4px;
+            color: var(--text-secondary);
+            font-size: 0.65rem;
+            cursor: pointer;
+        }
+        .console-logs {
+            padding: 8px;
+            max-height: 120px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 0.7rem;
+        }
+        .log { padding: 3px 6px; margin-bottom: 2px; border-radius: 3px; }
+        .log.ok { background: rgba(16,185,129,0.1); color: var(--success); }
+        .log.err { background: rgba(239,68,68,0.1); color: var(--danger); }
+        .log.info { background: rgba(0,212,170,0.1); color: var(--primary); }
+        .log.warn { background: rgba(245,158,11,0.1); color: var(--warning); }
+
+        /* Toast */
         .toast {
             position: fixed;
-            bottom: 25px; right: 25px;
-            padding: 14px 22px;
+            bottom: 20px; right: 20px;
+            padding: 12px 20px;
             background: var(--success);
             color: white;
             border-radius: 10px;
             font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             transform: translateX(150%);
-            transition: transform 0.4s cubic-bezier(0.68,-0.55,0.265,1.55);
+            transition: transform 0.3s;
             z-index: 3000;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
         .toast.show { transform: translateX(0); }
-        .toast.error { background: var(--danger); }
-        .toast.warning { background: var(--warning); }
+        .toast.err { background: var(--danger); }
+        .toast.warn { background: var(--warning); }
 
-        /* Debug Console */
-        .debug-console {
-            background: #1a1a1a;
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            margin-top: 20px;
-            overflow: hidden;
-        }
-        .debug-header {
-            background: var(--bg-dark);
-            padding: 10px 15px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .debug-header button {
-            padding: 5px 10px;
-            background: var(--border);
-            border: none;
-            border-radius: 5px;
-            color: var(--text-secondary);
-            font-size: 0.75rem;
-            cursor: pointer;
-        }
-        .debug-logs {
-            padding: 10px;
-            max-height: 150px;
-            overflow-y: auto;
-            font-family: monospace;
-            font-size: 0.75rem;
-        }
-        .debug-log {
-            padding: 4px 8px;
-            margin-bottom: 4px;
-            border-radius: 4px;
-        }
-        .debug-log.success { background: rgba(16,185,129,0.15); color: var(--success); }
-        .debug-log.error { background: rgba(239,68,68,0.15); color: var(--danger); }
-        .debug-log.info { background: rgba(0,212,170,0.1); color: var(--primary); }
-        .debug-log.warning { background: rgba(245,158,11,0.15); color: var(--warning); }
-
-        @media (max-width: 800px) {
-            .admin-grid { grid-template-columns: 1fr; }
-            .form-row { grid-template-columns: 1fr; }
-        }
-        @media (max-width: 500px) {
-            .login-box { padding: 25px 20px; }
-            .card { padding: 18px 15px; }
-            .header-content { justify-content: center; }
-        }
-
-        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar { width: 5px; }
         ::-webkit-scrollbar-track { background: var(--bg-dark); }
         ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
     </style>
@@ -473,17 +436,13 @@
         <div class="login-box">
             <div class="login-logo">🔐</div>
             <h1 class="login-title">Admin Panel</h1>
-            <p class="login-subtitle">Masukkan password untuk akses</p>
-            <input type="password" class="login-input" id="passwordInput" placeholder="Password" autofocus>
-            <button class="login-btn" id="loginBtn" onclick="login()">
+            <p class="login-subtitle">Masukkan password</p>
+            <input type="password" class="login-input" id="pwInput" placeholder="Password" autofocus>
+            <button class="login-btn" onclick="login()">
                 <i class="fas fa-sign-in-alt"></i> Login
             </button>
-            <p class="login-error" id="loginError">
-                <i class="fas fa-times-circle"></i> Password salah!
-            </p>
-            <div class="login-hint">
-                💡 Default: <code>admin123</code>
-            </div>
+            <p class="login-error" id="loginErr">Password salah!</p>
+            <div class="login-hint">Default: <code>admin123</code></div>
         </div>
     </div>
 
@@ -500,95 +459,91 @@
                     <a href="index.html" class="header-btn" target="_blank">
                         <i class="fas fa-external-link-alt"></i> Public
                     </a>
-                    <button class="header-btn" onclick="testDatabase()">
-                        <i class="fas fa-database"></i> Test DB
+                    <button class="header-btn" onclick="testConnection()">
+                        <i class="fas fa-plug"></i> Test
                     </button>
                     <button class="header-btn logout" onclick="logout()">
-                        <i class="fas fa-sign-out-alt"></i> Logout
+                        <i class="fas fa-sign-out-alt"></i>
                     </button>
                 </div>
             </div>
         </header>
 
         <div class="container">
-            <!-- Database Status -->
-            <div class="db-status disconnected" id="dbStatus">
+            <!-- Status -->
+            <div class="status-box warning" id="statusBox">
                 <i class="fas fa-database"></i>
-                <div class="db-status-text">
-                    <strong id="dbStatusTitle">Memeriksa database...</strong>
-                    <small id="dbStatusDesc">Menghubungkan ke JSONBin</small>
+                <div class="status-text">
+                    <strong id="statusTitle">Memeriksa koneksi...</strong>
+                    <small id="statusDesc">Menghubungkan ke database</small>
                 </div>
-                <button class="test-btn" onclick="testDatabase()">
-                    <i class="fas fa-sync-alt"></i> Test Koneksi
-                </button>
             </div>
 
             <!-- Stats -->
-            <div class="stats-grid">
-                <div class="stat-card">
+            <div class="stats-row">
+                <div class="stat-box">
                     <i class="fas fa-chart-line"></i>
-                    <div class="value" id="statTotal">0</div>
-                    <div class="label">Total</div>
+                    <div class="num" id="sTotal">0</div>
+                    <div class="lbl">Total</div>
                 </div>
-                <div class="stat-card">
+                <div class="stat-box">
                     <i class="fas fa-arrow-up"></i>
-                    <div class="value" id="statBuy">0</div>
-                    <div class="label">Buy</div>
+                    <div class="num" id="sBuy">0</div>
+                    <div class="lbl">Buy</div>
                 </div>
-                <div class="stat-card">
+                <div class="stat-box">
                     <i class="fas fa-arrow-down"></i>
-                    <div class="value" id="statSell">0</div>
-                    <div class="label">Sell</div>
+                    <div class="num" id="sSell">0</div>
+                    <div class="lbl">Sell</div>
                 </div>
-                <div class="stat-card">
+                <div class="stat-box">
                     <i class="fas fa-calendar"></i>
-                    <div class="value" id="statToday">0</div>
-                    <div class="label">Hari Ini</div>
+                    <div class="num" id="sToday">0</div>
+                    <div class="lbl">Today</div>
                 </div>
             </div>
 
-            <div class="admin-grid">
+            <div class="main-grid">
                 <!-- Form -->
                 <div class="card">
                     <h2 class="card-title"><i class="fas fa-plus-circle"></i> Buat Signal</h2>
                     <form id="signalForm" onsubmit="createSignal(event)">
                         <div class="form-group">
                             <label>Trading Pair *</label>
-                            <input type="text" id="pair" placeholder="BTC/USDT, EUR/USD" required>
+                            <input type="text" id="pair" placeholder="BTC/USDT" required>
                         </div>
                         <div class="form-row">
                             <div class="form-group">
                                 <label>Market</label>
-                                <select id="marketType">
+                                <select id="market">
                                     <option value="crypto">Crypto</option>
                                     <option value="forex">Forex</option>
-                                    <option value="stocks">Stocks</option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label>Timeframe</label>
-                                <select id="timeframe">
-                                    <option value="5m">5 Min</option>
-                                    <option value="15m">15 Min</option>
-                                    <option value="1h" selected>1 Hour</option>
-                                    <option value="4h">4 Hours</option>
-                                    <option value="1d">1 Day</option>
+                                <select id="tf">
+                                    <option value="5m">5m</option>
+                                    <option value="15m">15m</option>
+                                    <option value="1h" selected>1h</option>
+                                    <option value="4h">4h</option>
+                                    <option value="1d">1d</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>Tipe *</label>
-                            <div class="signal-type-grid">
-                                <div class="type-option buy selected" onclick="selectType('buy')">
+                            <label>Type *</label>
+                            <div class="type-grid">
+                                <div class="type-opt buy sel" onclick="selType('buy')">
                                     <i class="fas fa-arrow-trend-up"></i>
                                     <span>BUY</span>
                                 </div>
-                                <div class="type-option sell" onclick="selectType('sell')">
+                                <div class="type-opt sell" onclick="selType('sell')">
                                     <i class="fas fa-arrow-trend-down"></i>
                                     <span>SELL</span>
                                 </div>
                             </div>
-                            <input type="hidden" id="signalType" value="buy">
+                            <input type="hidden" id="sType" value="buy">
                         </div>
                         <div class="form-row">
                             <div class="form-group">
@@ -597,57 +552,60 @@
                             </div>
                             <div class="form-group">
                                 <label>Take Profit *</label>
-                                <input type="text" id="takeProfit" placeholder="72000" required>
+                                <input type="text" id="tp" placeholder="72000" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label>Stop Loss *</label>
-                            <input type="text" id="stopLoss" placeholder="65000" required>
+                            <input type="text" id="sl" placeholder="65000" required>
                         </div>
                         <div class="form-group">
                             <label>Chart Image *</label>
-                            <div class="image-upload" id="imageUpload" onclick="document.getElementById('chartImage').click()">
-                                <input type="file" id="chartImage" accept="image/*" onchange="previewImage(event)">
-                                <div class="upload-placeholder">
+                            <div class="img-upload" id="imgUpload" onclick="document.getElementById('imgFile').click()">
+                                <input type="file" id="imgFile" accept="image/*" onchange="previewImg(event)">
+                                <div class="upload-ph">
                                     <i class="fas fa-cloud-upload-alt"></i>
-                                    <p>Klik upload gambar</p>
+                                    <p>Upload gambar (max 2MB)</p>
                                 </div>
-                                <img class="image-preview" id="imagePreview" alt="Preview">
+                                <img class="img-preview" id="imgPreview">
                             </div>
                         </div>
                         <div class="form-group">
                             <label>Analisis *</label>
-                            <textarea id="description" placeholder="Jelaskan analisis..." required></textarea>
+                            <textarea id="desc" placeholder="Jelaskan analisis..." required></textarea>
                         </div>
-                        <button type="submit" class="btn-primary" id="publishBtn">
-                            <i class="fas fa-paper-plane"></i> Publish Signal
+                        <button type="submit" class="btn-primary" id="pubBtn">
+                            <i class="fas fa-paper-plane"></i> Publish
                         </button>
-                        <div style="margin-top:12px;text-align:center;">
+                        <div style="margin-top:10px;text-align:center;">
                             <button type="button" class="btn-secondary" onclick="resetForm()">
                                 <i class="fas fa-redo"></i> Reset
                             </button>
                         </div>
                     </form>
 
-                    <!-- Debug Console -->
-                    <div class="debug-console">
-                        <div class="debug-header">
-                            <span>📋 Debug Console</span>
-                            <button onclick="clearLogs()">Clear</button>
+                    <!-- Console -->
+                    <div class="console">
+                        <div class="console-header">
+                            <span>📋 Log</span>
+                            <button onclick="clearLog()">Clear</button>
                         </div>
-                        <div class="debug-logs" id="debugLogs">
-                            <div class="debug-log info">Siap menerima perintah...</div>
+                        <div class="console-logs" id="logs">
+                            <div class="log info">Ready...</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Signal List -->
+                <!-- List -->
                 <div class="card">
-                    <h2 class="card-title"><i class="fas fa-list"></i> Signals (<span id="signalCount">0</span>)</h2>
-                    <div class="signal-list" id="signalList">
+                    <h2 class="card-title">
+                        <i class="fas fa-list"></i> Signals 
+                        <span style="margin-left:auto;font-size:0.8rem;color:var(--text-secondary)" id="cnt">(0)</span>
+                    </h2>
+                    <div class="signal-list" id="sigList">
                         <div class="empty-list">
                             <i class="fas fa-spinner fa-spin"></i>
-                            <p>Memuat...</p>
+                            <p>Loading...</p>
                         </div>
                     </div>
                 </div>
@@ -658,88 +616,94 @@
     <!-- Toast -->
     <div class="toast" id="toast">
         <i class="fas fa-check-circle" id="toastIcon"></i>
-        <span id="toastMsg">Success!</span>
+        <span id="toastMsg">OK</span>
     </div>
 
     <script>
         // ================================================================
-        // ⚙️ KONFIGURASI - ISI DENGAN DATA JSONBIN ANDA!
+        // 🔧 KONFIGURASI - ISI SEMUA INI!
         // ================================================================
         const CONFIG = {
             // Password admin
-            ADMIN_PASSWORD: 'Ikan12345',
+            ADMIN_PASSWORD: 'admin123',
             
-            // JSONBin.io - ISI INI!
-            // Cara dapat:
-            // 1. Buka https://jsonbin.io dan daftar
+            // JSONBin.io (untuk simpan data sinyal)
+            // 1. Buka https://jsonbin.io, daftar gratis
             // 2. Buat Bin baru isi: {"signals":[]}
             // 3. Copy Bin ID dari URL
             // 4. Copy API Key dari menu API Keys
+            JSONBIN_BIN_ID: '694074e743b1c97be9f09448',      // Contoh: '507f1f77bcf86cd799439011'
+            JSONBIN_API_KEY: '$2a$10$8dydQ2cR6l/L9sTc8Rh5Pu2ip865LXWi3Re5hU55X7Ej499kxTiaW',     // Contoh: '$2a$10$...'
             
-            JSONBIN_BIN_ID: '694074e743b1c97be9f09448',    // <-- ISI BIN ID DISINI (contoh: '683f1a2b3c4d5e6f')
-            JSONBIN_API_KEY: '$2a$10$8dydQ2cR6l/L9sTc8Rh5Pu2ip865LXWi3Re5hU55X7Ej499kxTiaW',   // <-- ISI API KEY DISINI (contoh: '$2a$10$xxx...')
+            // ImgBB.com (untuk upload gambar - WAJIB!)
+            // 1. Buka https://api.imgbb.com/
+            // 2. Klik "Get API Key"
+            // 3. Login & copy API key
+            IMGBB_API_KEY: '813a9454d27c3d6ae0b9bb0dabf2c07d',       // Contoh: 'a1b2c3d4e5f6g7h8i9j0'
         };
         // ================================================================
 
         let signals = [];
-        let dbConnected = false;
+        let imageFile = null;
 
-        // Enter key login
-        document.getElementById('passwordInput').addEventListener('keypress', e => {
+        // Enter login
+        document.getElementById('pwInput').addEventListener('keypress', e => {
             if (e.key === 'Enter') login();
         });
 
         // ==================== LOGIN ====================
         function login() {
-            const pw = document.getElementById('passwordInput').value;
-            if (pw === CONFIG.ADMIN_PASSWORD) {
+            if (document.getElementById('pwInput').value === CONFIG.ADMIN_PASSWORD) {
                 document.getElementById('loginScreen').style.display = 'none';
                 document.getElementById('adminPanel').style.display = 'block';
-                log('Login berhasil!', 'success');
-                checkDatabase();
+                log('Login OK!', 'ok');
+                checkConfig();
                 loadSignals();
             } else {
-                document.getElementById('loginError').style.display = 'block';
-                setTimeout(() => document.getElementById('loginError').style.display = 'none', 3000);
+                document.getElementById('loginErr').style.display = 'block';
+                setTimeout(() => document.getElementById('loginErr').style.display = 'none', 2000);
             }
         }
 
         function logout() {
             document.getElementById('adminPanel').style.display = 'none';
             document.getElementById('loginScreen').style.display = 'flex';
-            document.getElementById('passwordInput').value = '';
+            document.getElementById('pwInput').value = '';
         }
 
-        // ==================== DATABASE CHECK ====================
-        function checkDatabase() {
-            const status = document.getElementById('dbStatus');
-            const title = document.getElementById('dbStatusTitle');
-            const desc = document.getElementById('dbStatusDesc');
+        // ==================== CHECK CONFIG ====================
+        function checkConfig() {
+            const box = document.getElementById('statusBox');
+            const title = document.getElementById('statusTitle');
+            const desc = document.getElementById('statusDesc');
 
-            if (!CONFIG.JSONBIN_BIN_ID || !CONFIG.JSONBIN_API_KEY) {
-                status.className = 'db-status disconnected';
-                title.textContent = '⚠️ Database Belum Dikonfigurasi';
-                desc.innerHTML = 'Isi <code>JSONBIN_BIN_ID</code> dan <code>JSONBIN_API_KEY</code> di bagian CONFIG';
-                log('JSONBin belum dikonfigurasi!', 'warning');
-                dbConnected = false;
+            let issues = [];
+            if (!CONFIG.JSONBIN_BIN_ID) issues.push('JSONBIN_BIN_ID kosong');
+            if (!CONFIG.JSONBIN_API_KEY) issues.push('JSONBIN_API_KEY kosong');
+            if (!CONFIG.IMGBB_API_KEY) issues.push('IMGBB_API_KEY kosong');
+
+            if (issues.length > 0) {
+                box.className = 'status-box warning';
+                title.textContent = '⚠️ Konfigurasi Belum Lengkap';
+                desc.textContent = issues.join(', ');
+                log('Config incomplete: ' + issues.join(', '), 'warn');
             } else {
-                testDatabase();
+                testConnection();
             }
         }
 
-        async function testDatabase() {
-            const status = document.getElementById('dbStatus');
-            const title = document.getElementById('dbStatusTitle');
-            const desc = document.getElementById('dbStatusDesc');
+        async function testConnection() {
+            const box = document.getElementById('statusBox');
+            const title = document.getElementById('statusTitle');
+            const desc = document.getElementById('statusDesc');
 
             if (!CONFIG.JSONBIN_BIN_ID || !CONFIG.JSONBIN_API_KEY) {
-                toast('Isi Bin ID dan API Key dulu!', 'error');
+                toast('Isi config dulu!', 'err');
                 return;
             }
 
-            title.textContent = '🔄 Menghubungkan...';
-            desc.textContent = 'Testing koneksi ke JSONBin';
-            log('Testing koneksi ke JSONBin...', 'info');
+            title.textContent = '🔄 Testing...';
+            log('Testing JSONBin connection...', 'info');
 
             try {
                 const res = await fetch(`https://api.jsonbin.io/v3/b/${CONFIG.JSONBIN_BIN_ID}/latest`, {
@@ -747,29 +711,26 @@
                 });
 
                 if (res.ok) {
-                    const data = await res.json();
-                    status.className = 'db-status connected';
+                    box.className = 'status-box success';
                     title.textContent = '✅ Database Terhubung';
-                    desc.textContent = `Bin ID: ${CONFIG.JSONBIN_BIN_ID.substring(0, 10)}... | ${(data.record.signals || []).length} signals`;
-                    dbConnected = true;
-                    log('Database terhubung! ✅', 'success');
-                    toast('Database terhubung!', 'success');
+                    desc.textContent = 'JSONBin & ImgBB siap digunakan';
+                    log('JSONBin connected!', 'ok');
+                    toast('Database OK!');
                 } else {
                     throw new Error(`HTTP ${res.status}`);
                 }
             } catch (err) {
-                status.className = 'db-status error';
+                box.className = 'status-box error';
                 title.textContent = '❌ Koneksi Gagal';
-                desc.textContent = `Error: ${err.message}. Cek Bin ID dan API Key`;
-                dbConnected = false;
-                log(`Error: ${err.message}`, 'error');
-                toast('Gagal terhubung ke database', 'error');
+                desc.textContent = err.message;
+                log('Connection error: ' + err.message, 'err');
+                toast('Koneksi gagal!', 'err');
             }
         }
 
         // ==================== LOAD SIGNALS ====================
         async function loadSignals() {
-            log('Memuat signals...', 'info');
+            log('Loading signals...', 'info');
 
             try {
                 if (CONFIG.JSONBIN_BIN_ID && CONFIG.JSONBIN_API_KEY) {
@@ -779,17 +740,15 @@
                     if (res.ok) {
                         const data = await res.json();
                         signals = data.record.signals || [];
-                        log(`Loaded ${signals.length} signals dari JSONBin`, 'success');
-                    } else {
-                        throw new Error('JSONBin error');
+                        log(`Loaded ${signals.length} signals`, 'ok');
                     }
                 } else {
-                    signals = JSON.parse(localStorage.getItem('tradingSignals')) || [];
-                    log(`Loaded ${signals.length} signals dari localStorage`, 'info');
+                    signals = JSON.parse(localStorage.getItem('signals') || '[]');
+                    log('Loaded from localStorage', 'info');
                 }
             } catch (err) {
-                log(`Load error: ${err.message}`, 'error');
-                signals = JSON.parse(localStorage.getItem('tradingSignals')) || [];
+                log('Load error: ' + err.message, 'err');
+                signals = JSON.parse(localStorage.getItem('signals') || '[]');
             }
 
             renderList();
@@ -798,11 +757,9 @@
 
         // ==================== SAVE SIGNALS ====================
         async function saveSignals() {
-            // Always save to localStorage
-            localStorage.setItem('tradingSignals', JSON.stringify(signals));
-            log('Saved to localStorage ✓', 'info');
+            localStorage.setItem('signals', JSON.stringify(signals));
+            log('Saved to localStorage', 'info');
 
-            // Try JSONBin
             if (CONFIG.JSONBIN_BIN_ID && CONFIG.JSONBIN_API_KEY) {
                 log('Saving to JSONBin...', 'info');
                 try {
@@ -812,24 +769,51 @@
                             'Content-Type': 'application/json',
                             'X-Master-Key': CONFIG.JSONBIN_API_KEY
                         },
-                        body: JSON.stringify({ signals: signals })
+                        body: JSON.stringify({ signals })
                     });
 
                     if (res.ok) {
-                        log('Saved to JSONBin ✅', 'success');
+                        log('Saved to JSONBin!', 'ok');
                         return true;
                     } else {
-                        const errData = await res.json();
-                        throw new Error(errData.message || `HTTP ${res.status}`);
+                        throw new Error(`HTTP ${res.status}`);
                     }
                 } catch (err) {
-                    log(`JSONBin save error: ${err.message}`, 'error');
-                    toast('Gagal save ke database!', 'error');
+                    log('JSONBin save error: ' + err.message, 'err');
                     return false;
                 }
+            }
+            return true;
+        }
+
+        // ==================== UPLOAD IMAGE TO IMGBB ====================
+        async function uploadImage(file) {
+            if (!CONFIG.IMGBB_API_KEY) {
+                log('IMGBB_API_KEY not set!', 'err');
+                throw new Error('ImgBB API Key belum diisi');
+            }
+
+            log('Uploading image to ImgBB...', 'info');
+
+            const formData = new FormData();
+            formData.append('image', file);
+
+            const res = await fetch(`https://api.imgbb.com/1/upload?key=${CONFIG.IMGBB_API_KEY}`, {
+                method: 'POST',
+                body: formData
+            });
+
+            if (!res.ok) {
+                throw new Error('Upload gagal');
+            }
+
+            const data = await res.json();
+            
+            if (data.success) {
+                log('Image uploaded: ' + data.data.url.substring(0, 50) + '...', 'ok');
+                return data.data.url;
             } else {
-                log('JSONBin tidak dikonfigurasi, hanya save ke localStorage', 'warning');
-                return true;
+                throw new Error(data.error?.message || 'Upload failed');
             }
         }
 
@@ -837,169 +821,177 @@
         async function createSignal(e) {
             e.preventDefault();
 
-            const imagePreview = document.getElementById('imagePreview');
-            const publishBtn = document.getElementById('publishBtn');
-
-            if (!imagePreview.src || imagePreview.src === '' || imagePreview.src === window.location.href) {
-                toast('Upload gambar chart!', 'error');
-                log('Error: Gambar belum diupload', 'error');
+            if (!imageFile) {
+                toast('Upload gambar!', 'err');
+                log('No image selected', 'err');
                 return;
             }
 
-            publishBtn.disabled = true;
-            publishBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Menyimpan...';
-            log('Membuat signal baru...', 'info');
+            const btn = document.getElementById('pubBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
 
-            const signal = {
-                id: Date.now(),
-                pair: document.getElementById('pair').value.toUpperCase().trim(),
-                marketType: document.getElementById('marketType').value,
-                timeframe: document.getElementById('timeframe').value,
-                type: document.getElementById('signalType').value,
-                entry: document.getElementById('entry').value.trim(),
-                takeProfit: document.getElementById('takeProfit').value.trim(),
-                stopLoss: document.getElementById('stopLoss').value.trim(),
-                description: document.getElementById('description').value.trim(),
-                image: imagePreview.src,
-                timestamp: Date.now()
-            };
+            try {
+                // 1. Upload image to ImgBB
+                let imageUrl;
+                if (CONFIG.IMGBB_API_KEY) {
+                    imageUrl = await uploadImage(imageFile);
+                } else {
+                    // Fallback: use base64 (not recommended)
+                    imageUrl = document.getElementById('imgPreview').src;
+                    log('Using base64 (no ImgBB key)', 'warn');
+                }
 
-            signals.unshift(signal);
-            log(`Signal ${signal.pair} dibuat`, 'info');
+                // 2. Create signal object
+                const signal = {
+                    id: Date.now(),
+                    pair: document.getElementById('pair').value.toUpperCase().trim(),
+                    marketType: document.getElementById('market').value,
+                    timeframe: document.getElementById('tf').value,
+                    type: document.getElementById('sType').value,
+                    entry: document.getElementById('entry').value.trim(),
+                    takeProfit: document.getElementById('tp').value.trim(),
+                    stopLoss: document.getElementById('sl').value.trim(),
+                    description: document.getElementById('desc').value.trim(),
+                    image: imageUrl,
+                    timestamp: Date.now()
+                };
 
-            const saved = await saveSignals();
+                log('Signal created: ' + signal.pair, 'info');
 
-            renderList();
-            updateStats();
-            resetForm();
+                // 3. Add & save
+                signals.unshift(signal);
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+                
+                const saved = await saveSignals();
 
-            publishBtn.disabled = false;
-            publishBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Publish Signal';
+                renderList();
+                updateStats();
+                resetForm();
 
-            if (saved) {
-                toast('Signal berhasil dipublish! 🚀', 'success');
-                log('Signal published successfully! 🚀', 'success');
+                if (saved) {
+                    toast('Signal published! 🚀');
+                    log('Signal published successfully!', 'ok');
+                } else {
+                    toast('Saved locally only', 'warn');
+                }
+
+            } catch (err) {
+                log('Error: ' + err.message, 'err');
+                toast('Error: ' + err.message, 'err');
             }
+
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-paper-plane"></i> Publish';
         }
 
-        // ==================== DELETE SIGNAL ====================
-        async function deleteSignal(id) {
-            if (!confirm('Hapus signal ini?')) return;
-
+        // ==================== DELETE ====================
+        async function deleteSig(id) {
+            if (!confirm('Hapus?')) return;
             signals = signals.filter(s => s.id !== id);
-            log(`Signal ${id} dihapus`, 'info');
-
             await saveSignals();
             renderList();
             updateStats();
-            toast('Signal dihapus');
+            toast('Deleted');
+            log('Signal ' + id + ' deleted', 'info');
         }
 
         // ==================== RENDER ====================
         function renderList() {
-            const list = document.getElementById('signalList');
-            document.getElementById('signalCount').textContent = signals.length;
+            const list = document.getElementById('sigList');
+            document.getElementById('cnt').textContent = `(${signals.length})`;
 
             if (signals.length === 0) {
-                list.innerHTML = '<div class="empty-list"><i class="fas fa-inbox"></i><p>Belum ada signal</p></div>';
+                list.innerHTML = '<div class="empty-list"><i class="fas fa-inbox"></i><p>Kosong</p></div>';
                 return;
             }
 
             list.innerHTML = signals.map(s => `
                 <div class="signal-item">
-                    <img src="${s.image}" alt="${s.pair}" onerror="this.src='https://via.placeholder.com/50?text=Err'">
+                    <img src="${s.image}" onerror="this.src='https://via.placeholder.com/45?text=Err'">
                     <div class="signal-item-info">
                         <div class="signal-item-pair">
                             ${s.pair}
-                            <span class="signal-badge ${s.type}">${s.type.toUpperCase()}</span>
+                            <span class="badge ${s.type}">${s.type.toUpperCase()}</span>
                         </div>
                         <div class="signal-item-details">E:${s.entry} TP:${s.takeProfit} SL:${s.stopLoss}</div>
                         <div class="signal-item-time">${timeAgo(s.timestamp)}</div>
                     </div>
-                    <button class="btn-danger" onclick="deleteSignal(${s.id})"><i class="fas fa-trash"></i></button>
+                    <button class="btn-danger" onclick="deleteSig(${s.id})"><i class="fas fa-trash"></i></button>
                 </div>
             `).join('');
         }
 
         function updateStats() {
             const today = new Date().setHours(0,0,0,0);
-            document.getElementById('statTotal').textContent = signals.length;
-            document.getElementById('statBuy').textContent = signals.filter(s => s.type === 'buy').length;
-            document.getElementById('statSell').textContent = signals.filter(s => s.type === 'sell').length;
-            document.getElementById('statToday').textContent = signals.filter(s => s.timestamp >= today).length;
+            document.getElementById('sTotal').textContent = signals.length;
+            document.getElementById('sBuy').textContent = signals.filter(s => s.type === 'buy').length;
+            document.getElementById('sSell').textContent = signals.filter(s => s.type === 'sell').length;
+            document.getElementById('sToday').textContent = signals.filter(s => s.timestamp >= today).length;
         }
 
         // ==================== HELPERS ====================
-        function selectType(type) {
-            document.querySelectorAll('.type-option').forEach(o => o.classList.remove('selected'));
-            document.querySelector(`.type-option.${type}`).classList.add('selected');
-            document.getElementById('signalType').value = type;
+        function selType(t) {
+            document.querySelectorAll('.type-opt').forEach(o => o.classList.remove('sel'));
+            document.querySelector(`.type-opt.${t}`).classList.add('sel');
+            document.getElementById('sType').value = t;
         }
 
-        function previewImage(e) {
+        function previewImg(e) {
             const file = e.target.files[0];
             if (!file) return;
-            if (file.size > 5 * 1024 * 1024) {
-                toast('File terlalu besar! Max 5MB', 'error');
+
+            if (file.size > 2 * 1024 * 1024) {
+                toast('Max 2MB!', 'err');
                 return;
             }
+
+            imageFile = file;
             const reader = new FileReader();
             reader.onload = ev => {
-                document.getElementById('imagePreview').src = ev.target.result;
-                document.getElementById('imageUpload').classList.add('has-image');
-                log('Image loaded ✓', 'success');
+                document.getElementById('imgPreview').src = ev.target.result;
+                document.getElementById('imgUpload').classList.add('has-img');
+                log('Image selected: ' + file.name, 'ok');
             };
             reader.readAsDataURL(file);
         }
 
         function resetForm() {
             document.getElementById('signalForm').reset();
-            document.getElementById('imagePreview').src = '';
-            document.getElementById('imageUpload').classList.remove('has-image');
-            selectType('buy');
+            document.getElementById('imgPreview').src = '';
+            document.getElementById('imgUpload').classList.remove('has-img');
+            imageFile = null;
+            selType('buy');
         }
 
         function timeAgo(ts) {
             const m = Math.floor((Date.now() - ts) / 60000);
+            if (m < 1) return 'Baru';
+            if (m < 60) return m + 'm';
             const h = Math.floor(m / 60);
-            const d = Math.floor(h / 24);
-            if (d > 0) return `${d} hari lalu`;
-            if (h > 0) return `${h} jam lalu`;
-            if (m > 0) return `${m} menit lalu`;
-            return 'Baru saja';
+            if (h < 24) return h + 'h';
+            return Math.floor(h / 24) + 'd';
         }
 
-        function toast(msg, type = 'success') {
+        function toast(msg, type = 'ok') {
             const t = document.getElementById('toast');
             const icon = document.getElementById('toastIcon');
             document.getElementById('toastMsg').textContent = msg;
-            
-            t.className = 'toast';
-            if (type === 'error') {
-                t.classList.add('error');
-                icon.className = 'fas fa-times-circle';
-            } else if (type === 'warning') {
-                t.classList.add('warning');
-                icon.className = 'fas fa-exclamation-triangle';
-            } else {
-                icon.className = 'fas fa-check-circle';
-            }
-            
+            t.className = 'toast ' + (type === 'err' ? 'err' : type === 'warn' ? 'warn' : '');
+            icon.className = type === 'err' ? 'fas fa-times-circle' : type === 'warn' ? 'fas fa-exclamation-triangle' : 'fas fa-check-circle';
             t.classList.add('show');
             setTimeout(() => t.classList.remove('show'), 3000);
         }
 
-        // Debug logging
         function log(msg, type = 'info') {
-            const logs = document.getElementById('debugLogs');
+            const logs = document.getElementById('logs');
             const time = new Date().toLocaleTimeString();
-            logs.innerHTML += `<div class="debug-log ${type}">[${time}] ${msg}</div>`;
+            logs.innerHTML += `<div class="log ${type}">[${time}] ${msg}</div>`;
             logs.scrollTop = logs.scrollHeight;
-            console.log(`[${type.toUpperCase()}] ${msg}`);
         }
 
-        function clearLogs() {
-            document.getElementById('debugLogs').innerHTML = '<div class="debug-log info">Console cleared</div>';
+        function clearLog() {
+            document.getElementById('logs').innerHTML = '<div class="log info">Cleared</div>';
         }
     </script>
 </body>
