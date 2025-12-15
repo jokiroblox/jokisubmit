@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CryptoSignal Pro - Trading Signals</title>
+    <title>CryptoSignal Pro</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -25,22 +25,22 @@
             color: var(--text-primary);
             min-height: 100vh;
         }
-        .bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
-            background: radial-gradient(circle at 20% 80%, rgba(0,212,170,0.08) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 20%, rgba(124,58,237,0.08) 0%, transparent 50%);
+        .bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            background: radial-gradient(circle at 20% 80%, rgba(0,212,170,0.06) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(124,58,237,0.06) 0%, transparent 50%);
         }
-
         header {
             background: rgba(18,18,26,0.95);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border);
             padding: 12px 0;
             position: sticky;
             top: 0;
-            z-index: 1000;
+            z-index: 100;
         }
         .header-content {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
             display: flex;
@@ -50,14 +50,14 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 1.3rem;
+            gap: 8px;
+            font-size: 1.2rem;
             font-weight: 700;
             text-decoration: none;
             color: inherit;
         }
         .logo-icon {
-            width: 40px; height: 40px;
+            width: 36px; height: 36px;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             border-radius: 10px;
             display: flex; align-items: center; justify-content: center;
@@ -67,144 +67,133 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        .live-badge {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 14px;
+        .live {
+            display: flex; align-items: center; gap: 6px;
+            padding: 5px 12px;
             background: rgba(16,185,129,0.15);
             border: 1px solid var(--success);
             border-radius: 20px;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--success);
         }
         .live-dot { width: 6px; height: 6px; background: var(--success); border-radius: 50%; animation: pulse 2s infinite; }
         @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
 
-        .container { max-width: 1400px; margin: 0 auto; padding: 25px 20px; }
-
-        .hero { text-align: center; padding: 40px 20px; margin-bottom: 25px; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        
+        .hero { text-align: center; padding: 35px 20px; margin-bottom: 20px; }
         .hero h1 {
-            font-size: 2.2rem;
-            margin-bottom: 10px;
+            font-size: 2rem;
             background: linear-gradient(135deg, #fff, var(--primary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        .hero p { color: var(--text-secondary); font-size: 1rem; }
+        .hero p { color: var(--text-secondary); font-size: 0.95rem; margin-top: 8px; }
 
-        .stats-bar {
+        .stats {
             display: flex;
             justify-content: center;
-            gap: 25px;
-            padding: 18px;
+            gap: 20px;
+            padding: 15px;
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 14px;
-            margin-bottom: 30px;
+            border-radius: 12px;
+            margin-bottom: 25px;
             flex-wrap: wrap;
         }
-        .stat-item { text-align: center; min-width: 70px; }
-        .stat-value { font-size: 1.6rem; font-weight: 700; color: var(--primary); }
-        .stat-label { color: var(--text-secondary); font-size: 0.75rem; }
+        .stat { text-align: center; min-width: 60px; }
+        .stat-num { font-size: 1.4rem; font-weight: 700; color: var(--primary); }
+        .stat-lbl { font-size: 0.7rem; color: var(--text-secondary); }
 
         .filter-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             flex-wrap: wrap;
-            gap: 12px;
+            gap: 10px;
         }
-        .section-title { font-size: 1.2rem; display: flex; align-items: center; gap: 8px; }
+        .section-title { font-size: 1.1rem; display: flex; align-items: center; gap: 8px; }
         .section-title i { color: var(--primary); }
-        .filter-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
-        .filter-tab {
-            padding: 8px 16px;
+        .tabs { display: flex; gap: 6px; }
+        .tab {
+            padding: 7px 14px;
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: 8px;
             color: var(--text-secondary);
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             cursor: pointer;
-            transition: all 0.3s;
         }
-        .filter-tab:hover { border-color: var(--primary); color: var(--primary); }
-        .filter-tab.active { background: linear-gradient(135deg, var(--primary), var(--secondary)); border-color: transparent; color: white; }
+        .tab:hover { border-color: var(--primary); color: var(--primary); }
+        .tab.active { background: linear-gradient(135deg, var(--primary), var(--secondary)); border-color: transparent; color: white; }
 
-        .signals-grid {
+        .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 18px;
         }
 
-        .signal-card {
+        .card {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 16px;
+            border-radius: 14px;
             overflow: hidden;
             transition: all 0.3s;
         }
-        .signal-card:hover { transform: translateY(-4px); border-color: var(--primary); box-shadow: 0 15px 35px rgba(0,0,0,0.3); }
-        .signal-image-wrapper { position: relative; overflow: hidden; cursor: pointer; }
-        .signal-image { width: 100%; height: 180px; object-fit: cover; transition: transform 0.5s; }
-        .signal-card:hover .signal-image { transform: scale(1.05); }
-        .signal-badge {
-            position: absolute;
-            top: 10px; left: 10px;
-            padding: 6px 14px;
-            border-radius: 18px;
+        .card:hover { transform: translateY(-4px); border-color: var(--primary); }
+        .card-img-wrap { position: relative; overflow: hidden; cursor: pointer; }
+        .card-img { width: 100%; height: 160px; object-fit: cover; transition: transform 0.5s; }
+        .card:hover .card-img { transform: scale(1.05); }
+        .card-badge {
+            position: absolute; top: 10px; left: 10px;
+            padding: 5px 12px;
+            border-radius: 15px;
             font-weight: 700;
-            font-size: 0.8rem;
-            display: flex;
-            align-items: center;
-            gap: 5px;
+            font-size: 0.75rem;
+            display: flex; align-items: center; gap: 4px;
         }
-        .signal-badge.buy { background: var(--success); color: white; }
-        .signal-badge.sell { background: var(--danger); color: white; }
-        .meta-tag {
-            position: absolute;
-            top: 10px; right: 10px;
-            padding: 4px 10px;
+        .card-badge.buy { background: var(--success); color: white; }
+        .card-badge.sell { background: var(--danger); color: white; }
+        .card-tf {
+            position: absolute; top: 10px; right: 10px;
+            padding: 4px 8px;
             background: rgba(0,0,0,0.7);
-            border-radius: 12px;
-            font-size: 0.7rem;
-            color: white;
+            border-radius: 10px;
+            font-size: 0.65rem;
         }
-        .signal-content { padding: 16px; }
-        .signal-pair {
-            font-size: 1.25rem;
+        .card-body { padding: 14px; }
+        .card-pair {
+            font-size: 1.15rem;
             font-weight: 700;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            margin-bottom: 10px;
+            display: flex; align-items: center; gap: 8px;
         }
         .pair-icon {
-            width: 34px; height: 34px;
+            width: 30px; height: 30px;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
         }
-        .price-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 12px; }
-        .price-item { background: var(--bg-dark); border-radius: 8px; padding: 10px 8px; text-align: center; }
-        .price-label { font-size: 0.6rem; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 3px; }
-        .price-value { font-size: 0.9rem; font-weight: 700; }
-        .price-value.entry { color: var(--warning); }
-        .price-value.tp { color: var(--success); }
-        .price-value.sl { color: var(--danger); }
-        .signal-description {
+        .prices { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 10px; }
+        .price-box { background: var(--bg-dark); border-radius: 8px; padding: 8px 6px; text-align: center; }
+        .price-lbl { font-size: 0.55rem; color: var(--text-secondary); text-transform: uppercase; }
+        .price-val { font-size: 0.85rem; font-weight: 700; }
+        .price-val.entry { color: var(--warning); }
+        .price-val.tp { color: var(--success); }
+        .price-val.sl { color: var(--danger); }
+        .card-desc {
             color: var(--text-secondary);
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             line-height: 1.5;
             padding: 10px;
             background: var(--bg-dark);
             border-radius: 8px;
             border-left: 3px solid var(--primary);
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
-        .signal-actions { display: flex; gap: 8px; }
+        .card-actions { display: flex; gap: 8px; }
         .action-btn {
             flex: 1;
             padding: 10px;
@@ -212,121 +201,70 @@
             border-radius: 8px;
             background: transparent;
             color: var(--text-secondary);
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-            transition: all 0.3s;
+            display: flex; align-items: center; justify-content: center; gap: 5px;
         }
         .action-btn:hover { border-color: var(--primary); color: var(--primary); }
-        .action-btn.primary { background: linear-gradient(135deg, var(--primary), var(--secondary)); border: none; color: white; }
-        .signal-time {
-            display: flex;
-            justify-content: center;
+        .action-btn.pri { background: linear-gradient(135deg, var(--primary), var(--secondary)); border: none; color: white; }
+        .card-time {
+            text-align: center;
             padding-top: 10px;
             margin-top: 10px;
             border-top: 1px solid var(--border);
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: var(--text-secondary);
         }
 
-        .loading, .empty-state { text-align: center; padding: 50px 20px; }
-        .spinner { width: 40px; height: 40px; border: 3px solid var(--border); border-top-color: var(--primary); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 15px; }
+        .loading, .empty { text-align: center; padding: 50px; }
+        .spinner { width: 35px; height: 35px; border: 3px solid var(--border); border-top-color: var(--primary); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 12px; }
         @keyframes spin { to { transform: rotate(360deg); } }
-        .empty-state i { font-size: 3rem; margin-bottom: 15px; opacity: 0.3; }
+        .empty i { font-size: 2.5rem; opacity: 0.3; margin-bottom: 10px; }
 
         .modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,0.95);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95); z-index: 2000;
+            align-items: center; justify-content: center; padding: 20px;
         }
         .modal.active { display: flex; }
         .modal img { max-width: 95%; max-height: 90%; border-radius: 8px; }
         .modal-close { position: absolute; top: 15px; right: 25px; font-size: 2rem; color: white; cursor: pointer; }
 
         .share-modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,0.85);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85); z-index: 2000;
+            align-items: center; justify-content: center; padding: 20px;
         }
         .share-modal.active { display: flex; }
-        .share-box { background: var(--bg-card); border-radius: 16px; padding: 25px; max-width: 380px; width: 100%; }
-        .share-title { text-align: center; margin-bottom: 18px; }
-        .share-title i { font-size: 2rem; color: var(--primary); }
-        .share-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
-        .share-btn { padding: 12px; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; color: white; transition: all 0.3s; }
+        .share-box { background: var(--bg-card); border-radius: 14px; padding: 22px; max-width: 360px; width: 100%; }
+        .share-title { text-align: center; margin-bottom: 15px; }
+        .share-title i { font-size: 1.8rem; color: var(--primary); }
+        .share-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+        .share-btn { padding: 10px; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; color: white; font-size: 0.85rem; }
         .share-btn.wa { background: #25D366; }
         .share-btn.tg { background: #0088cc; }
         .share-btn.tw { background: #1DA1F2; }
         .share-btn.cp { background: var(--secondary); }
-        .share-btn:hover { transform: translateY(-2px); }
-        .share-text { background: var(--bg-dark); border-radius: 8px; padding: 10px; margin-bottom: 12px; }
-        .share-text textarea { width: 100%; background: transparent; border: none; color: var(--text-primary); font-size: 0.8rem; resize: none; height: 90px; }
+        .share-text { background: var(--bg-dark); border-radius: 8px; padding: 10px; margin-bottom: 10px; }
+        .share-text textarea { width: 100%; background: transparent; border: none; color: var(--text-primary); font-size: 0.75rem; resize: none; height: 80px; }
         .close-btn { width: 100%; padding: 10px; background: var(--bg-dark); border: 1px solid var(--border); border-radius: 8px; color: var(--text-secondary); cursor: pointer; }
 
-        .toast {
-            position: fixed;
-            bottom: 25px; right: 25px;
-            padding: 12px 20px;
-            background: var(--success);
-            color: white;
-            border-radius: 10px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transform: translateX(150%);
-            transition: transform 0.4s;
-            z-index: 3000;
-            font-size: 0.9rem;
-        }
+        .toast { position: fixed; bottom: 20px; right: 20px; padding: 10px 18px; background: var(--success); color: white; border-radius: 8px; font-weight: 600; display: flex; align-items: center; gap: 6px; transform: translateX(150%); transition: transform 0.3s; z-index: 3000; font-size: 0.85rem; }
         .toast.show { transform: translateX(0); }
 
-        .refresh-btn {
-            position: fixed;
-            bottom: 25px; left: 25px;
-            width: 50px; height: 50px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border: none;
-            border-radius: 50%;
-            color: white;
-            font-size: 1.2rem;
-            cursor: pointer;
-            z-index: 100;
-        }
+        .refresh-btn { position: fixed; bottom: 20px; left: 20px; width: 45px; height: 45px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border: none; border-radius: 50%; color: white; font-size: 1rem; cursor: pointer; z-index: 100; }
         .refresh-btn:hover { transform: scale(1.1); }
-        .refresh-btn.spinning i { animation: spin 1s linear infinite; }
+        .refresh-btn.spin i { animation: spin 1s linear infinite; }
 
-        footer {
-            background: var(--bg-card);
-            border-top: 1px solid var(--border);
-            padding: 30px 20px;
-            margin-top: 40px;
-            text-align: center;
-        }
-        .disclaimer { padding: 12px; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); border-radius: 8px; margin-bottom: 15px; max-width: 500px; margin-left: auto; margin-right: auto; }
-        .disclaimer h4 { color: var(--danger); font-size: 0.85rem; margin-bottom: 4px; }
-        .disclaimer p { color: var(--text-secondary); font-size: 0.75rem; }
-        .copyright { color: var(--text-secondary); font-size: 0.75rem; }
+        footer { background: var(--bg-card); border-top: 1px solid var(--border); padding: 25px 20px; margin-top: 35px; text-align: center; }
+        .disclaimer { padding: 10px; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); border-radius: 8px; margin-bottom: 12px; max-width: 450px; margin-left: auto; margin-right: auto; }
+        .disclaimer h4 { color: var(--danger); font-size: 0.8rem; }
+        .disclaimer p { color: var(--text-secondary); font-size: 0.7rem; }
+        .copyright { color: var(--text-secondary); font-size: 0.7rem; }
 
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 1.6rem; }
-            .signals-grid { grid-template-columns: 1fr; }
-            .filter-bar { flex-direction: column; align-items: stretch; }
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 1.5rem; }
+            .grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -339,7 +277,7 @@
                 <div class="logo-icon">📊</div>
                 <span>CryptoSignal</span>
             </a>
-            <div class="live-badge">
+            <div class="live">
                 <div class="live-dot"></div>
                 <span>Live</span>
             </div>
@@ -347,50 +285,32 @@
     </header>
 
     <div class="container">
-        <section class="hero">
+        <div class="hero">
             <h1>🚀 Trading Signals</h1>
             <p>Sinyal trading Crypto & Forex berkualitas</p>
-        </section>
+        </div>
 
-        <div class="stats-bar">
-            <div class="stat-item">
-                <div class="stat-value" id="totalSignals">-</div>
-                <div class="stat-label">Total</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-value" id="buySignals">-</div>
-                <div class="stat-label">Buy</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-value" id="sellSignals">-</div>
-                <div class="stat-label">Sell</div>
-            </div>
+        <div class="stats">
+            <div class="stat"><div class="stat-num" id="sTotal">-</div><div class="stat-lbl">Total</div></div>
+            <div class="stat"><div class="stat-num" id="sBuy">-</div><div class="stat-lbl">Buy</div></div>
+            <div class="stat"><div class="stat-num" id="sSell">-</div><div class="stat-lbl">Sell</div></div>
         </div>
 
         <div class="filter-bar">
             <h2 class="section-title"><i class="fas fa-signal"></i> Signals</h2>
-            <div class="filter-tabs">
-                <button class="filter-tab active" onclick="filter('all',this)">All</button>
-                <button class="filter-tab" onclick="filter('buy',this)">Buy</button>
-                <button class="filter-tab" onclick="filter('sell',this)">Sell</button>
+            <div class="tabs">
+                <button class="tab active" onclick="filter('all',this)">All</button>
+                <button class="tab" onclick="filter('buy',this)">Buy</button>
+                <button class="tab" onclick="filter('sell',this)">Sell</button>
             </div>
         </div>
 
-        <div class="loading" id="loading">
-            <div class="spinner"></div>
-            <p>Memuat signals...</p>
-        </div>
-
-        <div class="signals-grid" id="grid"></div>
-
-        <div class="empty-state" id="empty" style="display:none;">
-            <i class="fas fa-inbox"></i>
-            <h3>Belum Ada Signal</h3>
-            <p>Signal akan segera tersedia</p>
-        </div>
+        <div class="loading" id="loading"><div class="spinner"></div><p>Memuat...</p></div>
+        <div class="grid" id="grid"></div>
+        <div class="empty" id="empty" style="display:none;"><i class="fas fa-inbox"></i><h3>Kosong</h3></div>
     </div>
 
-    <button class="refresh-btn" onclick="refresh()" title="Refresh"><i class="fas fa-sync-alt"></i></button>
+    <button class="refresh-btn" onclick="refresh()"><i class="fas fa-sync-alt"></i></button>
 
     <div class="modal" id="imgModal" onclick="closeModal()">
         <span class="modal-close">&times;</span>
@@ -399,17 +319,14 @@
 
     <div class="share-modal" id="shareModal" onclick="closeShare()">
         <div class="share-box" onclick="event.stopPropagation()">
-            <div class="share-title">
-                <i class="fas fa-share-alt"></i>
-                <h3>Share Signal</h3>
-            </div>
+            <div class="share-title"><i class="fas fa-share-alt"></i><h3>Share</h3></div>
             <div class="share-btns">
-                <button class="share-btn wa" onclick="shareWA()"><i class="fab fa-whatsapp"></i> WA</button>
-                <button class="share-btn tg" onclick="shareTG()"><i class="fab fa-telegram"></i> TG</button>
-                <button class="share-btn tw" onclick="shareTW()"><i class="fab fa-twitter"></i> TW</button>
-                <button class="share-btn cp" onclick="copy()"><i class="fas fa-copy"></i> Copy</button>
+                <button class="share-btn wa" onclick="shareWA()"><i class="fab fa-whatsapp"></i>WA</button>
+                <button class="share-btn tg" onclick="shareTG()"><i class="fab fa-telegram"></i>TG</button>
+                <button class="share-btn tw" onclick="shareTW()"><i class="fab fa-twitter"></i>TW</button>
+                <button class="share-btn cp" onclick="copyTxt()"><i class="fas fa-copy"></i>Copy</button>
             </div>
-            <div class="share-text"><textarea id="shareText" readonly></textarea></div>
+            <div class="share-text"><textarea id="shareTxt" readonly></textarea></div>
             <button class="close-btn" onclick="closeShare()">Tutup</button>
         </div>
     </div>
@@ -417,26 +334,23 @@
     <div class="toast" id="toast"><i class="fas fa-check-circle"></i><span id="toastMsg">OK</span></div>
 
     <footer>
-        <div class="disclaimer">
-            <h4>⚠️ Disclaimer</h4>
-            <p>Trading berisiko tinggi. Bukan saran investasi.</p>
-        </div>
+        <div class="disclaimer"><h4>⚠️ Disclaimer</h4><p>Trading berisiko. Bukan saran investasi.</p></div>
         <p class="copyright">© 2024 CryptoSignal Pro</p>
     </footer>
 
     <script>
         // ================================================================
-        // ⚙️ CONFIG - SAMAKAN DENGAN ADMIN.HTML!
+        // 🔧 CONFIG - SAMAKAN DENGAN ADMIN!
         // ================================================================
         const CONFIG = {
-            JSONBIN_BIN_ID: '694074e743b1c97be9f09448',    // <-- SAMAKAN DENGAN ADMIN
-            JSONBIN_API_KEY: '$2a$10$8dydQ2cR6l/L9sTc8Rh5Pu2ip865LXWi3Re5hU55X7Ej499kxTiaW',   // <-- SAMAKAN DENGAN ADMIN
+            JSONBIN_BIN_ID: '694074e743b1c97be9f09448',    // <-- SAMA DENGAN ADMIN
+            JSONBIN_API_KEY: '$2a$10$8dydQ2cR6l/L9sTc8Rh5Pu2ip865LXWi3Re5hU55X7Ej499kxTiaW',   // <-- SAMA DENGAN ADMIN
         };
         // ================================================================
 
         let signals = [];
-        let currentFilter = 'all';
-        let currentSignal = null;
+        let curFilter = 'all';
+        let curSig = null;
 
         document.addEventListener('DOMContentLoaded', load);
 
@@ -455,10 +369,10 @@
                         signals = data.record.signals || [];
                     }
                 } else {
-                    signals = JSON.parse(localStorage.getItem('tradingSignals')) || [];
+                    signals = JSON.parse(localStorage.getItem('signals') || '[]');
                 }
             } catch (e) {
-                signals = JSON.parse(localStorage.getItem('tradingSignals')) || [];
+                signals = JSON.parse(localStorage.getItem('signals') || '[]');
             }
 
             document.getElementById('loading').style.display = 'none';
@@ -471,91 +385,88 @@
             const empty = document.getElementById('empty');
 
             let list = [...signals];
-            if (currentFilter !== 'all') list = list.filter(s => s.type === currentFilter);
+            if (curFilter !== 'all') list = list.filter(s => s.type === curFilter);
             list.sort((a, b) => b.timestamp - a.timestamp);
 
             if (list.length === 0) { grid.innerHTML = ''; empty.style.display = 'block'; return; }
             empty.style.display = 'none';
 
             grid.innerHTML = list.map(s => `
-                <div class="signal-card">
-                    <div class="signal-image-wrapper" onclick="openModal('${s.image}')">
-                        <img src="${s.image}" class="signal-image" loading="lazy">
-                        <span class="signal-badge ${s.type}"><i class="fas fa-arrow-${s.type==='buy'?'up':'down'}"></i> ${s.type.toUpperCase()}</span>
-                        <span class="meta-tag">${s.timeframe}</span>
+                <div class="card">
+                    <div class="card-img-wrap" onclick="openModal('${s.image}')">
+                        <img src="${s.image}" class="card-img" loading="lazy" onerror="this.src='https://via.placeholder.com/320x160?text=No+Image'">
+                        <span class="card-badge ${s.type}"><i class="fas fa-arrow-${s.type==='buy'?'up':'down'}"></i>${s.type.toUpperCase()}</span>
+                        <span class="card-tf">${s.timeframe}</span>
                     </div>
-                    <div class="signal-content">
-                        <div class="signal-pair">
+                    <div class="card-body">
+                        <div class="card-pair">
                             <span class="pair-icon">${s.marketType==='crypto'?'₿':'💱'}</span>
                             ${s.pair}
                         </div>
-                        <div class="price-grid">
-                            <div class="price-item"><div class="price-label">Entry</div><div class="price-value entry">${s.entry}</div></div>
-                            <div class="price-item"><div class="price-label">TP</div><div class="price-value tp">${s.takeProfit}</div></div>
-                            <div class="price-item"><div class="price-label">SL</div><div class="price-value sl">${s.stopLoss}</div></div>
+                        <div class="prices">
+                            <div class="price-box"><div class="price-lbl">Entry</div><div class="price-val entry">${s.entry}</div></div>
+                            <div class="price-box"><div class="price-lbl">TP</div><div class="price-val tp">${s.takeProfit}</div></div>
+                            <div class="price-box"><div class="price-lbl">SL</div><div class="price-val sl">${s.stopLoss}</div></div>
                         </div>
-                        <div class="signal-description">${s.description}</div>
-                        <div class="signal-actions">
-                            <button class="action-btn primary" onclick='share(${JSON.stringify(s).replace(/'/g,"\\'")})'><i class="fas fa-share"></i> Share</button>
+                        <div class="card-desc">${s.description}</div>
+                        <div class="card-actions">
+                            <button class="action-btn pri" onclick='share(${JSON.stringify(s).replace(/'/g,"\\'")})'><i class="fas fa-share"></i>Share</button>
                             <button class="action-btn" onclick="openModal('${s.image}')"><i class="fas fa-expand"></i></button>
                         </div>
-                        <div class="signal-time"><i class="fas fa-clock"></i>&nbsp;${timeAgo(s.timestamp)}</div>
+                        <div class="card-time"><i class="fas fa-clock"></i> ${timeAgo(s.timestamp)}</div>
                     </div>
                 </div>
             `).join('');
         }
 
         function stats() {
-            document.getElementById('totalSignals').textContent = signals.length;
-            document.getElementById('buySignals').textContent = signals.filter(s => s.type === 'buy').length;
-            document.getElementById('sellSignals').textContent = signals.filter(s => s.type === 'sell').length;
+            document.getElementById('sTotal').textContent = signals.length;
+            document.getElementById('sBuy').textContent = signals.filter(s => s.type === 'buy').length;
+            document.getElementById('sSell').textContent = signals.filter(s => s.type === 'sell').length;
         }
 
-        function filter(type, btn) {
-            currentFilter = type;
-            document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+        function filter(t, btn) {
+            curFilter = t;
+            document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             render();
         }
 
         function refresh() {
             const btn = document.querySelector('.refresh-btn');
-            btn.classList.add('spinning');
-            load().finally(() => {
-                setTimeout(() => { btn.classList.remove('spinning'); toast('Updated!'); }, 500);
-            });
+            btn.classList.add('spin');
+            load().finally(() => { setTimeout(() => { btn.classList.remove('spin'); toast('Updated!'); }, 500); });
         }
 
         function timeAgo(ts) {
             const m = Math.floor((Date.now() - ts) / 60000);
+            if (m < 1) return 'Baru';
+            if (m < 60) return m + 'm lalu';
             const h = Math.floor(m / 60);
-            const d = Math.floor(h / 24);
-            if (d > 0) return `${d}h lalu`;
-            if (h > 0) return `${h}j lalu`;
-            if (m > 0) return `${m}m lalu`;
-            return 'Baru';
+            if (h < 24) return h + 'h lalu';
+            return Math.floor(h / 24) + 'd lalu';
         }
 
         function openModal(src) { document.getElementById('modalImg').src = src; document.getElementById('imgModal').classList.add('active'); }
         function closeModal() { document.getElementById('imgModal').classList.remove('active'); }
 
         function share(s) {
-            currentSignal = s;
+            curSig = s;
             const txt = `🚀 SIGNAL ${s.pair}\n${s.type==='buy'?'🟢':'🔴'} ${s.type.toUpperCase()}\n\n💰 Entry: ${s.entry}\n🎯 TP: ${s.takeProfit}\n🛑 SL: ${s.stopLoss}\n\n📝 ${s.description}\n\n⚠️ Trade at your own risk!`;
-            document.getElementById('shareText').value = txt;
+            document.getElementById('shareTxt').value = txt;
             document.getElementById('shareModal').classList.add('active');
         }
         function closeShare() { document.getElementById('shareModal').classList.remove('active'); }
-        function shareWA() { window.open(`https://wa.me/?text=${encodeURIComponent(document.getElementById('shareText').value)}`, '_blank'); }
-        function shareTG() { window.open(`https://t.me/share/url?text=${encodeURIComponent(document.getElementById('shareText').value)}`, '_blank'); }
-        function shareTW() { window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(document.getElementById('shareText').value.substring(0,280))}`, '_blank'); }
-        function copy() { navigator.clipboard.writeText(document.getElementById('shareText').value); toast('Copied!'); }
+        function shareWA() { window.open(`https://wa.me/?text=${encodeURIComponent(document.getElementById('shareTxt').value)}`, '_blank'); }
+        function shareTG() { window.open(`https://t.me/share/url?text=${encodeURIComponent(document.getElementById('shareTxt').value)}`, '_blank'); }
+        function shareTW() { window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(document.getElementById('shareTxt').value.substring(0,280))}`, '_blank'); }
+        function copyTxt() { navigator.clipboard.writeText(document.getElementById('shareTxt').value); toast('Copied!'); }
 
         function toast(msg) {
             const t = document.getElementById('toast');
             document.getElementById('toastMsg').textContent = msg;
             t.classList.add('show');
-            setTimeout(() => t.classList.remove('show'), 3000);
+            setTimeout(() => t.classList.remove('show'), 2000);
         }
 
         document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); closeShare(); } });
