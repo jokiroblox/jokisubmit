@@ -620,181 +620,198 @@
     </div>
 
     <script>
-        // ================================================================
-        // 🔧 KONFIGURASI - ISI SEMUA INI!
-        // ================================================================
-        const CONFIG = {
-            // Password admin
-            ADMIN_PASSWORD: 'Ikan12345',
-            
-            // JSONBin.io (untuk simpan data sinyal)
-            // 1. Buka https://jsonbin.io, daftar gratis
-            // 2. Buat Bin baru isi: {"signals":[]}
-            // 3. Copy Bin ID dari URL
-            // 4. Copy API Key dari menu API Keys
-            JSONBIN_BIN_ID: '694074e743b1c97be9f09448',      // Contoh: '507f1f77bcf86cd799439011'
-            JSONBIN_API_KEY: '$2a$10$8dydQ2cR6l/L9sTc8Rh5Pu2ip865LXWi3Re5hU55X7Ej499kxTiaW',     // Contoh: '$2a$10$...'
-            
-            // ImgBB.com (untuk upload gambar - WAJIB!)
-            // 1. Buka https://api.imgbb.com/
-            // 2. Klik "Get API Key"
-            // 3. Login & copy API key
-            IMGBB_API_KEY: '813a9454d27c3d6ae0b9bb0dabf2c07d',       // Contoh: 'a1b2c3d4e5f6g7h8i9j0'
-        };
-        // ================================================================
+    // ================================================================
+    // 🔧 KONFIGURASI - ISI SEMUA INI!
+    // ================================================================
+    const CONFIG = {
+        ADMIN_PASSWORD: 'admin123',
+        
+        // JSONBin (dari sebelumnya)
+        JSONBIN_BIN_ID: '694074e743b1c97be9f09448',      // ← ISI!
+        JSONBIN_API_KEY: '$2a$10$8dydQ2cR6l/L9sTc8Rh5Pu2ip865LXWi3Re5hU55X7Ej499kxTiaW',     // ← ISI!
+        
+        // ImgBB (WAJIB untuk upload gambar)
+        IMGBB_API_KEY: '813a9454d27c3d6ae0b9bb0dabf2c07d',       // ← ISI! Dapat dari https://api.imgbb.com/
+    };
+    // ================================================================
 
-        let signals = [];
-        let imageFile = null;
+    let signals = [];
+    let imageFile = null;
+    let imageBase64 = null;
 
-        // Enter login
-        document.getElementById('pwInput').addEventListener('keypress', e => {
-            if (e.key === 'Enter') login();
-        });
+    document.getElementById('pwInput').addEventListener('keypress', e => {
+        if (e.key === 'Enter') login();
+    });
 
-        // ==================== LOGIN ====================
-        function login() {
-            if (document.getElementById('pwInput').value === CONFIG.ADMIN_PASSWORD) {
-                document.getElementById('loginScreen').style.display = 'none';
-                document.getElementById('adminPanel').style.display = 'block';
-                log('Login OK!', 'ok');
-                checkConfig();
-                loadSignals();
+    // ==================== LOGIN ====================
+    function login() {
+        if (document.getElementById('pwInput').value === CONFIG.ADMIN_PASSWORD) {
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('adminPanel').style.display = 'block';
+            log('✅ Login berhasil!', 'ok');
+            checkConfig();
+            loadSignals();
+        } else {
+            document.getElementById('loginErr').style.display = 'block';
+            setTimeout(() => document.getElementById('loginErr').style.display = 'none', 2000);
+        }
+    }
+
+    function logout() {
+        document.getElementById('adminPanel').style.display = 'none';
+        document.getElementById('loginScreen').style.display = 'flex';
+        document.getElementById('pwInput').value = '';
+    }
+
+    // ==================== CHECK CONFIG ====================
+    function checkConfig() {
+        const box = document.getElementById('statusBox');
+        const title = document.getElementById('statusTitle');
+        const desc = document.getElementById('statusDesc');
+
+        let issues = [];
+        
+        if (!CONFIG.JSONBIN_BIN_ID) {
+            issues.push('JSONBIN_BIN_ID kosong');
+            log('❌ JSONBIN_BIN_ID belum diisi!', 'err');
+        }
+        if (!CONFIG.JSONBIN_API_KEY) {
+            issues.push('JSONBIN_API_KEY kosong');
+            log('❌ JSONBIN_API_KEY belum diisi!', 'err');
+        }
+        if (!CONFIG.IMGBB_API_KEY) {
+            issues.push('IMGBB_API_KEY kosong');
+            log('❌ IMGBB_API_KEY belum diisi! Gambar tidak akan terupload!', 'err');
+        }
+
+        if (issues.length > 0) {
+            box.className = 'status-box warning';
+            title.textContent = '⚠️ Config Belum Lengkap';
+            desc.textContent = issues.join(' | ');
+        } else {
+            log('✅ Semua config terisi', 'ok');
+            testConnection();
+        }
+    }
+
+    async function testConnection() {
+        const box = document.getElementById('statusBox');
+        const title = document.getElementById('statusTitle');
+        const desc = document.getElementById('statusDesc');
+
+        if (!CONFIG.JSONBIN_BIN_ID || !CONFIG.JSONBIN_API_KEY) {
+            toast('Isi JSONBin config dulu!', 'err');
+            return;
+        }
+
+        title.textContent = '🔄 Testing koneksi...';
+        log('Testing JSONBin...', 'info');
+
+        try {
+            // Test JSONBin
+            const res = await fetch(`https://api.jsonbin.io/v3/b/${CONFIG.JSONBIN_BIN_ID}/latest`, {
+                headers: { 'X-Master-Key': CONFIG.JSONBIN_API_KEY }
+            });
+
+            if (res.ok) {
+                log('✅ JSONBin OK!', 'ok');
+                
+                // Test ImgBB (optional)
+                if (CONFIG.IMGBB_API_KEY) {
+                    log('✅ ImgBB API Key terisi', 'ok');
+                    box.className = 'status-box success';
+                    title.textContent = '✅ Semua Terhubung';
+                    desc.textContent = 'JSONBin & ImgBB siap!';
+                } else {
+                    box.className = 'status-box warning';
+                    title.textContent = '⚠️ ImgBB Belum Diisi';
+                    desc.textContent = 'Gambar akan pakai base64 (mungkin error)';
+                }
+                
+                toast('Koneksi OK!');
             } else {
-                document.getElementById('loginErr').style.display = 'block';
-                setTimeout(() => document.getElementById('loginErr').style.display = 'none', 2000);
+                throw new Error(`HTTP ${res.status}`);
             }
+        } catch (err) {
+            box.className = 'status-box error';
+            title.textContent = '❌ Koneksi Gagal';
+            desc.textContent = err.message;
+            log('❌ Error: ' + err.message, 'err');
+            toast('Gagal!', 'err');
         }
+    }
 
-        function logout() {
-            document.getElementById('adminPanel').style.display = 'none';
-            document.getElementById('loginScreen').style.display = 'flex';
-            document.getElementById('pwInput').value = '';
-        }
+    // ==================== LOAD ====================
+    async function loadSignals() {
+        log('📥 Loading signals...', 'info');
 
-        // ==================== CHECK CONFIG ====================
-        function checkConfig() {
-            const box = document.getElementById('statusBox');
-            const title = document.getElementById('statusTitle');
-            const desc = document.getElementById('statusDesc');
-
-            let issues = [];
-            if (!CONFIG.JSONBIN_BIN_ID) issues.push('JSONBIN_BIN_ID kosong');
-            if (!CONFIG.JSONBIN_API_KEY) issues.push('JSONBIN_API_KEY kosong');
-            if (!CONFIG.IMGBB_API_KEY) issues.push('IMGBB_API_KEY kosong');
-
-            if (issues.length > 0) {
-                box.className = 'status-box warning';
-                title.textContent = '⚠️ Konfigurasi Belum Lengkap';
-                desc.textContent = issues.join(', ');
-                log('Config incomplete: ' + issues.join(', '), 'warn');
-            } else {
-                testConnection();
-            }
-        }
-
-        async function testConnection() {
-            const box = document.getElementById('statusBox');
-            const title = document.getElementById('statusTitle');
-            const desc = document.getElementById('statusDesc');
-
-            if (!CONFIG.JSONBIN_BIN_ID || !CONFIG.JSONBIN_API_KEY) {
-                toast('Isi config dulu!', 'err');
-                return;
-            }
-
-            title.textContent = '🔄 Testing...';
-            log('Testing JSONBin connection...', 'info');
-
-            try {
+        try {
+            if (CONFIG.JSONBIN_BIN_ID && CONFIG.JSONBIN_API_KEY) {
                 const res = await fetch(`https://api.jsonbin.io/v3/b/${CONFIG.JSONBIN_BIN_ID}/latest`, {
                     headers: { 'X-Master-Key': CONFIG.JSONBIN_API_KEY }
                 });
+                if (res.ok) {
+                    const data = await res.json();
+                    signals = data.record.signals || [];
+                    log(`✅ Loaded ${signals.length} signals dari JSONBin`, 'ok');
+                }
+            } else {
+                signals = JSON.parse(localStorage.getItem('signals') || '[]');
+                log(`📦 Loaded ${signals.length} signals dari localStorage`, 'info');
+            }
+        } catch (err) {
+            log('❌ Load error: ' + err.message, 'err');
+            signals = JSON.parse(localStorage.getItem('signals') || '[]');
+        }
+
+        renderList();
+        updateStats();
+    }
+
+    // ==================== SAVE ====================
+    async function saveSignals() {
+        localStorage.setItem('signals', JSON.stringify(signals));
+        log('💾 Saved to localStorage', 'info');
+
+        if (CONFIG.JSONBIN_BIN_ID && CONFIG.JSONBIN_API_KEY) {
+            log('☁️ Saving to JSONBin...', 'info');
+            try {
+                const res = await fetch(`https://api.jsonbin.io/v3/b/${CONFIG.JSONBIN_BIN_ID}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Master-Key': CONFIG.JSONBIN_API_KEY
+                    },
+                    body: JSON.stringify({ signals })
+                });
 
                 if (res.ok) {
-                    box.className = 'status-box success';
-                    title.textContent = '✅ Database Terhubung';
-                    desc.textContent = 'JSONBin & ImgBB siap digunakan';
-                    log('JSONBin connected!', 'ok');
-                    toast('Database OK!');
+                    log('✅ Saved to JSONBin!', 'ok');
+                    return true;
                 } else {
-                    throw new Error(`HTTP ${res.status}`);
+                    const errText = await res.text();
+                    throw new Error(`HTTP ${res.status}: ${errText}`);
                 }
             } catch (err) {
-                box.className = 'status-box error';
-                title.textContent = '❌ Koneksi Gagal';
-                desc.textContent = err.message;
-                log('Connection error: ' + err.message, 'err');
-                toast('Koneksi gagal!', 'err');
+                log('❌ JSONBin error: ' + err.message, 'err');
+                return false;
             }
         }
+        return true;
+    }
 
-        // ==================== LOAD SIGNALS ====================
-        async function loadSignals() {
-            log('Loading signals...', 'info');
-
-            try {
-                if (CONFIG.JSONBIN_BIN_ID && CONFIG.JSONBIN_API_KEY) {
-                    const res = await fetch(`https://api.jsonbin.io/v3/b/${CONFIG.JSONBIN_BIN_ID}/latest`, {
-                        headers: { 'X-Master-Key': CONFIG.JSONBIN_API_KEY }
-                    });
-                    if (res.ok) {
-                        const data = await res.json();
-                        signals = data.record.signals || [];
-                        log(`Loaded ${signals.length} signals`, 'ok');
-                    }
-                } else {
-                    signals = JSON.parse(localStorage.getItem('signals') || '[]');
-                    log('Loaded from localStorage', 'info');
-                }
-            } catch (err) {
-                log('Load error: ' + err.message, 'err');
-                signals = JSON.parse(localStorage.getItem('signals') || '[]');
-            }
-
-            renderList();
-            updateStats();
+    // ==================== UPLOAD IMAGE ====================
+    async function uploadImage(file) {
+        // Cek API Key
+        if (!CONFIG.IMGBB_API_KEY) {
+            log('⚠️ IMGBB_API_KEY kosong! Pakai base64...', 'warn');
+            // Fallback ke base64
+            return imageBase64;
         }
 
-        // ==================== SAVE SIGNALS ====================
-        async function saveSignals() {
-            localStorage.setItem('signals', JSON.stringify(signals));
-            log('Saved to localStorage', 'info');
+        log('📤 Uploading ke ImgBB...', 'info');
 
-            if (CONFIG.JSONBIN_BIN_ID && CONFIG.JSONBIN_API_KEY) {
-                log('Saving to JSONBin...', 'info');
-                try {
-                    const res = await fetch(`https://api.jsonbin.io/v3/b/${CONFIG.JSONBIN_BIN_ID}`, {
-                        method: 'PUT',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-Master-Key': CONFIG.JSONBIN_API_KEY
-                        },
-                        body: JSON.stringify({ signals })
-                    });
-
-                    if (res.ok) {
-                        log('Saved to JSONBin!', 'ok');
-                        return true;
-                    } else {
-                        throw new Error(`HTTP ${res.status}`);
-                    }
-                } catch (err) {
-                    log('JSONBin save error: ' + err.message, 'err');
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        // ==================== UPLOAD IMAGE TO IMGBB ====================
-        async function uploadImage(file) {
-            if (!CONFIG.IMGBB_API_KEY) {
-                log('IMGBB_API_KEY not set!', 'err');
-                throw new Error('ImgBB API Key belum diisi');
-            }
-
-            log('Uploading image to ImgBB...', 'info');
-
+        try {
             const formData = new FormData();
             formData.append('image', file);
 
@@ -803,196 +820,213 @@
                 body: formData
             });
 
-            if (!res.ok) {
-                throw new Error('Upload gagal');
-            }
-
             const data = await res.json();
             
             if (data.success) {
-                log('Image uploaded: ' + data.data.url.substring(0, 50) + '...', 'ok');
-                return data.data.url;
+                const url = data.data.url;
+                log('✅ Image uploaded: ' + url, 'ok');
+                return url;
             } else {
                 throw new Error(data.error?.message || 'Upload failed');
             }
+        } catch (err) {
+            log('❌ ImgBB error: ' + err.message, 'err');
+            log('⚠️ Fallback ke base64...', 'warn');
+            return imageBase64;
+        }
+    }
+
+    // ==================== CREATE SIGNAL ====================
+    async function createSignal(e) {
+        e.preventDefault();
+
+        if (!imageFile && !imageBase64) {
+            toast('Upload gambar!', 'err');
+            log('❌ Tidak ada gambar', 'err');
+            return;
         }
 
-        // ==================== CREATE SIGNAL ====================
-        async function createSignal(e) {
-            e.preventDefault();
+        const btn = document.getElementById('pubBtn');
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
 
-            if (!imageFile) {
-                toast('Upload gambar!', 'err');
-                log('No image selected', 'err');
-                return;
+        try {
+            // Upload gambar
+            log('🖼️ Processing image...', 'info');
+            let imageUrl;
+            
+            if (imageFile && CONFIG.IMGBB_API_KEY) {
+                imageUrl = await uploadImage(imageFile);
+            } else {
+                imageUrl = imageBase64;
+                log('⚠️ Menggunakan base64 (tidak recommended)', 'warn');
             }
 
-            const btn = document.getElementById('pubBtn');
-            btn.disabled = true;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
-
-            try {
-                // 1. Upload image to ImgBB
-                let imageUrl;
-                if (CONFIG.IMGBB_API_KEY) {
-                    imageUrl = await uploadImage(imageFile);
-                } else {
-                    // Fallback: use base64 (not recommended)
-                    imageUrl = document.getElementById('imgPreview').src;
-                    log('Using base64 (no ImgBB key)', 'warn');
-                }
-
-                // 2. Create signal object
-                const signal = {
-                    id: Date.now(),
-                    pair: document.getElementById('pair').value.toUpperCase().trim(),
-                    marketType: document.getElementById('market').value,
-                    timeframe: document.getElementById('tf').value,
-                    type: document.getElementById('sType').value,
-                    entry: document.getElementById('entry').value.trim(),
-                    takeProfit: document.getElementById('tp').value.trim(),
-                    stopLoss: document.getElementById('sl').value.trim(),
-                    description: document.getElementById('desc').value.trim(),
-                    image: imageUrl,
-                    timestamp: Date.now()
-                };
-
-                log('Signal created: ' + signal.pair, 'info');
-
-                // 3. Add & save
-                signals.unshift(signal);
-                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
-                
-                const saved = await saveSignals();
-
-                renderList();
-                updateStats();
-                resetForm();
-
-                if (saved) {
-                    toast('Signal published! 🚀');
-                    log('Signal published successfully!', 'ok');
-                } else {
-                    toast('Saved locally only', 'warn');
-                }
-
-            } catch (err) {
-                log('Error: ' + err.message, 'err');
-                toast('Error: ' + err.message, 'err');
+            if (!imageUrl) {
+                throw new Error('Gagal mendapatkan URL gambar');
             }
 
-            btn.disabled = false;
-            btn.innerHTML = '<i class="fas fa-paper-plane"></i> Publish';
-        }
+            log('🔗 Image URL: ' + imageUrl.substring(0, 50) + '...', 'info');
 
-        // ==================== DELETE ====================
-        async function deleteSig(id) {
-            if (!confirm('Hapus?')) return;
-            signals = signals.filter(s => s.id !== id);
-            await saveSignals();
+            // Buat signal
+            const signal = {
+                id: Date.now(),
+                pair: document.getElementById('pair').value.toUpperCase().trim(),
+                marketType: document.getElementById('market').value,
+                timeframe: document.getElementById('tf').value,
+                type: document.getElementById('sType').value,
+                entry: document.getElementById('entry').value.trim(),
+                takeProfit: document.getElementById('tp').value.trim(),
+                stopLoss: document.getElementById('sl').value.trim(),
+                description: document.getElementById('desc').value.trim(),
+                image: imageUrl,
+                timestamp: Date.now()
+            };
+
+            log('📊 Signal: ' + signal.pair + ' ' + signal.type.toUpperCase(), 'info');
+
+            signals.unshift(signal);
+            
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+            const saved = await saveSignals();
+
             renderList();
             updateStats();
-            toast('Deleted');
-            log('Signal ' + id + ' deleted', 'info');
-        }
+            resetForm();
 
-        // ==================== RENDER ====================
-        function renderList() {
-            const list = document.getElementById('sigList');
-            document.getElementById('cnt').textContent = `(${signals.length})`;
-
-            if (signals.length === 0) {
-                list.innerHTML = '<div class="empty-list"><i class="fas fa-inbox"></i><p>Kosong</p></div>';
-                return;
+            if (saved) {
+                toast('✅ Published!');
+                log('🎉 Signal published successfully!', 'ok');
+            } else {
+                toast('⚠️ Saved locally', 'warn');
             }
 
-            list.innerHTML = signals.map(s => `
-                <div class="signal-item">
-                    <img src="${s.image}" onerror="this.src='https://via.placeholder.com/45?text=Err'">
-                    <div class="signal-item-info">
-                        <div class="signal-item-pair">
-                            ${s.pair}
-                            <span class="badge ${s.type}">${s.type.toUpperCase()}</span>
-                        </div>
-                        <div class="signal-item-details">E:${s.entry} TP:${s.takeProfit} SL:${s.stopLoss}</div>
-                        <div class="signal-item-time">${timeAgo(s.timestamp)}</div>
+        } catch (err) {
+            log('❌ Error: ' + err.message, 'err');
+            toast('Error: ' + err.message, 'err');
+        }
+
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fas fa-paper-plane"></i> Publish';
+    }
+
+    // ==================== DELETE ====================
+    async function deleteSig(id) {
+        if (!confirm('Hapus signal ini?')) return;
+        signals = signals.filter(s => s.id !== id);
+        await saveSignals();
+        renderList();
+        updateStats();
+        toast('Deleted');
+        log('🗑️ Signal deleted', 'info');
+    }
+
+    // ==================== RENDER ====================
+    function renderList() {
+        const list = document.getElementById('sigList');
+        document.getElementById('cnt').textContent = `(${signals.length})`;
+
+        if (signals.length === 0) {
+            list.innerHTML = '<div class="empty-list"><i class="fas fa-inbox"></i><p>Belum ada signal</p></div>';
+            return;
+        }
+
+        list.innerHTML = signals.map(s => `
+            <div class="signal-item">
+                <img src="${s.image}" onerror="this.onerror=null; this.src='https://via.placeholder.com/45x45?text=Err'; console.log('Image error:', '${s.image?.substring(0,30)}...')">
+                <div class="signal-item-info">
+                    <div class="signal-item-pair">
+                        ${s.pair}
+                        <span class="badge ${s.type}">${s.type.toUpperCase()}</span>
                     </div>
-                    <button class="btn-danger" onclick="deleteSig(${s.id})"><i class="fas fa-trash"></i></button>
+                    <div class="signal-item-details">E:${s.entry} TP:${s.takeProfit} SL:${s.stopLoss}</div>
+                    <div class="signal-item-time">${timeAgo(s.timestamp)}</div>
                 </div>
-            `).join('');
+                <button class="btn-danger" onclick="deleteSig(${s.id})"><i class="fas fa-trash"></i></button>
+            </div>
+        `).join('');
+    }
+
+    function updateStats() {
+        const today = new Date().setHours(0,0,0,0);
+        document.getElementById('sTotal').textContent = signals.length;
+        document.getElementById('sBuy').textContent = signals.filter(s => s.type === 'buy').length;
+        document.getElementById('sSell').textContent = signals.filter(s => s.type === 'sell').length;
+        document.getElementById('sToday').textContent = signals.filter(s => s.timestamp >= today).length;
+    }
+
+    // ==================== HELPERS ====================
+    function selType(t) {
+        document.querySelectorAll('.type-opt').forEach(o => o.classList.remove('sel'));
+        document.querySelector(`.type-opt.${t}`).classList.add('sel');
+        document.getElementById('sType').value = t;
+    }
+
+    function previewImg(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        log('📁 File selected: ' + file.name + ' (' + (file.size/1024).toFixed(1) + 'KB)', 'info');
+
+        if (file.size > 2 * 1024 * 1024) {
+            toast('Max 2MB!', 'err');
+            log('❌ File terlalu besar!', 'err');
+            return;
         }
 
-        function updateStats() {
-            const today = new Date().setHours(0,0,0,0);
-            document.getElementById('sTotal').textContent = signals.length;
-            document.getElementById('sBuy').textContent = signals.filter(s => s.type === 'buy').length;
-            document.getElementById('sSell').textContent = signals.filter(s => s.type === 'sell').length;
-            document.getElementById('sToday').textContent = signals.filter(s => s.timestamp >= today).length;
-        }
+        imageFile = file;
+        
+        const reader = new FileReader();
+        reader.onload = ev => {
+            imageBase64 = ev.target.result;
+            document.getElementById('imgPreview').src = imageBase64;
+            document.getElementById('imgUpload').classList.add('has-img');
+            log('✅ Image loaded', 'ok');
+        };
+        reader.readAsDataURL(file);
+    }
 
-        // ==================== HELPERS ====================
-        function selType(t) {
-            document.querySelectorAll('.type-opt').forEach(o => o.classList.remove('sel'));
-            document.querySelector(`.type-opt.${t}`).classList.add('sel');
-            document.getElementById('sType').value = t;
-        }
+    function resetForm() {
+        document.getElementById('signalForm').reset();
+        document.getElementById('imgPreview').src = '';
+        document.getElementById('imgUpload').classList.remove('has-img');
+        imageFile = null;
+        imageBase64 = null;
+        selType('buy');
+    }
 
-        function previewImg(e) {
-            const file = e.target.files[0];
-            if (!file) return;
+    function timeAgo(ts) {
+        const m = Math.floor((Date.now() - ts) / 60000);
+        if (m < 1) return 'Baru saja';
+        if (m < 60) return m + ' menit lalu';
+        const h = Math.floor(m / 60);
+        if (h < 24) return h + ' jam lalu';
+        return Math.floor(h / 24) + ' hari lalu';
+    }
 
-            if (file.size > 2 * 1024 * 1024) {
-                toast('Max 2MB!', 'err');
-                return;
-            }
+    function toast(msg, type = 'ok') {
+        const t = document.getElementById('toast');
+        const icon = document.getElementById('toastIcon');
+        document.getElementById('toastMsg').textContent = msg;
+        t.className = 'toast';
+        if (type === 'err') t.classList.add('err');
+        if (type === 'warn') t.classList.add('warn');
+        icon.className = type === 'err' ? 'fas fa-times-circle' : type === 'warn' ? 'fas fa-exclamation-triangle' : 'fas fa-check-circle';
+        t.classList.add('show');
+        setTimeout(() => t.classList.remove('show'), 3000);
+    }
 
-            imageFile = file;
-            const reader = new FileReader();
-            reader.onload = ev => {
-                document.getElementById('imgPreview').src = ev.target.result;
-                document.getElementById('imgUpload').classList.add('has-img');
-                log('Image selected: ' + file.name, 'ok');
-            };
-            reader.readAsDataURL(file);
-        }
+    function log(msg, type = 'info') {
+        const logs = document.getElementById('logs');
+        const time = new Date().toLocaleTimeString();
+        logs.innerHTML += `<div class="log ${type}">[${time}] ${msg}</div>`;
+        logs.scrollTop = logs.scrollHeight;
+        console.log(`[${type.toUpperCase()}] ${msg}`);
+    }
 
-        function resetForm() {
-            document.getElementById('signalForm').reset();
-            document.getElementById('imgPreview').src = '';
-            document.getElementById('imgUpload').classList.remove('has-img');
-            imageFile = null;
-            selType('buy');
-        }
-
-        function timeAgo(ts) {
-            const m = Math.floor((Date.now() - ts) / 60000);
-            if (m < 1) return 'Baru';
-            if (m < 60) return m + 'm';
-            const h = Math.floor(m / 60);
-            if (h < 24) return h + 'h';
-            return Math.floor(h / 24) + 'd';
-        }
-
-        function toast(msg, type = 'ok') {
-            const t = document.getElementById('toast');
-            const icon = document.getElementById('toastIcon');
-            document.getElementById('toastMsg').textContent = msg;
-            t.className = 'toast ' + (type === 'err' ? 'err' : type === 'warn' ? 'warn' : '');
-            icon.className = type === 'err' ? 'fas fa-times-circle' : type === 'warn' ? 'fas fa-exclamation-triangle' : 'fas fa-check-circle';
-            t.classList.add('show');
-            setTimeout(() => t.classList.remove('show'), 3000);
-        }
-
-        function log(msg, type = 'info') {
-            const logs = document.getElementById('logs');
-            const time = new Date().toLocaleTimeString();
-            logs.innerHTML += `<div class="log ${type}">[${time}] ${msg}</div>`;
-            logs.scrollTop = logs.scrollHeight;
-        }
-
-        function clearLog() {
-            document.getElementById('logs').innerHTML = '<div class="log info">Cleared</div>';
-        }
-    </script>
+    function clearLog() {
+        document.getElementById('logs').innerHTML = '<div class="log info">Log cleared</div>';
+    }
+</script>
 </body>
 </html>
