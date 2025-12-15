@@ -4,79 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CryptoSignal Pro - Trading Signals</title>
-    <meta name="description" content="Free trading signals for Crypto & Forex">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📊</text></svg>">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --primary: #00d4aa;
-            --primary-dark: #00a383;
             --secondary: #7c3aed;
             --bg-dark: #0a0a0f;
             --bg-card: #12121a;
-            --bg-card-hover: #1a1a25;
-            --text-primary: #ffffff;
+            --text-primary: #fff;
             --text-secondary: #a0a0a0;
             --success: #10b981;
             --danger: #ef4444;
             --warning: #f59e0b;
             --border: #2a2a3a;
         }
-
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', sans-serif;
             background: var(--bg-dark);
             color: var(--text-primary);
             min-height: 100vh;
-            overflow-x: hidden;
+        }
+        .bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            background: radial-gradient(circle at 20% 80%, rgba(0,212,170,0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(124,58,237,0.08) 0%, transparent 50%);
         }
 
-        /* Animated Background */
-        .bg-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
-        }
-
-        .bg-animation::before {
-            content: '';
-            position: absolute;
-            width: 200%;
-            height: 200%;
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(0, 212, 170, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(124, 58, 237, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(0, 212, 170, 0.05) 0%, transparent 30%);
-            animation: bgMove 20s linear infinite;
-        }
-
-        @keyframes bgMove {
-            0% { transform: translate(0, 0); }
-            50% { transform: translate(-25%, -25%); }
-            100% { transform: translate(0, 0); }
-        }
-
-        /* Header */
         header {
-            background: rgba(18, 18, 26, 0.95);
+            background: rgba(18,18,26,0.95);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border);
-            padding: 15px 0;
+            padding: 12px 0;
             position: sticky;
             top: 0;
             z-index: 1000;
         }
-
         .header-content {
             max-width: 1400px;
             margin: 0 auto;
@@ -85,1451 +47,519 @@
             justify-content: space-between;
             align-items: center;
         }
-
         .logo {
             display: flex;
             align-items: center;
-            gap: 12px;
-            font-size: 1.5rem;
+            gap: 10px;
+            font-size: 1.3rem;
             font-weight: 700;
             text-decoration: none;
+            color: inherit;
         }
-
         .logo-icon {
-            width: 45px;
-            height: 45px;
+            width: 40px; height: 40px;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
         }
-
         .logo span {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
-
-        .header-right {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
         .live-badge {
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 8px 16px;
-            background: rgba(16, 185, 129, 0.2);
+            gap: 6px;
+            padding: 6px 14px;
+            background: rgba(16,185,129,0.15);
             border: 1px solid var(--success);
             border-radius: 20px;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--success);
         }
+        .live-dot { width: 6px; height: 6px; background: var(--success); border-radius: 50%; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
 
-        .live-dot {
-            width: 8px;
-            height: 8px;
-            background: var(--success);
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
+        .container { max-width: 1400px; margin: 0 auto; padding: 25px 20px; }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
-        .social-links {
-            display: flex;
-            gap: 10px;
-        }
-
-        .social-links a {
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-
-        .social-links a:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-            transform: translateY(-2px);
-        }
-
-        /* Container */
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 30px 20px;
-        }
-
-        /* Hero Section */
-        .hero {
-            text-align: center;
-            padding: 50px 20px;
-            margin-bottom: 30px;
-        }
-
+        .hero { text-align: center; padding: 40px 20px; margin-bottom: 25px; }
         .hero h1 {
-            font-size: 2.8rem;
-            margin-bottom: 15px;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
             background: linear-gradient(135deg, #fff, var(--primary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
+        .hero p { color: var(--text-secondary); font-size: 1rem; }
 
-        .hero p {
-            color: var(--text-secondary);
-            font-size: 1.15rem;
-            max-width: 600px;
-            margin: 0 auto 25px;
-            line-height: 1.6;
-        }
-
-        .hero-badges {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .hero-badge {
-            padding: 10px 20px;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 25px;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .hero-badge i {
-            color: var(--primary);
-        }
-
-        /* Stats */
         .stats-bar {
             display: flex;
             justify-content: center;
-            gap: 40px;
-            padding: 25px;
+            gap: 25px;
+            padding: 18px;
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 16px;
-            margin-bottom: 40px;
+            border-radius: 14px;
+            margin-bottom: 30px;
             flex-wrap: wrap;
         }
+        .stat-item { text-align: center; min-width: 70px; }
+        .stat-value { font-size: 1.6rem; font-weight: 700; color: var(--primary); }
+        .stat-label { color: var(--text-secondary); font-size: 0.75rem; }
 
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-value {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
-
-        .stat-label {
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-            margin-top: 5px;
-        }
-
-        /* Filter Tabs */
-        .filter-section {
+        .filter-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             flex-wrap: wrap;
-            gap: 15px;
+            gap: 12px;
         }
-
-        .section-title {
-            font-size: 1.4rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .section-title i {
-            color: var(--primary);
-        }
-
-        .filter-tabs {
-            display: flex;
-            gap: 10px;
-        }
-
+        .section-title { font-size: 1.2rem; display: flex; align-items: center; gap: 8px; }
+        .section-title i { color: var(--primary); }
+        .filter-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
         .filter-tab {
-            padding: 10px 20px;
+            padding: 8px 16px;
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 10px;
+            border-radius: 8px;
             color: var(--text-secondary);
-            font-weight: 500;
+            font-size: 0.85rem;
             cursor: pointer;
             transition: all 0.3s;
         }
+        .filter-tab:hover { border-color: var(--primary); color: var(--primary); }
+        .filter-tab.active { background: linear-gradient(135deg, var(--primary), var(--secondary)); border-color: transparent; color: white; }
 
-        .filter-tab:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-        }
-
-        .filter-tab.active {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-color: transparent;
-            color: white;
-        }
-
-        /* Signals Grid */
         .signals-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 20px;
         }
 
-        /* Signal Card */
         .signal-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 20px;
+            border-radius: 16px;
             overflow: hidden;
             transition: all 0.3s;
-            animation: fadeInUp 0.5s ease;
         }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .signal-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
-        }
-
-        .signal-image-wrapper {
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-        }
-
-        .signal-image {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
-
-        .signal-card:hover .signal-image {
-            transform: scale(1.05);
-        }
-
+        .signal-card:hover { transform: translateY(-4px); border-color: var(--primary); box-shadow: 0 15px 35px rgba(0,0,0,0.3); }
+        .signal-image-wrapper { position: relative; overflow: hidden; cursor: pointer; }
+        .signal-image { width: 100%; height: 180px; object-fit: cover; transition: transform 0.5s; }
+        .signal-card:hover .signal-image { transform: scale(1.05); }
         .signal-badge {
             position: absolute;
-            top: 15px;
-            left: 15px;
-            padding: 10px 18px;
-            border-radius: 25px;
+            top: 10px; left: 10px;
+            padding: 6px 14px;
+            border-radius: 18px;
             font-weight: 700;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             display: flex;
             align-items: center;
-            gap: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            gap: 5px;
         }
-
-        .signal-badge.buy {
-            background: linear-gradient(135deg, #10b981, #059669);
-            color: white;
-            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
-        }
-
-        .signal-badge.sell {
-            background: linear-gradient(135deg, #ef4444, #dc2626);
-            color: white;
-            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
-        }
-
-        .signal-meta {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            display: flex;
-            gap: 8px;
-        }
-
+        .signal-badge.buy { background: var(--success); color: white; }
+        .signal-badge.sell { background: var(--danger); color: white; }
         .meta-tag {
-            padding: 6px 12px;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            font-size: 0.75rem;
+            position: absolute;
+            top: 10px; right: 10px;
+            padding: 4px 10px;
+            background: rgba(0,0,0,0.7);
+            border-radius: 12px;
+            font-size: 0.7rem;
             color: white;
         }
-
-        .signal-content {
-            padding: 22px;
-        }
-
-        .signal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 18px;
-        }
-
+        .signal-content { padding: 16px; }
         .signal-pair {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             font-weight: 700;
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
-
         .pair-icon {
-            width: 40px;
-            height: 40px;
+            width: 34px; height: 34px;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.9rem;
         }
-
-        .signal-status {
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        .signal-status.active {
-            background: rgba(16, 185, 129, 0.2);
-            color: var(--success);
-            border: 1px solid var(--success);
-        }
-
-        .signal-status.closed {
-            background: rgba(107, 114, 128, 0.2);
-            color: #9ca3af;
-            border: 1px solid #6b7280;
-        }
-
-        /* Price Grid */
-        .price-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            margin-bottom: 18px;
-        }
-
-        .price-item {
-            background: var(--bg-dark);
-            border-radius: 12px;
-            padding: 15px;
-            text-align: center;
-        }
-
-        .price-label {
-            font-size: 0.7rem;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 6px;
-        }
-
-        .price-value {
-            font-size: 1.1rem;
-            font-weight: 700;
-        }
-
+        .price-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 12px; }
+        .price-item { background: var(--bg-dark); border-radius: 8px; padding: 10px 8px; text-align: center; }
+        .price-label { font-size: 0.6rem; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 3px; }
+        .price-value { font-size: 0.9rem; font-weight: 700; }
         .price-value.entry { color: var(--warning); }
         .price-value.tp { color: var(--success); }
         .price-value.sl { color: var(--danger); }
-
-        /* Risk Reward */
-        .rr-bar {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 12px 15px;
-            background: var(--bg-dark);
-            border-radius: 10px;
-            margin-bottom: 15px;
-        }
-
-        .rr-label {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-        }
-
-        .rr-value {
-            font-weight: 700;
-            color: var(--primary);
-        }
-
-        .rr-bar-visual {
-            flex: 1;
-            height: 6px;
-            background: var(--border);
-            border-radius: 3px;
-            overflow: hidden;
-        }
-
-        .rr-bar-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--danger), var(--warning), var(--success));
-            border-radius: 3px;
-        }
-
-        /* Description */
         .signal-description {
             color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.7;
-            padding: 15px;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            padding: 10px;
             background: var(--bg-dark);
-            border-radius: 12px;
-            border-left: 4px solid var(--primary);
-            margin-bottom: 18px;
+            border-radius: 8px;
+            border-left: 3px solid var(--primary);
+            margin-bottom: 12px;
         }
-
-        /* Actions */
-        .signal-actions {
-            display: flex;
-            gap: 10px;
-        }
-
+        .signal-actions { display: flex; gap: 8px; }
         .action-btn {
             flex: 1;
-            padding: 14px;
+            padding: 10px;
             border: 1px solid var(--border);
-            border-radius: 12px;
+            border-radius: 8px;
             background: transparent;
             color: var(--text-secondary);
-            font-weight: 600;
+            font-size: 0.85rem;
             cursor: pointer;
-            transition: all 0.3s;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 5px;
+            transition: all 0.3s;
         }
-
-        .action-btn:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-            background: rgba(0, 212, 170, 0.1);
-        }
-
-        .action-btn.primary {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border: none;
-            color: white;
-        }
-
-        .action-btn.primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(0, 212, 170, 0.3);
-        }
-
-        /* Timestamp */
-        .signal-timestamp {
+        .action-btn:hover { border-color: var(--primary); color: var(--primary); }
+        .action-btn.primary { background: linear-gradient(135deg, var(--primary), var(--secondary)); border: none; color: white; }
+        .signal-time {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 15px;
-            margin-top: 15px;
+            justify-content: center;
+            padding-top: 10px;
+            margin-top: 10px;
             border-top: 1px solid var(--border);
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             color: var(--text-secondary);
         }
 
-        /* Empty State */
-        .empty-state {
-            text-align: center;
-            padding: 80px 20px;
-            color: var(--text-secondary);
-        }
+        .loading, .empty-state { text-align: center; padding: 50px 20px; }
+        .spinner { width: 40px; height: 40px; border: 3px solid var(--border); border-top-color: var(--primary); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 15px; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .empty-state i { font-size: 3rem; margin-bottom: 15px; opacity: 0.3; }
 
-        .empty-state i {
-            font-size: 5rem;
-            margin-bottom: 25px;
-            opacity: 0.3;
-            color: var(--primary);
-        }
-
-        .empty-state h3 {
-            font-size: 1.8rem;
-            margin-bottom: 10px;
-            color: var(--text-primary);
-        }
-
-        .empty-state p {
-            font-size: 1.1rem;
-        }
-
-        /* Loading */
-        .loading {
-            text-align: center;
-            padding: 60px;
-        }
-
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 4px solid var(--border);
-            border-top-color: var(--primary);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* Modal */
         .modal {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95);
             z-index: 2000;
             align-items: center;
             justify-content: center;
             padding: 20px;
         }
+        .modal.active { display: flex; }
+        .modal img { max-width: 95%; max-height: 90%; border-radius: 8px; }
+        .modal-close { position: absolute; top: 15px; right: 25px; font-size: 2rem; color: white; cursor: pointer; }
 
-        .modal.active {
-            display: flex;
-        }
-
-        .modal-content {
-            max-width: 95%;
-            max-height: 90%;
-            border-radius: 15px;
-            object-fit: contain;
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            font-size: 2.5rem;
-            color: white;
-            cursor: pointer;
-            transition: color 0.3s;
-            z-index: 10;
-        }
-
-        .modal-close:hover {
-            color: var(--primary);
-        }
-
-        /* Share Modal */
         .share-modal {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.85);
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85);
             z-index: 2000;
             align-items: center;
             justify-content: center;
             padding: 20px;
         }
+        .share-modal.active { display: flex; }
+        .share-box { background: var(--bg-card); border-radius: 16px; padding: 25px; max-width: 380px; width: 100%; }
+        .share-title { text-align: center; margin-bottom: 18px; }
+        .share-title i { font-size: 2rem; color: var(--primary); }
+        .share-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
+        .share-btn { padding: 12px; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; color: white; transition: all 0.3s; }
+        .share-btn.wa { background: #25D366; }
+        .share-btn.tg { background: #0088cc; }
+        .share-btn.tw { background: #1DA1F2; }
+        .share-btn.cp { background: var(--secondary); }
+        .share-btn:hover { transform: translateY(-2px); }
+        .share-text { background: var(--bg-dark); border-radius: 8px; padding: 10px; margin-bottom: 12px; }
+        .share-text textarea { width: 100%; background: transparent; border: none; color: var(--text-primary); font-size: 0.8rem; resize: none; height: 90px; }
+        .close-btn { width: 100%; padding: 10px; background: var(--bg-dark); border: 1px solid var(--border); border-radius: 8px; color: var(--text-secondary); cursor: pointer; }
 
-        .share-modal.active {
-            display: flex;
-        }
-
-        .share-content {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            padding: 35px;
-            max-width: 450px;
-            width: 100%;
-            animation: scaleIn 0.3s ease;
-        }
-
-        @keyframes scaleIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        .share-header {
-            text-align: center;
-            margin-bottom: 25px;
-        }
-
-        .share-header i {
-            font-size: 3rem;
-            color: var(--primary);
-            margin-bottom: 15px;
-        }
-
-        .share-header h3 {
-            font-size: 1.5rem;
-        }
-
-        .share-buttons {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-
-        .share-btn {
-            padding: 16px;
-            border: none;
-            border-radius: 14px;
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            color: white;
-        }
-
-        .share-btn.whatsapp { background: #25D366; }
-        .share-btn.telegram { background: #0088cc; }
-        .share-btn.twitter { background: #1DA1F2; }
-        .share-btn.copy { background: var(--secondary); }
-
-        .share-btn:hover {
-            transform: translateY(-3px);
-            filter: brightness(1.1);
-        }
-
-        .share-text-box {
-            background: var(--bg-dark);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 20px;
-        }
-
-        .share-text-box textarea {
-            width: 100%;
-            background: transparent;
-            border: none;
-            color: var(--text-primary);
-            font-size: 0.85rem;
-            resize: none;
-            height: 120px;
-            font-family: inherit;
-        }
-
-        .share-text-box textarea:focus {
-            outline: none;
-        }
-
-        .close-share-btn {
-            width: 100%;
-            padding: 14px;
-            background: var(--bg-dark);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            color: var(--text-secondary);
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .close-share-btn:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-        }
-
-        /* Toast */
         .toast {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
-            padding: 16px 28px;
+            bottom: 25px; right: 25px;
+            padding: 12px 20px;
             background: var(--success);
             color: white;
-            border-radius: 14px;
+            border-radius: 10px;
             font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 8px;
             transform: translateX(150%);
-            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            transition: transform 0.4s;
             z-index: 3000;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            font-size: 0.9rem;
         }
+        .toast.show { transform: translateX(0); }
 
-        .toast.show {
-            transform: translateX(0);
+        .refresh-btn {
+            position: fixed;
+            bottom: 25px; left: 25px;
+            width: 50px; height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 100;
         }
+        .refresh-btn:hover { transform: scale(1.1); }
+        .refresh-btn.spinning i { animation: spin 1s linear infinite; }
 
-        /* Footer */
         footer {
             background: var(--bg-card);
             border-top: 1px solid var(--border);
-            padding: 50px 20px;
-            margin-top: 60px;
-        }
-
-        .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
+            padding: 30px 20px;
+            margin-top: 40px;
             text-align: center;
         }
+        .disclaimer { padding: 12px; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); border-radius: 8px; margin-bottom: 15px; max-width: 500px; margin-left: auto; margin-right: auto; }
+        .disclaimer h4 { color: var(--danger); font-size: 0.85rem; margin-bottom: 4px; }
+        .disclaimer p { color: var(--text-secondary); font-size: 0.75rem; }
+        .copyright { color: var(--text-secondary); font-size: 0.75rem; }
 
-        .footer-logo {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
-
-        .footer-logo span {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .footer-text {
-            color: var(--text-secondary);
-            margin-bottom: 25px;
-            line-height: 1.6;
-        }
-
-        .footer-social {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-
-        .footer-social a {
-            width: 45px;
-            height: 45px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--bg-dark);
-            border: 1px solid var(--border);
-            border-radius: 50%;
-            color: var(--text-secondary);
-            font-size: 1.2rem;
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-
-        .footer-social a:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-            transform: translateY(-3px);
-        }
-
-        .disclaimer {
-            padding: 20px;
-            background: rgba(239, 68, 68, 0.1);
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            border-radius: 12px;
-            margin-bottom: 25px;
-        }
-
-        .disclaimer h4 {
-            color: var(--danger);
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .disclaimer p {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        .copyright {
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-        }
-
-        /* Responsive */
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 1.8rem;
-            }
-
-            .hero p {
-                font-size: 1rem;
-            }
-
-            .stats-bar {
-                gap: 25px;
-            }
-
-            .stat-value {
-                font-size: 1.4rem;
-            }
-
-            .signals-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .filter-section {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .filter-tabs {
-                width: 100%;
-                overflow-x: auto;
-                padding-bottom: 5px;
-            }
-
-            .share-buttons {
-                grid-template-columns: 1fr;
-            }
-
-            .toast {
-                left: 20px;
-                right: 20px;
-            }
-
-            .header-right {
-                gap: 10px;
-            }
-
-            .live-badge span:last-child {
-                display: none;
-            }
-
-            .social-links {
-                display: none;
-            }
-        }
-
-        /* Scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--bg-dark);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--border);
-            border-radius: 5px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--primary);
-        }
-
-        /* Refresh Button */
-        .refresh-btn {
-            position: fixed;
-            bottom: 30px;
-            left: 30px;
-            width: 55px;
-            height: 55px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border: none;
-            border-radius: 50%;
-            color: white;
-            font-size: 1.3rem;
-            cursor: pointer;
-            box-shadow: 0 5px 25px rgba(0, 212, 170, 0.4);
-            transition: all 0.3s;
-            z-index: 100;
-        }
-
-        .refresh-btn:hover {
-            transform: scale(1.1);
-        }
-
-        .refresh-btn.spinning i {
-            animation: spin 1s linear infinite;
+            .hero h1 { font-size: 1.6rem; }
+            .signals-grid { grid-template-columns: 1fr; }
+            .filter-bar { flex-direction: column; align-items: stretch; }
         }
     </style>
 </head>
 <body>
-    <div class="bg-animation"></div>
+    <div class="bg"></div>
 
-    <!-- Header -->
     <header>
         <div class="header-content">
             <a href="/" class="logo">
                 <div class="logo-icon">📊</div>
-                <span>CryptoSignal Pro</span>
+                <span>CryptoSignal</span>
             </a>
-            <div class="header-right">
-                <div class="live-badge">
-                    <div class="live-dot"></div>
-                    <span>Live Signals</span>
-                </div>
-                <div class="social-links">
-                    <a href="#" title="Telegram"><i class="fab fa-telegram"></i></a>
-                    <a href="#" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                </div>
+            <div class="live-badge">
+                <div class="live-dot"></div>
+                <span>Live</span>
             </div>
         </div>
     </header>
 
-    <!-- Main Container -->
     <div class="container">
-        <!-- Hero -->
         <section class="hero">
-            <h1>🚀 Premium Trading Signals</h1>
-            <p>Dapatkan sinyal trading Crypto & Forex berkualitas dengan analisis teknikal yang akurat. Gratis untuk semua trader!</p>
-            <div class="hero-badges">
-                <div class="hero-badge">
-                    <i class="fas fa-chart-line"></i> Technical Analysis
-                </div>
-                <div class="hero-badge">
-                    <i class="fas fa-clock"></i> Real-time Updates
-                </div>
-                <div class="hero-badge">
-                    <i class="fas fa-shield-alt"></i> Risk Management
-                </div>
-            </div>
+            <h1>🚀 Trading Signals</h1>
+            <p>Sinyal trading Crypto & Forex berkualitas</p>
         </section>
 
-        <!-- Stats -->
         <div class="stats-bar">
             <div class="stat-item">
-                <div class="stat-value" id="totalSignals">0</div>
-                <div class="stat-label">Total Signals</div>
+                <div class="stat-value" id="totalSignals">-</div>
+                <div class="stat-label">Total</div>
             </div>
             <div class="stat-item">
-                <div class="stat-value" id="buySignals">0</div>
-                <div class="stat-label">Buy Signals</div>
+                <div class="stat-value" id="buySignals">-</div>
+                <div class="stat-label">Buy</div>
             </div>
             <div class="stat-item">
-                <div class="stat-value" id="sellSignals">0</div>
-                <div class="stat-label">Sell Signals</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-value" id="todaySignals">0</div>
-                <div class="stat-label">Today</div>
+                <div class="stat-value" id="sellSignals">-</div>
+                <div class="stat-label">Sell</div>
             </div>
         </div>
 
-        <!-- Signals Section -->
-        <section id="signalsSection">
-            <div class="filter-section">
-                <h2 class="section-title">
-                    <i class="fas fa-signal"></i> Latest Signals
-                </h2>
-                <div class="filter-tabs">
-                    <button class="filter-tab active" onclick="filterSignals('all')">All</button>
-                    <button class="filter-tab" onclick="filterSignals('buy')">
-                        <i class="fas fa-arrow-up"></i> Buy
-                    </button>
-                    <button class="filter-tab" onclick="filterSignals('sell')">
-                        <i class="fas fa-arrow-down"></i> Sell
-                    </button>
-                    <button class="filter-tab" onclick="filterSignals('crypto')">₿ Crypto</button>
-                    <button class="filter-tab" onclick="filterSignals('forex')">💱 Forex</button>
-                </div>
+        <div class="filter-bar">
+            <h2 class="section-title"><i class="fas fa-signal"></i> Signals</h2>
+            <div class="filter-tabs">
+                <button class="filter-tab active" onclick="filter('all',this)">All</button>
+                <button class="filter-tab" onclick="filter('buy',this)">Buy</button>
+                <button class="filter-tab" onclick="filter('sell',this)">Sell</button>
             </div>
+        </div>
 
-            <!-- Loading -->
-            <div class="loading" id="loadingState">
-                <div class="spinner"></div>
-                <p>Loading signals...</p>
-            </div>
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Memuat signals...</p>
+        </div>
 
-            <!-- Signals Grid -->
-            <div class="signals-grid" id="signalsGrid"></div>
+        <div class="signals-grid" id="grid"></div>
 
-            <!-- Empty State -->
-            <div class="empty-state" id="emptyState" style="display: none;">
-                <i class="fas fa-chart-bar"></i>
-                <h3>Belum ada signal</h3>
-                <p>Signal trading akan segera tersedia. Stay tuned!</p>
-            </div>
-        </section>
+        <div class="empty-state" id="empty" style="display:none;">
+            <i class="fas fa-inbox"></i>
+            <h3>Belum Ada Signal</h3>
+            <p>Signal akan segera tersedia</p>
+        </div>
     </div>
 
-    <!-- Refresh Button -->
-    <button class="refresh-btn" onclick="refreshSignals()" title="Refresh Signals">
-        <i class="fas fa-sync-alt"></i>
-    </button>
+    <button class="refresh-btn" onclick="refresh()" title="Refresh"><i class="fas fa-sync-alt"></i></button>
 
-    <!-- Image Modal -->
-    <div class="modal" id="imageModal" onclick="closeImageModal()">
+    <div class="modal" id="imgModal" onclick="closeModal()">
         <span class="modal-close">&times;</span>
-        <img class="modal-content" id="modalImage" alt="Chart">
+        <img id="modalImg">
     </div>
 
-    <!-- Share Modal -->
-    <div class="share-modal" id="shareModal">
-        <div class="share-content" onclick="event.stopPropagation()">
-            <div class="share-header">
+    <div class="share-modal" id="shareModal" onclick="closeShare()">
+        <div class="share-box" onclick="event.stopPropagation()">
+            <div class="share-title">
                 <i class="fas fa-share-alt"></i>
                 <h3>Share Signal</h3>
             </div>
-            <div class="share-buttons">
-                <button class="share-btn whatsapp" onclick="shareToWhatsApp()">
-                    <i class="fab fa-whatsapp"></i> WhatsApp
-                </button>
-                <button class="share-btn telegram" onclick="shareToTelegram()">
-                    <i class="fab fa-telegram"></i> Telegram
-                </button>
-                <button class="share-btn twitter" onclick="shareToTwitter()">
-                    <i class="fab fa-twitter"></i> Twitter
-                </button>
-                <button class="share-btn copy" onclick="copySignalText()">
-                    <i class="fas fa-copy"></i> Copy
-                </button>
+            <div class="share-btns">
+                <button class="share-btn wa" onclick="shareWA()"><i class="fab fa-whatsapp"></i> WA</button>
+                <button class="share-btn tg" onclick="shareTG()"><i class="fab fa-telegram"></i> TG</button>
+                <button class="share-btn tw" onclick="shareTW()"><i class="fab fa-twitter"></i> TW</button>
+                <button class="share-btn cp" onclick="copy()"><i class="fas fa-copy"></i> Copy</button>
             </div>
-            <div class="share-text-box">
-                <textarea id="shareText" readonly></textarea>
-            </div>
-            <button class="close-share-btn" onclick="closeShareModal()">Tutup</button>
+            <div class="share-text"><textarea id="shareText" readonly></textarea></div>
+            <button class="close-btn" onclick="closeShare()">Tutup</button>
         </div>
     </div>
 
-    <!-- Toast -->
-    <div class="toast" id="toast">
-        <i class="fas fa-check-circle"></i>
-        <span id="toastMessage">Success!</span>
-    </div>
+    <div class="toast" id="toast"><i class="fas fa-check-circle"></i><span id="toastMsg">OK</span></div>
 
-    <!-- Footer -->
     <footer>
-        <div class="footer-content">
-            <div class="footer-logo">
-                <div class="logo-icon">📊</div>
-                <span>CryptoSignal Pro</span>
-            </div>
-            <p class="footer-text">
-                Platform berbagi sinyal trading terpercaya.<br>
-                Analisis akurat untuk keputusan trading yang lebih baik.
-            </p>
-            <div class="footer-social">
-                <a href="#"><i class="fab fa-telegram"></i></a>
-                <a href="#"><i class="fab fa-whatsapp"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-            </div>
-            <div class="disclaimer">
-                <h4><i class="fas fa-exclamation-triangle"></i> Disclaimer</h4>
-                <p>Trading mengandung risiko tinggi. Sinyal yang diberikan bukan merupakan saran investasi. Selalu lakukan riset mandiri dan kelola risiko dengan bijak.</p>
-            </div>
-            <p class="copyright">© 2024 CryptoSignal Pro. All rights reserved.</p>
+        <div class="disclaimer">
+            <h4>⚠️ Disclaimer</h4>
+            <p>Trading berisiko tinggi. Bukan saran investasi.</p>
         </div>
+        <p class="copyright">© 2024 CryptoSignal Pro</p>
     </footer>
 
     <script>
-        // =====================================================
-        // KONFIGURASI - Ganti dengan credentials Anda
-        // =====================================================
+        // ================================================================
+        // ⚙️ CONFIG - SAMAKAN DENGAN ADMIN.HTML!
+        // ================================================================
         const CONFIG = {
-            // JSONBin.io (Gratis - https://jsonbin.io)
-            JSONBIN_BIN_ID: 'YOUR_BIN_ID_HERE',  // Ganti dengan Bin ID Anda
-            JSONBIN_API_KEY: 'YOUR_API_KEY_HERE', // Ganti dengan API Key Anda
-            
-            // Refresh interval (dalam milidetik)
-            REFRESH_INTERVAL: 30000 // 30 detik
+            JSONBIN_BIN_ID: '',    // <-- SAMAKAN DENGAN ADMIN
+            JSONBIN_API_KEY: '',   // <-- SAMAKAN DENGAN ADMIN
         };
+        // ================================================================
 
-        // =====================================================
-        // DATA & STATE
-        // =====================================================
         let signals = [];
         let currentFilter = 'all';
-        let currentShareSignal = null;
+        let currentSignal = null;
 
-        // =====================================================
-        // INITIALIZE
-        // =====================================================
-        document.addEventListener('DOMContentLoaded', () => {
-            loadSignals();
-            
-            // Auto refresh setiap 30 detik
-            setInterval(loadSignals, CONFIG.REFRESH_INTERVAL);
-        });
+        document.addEventListener('DOMContentLoaded', load);
 
-        // =====================================================
-        // LOAD SIGNALS
-        // =====================================================
-        async function loadSignals() {
-            const loadingState = document.getElementById('loadingState');
-            const signalsGrid = document.getElementById('signalsGrid');
-            const emptyState = document.getElementById('emptyState');
+        async function load() {
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('grid').innerHTML = '';
+            document.getElementById('empty').style.display = 'none';
 
             try {
-                // Coba load dari JSONBin
-                if (CONFIG.JSONBIN_BIN_ID !== 'YOUR_BIN_ID_HERE') {
-                    const response = await fetch(`https://api.jsonbin.io/v3/b/${CONFIG.JSONBIN_BIN_ID}/latest`, {
-                        headers: {
-                            'X-Master-Key': CONFIG.JSONBIN_API_KEY
-                        }
+                if (CONFIG.JSONBIN_BIN_ID && CONFIG.JSONBIN_API_KEY) {
+                    const res = await fetch(`https://api.jsonbin.io/v3/b/${CONFIG.JSONBIN_BIN_ID}/latest`, {
+                        headers: { 'X-Master-Key': CONFIG.JSONBIN_API_KEY }
                     });
-                    
-                    if (response.ok) {
-                        const data = await response.json();
+                    if (res.ok) {
+                        const data = await res.json();
                         signals = data.record.signals || [];
                     }
                 } else {
-                    // Fallback ke localStorage (untuk demo)
                     signals = JSON.parse(localStorage.getItem('tradingSignals')) || [];
                 }
-
-                loadingState.style.display = 'none';
-                renderSignals();
-                updateStats();
-
-            } catch (error) {
-                console.error('Error loading signals:', error);
-                loadingState.style.display = 'none';
-                
-                // Fallback ke localStorage
+            } catch (e) {
                 signals = JSON.parse(localStorage.getItem('tradingSignals')) || [];
-                renderSignals();
-                updateStats();
             }
+
+            document.getElementById('loading').style.display = 'none';
+            render();
+            stats();
         }
 
-        // =====================================================
-        // RENDER SIGNALS
-        // =====================================================
-        function renderSignals() {
-            const grid = document.getElementById('signalsGrid');
-            const emptyState = document.getElementById('emptyState');
+        function render() {
+            const grid = document.getElementById('grid');
+            const empty = document.getElementById('empty');
 
-            let filteredSignals = [...signals];
+            let list = [...signals];
+            if (currentFilter !== 'all') list = list.filter(s => s.type === currentFilter);
+            list.sort((a, b) => b.timestamp - a.timestamp);
 
-            // Apply filter
-            if (currentFilter === 'buy' || currentFilter === 'sell') {
-                filteredSignals = filteredSignals.filter(s => s.type === currentFilter);
-            } else if (currentFilter === 'crypto' || currentFilter === 'forex') {
-                filteredSignals = filteredSignals.filter(s => s.marketType === currentFilter);
-            }
+            if (list.length === 0) { grid.innerHTML = ''; empty.style.display = 'block'; return; }
+            empty.style.display = 'none';
 
-            // Sort by timestamp (newest first)
-            filteredSignals.sort((a, b) => b.timestamp - a.timestamp);
-
-            if (filteredSignals.length === 0) {
-                grid.innerHTML = '';
-                emptyState.style.display = 'block';
-                return;
-            }
-
-            emptyState.style.display = 'none';
-            grid.innerHTML = filteredSignals.map((signal, index) => `
-                <div class="signal-card" style="animation-delay: ${index * 0.1}s">
-                    <div class="signal-image-wrapper" onclick="openImageModal('${signal.image}')">
-                        <img src="${signal.image}" alt="${signal.pair}" class="signal-image" loading="lazy">
-                        <span class="signal-badge ${signal.type}">
-                            <i class="fas fa-arrow-${signal.type === 'buy' ? 'trend-up' : 'trend-down'}"></i>
-                            ${signal.type}
-                        </span>
-                        <div class="signal-meta">
-                            <span class="meta-tag">${signal.timeframe}</span>
-                            <span class="meta-tag">${getMarketLabel(signal.marketType)}</span>
-                        </div>
+            grid.innerHTML = list.map(s => `
+                <div class="signal-card">
+                    <div class="signal-image-wrapper" onclick="openModal('${s.image}')">
+                        <img src="${s.image}" class="signal-image" loading="lazy">
+                        <span class="signal-badge ${s.type}"><i class="fas fa-arrow-${s.type==='buy'?'up':'down'}"></i> ${s.type.toUpperCase()}</span>
+                        <span class="meta-tag">${s.timeframe}</span>
                     </div>
                     <div class="signal-content">
-                        <div class="signal-header">
-                            <div class="signal-pair">
-                                <span class="pair-icon">${getMarketIcon(signal.marketType)}</span>
-                                ${signal.pair}
-                            </div>
-                            <span class="signal-status ${signal.status || 'active'}">
-                                ${signal.status === 'closed' ? 'Closed' : 'Active'}
-                            </span>
+                        <div class="signal-pair">
+                            <span class="pair-icon">${s.marketType==='crypto'?'₿':'💱'}</span>
+                            ${s.pair}
                         </div>
-                        
                         <div class="price-grid">
-                            <div class="price-item">
-                                <div class="price-label">Entry</div>
-                                <div class="price-value entry">${signal.entry}</div>
-                            </div>
-                            <div class="price-item">
-                                <div class="price-label">Take Profit</div>
-                                <div class="price-value tp">${signal.takeProfit}</div>
-                            </div>
-                            <div class="price-item">
-                                <div class="price-label">Stop Loss</div>
-                                <div class="price-value sl">${signal.stopLoss}</div>
-                            </div>
+                            <div class="price-item"><div class="price-label">Entry</div><div class="price-value entry">${s.entry}</div></div>
+                            <div class="price-item"><div class="price-label">TP</div><div class="price-value tp">${s.takeProfit}</div></div>
+                            <div class="price-item"><div class="price-label">SL</div><div class="price-value sl">${s.stopLoss}</div></div>
                         </div>
-
-                        <div class="rr-bar">
-                            <span class="rr-label">R:R</span>
-                            <span class="rr-value">${calculateRR(signal)}</span>
-                            <div class="rr-bar-visual">
-                                <div class="rr-bar-fill" style="width: ${Math.min(getRRPercentage(signal), 100)}%"></div>
-                            </div>
-                        </div>
-
-                        <div class="signal-description">${signal.description}</div>
-
+                        <div class="signal-description">${s.description}</div>
                         <div class="signal-actions">
-                            <button class="action-btn primary" onclick="shareSignal(${signal.id})">
-                                <i class="fas fa-share"></i> Share
-                            </button>
-                            <button class="action-btn" onclick="openImageModal('${signal.image}')">
-                                <i class="fas fa-expand"></i> View
-                            </button>
+                            <button class="action-btn primary" onclick='share(${JSON.stringify(s).replace(/'/g,"\\'")})'><i class="fas fa-share"></i> Share</button>
+                            <button class="action-btn" onclick="openModal('${s.image}')"><i class="fas fa-expand"></i></button>
                         </div>
-
-                        <div class="signal-timestamp">
-                            <span><i class="fas fa-clock"></i> ${formatTime(signal.timestamp)}</span>
-                            <span><i class="fas fa-calendar"></i> ${formatDate(signal.timestamp)}</span>
-                        </div>
+                        <div class="signal-time"><i class="fas fa-clock"></i>&nbsp;${timeAgo(s.timestamp)}</div>
                     </div>
                 </div>
             `).join('');
         }
 
-        // =====================================================
-        // HELPER FUNCTIONS
-        // =====================================================
-        function getMarketIcon(type) {
-            const icons = { crypto: '₿', forex: '💱', stocks: '📈', commodities: '🛢️' };
-            return icons[type] || '📊';
-        }
-
-        function getMarketLabel(type) {
-            const labels = { crypto: 'Crypto', forex: 'Forex', stocks: 'Stocks', commodities: 'Commodities' };
-            return labels[type] || 'Market';
-        }
-
-        function formatTime(timestamp) {
-            const diff = Date.now() - timestamp;
-            const minutes = Math.floor(diff / 60000);
-            const hours = Math.floor(minutes / 60);
-            const days = Math.floor(hours / 24);
-
-            if (days > 0) return `${days} hari lalu`;
-            if (hours > 0) return `${hours} jam lalu`;
-            if (minutes > 0) return `${minutes} menit lalu`;
-            return 'Baru saja';
-        }
-
-        function formatDate(timestamp) {
-            return new Date(timestamp).toLocaleDateString('id-ID', {
-                day: 'numeric',
-                month: 'short',
-                year: 'numeric'
-            });
-        }
-
-        function calculateRR(signal) {
-            try {
-                const entry = parseFloat(signal.entry.replace(/,/g, ''));
-                const tp = parseFloat(signal.takeProfit.replace(/,/g, ''));
-                const sl = parseFloat(signal.stopLoss.replace(/,/g, ''));
-                
-                const risk = Math.abs(entry - sl);
-                const reward = Math.abs(tp - entry);
-                const rr = (reward / risk).toFixed(2);
-                
-                return `1:${rr}`;
-            } catch {
-                return '1:1';
-            }
-        }
-
-        function getRRPercentage(signal) {
-            try {
-                const entry = parseFloat(signal.entry.replace(/,/g, ''));
-                const tp = parseFloat(signal.takeProfit.replace(/,/g, ''));
-                const sl = parseFloat(signal.stopLoss.replace(/,/g, ''));
-                
-                const risk = Math.abs(entry - sl);
-                const reward = Math.abs(tp - entry);
-                const rr = reward / risk;
-                
-                return (rr / 3) * 100; // 3:1 = 100%
-            } catch {
-                return 33;
-            }
-        }
-
-        function updateStats() {
-            const today = new Date().setHours(0, 0, 0, 0);
-            
+        function stats() {
             document.getElementById('totalSignals').textContent = signals.length;
             document.getElementById('buySignals').textContent = signals.filter(s => s.type === 'buy').length;
             document.getElementById('sellSignals').textContent = signals.filter(s => s.type === 'sell').length;
-            document.getElementById('todaySignals').textContent = signals.filter(s => s.timestamp >= today).length;
         }
 
-        // =====================================================
-        // FILTER
-        // =====================================================
-        function filterSignals(filter) {
-            currentFilter = filter;
-            
-            document.querySelectorAll('.filter-tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            event.target.classList.add('active');
-            
-            renderSignals();
+        function filter(type, btn) {
+            currentFilter = type;
+            document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+            btn.classList.add('active');
+            render();
         }
 
-        // =====================================================
-        // REFRESH
-        // =====================================================
-        function refreshSignals() {
+        function refresh() {
             const btn = document.querySelector('.refresh-btn');
             btn.classList.add('spinning');
-            
-            loadSignals().then(() => {
-                setTimeout(() => {
-                    btn.classList.remove('spinning');
-                    showToast('Signals updated!');
-                }, 500);
+            load().finally(() => {
+                setTimeout(() => { btn.classList.remove('spinning'); toast('Updated!'); }, 500);
             });
         }
 
-        // =====================================================
-        // SHARE
-        // =====================================================
-        function shareSignal(id) {
-            currentShareSignal = signals.find(s => s.id === id);
-            if (!currentShareSignal) return;
+        function timeAgo(ts) {
+            const m = Math.floor((Date.now() - ts) / 60000);
+            const h = Math.floor(m / 60);
+            const d = Math.floor(h / 24);
+            if (d > 0) return `${d}h lalu`;
+            if (h > 0) return `${h}j lalu`;
+            if (m > 0) return `${m}m lalu`;
+            return 'Baru';
+        }
 
-            const text = generateShareText(currentShareSignal);
-            document.getElementById('shareText').value = text;
+        function openModal(src) { document.getElementById('modalImg').src = src; document.getElementById('imgModal').classList.add('active'); }
+        function closeModal() { document.getElementById('imgModal').classList.remove('active'); }
+
+        function share(s) {
+            currentSignal = s;
+            const txt = `🚀 SIGNAL ${s.pair}\n${s.type==='buy'?'🟢':'🔴'} ${s.type.toUpperCase()}\n\n💰 Entry: ${s.entry}\n🎯 TP: ${s.takeProfit}\n🛑 SL: ${s.stopLoss}\n\n📝 ${s.description}\n\n⚠️ Trade at your own risk!`;
+            document.getElementById('shareText').value = txt;
             document.getElementById('shareModal').classList.add('active');
         }
+        function closeShare() { document.getElementById('shareModal').classList.remove('active'); }
+        function shareWA() { window.open(`https://wa.me/?text=${encodeURIComponent(document.getElementById('shareText').value)}`, '_blank'); }
+        function shareTG() { window.open(`https://t.me/share/url?text=${encodeURIComponent(document.getElementById('shareText').value)}`, '_blank'); }
+        function shareTW() { window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(document.getElementById('shareText').value.substring(0,280))}`, '_blank'); }
+        function copy() { navigator.clipboard.writeText(document.getElementById('shareText').value); toast('Copied!'); }
 
-        function generateShareText(signal) {
-            return `🚀 *TRADING SIGNAL* 🚀
-━━━━━━━━━━━━━━━
-📊 Pair: ${signal.pair}
-${signal.type === 'buy' ? '🟢' : '🔴'} Type: ${signal.type.toUpperCase()}
-⏰ Timeframe: ${signal.timeframe}
-━━━━━━━━━━━━━━━
-💰 Entry: ${signal.entry}
-🎯 Take Profit: ${signal.takeProfit}
-🛑 Stop Loss: ${signal.stopLoss}
-📈 Risk/Reward: ${calculateRR(signal)}
-━━━━━━━━━━━━━━━
-📝 *Analysis:*
-${signal.description}
-━━━━━━━━━━━━━━━
-⚠️ _Trade at your own risk!_
-📱 *CryptoSignal Pro*`;
+        function toast(msg) {
+            const t = document.getElementById('toast');
+            document.getElementById('toastMsg').textContent = msg;
+            t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), 3000);
         }
 
-        function shareToWhatsApp() {
-            const text = encodeURIComponent(generateShareText(currentShareSignal));
-            window.open(`https://wa.me/?text=${text}`, '_blank');
-            closeShareModal();
-            showToast('Opening WhatsApp...');
-        }
-
-        function shareToTelegram() {
-            const text = encodeURIComponent(generateShareText(currentShareSignal));
-            window.open(`https://t.me/share/url?url=${encodeURIComponent(window.location.href)}&text=${text}`, '_blank');
-            closeShareModal();
-            showToast('Opening Telegram...');
-        }
-
-        function shareToTwitter() {
-            const text = encodeURIComponent(`🚀 ${currentShareSignal.pair} ${currentShareSignal.type.toUpperCase()}\n\nEntry: ${currentShareSignal.entry}\nTP: ${currentShareSignal.takeProfit}\nSL: ${currentShareSignal.stopLoss}\n\n#trading #crypto #forex`);
-            window.open(`https://twitter.com/intent/tweet?text=${text}`, '_blank');
-            closeShareModal();
-            showToast('Opening Twitter...');
-        }
-
-        function copySignalText() {
-            const text = document.getElementById('shareText').value;
-            navigator.clipboard.writeText(text).then(() => {
-                showToast('Copied to clipboard! 📋');
-            });
-        }
-
-        function closeShareModal() {
-            document.getElementById('shareModal').classList.remove('active');
-        }
-
-        // =====================================================
-        // IMAGE MODAL
-        // =====================================================
-        function openImageModal(src) {
-            document.getElementById('modalImage').src = src;
-            document.getElementById('imageModal').classList.add('active');
-        }
-
-        function closeImageModal() {
-            document.getElementById('imageModal').classList.remove('active');
-        }
-
-        // =====================================================
-        // TOAST
-        // =====================================================
-        function showToast(message) {
-            const toast = document.getElementById('toast');
-            document.getElementById('toastMessage').textContent = message;
-            toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), 3000);
-        }
-
-        // =====================================================
-        // KEYBOARD SHORTCUTS
-        // =====================================================
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                closeImageModal();
-                closeShareModal();
-            }
-        });
-
-        // Close share modal when clicking outside
-        document.getElementById('shareModal').addEventListener('click', (e) => {
-            if (e.target === document.getElementById('shareModal')) {
-                closeShareModal();
-            }
-        });
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); closeShare(); } });
+        setInterval(load, 30000);
     </script>
 </body>
 </html>
