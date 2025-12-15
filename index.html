@@ -1,518 +1,1535 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>🏍️ Impian Harley-Davidson</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CryptoSignal Pro - Trading Signals</title>
+    <meta name="description" content="Free trading signals for Crypto & Forex">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📊</text></svg>">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0f0f0f 100%);
-      color: #e0e0e0;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-      overflow-x: hidden;
-    }
+        :root {
+            --primary: #00d4aa;
+            --primary-dark: #00a383;
+            --secondary: #7c3aed;
+            --bg-dark: #0a0a0f;
+            --bg-card: #12121a;
+            --bg-card-hover: #1a1a25;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --border: #2a2a3a;
+        }
 
-    .container {
-      background: linear-gradient(145deg, #1a1a1a, #252525);
-      border-radius: 24px;
-      padding: 40px 30px;
-      width: 100%;
-      max-width: 480px;
-      box-shadow: 
-        0 20px 60px rgba(0, 0, 0, 0.7),
-        0 0 40px rgba(255, 140, 0, 0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 0.05);
-      text-align: center;
-      position: relative;
-      border: 1px solid rgba(255, 140, 0, 0.2);
-    }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
 
-    /* Header */
-    .header {
-      margin-bottom: 25px;
-    }
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
 
-    .header h1 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 1.8rem;
-      color: #ff8c00;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      text-shadow: 0 0 20px rgba(255, 140, 0, 0.5);
-      margin-bottom: 5px;
-    }
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(0, 212, 170, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(124, 58, 237, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(0, 212, 170, 0.05) 0%, transparent 30%);
+            animation: bgMove 20s linear infinite;
+        }
 
-    .header p {
-      color: #888;
-      font-size: 0.9rem;
-      font-weight: 300;
-    }
+        @keyframes bgMove {
+            0% { transform: translate(0, 0); }
+            50% { transform: translate(-25%, -25%); }
+            100% { transform: translate(0, 0); }
+        }
 
-    /* Gambar Motor */
-    .motor-image {
-      width: 100%;
-      max-width: 350px;
-      margin: 0 auto 30px;
-      position: relative;
-    }
+        /* Header */
+        header {
+            background: rgba(18, 18, 26, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
 
-    .motor-image img {
-      width: 100%;
-      height: auto;
-      border-radius: 16px;
-      box-shadow: 
-        0 10px 40px rgba(0, 0, 0, 0.6),
-        0 0 30px rgba(255, 140, 0, 0.2);
-      transition: transform 0.5s ease, box-shadow 0.5s ease;
-    }
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-    .motor-image img:hover {
-      transform: scale(1.03);
-      box-shadow: 
-        0 15px 50px rgba(0, 0, 0, 0.7),
-        0 0 50px rgba(255, 140, 0, 0.4);
-    }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
 
-    .motor-image::before {
-      content: '';
-      position: absolute;
-      top: -3px;
-      left: -3px;
-      right: -3px;
-      bottom: -3px;
-      background: linear-gradient(45deg, #ff8c00, #ff4500, #ff8c00, #ffa500);
-      border-radius: 18px;
-      z-index: -1;
-      opacity: 0.7;
-      filter: blur(8px);
-    }
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
 
-    /* Circle Progress - Persentase Tengah */
-    .circle-progress-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 30px 0;
-    }
+        .logo span {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
 
-    .circle-progress {
-      position: relative;
-      width: 200px;
-      height: 200px;
-    }
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
 
-    .circle-progress svg {
-      transform: rotate(-90deg);
-      width: 200px;
-      height: 200px;
-    }
+        .live-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(16, 185, 129, 0.2);
+            border: 1px solid var(--success);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--success);
+        }
 
-    .circle-bg {
-      fill: none;
-      stroke: #2a2a2a;
-      stroke-width: 12;
-    }
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--success);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
 
-    .circle-fill {
-      fill: none;
-      stroke: url(#gradient);
-      stroke-width: 12;
-      stroke-linecap: round;
-      stroke-dasharray: 565.48;
-      stroke-dashoffset: 565.48;
-      transition: stroke-dashoffset 2s ease-in-out;
-    }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
 
-    .percentage-display {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
-    }
+        .social-links {
+            display: flex;
+            gap: 10px;
+        }
 
-    .percentage-number {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 3rem;
-      font-weight: 900;
-      color: #ff8c00;
-      text-shadow: 0 0 30px rgba(255, 140, 0, 0.7);
-      line-height: 1;
-    }
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
 
-    .percentage-symbol {
-      font-size: 1.5rem;
-      color: #ff6600;
-    }
+        .social-links a:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
 
-    .percentage-label {
-      font-size: 0.85rem;
-      color: #888;
-      margin-top: 5px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-    }
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
 
-    /* Progress Bar Horizontal */
-    .progress-bar-container {
-      margin: 25px 0;
-    }
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 50px 20px;
+            margin-bottom: 30px;
+        }
 
-    .progress-bar-label {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 10px;
-      font-size: 0.8rem;
-      color: #666;
-    }
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #fff, var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
 
-    .progress-bar {
-      height: 12px;
-      background: linear-gradient(90deg, #1a1a1a, #2a2a2a);
-      border-radius: 10px;
-      overflow: hidden;
-      position: relative;
-      box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.5);
-    }
+        .hero p {
+            color: var(--text-secondary);
+            font-size: 1.15rem;
+            max-width: 600px;
+            margin: 0 auto 25px;
+            line-height: 1.6;
+        }
 
-    .progress-fill {
-      width: 0%;
-      height: 100%;
-      background: linear-gradient(90deg, #ff4500, #ff8c00, #ffa500);
-      border-radius: 10px;
-      transition: width 2s ease-in-out;
-      position: relative;
-      box-shadow: 0 0 15px rgba(255, 140, 0, 0.6);
-    }
+        .hero-badges {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
 
-    .progress-fill::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(90deg, 
-        transparent 0%, 
-        rgba(255, 255, 255, 0.3) 50%, 
-        transparent 100%);
-      animation: shimmer 2s infinite;
-    }
+        .hero-badge {
+            padding: 10px 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 25px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
 
-    @keyframes shimmer {
-      0% { transform: translateX(-100%); }
-      100% { transform: translateX(100%); }
-    }
+        .hero-badge i {
+            color: var(--primary);
+        }
 
-    /* Detail Cards */
-    .details {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 15px;
-      margin-top: 25px;
-    }
+        /* Stats */
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            padding: 25px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
 
-    .detail-card {
-      background: linear-gradient(145deg, #1e1e1e, #2a2a2a);
-      padding: 20px 15px;
-      border-radius: 16px;
-      border: 1px solid rgba(255, 140, 0, 0.1);
-      transition: all 0.3s ease;
-    }
+        .stat-item {
+            text-align: center;
+        }
 
-    .detail-card:hover {
-      transform: translateY(-3px);
-      border-color: rgba(255, 140, 0, 0.3);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-    }
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
 
-    .detail-card .icon {
-      font-size: 1.5rem;
-      margin-bottom: 8px;
-    }
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-top: 5px;
+        }
 
-    .detail-card .label {
-      font-size: 0.75rem;
-      color: #666;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 5px;
-    }
+        /* Filter Tabs */
+        .filter-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
 
-    .detail-card .value {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 1rem;
-      color: #ff8c00;
-      font-weight: 700;
-    }
+        .section-title {
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-    /* Sisa yang Dibutuhkan */
-    .remaining {
-      margin-top: 25px;
-      padding: 20px;
-      background: linear-gradient(145deg, #2a1a1a, #1a1a1a);
-      border-radius: 16px;
-      border: 1px solid rgba(255, 100, 0, 0.2);
-    }
+        .section-title i {
+            color: var(--primary);
+        }
 
-    .remaining .label {
-      font-size: 0.8rem;
-      color: #888;
-      margin-bottom: 5px;
-    }
+        .filter-tabs {
+            display: flex;
+            gap: 10px;
+        }
 
-    .remaining .value {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 1.4rem;
-      color: #ff6347;
-      font-weight: 700;
-    }
+        .filter-tab {
+            padding: 10px 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
 
-    /* Motivasi */
-    .motivation {
-      margin-top: 25px;
-      padding: 15px;
-      background: rgba(255, 140, 0, 0.1);
-      border-radius: 12px;
-      border-left: 4px solid #ff8c00;
-    }
+        .filter-tab:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
 
-    .motivation p {
-      font-size: 0.9rem;
-      color: #ccc;
-      font-style: italic;
-    }
+        .filter-tab.active {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-color: transparent;
+            color: white;
+        }
 
-    /* Footer */
-    footer {
-      margin-top: 30px;
-      font-size: 0.75rem;
-      color: #444;
-      border-top: 1px solid #2a2a2a;
-      padding-top: 20px;
-    }
+        /* Signals Grid */
+        .signals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 25px;
+        }
 
-    footer span {
-      color: #ff8c00;
-    }
+        /* Signal Card */
+        .signal-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s;
+            animation: fadeInUp 0.5s ease;
+        }
 
-    /* Glowing Effect */
-    .glow {
-      animation: glow 2s ease-in-out infinite alternate;
-    }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-    @keyframes glow {
-      from {
-        text-shadow: 0 0 10px rgba(255, 140, 0, 0.5);
-      }
-      to {
-        text-shadow: 0 0 30px rgba(255, 140, 0, 0.9), 0 0 50px rgba(255, 100, 0, 0.5);
-      }
-    }
+        .signal-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+        }
 
-    /* Responsive */
-    @media (max-width: 480px) {
-      .container {
-        padding: 25px 20px;
-      }
-      
-      .header h1 {
-        font-size: 1.4rem;
-      }
-      
-      .circle-progress {
-        width: 160px;
-        height: 160px;
-      }
-      
-      .circle-progress svg {
-        width: 160px;
-        height: 160px;
-      }
-      
-      .percentage-number {
-        font-size: 2.2rem;
-      }
-      
-      .detail-card .value {
-        font-size: 0.85rem;
-      }
-    }
-  </style>
+        .signal-image-wrapper {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .signal-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .signal-card:hover .signal-image {
+            transform: scale(1.05);
+        }
+
+        .signal-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .signal-badge.buy {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+        }
+
+        .signal-badge.sell {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+        }
+
+        .signal-meta {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .meta-tag {
+            padding: 6px 12px;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            color: white;
+        }
+
+        .signal-content {
+            padding: 22px;
+        }
+
+        .signal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+
+        .signal-pair {
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .pair-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+
+        .signal-status {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .signal-status.active {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--success);
+            border: 1px solid var(--success);
+        }
+
+        .signal-status.closed {
+            background: rgba(107, 114, 128, 0.2);
+            color: #9ca3af;
+            border: 1px solid #6b7280;
+        }
+
+        /* Price Grid */
+        .price-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .price-item {
+            background: var(--bg-dark);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .price-label {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+
+        .price-value {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .price-value.entry { color: var(--warning); }
+        .price-value.tp { color: var(--success); }
+        .price-value.sl { color: var(--danger); }
+
+        /* Risk Reward */
+        .rr-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 15px;
+            background: var(--bg-dark);
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .rr-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .rr-value {
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .rr-bar-visual {
+            flex: 1;
+            height: 6px;
+            background: var(--border);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .rr-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--danger), var(--warning), var(--success));
+            border-radius: 3px;
+        }
+
+        /* Description */
+        .signal-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            padding: 15px;
+            background: var(--bg-dark);
+            border-radius: 12px;
+            border-left: 4px solid var(--primary);
+            margin-bottom: 18px;
+        }
+
+        /* Actions */
+        .signal-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 14px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: transparent;
+            color: var(--text-secondary);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .action-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: rgba(0, 212, 170, 0.1);
+        }
+
+        .action-btn.primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border: none;
+            color: white;
+        }
+
+        .action-btn.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 212, 170, 0.3);
+        }
+
+        /* Timestamp */
+        .signal-timestamp {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            margin-top: 15px;
+            border-top: 1px solid var(--border);
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+            color: var(--text-secondary);
+        }
+
+        .empty-state i {
+            font-size: 5rem;
+            margin-bottom: 25px;
+            opacity: 0.3;
+            color: var(--primary);
+        }
+
+        .empty-state h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .empty-state p {
+            font-size: 1.1rem;
+        }
+
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 60px;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid var(--border);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            max-width: 95%;
+            max-height: 90%;
+            border-radius: 15px;
+            object-fit: contain;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 2.5rem;
+            color: white;
+            cursor: pointer;
+            transition: color 0.3s;
+            z-index: 10;
+        }
+
+        .modal-close:hover {
+            color: var(--primary);
+        }
+
+        /* Share Modal */
+        .share-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .share-modal.active {
+            display: flex;
+        }
+
+        .share-content {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 35px;
+            max-width: 450px;
+            width: 100%;
+            animation: scaleIn 0.3s ease;
+        }
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .share-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .share-header i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .share-header h3 {
+            font-size: 1.5rem;
+        }
+
+        .share-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .share-btn {
+            padding: 16px;
+            border: none;
+            border-radius: 14px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            color: white;
+        }
+
+        .share-btn.whatsapp { background: #25D366; }
+        .share-btn.telegram { background: #0088cc; }
+        .share-btn.twitter { background: #1DA1F2; }
+        .share-btn.copy { background: var(--secondary); }
+
+        .share-btn:hover {
+            transform: translateY(-3px);
+            filter: brightness(1.1);
+        }
+
+        .share-text-box {
+            background: var(--bg-dark);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .share-text-box textarea {
+            width: 100%;
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            font-size: 0.85rem;
+            resize: none;
+            height: 120px;
+            font-family: inherit;
+        }
+
+        .share-text-box textarea:focus {
+            outline: none;
+        }
+
+        .close-share-btn {
+            width: 100%;
+            padding: 14px;
+            background: var(--bg-dark);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: var(--text-secondary);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .close-share-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            padding: 16px 28px;
+            background: var(--success);
+            color: white;
+            border-radius: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transform: translateX(150%);
+            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 3000;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-card);
+            border-top: 1px solid var(--border);
+            padding: 50px 20px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo span {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .footer-text {
+            color: var(--text-secondary);
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .footer-social a {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-dark);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .footer-social a:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .disclaimer {
+            padding: 20px;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 12px;
+            margin-bottom: 25px;
+        }
+
+        .disclaimer h4 {
+            color: var(--danger);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .disclaimer p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .copyright {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .stats-bar {
+                gap: 25px;
+            }
+
+            .stat-value {
+                font-size: 1.4rem;
+            }
+
+            .signals-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-section {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .filter-tabs {
+                width: 100%;
+                overflow-x: auto;
+                padding-bottom: 5px;
+            }
+
+            .share-buttons {
+                grid-template-columns: 1fr;
+            }
+
+            .toast {
+                left: 20px;
+                right: 20px;
+            }
+
+            .header-right {
+                gap: 10px;
+            }
+
+            .live-badge span:last-child {
+                display: none;
+            }
+
+            .social-links {
+                display: none;
+            }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
+        }
+
+        /* Refresh Button */
+        .refresh-btn {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.3rem;
+            cursor: pointer;
+            box-shadow: 0 5px 25px rgba(0, 212, 170, 0.4);
+            transition: all 0.3s;
+            z-index: 100;
+        }
+
+        .refresh-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .refresh-btn.spinning i {
+            animation: spin 1s linear infinite;
+        }
+    </style>
 </head>
 <body>
+    <div class="bg-animation"></div>
 
-  <div class="container">
     <!-- Header -->
-    <div class="header">
-      <h1 class="glow">🏍️ MY DREAM 2026/2027</h1>
-      <p>Harley-Davidson Fat Boy</p>
-    </div>
-
-    <!-- Gambar Motor Harley -->
-    <div class="motor-image">
-      <img src="https://d2bywgumb0o70j.cloudfront.net/2019/10/07/01d91472ee3a0822ba21838fe29b1912_8950a810afdcdff1.png" 
-           alt="Harley-Davidson" 
-           onerror="this.src='https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=600&h=400&fit=crop'">
-    </div>
-
-    <!-- Circle Progress dengan Persentase di Tengah -->
-    <div class="circle-progress-container">
-      <div class="circle-progress">
-        <svg viewBox="0 0 200 200">
-          <defs>
-            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#ff4500"/>
-              <stop offset="50%" stop-color="#ff8c00"/>
-              <stop offset="100%" stop-color="#ffa500"/>
-            </linearGradient>
-          </defs>
-          <circle class="circle-bg" cx="100" cy="100" r="90"/>
-          <circle class="circle-fill" id="circleFill" cx="100" cy="100" r="90"/>
-        </svg>
-        <div class="percentage-display">
-          <div class="percentage-number glow">
-            <span id="percentageValue">0</span><span class="percentage-symbol">%</span>
-          </div>
-          <div class="percentage-label">Tercapai</div>
+    <header>
+        <div class="header-content">
+            <a href="/" class="logo">
+                <div class="logo-icon">📊</div>
+                <span>CryptoSignal Pro</span>
+            </a>
+            <div class="header-right">
+                <div class="live-badge">
+                    <div class="live-dot"></div>
+                    <span>Live Signals</span>
+                </div>
+                <div class="social-links">
+                    <a href="#" title="Telegram"><i class="fab fa-telegram"></i></a>
+                    <a href="#" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
         </div>
-      </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Hero -->
+        <section class="hero">
+            <h1>🚀 Premium Trading Signals</h1>
+            <p>Dapatkan sinyal trading Crypto & Forex berkualitas dengan analisis teknikal yang akurat. Gratis untuk semua trader!</p>
+            <div class="hero-badges">
+                <div class="hero-badge">
+                    <i class="fas fa-chart-line"></i> Technical Analysis
+                </div>
+                <div class="hero-badge">
+                    <i class="fas fa-clock"></i> Real-time Updates
+                </div>
+                <div class="hero-badge">
+                    <i class="fas fa-shield-alt"></i> Risk Management
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats -->
+        <div class="stats-bar">
+            <div class="stat-item">
+                <div class="stat-value" id="totalSignals">0</div>
+                <div class="stat-label">Total Signals</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="buySignals">0</div>
+                <div class="stat-label">Buy Signals</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="sellSignals">0</div>
+                <div class="stat-label">Sell Signals</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="todaySignals">0</div>
+                <div class="stat-label">Today</div>
+            </div>
+        </div>
+
+        <!-- Signals Section -->
+        <section id="signalsSection">
+            <div class="filter-section">
+                <h2 class="section-title">
+                    <i class="fas fa-signal"></i> Latest Signals
+                </h2>
+                <div class="filter-tabs">
+                    <button class="filter-tab active" onclick="filterSignals('all')">All</button>
+                    <button class="filter-tab" onclick="filterSignals('buy')">
+                        <i class="fas fa-arrow-up"></i> Buy
+                    </button>
+                    <button class="filter-tab" onclick="filterSignals('sell')">
+                        <i class="fas fa-arrow-down"></i> Sell
+                    </button>
+                    <button class="filter-tab" onclick="filterSignals('crypto')">₿ Crypto</button>
+                    <button class="filter-tab" onclick="filterSignals('forex')">💱 Forex</button>
+                </div>
+            </div>
+
+            <!-- Loading -->
+            <div class="loading" id="loadingState">
+                <div class="spinner"></div>
+                <p>Loading signals...</p>
+            </div>
+
+            <!-- Signals Grid -->
+            <div class="signals-grid" id="signalsGrid"></div>
+
+            <!-- Empty State -->
+            <div class="empty-state" id="emptyState" style="display: none;">
+                <i class="fas fa-chart-bar"></i>
+                <h3>Belum ada signal</h3>
+                <p>Signal trading akan segera tersedia. Stay tuned!</p>
+            </div>
+        </section>
     </div>
 
-    <!-- Progress Bar Horizontal -->
-    <div class="progress-bar-container">
-      <div class="progress-bar-label">
-        <span>Mulai</span>
-        <span>Target</span>
-      </div>
-      <div class="progress-bar">
-        <div class="progress-fill" id="progressFill"></div>
-      </div>
+    <!-- Refresh Button -->
+    <button class="refresh-btn" onclick="refreshSignals()" title="Refresh Signals">
+        <i class="fas fa-sync-alt"></i>
+    </button>
+
+    <!-- Image Modal -->
+    <div class="modal" id="imageModal" onclick="closeImageModal()">
+        <span class="modal-close">&times;</span>
+        <img class="modal-content" id="modalImage" alt="Chart">
     </div>
 
-    <!-- Detail Saldo & Target -->
-    <div class="details">
-      <div class="detail-card">
-        <div class="icon">💰</div>
-        <div class="label">Saldo Saat Ini</div>
-        <div class="value" id="currentBalance">Rp 0</div>
-      </div>
-      <div class="detail-card">
-        <div class="icon">🎯</div>
-        <div class="label">Harga Target</div>
-        <div class="value" id="targetPrice">Rp 0</div>
-      </div>
+    <!-- Share Modal -->
+    <div class="share-modal" id="shareModal">
+        <div class="share-content" onclick="event.stopPropagation()">
+            <div class="share-header">
+                <i class="fas fa-share-alt"></i>
+                <h3>Share Signal</h3>
+            </div>
+            <div class="share-buttons">
+                <button class="share-btn whatsapp" onclick="shareToWhatsApp()">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
+                </button>
+                <button class="share-btn telegram" onclick="shareToTelegram()">
+                    <i class="fab fa-telegram"></i> Telegram
+                </button>
+                <button class="share-btn twitter" onclick="shareToTwitter()">
+                    <i class="fab fa-twitter"></i> Twitter
+                </button>
+                <button class="share-btn copy" onclick="copySignalText()">
+                    <i class="fas fa-copy"></i> Copy
+                </button>
+            </div>
+            <div class="share-text-box">
+                <textarea id="shareText" readonly></textarea>
+            </div>
+            <button class="close-share-btn" onclick="closeShareModal()">Tutup</button>
+        </div>
     </div>
 
-    <!-- Sisa yang Dibutuhkan -->
-    <div class="remaining">
-      <div class="label">💪 Sisa yang Dibutuhkan</div>
-      <div class="value" id="remainingAmount">Rp 0</div>
-    </div>
-
-    <!-- Motivasi -->
-    <div class="motivation">
-      <p id="motivationText">"Setiap rupiah yang kamu tabung adalah selangkah lebih dekat ke impianmu!"</p>
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Success!</span>
     </div>
 
     <!-- Footer -->
     <footer>
-      &copy; 2025 | Dibuat dengan <span>❤️</span> untuk sang pemimpi
+        <div class="footer-content">
+            <div class="footer-logo">
+                <div class="logo-icon">📊</div>
+                <span>CryptoSignal Pro</span>
+            </div>
+            <p class="footer-text">
+                Platform berbagi sinyal trading terpercaya.<br>
+                Analisis akurat untuk keputusan trading yang lebih baik.
+            </p>
+            <div class="footer-social">
+                <a href="#"><i class="fab fa-telegram"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+            <div class="disclaimer">
+                <h4><i class="fas fa-exclamation-triangle"></i> Disclaimer</h4>
+                <p>Trading mengandung risiko tinggi. Sinyal yang diberikan bukan merupakan saran investasi. Selalu lakukan riset mandiri dan kelola risiko dengan bijak.</p>
+            </div>
+            <p class="copyright">© 2024 CryptoSignal Pro. All rights reserved.</p>
+        </div>
     </footer>
-  </div>
 
-  <script>
-    // ============================================
-    // 🔧 KONFIGURASI - UBAH NILAI DI SINI!
-    // ============================================
-    const currentBalance = 2000000;  // Saldo kamu saat ini (Rp 150 juta)
-    const targetPrice = 300000000;      // Harga Harley-Davidson (Rp 850 juta)
-    // ============================================
+    <script>
+        // =====================================================
+        // KONFIGURASI - Ganti dengan credentials Anda
+        // =====================================================
+        const CONFIG = {
+            // JSONBin.io (Gratis - https://jsonbin.io)
+            JSONBIN_BIN_ID: 'YOUR_BIN_ID_HERE',  // Ganti dengan Bin ID Anda
+            JSONBIN_API_KEY: 'YOUR_API_KEY_HERE', // Ganti dengan API Key Anda
+            
+            // Refresh interval (dalam milidetik)
+            REFRESH_INTERVAL: 30000 // 30 detik
+        };
 
-    // Hitung persentase
-    let percentage = (currentBalance / targetPrice) * 100;
-    if (percentage > 100) percentage = 100;
+        // =====================================================
+        // DATA & STATE
+        // =====================================================
+        let signals = [];
+        let currentFilter = 'all';
+        let currentShareSignal = null;
 
-    // Hitung sisa yang dibutuhkan
-    const remaining = targetPrice - currentBalance;
+        // =====================================================
+        // INITIALIZE
+        // =====================================================
+        document.addEventListener('DOMContentLoaded', () => {
+            loadSignals();
+            
+            // Auto refresh setiap 30 detik
+            setInterval(loadSignals, CONFIG.REFRESH_INTERVAL);
+        });
 
-    // Format angka ke Rupiah
-    const formatRupiah = (angka) => {
-      return new Intl.NumberFormat('id-ID', {
-        style: 'currency',
-        currency: 'IDR',
-        minimumFractionDigits: 0,
-        maximumFractionDigits: 0
-      }).format(angka);
-    };
+        // =====================================================
+        // LOAD SIGNALS
+        // =====================================================
+        async function loadSignals() {
+            const loadingState = document.getElementById('loadingState');
+            const signalsGrid = document.getElementById('signalsGrid');
+            const emptyState = document.getElementById('emptyState');
 
-    // Update DOM
-    document.getElementById('currentBalance').textContent = formatRupiah(currentBalance);
-    document.getElementById('targetPrice').textContent = formatRupiah(targetPrice);
-    document.getElementById('remainingAmount').textContent = remaining > 0 ? formatRupiah(remaining) : 'Rp 0';
+            try {
+                // Coba load dari JSONBin
+                if (CONFIG.JSONBIN_BIN_ID !== 'YOUR_BIN_ID_HERE') {
+                    const response = await fetch(`https://api.jsonbin.io/v3/b/${CONFIG.JSONBIN_BIN_ID}/latest`, {
+                        headers: {
+                            'X-Master-Key': CONFIG.JSONBIN_API_KEY
+                        }
+                    });
+                    
+                    if (response.ok) {
+                        const data = await response.json();
+                        signals = data.record.signals || [];
+                    }
+                } else {
+                    // Fallback ke localStorage (untuk demo)
+                    signals = JSON.parse(localStorage.getItem('tradingSignals')) || [];
+                }
 
-    // Animasi Circle Progress
-    const circleFill = document.getElementById('circleFill');
-    const circumference = 2 * Math.PI * 90; // 565.48
-    const offset = circumference - (percentage / 100) * circumference;
+                loadingState.style.display = 'none';
+                renderSignals();
+                updateStats();
 
-    // Animasi Persentase Counter
-    const percentageElement = document.getElementById('percentageValue');
-    let currentPercent = 0;
-    const duration = 2000;
-    const increment = percentage / (duration / 16);
+            } catch (error) {
+                console.error('Error loading signals:', error);
+                loadingState.style.display = 'none';
+                
+                // Fallback ke localStorage
+                signals = JSON.parse(localStorage.getItem('tradingSignals')) || [];
+                renderSignals();
+                updateStats();
+            }
+        }
 
-    function animatePercentage() {
-      currentPercent += increment;
-      if (currentPercent >= percentage) {
-        currentPercent = percentage;
-        percentageElement.textContent = percentage.toFixed(1);
-      } else {
-        percentageElement.textContent = Math.floor(currentPercent);
-        requestAnimationFrame(animatePercentage);
-      }
-    }
+        // =====================================================
+        // RENDER SIGNALS
+        // =====================================================
+        function renderSignals() {
+            const grid = document.getElementById('signalsGrid');
+            const emptyState = document.getElementById('emptyState');
 
-    // Jalankan animasi setelah halaman dimuat
-    setTimeout(() => {
-      // Animasi circle
-      circleFill.style.strokeDashoffset = offset;
-      
-      // Animasi progress bar
-      document.getElementById('progressFill').style.width = `${percentage}%`;
-      
-      // Animasi counter
-      animatePercentage();
-    }, 500);
+            let filteredSignals = [...signals];
 
-    // Motivasi berdasarkan persentase
-    const motivationTexts = [
-      { min: 0, max: 10, text: '"Perjalanan seribu mil dimulai dari langkah pertama. Terus menabung!"' },
-      { min: 10, max: 25, text: '"Kamu sudah mulai! Konsistensi adalah kuncinya. 💪"' },
-      { min: 25, max: 50, text: '"Seperempat jalan sudah! Harley-Davidson semakin dekat!"' },
-      { min: 50, max: 75, text: '"SETENGAH JALAN! Kamu luar biasa, jangan berhenti!"' },
-      { min: 75, max: 90, text: '"Hampir sampai! Suara mesin Harley sudah terdengar!"' },
-      { min: 90, max: 99, text: '"TINGGAL SEDIKIT LAGI! Mimpimu di depan mata!"' },
-      { min: 100, max: 100, text: '"🎉 SELAMAT! Saatnya beli Harley-Davidson impianmu!"' }
-    ];
+            // Apply filter
+            if (currentFilter === 'buy' || currentFilter === 'sell') {
+                filteredSignals = filteredSignals.filter(s => s.type === currentFilter);
+            } else if (currentFilter === 'crypto' || currentFilter === 'forex') {
+                filteredSignals = filteredSignals.filter(s => s.marketType === currentFilter);
+            }
 
-    const motivation = motivationTexts.find(m => percentage >= m.min && percentage <= m.max);
-    if (motivation) {
-      document.getElementById('motivationText').textContent = motivation.text;
-    }
-  </script>
+            // Sort by timestamp (newest first)
+            filteredSignals.sort((a, b) => b.timestamp - a.timestamp);
 
+            if (filteredSignals.length === 0) {
+                grid.innerHTML = '';
+                emptyState.style.display = 'block';
+                return;
+            }
+
+            emptyState.style.display = 'none';
+            grid.innerHTML = filteredSignals.map((signal, index) => `
+                <div class="signal-card" style="animation-delay: ${index * 0.1}s">
+                    <div class="signal-image-wrapper" onclick="openImageModal('${signal.image}')">
+                        <img src="${signal.image}" alt="${signal.pair}" class="signal-image" loading="lazy">
+                        <span class="signal-badge ${signal.type}">
+                            <i class="fas fa-arrow-${signal.type === 'buy' ? 'trend-up' : 'trend-down'}"></i>
+                            ${signal.type}
+                        </span>
+                        <div class="signal-meta">
+                            <span class="meta-tag">${signal.timeframe}</span>
+                            <span class="meta-tag">${getMarketLabel(signal.marketType)}</span>
+                        </div>
+                    </div>
+                    <div class="signal-content">
+                        <div class="signal-header">
+                            <div class="signal-pair">
+                                <span class="pair-icon">${getMarketIcon(signal.marketType)}</span>
+                                ${signal.pair}
+                            </div>
+                            <span class="signal-status ${signal.status || 'active'}">
+                                ${signal.status === 'closed' ? 'Closed' : 'Active'}
+                            </span>
+                        </div>
+                        
+                        <div class="price-grid">
+                            <div class="price-item">
+                                <div class="price-label">Entry</div>
+                                <div class="price-value entry">${signal.entry}</div>
+                            </div>
+                            <div class="price-item">
+                                <div class="price-label">Take Profit</div>
+                                <div class="price-value tp">${signal.takeProfit}</div>
+                            </div>
+                            <div class="price-item">
+                                <div class="price-label">Stop Loss</div>
+                                <div class="price-value sl">${signal.stopLoss}</div>
+                            </div>
+                        </div>
+
+                        <div class="rr-bar">
+                            <span class="rr-label">R:R</span>
+                            <span class="rr-value">${calculateRR(signal)}</span>
+                            <div class="rr-bar-visual">
+                                <div class="rr-bar-fill" style="width: ${Math.min(getRRPercentage(signal), 100)}%"></div>
+                            </div>
+                        </div>
+
+                        <div class="signal-description">${signal.description}</div>
+
+                        <div class="signal-actions">
+                            <button class="action-btn primary" onclick="shareSignal(${signal.id})">
+                                <i class="fas fa-share"></i> Share
+                            </button>
+                            <button class="action-btn" onclick="openImageModal('${signal.image}')">
+                                <i class="fas fa-expand"></i> View
+                            </button>
+                        </div>
+
+                        <div class="signal-timestamp">
+                            <span><i class="fas fa-clock"></i> ${formatTime(signal.timestamp)}</span>
+                            <span><i class="fas fa-calendar"></i> ${formatDate(signal.timestamp)}</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // =====================================================
+        // HELPER FUNCTIONS
+        // =====================================================
+        function getMarketIcon(type) {
+            const icons = { crypto: '₿', forex: '💱', stocks: '📈', commodities: '🛢️' };
+            return icons[type] || '📊';
+        }
+
+        function getMarketLabel(type) {
+            const labels = { crypto: 'Crypto', forex: 'Forex', stocks: 'Stocks', commodities: 'Commodities' };
+            return labels[type] || 'Market';
+        }
+
+        function formatTime(timestamp) {
+            const diff = Date.now() - timestamp;
+            const minutes = Math.floor(diff / 60000);
+            const hours = Math.floor(minutes / 60);
+            const days = Math.floor(hours / 24);
+
+            if (days > 0) return `${days} hari lalu`;
+            if (hours > 0) return `${hours} jam lalu`;
+            if (minutes > 0) return `${minutes} menit lalu`;
+            return 'Baru saja';
+        }
+
+        function formatDate(timestamp) {
+            return new Date(timestamp).toLocaleDateString('id-ID', {
+                day: 'numeric',
+                month: 'short',
+                year: 'numeric'
+            });
+        }
+
+        function calculateRR(signal) {
+            try {
+                const entry = parseFloat(signal.entry.replace(/,/g, ''));
+                const tp = parseFloat(signal.takeProfit.replace(/,/g, ''));
+                const sl = parseFloat(signal.stopLoss.replace(/,/g, ''));
+                
+                const risk = Math.abs(entry - sl);
+                const reward = Math.abs(tp - entry);
+                const rr = (reward / risk).toFixed(2);
+                
+                return `1:${rr}`;
+            } catch {
+                return '1:1';
+            }
+        }
+
+        function getRRPercentage(signal) {
+            try {
+                const entry = parseFloat(signal.entry.replace(/,/g, ''));
+                const tp = parseFloat(signal.takeProfit.replace(/,/g, ''));
+                const sl = parseFloat(signal.stopLoss.replace(/,/g, ''));
+                
+                const risk = Math.abs(entry - sl);
+                const reward = Math.abs(tp - entry);
+                const rr = reward / risk;
+                
+                return (rr / 3) * 100; // 3:1 = 100%
+            } catch {
+                return 33;
+            }
+        }
+
+        function updateStats() {
+            const today = new Date().setHours(0, 0, 0, 0);
+            
+            document.getElementById('totalSignals').textContent = signals.length;
+            document.getElementById('buySignals').textContent = signals.filter(s => s.type === 'buy').length;
+            document.getElementById('sellSignals').textContent = signals.filter(s => s.type === 'sell').length;
+            document.getElementById('todaySignals').textContent = signals.filter(s => s.timestamp >= today).length;
+        }
+
+        // =====================================================
+        // FILTER
+        // =====================================================
+        function filterSignals(filter) {
+            currentFilter = filter;
+            
+            document.querySelectorAll('.filter-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            renderSignals();
+        }
+
+        // =====================================================
+        // REFRESH
+        // =====================================================
+        function refreshSignals() {
+            const btn = document.querySelector('.refresh-btn');
+            btn.classList.add('spinning');
+            
+            loadSignals().then(() => {
+                setTimeout(() => {
+                    btn.classList.remove('spinning');
+                    showToast('Signals updated!');
+                }, 500);
+            });
+        }
+
+        // =====================================================
+        // SHARE
+        // =====================================================
+        function shareSignal(id) {
+            currentShareSignal = signals.find(s => s.id === id);
+            if (!currentShareSignal) return;
+
+            const text = generateShareText(currentShareSignal);
+            document.getElementById('shareText').value = text;
+            document.getElementById('shareModal').classList.add('active');
+        }
+
+        function generateShareText(signal) {
+            return `🚀 *TRADING SIGNAL* 🚀
+━━━━━━━━━━━━━━━
+📊 Pair: ${signal.pair}
+${signal.type === 'buy' ? '🟢' : '🔴'} Type: ${signal.type.toUpperCase()}
+⏰ Timeframe: ${signal.timeframe}
+━━━━━━━━━━━━━━━
+💰 Entry: ${signal.entry}
+🎯 Take Profit: ${signal.takeProfit}
+🛑 Stop Loss: ${signal.stopLoss}
+📈 Risk/Reward: ${calculateRR(signal)}
+━━━━━━━━━━━━━━━
+📝 *Analysis:*
+${signal.description}
+━━━━━━━━━━━━━━━
+⚠️ _Trade at your own risk!_
+📱 *CryptoSignal Pro*`;
+        }
+
+        function shareToWhatsApp() {
+            const text = encodeURIComponent(generateShareText(currentShareSignal));
+            window.open(`https://wa.me/?text=${text}`, '_blank');
+            closeShareModal();
+            showToast('Opening WhatsApp...');
+        }
+
+        function shareToTelegram() {
+            const text = encodeURIComponent(generateShareText(currentShareSignal));
+            window.open(`https://t.me/share/url?url=${encodeURIComponent(window.location.href)}&text=${text}`, '_blank');
+            closeShareModal();
+            showToast('Opening Telegram...');
+        }
+
+        function shareToTwitter() {
+            const text = encodeURIComponent(`🚀 ${currentShareSignal.pair} ${currentShareSignal.type.toUpperCase()}\n\nEntry: ${currentShareSignal.entry}\nTP: ${currentShareSignal.takeProfit}\nSL: ${currentShareSignal.stopLoss}\n\n#trading #crypto #forex`);
+            window.open(`https://twitter.com/intent/tweet?text=${text}`, '_blank');
+            closeShareModal();
+            showToast('Opening Twitter...');
+        }
+
+        function copySignalText() {
+            const text = document.getElementById('shareText').value;
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('Copied to clipboard! 📋');
+            });
+        }
+
+        function closeShareModal() {
+            document.getElementById('shareModal').classList.remove('active');
+        }
+
+        // =====================================================
+        // IMAGE MODAL
+        // =====================================================
+        function openImageModal(src) {
+            document.getElementById('modalImage').src = src;
+            document.getElementById('imageModal').classList.add('active');
+        }
+
+        function closeImageModal() {
+            document.getElementById('imageModal').classList.remove('active');
+        }
+
+        // =====================================================
+        // TOAST
+        // =====================================================
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMessage').textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        // =====================================================
+        // KEYBOARD SHORTCUTS
+        // =====================================================
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeImageModal();
+                closeShareModal();
+            }
+        });
+
+        // Close share modal when clicking outside
+        document.getElementById('shareModal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('shareModal')) {
+                closeShareModal();
+            }
+        });
+    </script>
 </body>
 </html>
