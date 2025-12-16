@@ -26,457 +26,551 @@
             min-height: 100vh;
         }
 
+        /* Login */
         .login-screen {
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 20px;
-            background: linear-gradient(135deg, #0a0a0f, #1a1a2e);
+            background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%);
         }
         .login-box {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 40px;
+            border-radius: 24px;
+            padding: 40px 35px;
             max-width: 400px;
             width: 100%;
             text-align: center;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
         }
         .login-logo {
-            width: 70px; height: 70px;
+            width: 80px; height: 80px;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 16px;
+            border-radius: 20px;
             display: flex; align-items: center; justify-content: center;
-            font-size: 2rem;
-            margin: 0 auto 20px;
+            font-size: 2.5rem;
+            margin: 0 auto 25px;
+            box-shadow: 0 10px 30px rgba(0,212,170,0.3);
         }
-        .login-title { font-size: 1.5rem; margin-bottom: 8px; }
-        .login-subtitle { color: var(--text-secondary); margin-bottom: 25px; }
+        .login-title { font-size: 1.8rem; margin-bottom: 8px; font-weight: 700; }
+        .login-subtitle { color: var(--text-secondary); margin-bottom: 30px; }
         .login-input {
             width: 100%;
-            padding: 14px;
+            padding: 16px;
             background: var(--bg-dark);
             border: 2px solid var(--border);
-            border-radius: 12px;
+            border-radius: 14px;
             color: var(--text-primary);
-            font-size: 1rem;
-            margin-bottom: 15px;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
             text-align: center;
+            transition: border-color 0.3s;
         }
         .login-input:focus { outline: none; border-color: var(--primary); }
+        .login-input::placeholder { color: #555; }
         .login-btn {
             width: 100%;
-            padding: 14px;
+            padding: 16px;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             border: none;
-            border-radius: 12px;
+            border-radius: 14px;
             color: white;
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
-        .login-btn:hover { transform: translateY(-2px); }
+        .login-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,212,170,0.4); }
         .login-error {
             color: var(--danger);
-            margin-top: 12px;
-            padding: 10px;
-            background: rgba(239,68,68,0.1);
-            border-radius: 8px;
+            margin-top: 15px;
+            padding: 12px;
+            background: rgba(239,68,68,0.15);
+            border-radius: 10px;
             display: none;
+            font-size: 0.9rem;
         }
         .login-hint {
-            margin-top: 20px;
-            padding: 12px;
+            margin-top: 25px;
+            padding: 15px;
             background: rgba(0,212,170,0.1);
-            border-radius: 10px;
-            font-size: 0.8rem;
+            border: 1px solid rgba(0,212,170,0.3);
+            border-radius: 12px;
+            font-size: 0.85rem;
             color: var(--text-secondary);
         }
         .login-hint code {
             background: var(--bg-dark);
-            padding: 2px 6px;
-            border-radius: 4px;
+            padding: 3px 8px;
+            border-radius: 6px;
             color: var(--primary);
+            font-weight: 600;
         }
 
+        /* Admin Panel */
         .admin-panel { display: none; }
-        
+
+        /* Header */
         header {
-            background: var(--bg-card);
+            background: rgba(18,18,26,0.98);
+            backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border);
-            padding: 12px 0;
+            padding: 15px 0;
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
         }
         .header-content {
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
             padding: 0 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 15px;
         }
         .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 1.2rem;
+            gap: 12px;
+            font-size: 1.4rem;
             font-weight: 700;
         }
         .logo-icon {
-            width: 36px; height: 36px;
+            width: 45px; height: 45px;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 10px;
+            border-radius: 12px;
             display: flex; align-items: center; justify-content: center;
+            font-size: 1.4rem;
         }
-        .logo span {
+        .logo-text {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
         .admin-badge {
-            padding: 4px 10px;
-            background: var(--danger);
-            border-radius: 12px;
-            font-size: 0.65rem;
-            margin-left: 6px;
+            padding: 5px 12px;
+            background: linear-gradient(135deg, var(--danger), #dc2626);
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            margin-left: 8px;
+            letter-spacing: 0.5px;
         }
-        .header-btns { display: flex; gap: 8px; }
+        .header-btns { display: flex; gap: 10px; flex-wrap: wrap; }
         .header-btn {
-            padding: 8px 14px;
+            padding: 10px 18px;
             background: var(--bg-dark);
             border: 1px solid var(--border);
-            border-radius: 8px;
+            border-radius: 10px;
             color: var(--text-secondary);
-            font-size: 0.8rem;
+            font-size: 0.85rem;
+            font-weight: 500;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 8px;
             text-decoration: none;
+            transition: all 0.3s;
         }
-        .header-btn:hover { border-color: var(--primary); color: var(--primary); }
-        .header-btn.logout:hover { border-color: var(--danger); color: var(--danger); }
+        .header-btn:hover { border-color: var(--primary); color: var(--primary); background: rgba(0,212,170,0.1); }
+        .header-btn.danger:hover { border-color: var(--danger); color: var(--danger); background: rgba(239,68,68,0.1); }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        /* Container */
+        .container { max-width: 1300px; margin: 0 auto; padding: 25px 20px; }
 
         /* Status Box */
         .status-box {
-            padding: 15px;
-            border-radius: 12px;
-            margin-bottom: 20px;
+            padding: 18px 22px;
+            border-radius: 14px;
+            margin-bottom: 25px;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
             flex-wrap: wrap;
         }
-        .status-box.success { background: rgba(16,185,129,0.15); border: 1px solid var(--success); }
-        .status-box.warning { background: rgba(245,158,11,0.15); border: 1px solid var(--warning); }
-        .status-box.error { background: rgba(239,68,68,0.15); border: 1px solid var(--danger); }
-        .status-box i { font-size: 1.2rem; }
+        .status-box.success { background: rgba(16,185,129,0.12); border: 1px solid var(--success); }
+        .status-box.warning { background: rgba(245,158,11,0.12); border: 1px solid var(--warning); }
+        .status-box.error { background: rgba(239,68,68,0.12); border: 1px solid var(--danger); }
+        .status-box i { font-size: 1.5rem; }
         .status-box.success i { color: var(--success); }
         .status-box.warning i { color: var(--warning); }
         .status-box.error i { color: var(--danger); }
         .status-text { flex: 1; }
-        .status-text strong { display: block; }
-        .status-text small { color: var(--text-secondary); font-size: 0.75rem; }
+        .status-text strong { display: block; font-size: 1rem; margin-bottom: 3px; }
+        .status-text small { color: var(--text-secondary); font-size: 0.8rem; }
+        .status-box .test-btn {
+            padding: 10px 18px;
+            background: var(--bg-dark);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s;
+        }
+        .status-box .test-btn:hover { border-color: var(--primary); color: var(--primary); }
 
         /* Stats */
         .stats-row {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 12px;
-            margin-bottom: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
         }
         .stat-box {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 15px;
+            border-radius: 16px;
+            padding: 22px 18px;
             text-align: center;
+            transition: all 0.3s;
         }
-        .stat-box i { color: var(--primary); margin-bottom: 5px; }
-        .stat-box .num { font-size: 1.5rem; font-weight: 700; }
-        .stat-box .lbl { font-size: 0.75rem; color: var(--text-secondary); }
+        .stat-box:hover { border-color: var(--primary); transform: translateY(-2px); }
+        .stat-box i { font-size: 1.5rem; color: var(--primary); margin-bottom: 10px; display: block; }
+        .stat-box .num { font-size: 2rem; font-weight: 700; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .stat-box .lbl { font-size: 0.8rem; color: var(--text-secondary); margin-top: 5px; }
 
-        /* Grid */
+        /* Main Grid */
         .main-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-        @media (max-width: 900px) {
-            .main-grid { grid-template-columns: 1fr; }
+            gap: 25px;
         }
 
+        /* Card */
         .card {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 20px;
+            border-radius: 20px;
+            padding: 25px;
         }
         .card-title {
-            font-size: 1.1rem;
-            margin-bottom: 15px;
+            font-size: 1.2rem;
+            margin-bottom: 22px;
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding-bottom: 12px;
+            gap: 10px;
+            padding-bottom: 15px;
             border-bottom: 1px solid var(--border);
         }
-        .card-title i { color: var(--primary); }
+        .card-title i { color: var(--primary); font-size: 1.1rem; }
+        .card-title span { margin-left: auto; font-size: 0.85rem; color: var(--text-secondary); font-weight: normal; }
 
         /* Form */
-        .form-group { margin-bottom: 12px; }
+        .form-group { margin-bottom: 18px; }
         .form-group label {
             display: block;
             color: var(--text-secondary);
-            font-size: 0.8rem;
-            margin-bottom: 5px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 8px;
         }
+        .form-group label span { color: var(--danger); }
         .form-group input, .form-group select, .form-group textarea {
             width: 100%;
-            padding: 10px 12px;
+            padding: 14px 16px;
             background: var(--bg-dark);
             border: 1px solid var(--border);
-            border-radius: 8px;
+            border-radius: 12px;
             color: var(--text-primary);
-            font-size: 0.9rem;
+            font-size: 1rem;
+            transition: all 0.3s;
         }
         .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
             outline: none;
             border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0,212,170,0.15);
         }
-        .form-group textarea { resize: vertical; min-height: 60px; }
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .form-group input::placeholder, .form-group textarea::placeholder { color: #444; }
+        .form-group textarea { resize: vertical; min-height: 80px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
 
         /* Image Upload */
         .img-upload {
             border: 2px dashed var(--border);
-            border-radius: 10px;
-            padding: 20px;
+            border-radius: 14px;
+            padding: 30px 20px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s;
+            background: var(--bg-dark);
         }
-        .img-upload:hover { border-color: var(--primary); }
-        .img-upload.has-img { padding: 8px; border-style: solid; border-color: var(--success); }
+        .img-upload:hover { border-color: var(--primary); background: rgba(0,212,170,0.05); }
+        .img-upload.has-img { padding: 10px; border-style: solid; border-color: var(--success); background: rgba(16,185,129,0.05); }
         .img-upload input { display: none; }
-        .img-upload i { font-size: 1.5rem; color: var(--primary); }
-        .img-upload p { color: var(--text-secondary); font-size: 0.8rem; margin-top: 5px; }
-        .img-preview { max-width: 100%; max-height: 120px; border-radius: 6px; display: none; }
+        .img-upload .upload-icon { font-size: 2.5rem; color: var(--primary); margin-bottom: 12px; }
+        .img-upload p { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 5px; }
+        .img-upload small { color: #555; font-size: 0.75rem; }
+        .img-preview { max-width: 100%; max-height: 180px; border-radius: 10px; display: none; }
         .img-upload.has-img .upload-ph { display: none; }
         .img-upload.has-img .img-preview { display: block; margin: 0 auto; }
 
         /* Signal Type */
-        .type-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        .type-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
         .type-opt {
-            padding: 12px;
+            padding: 18px 15px;
             background: var(--bg-dark);
             border: 2px solid var(--border);
-            border-radius: 10px;
+            border-radius: 14px;
             cursor: pointer;
             text-align: center;
+            transition: all 0.3s;
         }
         .type-opt:hover { border-color: var(--text-secondary); }
-        .type-opt.sel.buy { border-color: var(--success); background: rgba(16,185,129,0.1); }
-        .type-opt.sel.sell { border-color: var(--danger); background: rgba(239,68,68,0.1); }
-        .type-opt i { font-size: 1.2rem; }
+        .type-opt.sel.buy { border-color: var(--success); background: rgba(16,185,129,0.12); }
+        .type-opt.sel.sell { border-color: var(--danger); background: rgba(239,68,68,0.12); }
+        .type-opt i { font-size: 1.8rem; margin-bottom: 8px; display: block; }
         .type-opt.buy i { color: var(--success); }
         .type-opt.sell i { color: var(--danger); }
-        .type-opt span { display: block; font-size: 0.8rem; font-weight: 600; margin-top: 3px; }
+        .type-opt span { display: block; font-weight: 700; font-size: 0.9rem; }
 
         /* Buttons */
         .btn-primary {
             width: 100%;
-            padding: 12px;
+            padding: 16px;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             border: none;
-            border-radius: 10px;
+            border-radius: 14px;
             color: white;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 10px;
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(0,212,170,0.3);
         }
-        .btn-primary:hover { transform: translateY(-2px); }
-        .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,212,170,0.4); }
+        .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; box-shadow: none; }
         .btn-secondary {
-            padding: 8px 16px;
+            padding: 12px 22px;
             background: transparent;
             border: 1px solid var(--border);
-            border-radius: 8px;
+            border-radius: 10px;
             color: var(--text-secondary);
-            font-size: 0.8rem;
+            font-size: 0.9rem;
+            font-weight: 500;
             cursor: pointer;
+            transition: all 0.3s;
         }
         .btn-secondary:hover { border-color: var(--primary); color: var(--primary); }
         .btn-danger {
-            padding: 6px 10px;
+            padding: 8px 14px;
             background: transparent;
             border: 1px solid var(--danger);
-            border-radius: 6px;
+            border-radius: 8px;
             color: var(--danger);
             cursor: pointer;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
+            transition: all 0.3s;
         }
         .btn-danger:hover { background: var(--danger); color: white; }
 
         /* Signal List */
-        .signal-list { max-height: 450px; overflow-y: auto; }
+        .signal-list { max-height: 520px; overflow-y: auto; padding-right: 5px; }
         .signal-item {
             display: flex;
-            gap: 10px;
-            padding: 10px;
+            gap: 14px;
+            padding: 14px;
             background: var(--bg-dark);
-            border-radius: 10px;
-            margin-bottom: 8px;
+            border-radius: 14px;
+            margin-bottom: 12px;
             align-items: center;
+            transition: all 0.3s;
+            border: 1px solid transparent;
         }
+        .signal-item:hover { border-color: var(--border); background: #151520; }
         .signal-item img {
-            width: 45px; height: 45px;
-            border-radius: 6px;
+            width: 60px; height: 60px;
+            border-radius: 10px;
             object-fit: cover;
+            flex-shrink: 0;
+            background: var(--border);
         }
-        .signal-item-info { flex: 1; }
+        .signal-item-info { flex: 1; min-width: 0; }
         .signal-item-pair {
             font-weight: 700;
-            font-size: 0.9rem;
+            font-size: 1rem;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 10px;
+            margin-bottom: 5px;
         }
         .badge {
-            padding: 2px 6px;
-            border-radius: 6px;
-            font-size: 0.6rem;
-            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 8px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.3px;
         }
         .badge.buy { background: rgba(16,185,129,0.2); color: var(--success); }
         .badge.sell { background: rgba(239,68,68,0.2); color: var(--danger); }
-        .signal-item-details { font-size: 0.7rem; color: var(--text-secondary); }
-        .signal-item-time { font-size: 0.65rem; color: var(--text-secondary); }
+        .signal-item-details { font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 3px; }
+        .signal-item-time { font-size: 0.75rem; color: #555; display: flex; align-items: center; gap: 5px; }
 
-        .empty-list { text-align: center; padding: 30px; color: var(--text-secondary); }
-        .empty-list i { font-size: 2rem; margin-bottom: 10px; opacity: 0.3; }
+        .empty-list { text-align: center; padding: 50px 20px; color: var(--text-secondary); }
+        .empty-list i { font-size: 3rem; margin-bottom: 15px; opacity: 0.3; display: block; color: var(--primary); }
+        .empty-list p { font-size: 1rem; }
 
         /* Console */
         .console {
-            background: #111;
+            background: #0d0d12;
             border: 1px solid var(--border);
-            border-radius: 10px;
-            margin-top: 15px;
+            border-radius: 14px;
+            margin-top: 20px;
             overflow: hidden;
         }
         .console-header {
-            background: #1a1a1a;
-            padding: 8px 12px;
-            font-size: 0.75rem;
+            background: #151520;
+            padding: 12px 16px;
+            font-size: 0.85rem;
+            font-weight: 600;
             display: flex;
             justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
         }
+        .console-header span { display: flex; align-items: center; gap: 8px; }
         .console-header button {
-            padding: 3px 8px;
+            padding: 5px 12px;
             background: var(--border);
             border: none;
-            border-radius: 4px;
+            border-radius: 6px;
             color: var(--text-secondary);
-            font-size: 0.65rem;
+            font-size: 0.75rem;
             cursor: pointer;
+            transition: all 0.3s;
         }
+        .console-header button:hover { background: var(--primary); color: white; }
         .console-logs {
-            padding: 8px;
-            max-height: 120px;
+            padding: 12px;
+            max-height: 160px;
             overflow-y: auto;
-            font-family: monospace;
-            font-size: 0.7rem;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.75rem;
+            line-height: 1.6;
         }
-        .log { padding: 3px 6px; margin-bottom: 2px; border-radius: 3px; }
-        .log.ok { background: rgba(16,185,129,0.1); color: var(--success); }
-        .log.err { background: rgba(239,68,68,0.1); color: var(--danger); }
-        .log.info { background: rgba(0,212,170,0.1); color: var(--primary); }
-        .log.warn { background: rgba(245,158,11,0.1); color: var(--warning); }
+        .log { padding: 4px 10px; margin-bottom: 4px; border-radius: 6px; }
+        .log.ok { background: rgba(16,185,129,0.12); color: var(--success); }
+        .log.err { background: rgba(239,68,68,0.12); color: var(--danger); }
+        .log.info { background: rgba(0,212,170,0.08); color: var(--primary); }
+        .log.warn { background: rgba(245,158,11,0.12); color: var(--warning); }
 
         /* Toast */
         .toast {
             position: fixed;
-            bottom: 20px; right: 20px;
-            padding: 12px 20px;
+            bottom: 30px; right: 30px;
+            padding: 16px 26px;
             background: var(--success);
             color: white;
-            border-radius: 10px;
+            border-radius: 14px;
             font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 12px;
             transform: translateX(150%);
-            transition: transform 0.3s;
+            transition: transform 0.4s cubic-bezier(0.68,-0.55,0.265,1.55);
             z-index: 3000;
-            font-size: 0.85rem;
+            font-size: 0.95rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
         }
         .toast.show { transform: translateX(0); }
         .toast.err { background: var(--danger); }
         .toast.warn { background: var(--warning); }
 
-        ::-webkit-scrollbar { width: 5px; }
+        /* Responsive */
+        @media (max-width: 900px) {
+            .main-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 600px) {
+            .form-row { grid-template-columns: 1fr; }
+            .header-content { justify-content: center; }
+            .login-box { padding: 30px 25px; }
+            .card { padding: 20px 18px; }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: var(--bg-dark); }
         ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
     </style>
 </head>
 <body>
 
-    <!-- Login -->
+    <!-- Login Screen -->
     <div class="login-screen" id="loginScreen">
         <div class="login-box">
             <div class="login-logo">🔐</div>
             <h1 class="login-title">Admin Panel</h1>
-            <p class="login-subtitle">Masukkan password</p>
-            <input type="password" class="login-input" id="pwInput" placeholder="Password" autofocus>
-            <button class="login-btn" onclick="login()">
+            <p class="login-subtitle">Masukkan password untuk akses</p>
+            <input 
+                type="password" 
+                class="login-input" 
+                id="pwInput" 
+                placeholder="••••••••"
+                autofocus
+            >
+            <button class="login-btn" id="loginBtn" onclick="login()">
                 <i class="fas fa-sign-in-alt"></i> Login
             </button>
-            <p class="login-error" id="loginErr">Password salah!</p>
-            <div class="login-hint">Default: <code>admin123</code></div>
+            <p class="login-error" id="loginErr">
+                <i class="fas fa-times-circle"></i> Password salah! Coba lagi.
+            </p>
+            <div class="login-hint">
+                💡 Default password: <code>admin123</code>
+            </div>
         </div>
     </div>
 
     <!-- Admin Panel -->
     <div class="admin-panel" id="adminPanel">
+        <!-- Header -->
         <header>
             <div class="header-content">
                 <div class="logo">
                     <div class="logo-icon">📊</div>
-                    <span>CryptoSignal</span>
+                    <span class="logo-text">CryptoSignal Pro</span>
                     <span class="admin-badge">ADMIN</span>
                 </div>
                 <div class="header-btns">
                     <a href="index.html" class="header-btn" target="_blank">
-                        <i class="fas fa-external-link-alt"></i> Public
+                        <i class="fas fa-external-link-alt"></i> Lihat Public
                     </a>
                     <button class="header-btn" onclick="testConnection()">
-                        <i class="fas fa-plug"></i> Test
+                        <i class="fas fa-plug"></i> Test Koneksi
                     </button>
-                    <button class="header-btn logout" onclick="logout()">
-                        <i class="fas fa-sign-out-alt"></i>
+                    <button class="header-btn danger" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i> Logout
                     </button>
                 </div>
             </div>
         </header>
 
         <div class="container">
-            <!-- Status -->
+            <!-- Status Box -->
             <div class="status-box warning" id="statusBox">
                 <i class="fas fa-database"></i>
                 <div class="status-text">
                     <strong id="statusTitle">Memeriksa koneksi...</strong>
                     <small id="statusDesc">Menghubungkan ke database</small>
                 </div>
+                <button class="test-btn" onclick="testConnection()">
+                    <i class="fas fa-sync-alt"></i> Test
+                </button>
             </div>
 
             <!-- Stats -->
@@ -484,128 +578,146 @@
                 <div class="stat-box">
                     <i class="fas fa-chart-line"></i>
                     <div class="num" id="sTotal">0</div>
-                    <div class="lbl">Total</div>
+                    <div class="lbl">Total Signals</div>
                 </div>
                 <div class="stat-box">
-                    <i class="fas fa-arrow-up"></i>
+                    <i class="fas fa-arrow-trend-up"></i>
                     <div class="num" id="sBuy">0</div>
-                    <div class="lbl">Buy</div>
+                    <div class="lbl">Buy Signals</div>
                 </div>
                 <div class="stat-box">
-                    <i class="fas fa-arrow-down"></i>
+                    <i class="fas fa-arrow-trend-down"></i>
                     <div class="num" id="sSell">0</div>
-                    <div class="lbl">Sell</div>
+                    <div class="lbl">Sell Signals</div>
                 </div>
                 <div class="stat-box">
-                    <i class="fas fa-calendar"></i>
+                    <i class="fas fa-calendar-day"></i>
                     <div class="num" id="sToday">0</div>
-                    <div class="lbl">Today</div>
+                    <div class="lbl">Hari Ini</div>
                 </div>
             </div>
 
+            <!-- Main Grid -->
             <div class="main-grid">
-                <!-- Form -->
+                <!-- Create Signal Form -->
                 <div class="card">
-                    <h2 class="card-title"><i class="fas fa-plus-circle"></i> Buat Signal</h2>
+                    <h2 class="card-title">
+                        <i class="fas fa-plus-circle"></i> Buat Signal Baru
+                    </h2>
+                    
                     <form id="signalForm" onsubmit="createSignal(event)">
                         <div class="form-group">
-                            <label>Trading Pair *</label>
-                            <input type="text" id="pair" placeholder="BTC/USDT" required>
+                            <label>Trading Pair <span>*</span></label>
+                            <input type="text" id="pair" placeholder="Contoh: BTC/USDT, EUR/USD, XAU/USD" required>
                         </div>
+                        
                         <div class="form-row">
                             <div class="form-group">
                                 <label>Market</label>
                                 <select id="market">
-                                    <option value="crypto">Crypto</option>
-                                    <option value="forex">Forex</option>
+                                    <option value="crypto">🪙 Cryptocurrency</option>
+                                    <option value="forex">💱 Forex</option>
+                                    <option value="stocks">📈 Stocks</option>
+                                    <option value="commodities">🛢️ Commodities</option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label>Timeframe</label>
                                 <select id="tf">
-                                    <option value="5m">5m</option>
-                                    <option value="15m">15m</option>
-                                    <option value="1h" selected>1h</option>
-                                    <option value="4h">4h</option>
-                                    <option value="1d">1d</option>
+                                    <option value="1m">1 Minute</option>
+                                    <option value="5m">5 Minutes</option>
+                                    <option value="15m">15 Minutes</option>
+                                    <option value="30m">30 Minutes</option>
+                                    <option value="1h" selected>1 Hour</option>
+                                    <option value="4h">4 Hours</option>
+                                    <option value="1d">1 Day</option>
+                                    <option value="1w">1 Week</option>
                                 </select>
                             </div>
                         </div>
+                        
                         <div class="form-group">
-                            <label>Type *</label>
+                            <label>Signal Type <span>*</span></label>
                             <div class="type-grid">
                                 <div class="type-opt buy sel" onclick="selType('buy')">
                                     <i class="fas fa-arrow-trend-up"></i>
-                                    <span>BUY</span>
+                                    <span>BUY / LONG</span>
                                 </div>
                                 <div class="type-opt sell" onclick="selType('sell')">
                                     <i class="fas fa-arrow-trend-down"></i>
-                                    <span>SELL</span>
+                                    <span>SELL / SHORT</span>
                                 </div>
                             </div>
                             <input type="hidden" id="sType" value="buy">
                         </div>
+                        
                         <div class="form-row">
                             <div class="form-group">
-                                <label>Entry *</label>
-                                <input type="text" id="entry" placeholder="67500" required>
+                                <label>Entry Price <span>*</span></label>
+                                <input type="text" id="entry" placeholder="Contoh: 67500" required>
                             </div>
                             <div class="form-group">
-                                <label>Take Profit *</label>
-                                <input type="text" id="tp" placeholder="72000" required>
+                                <label>Take Profit <span>*</span></label>
+                                <input type="text" id="tp" placeholder="Contoh: 72000" required>
                             </div>
                         </div>
+                        
                         <div class="form-group">
-                            <label>Stop Loss *</label>
-                            <input type="text" id="sl" placeholder="65000" required>
+                            <label>Stop Loss <span>*</span></label>
+                            <input type="text" id="sl" placeholder="Contoh: 65000" required>
                         </div>
+                        
                         <div class="form-group">
-                            <label>Chart Image *</label>
+                            <label>Chart Image <span>*</span></label>
                             <div class="img-upload" id="imgUpload" onclick="document.getElementById('imgFile').click()">
                                 <input type="file" id="imgFile" accept="image/*" onchange="previewImg(event)">
                                 <div class="upload-ph">
-                                    <i class="fas fa-cloud-upload-alt"></i>
-                                    <p>Upload gambar (max 2MB)</p>
+                                    <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                                    <p>Klik untuk upload gambar chart</p>
+                                    <small>Format: JPG, PNG (Max 2MB)</small>
                                 </div>
-                                <img class="img-preview" id="imgPreview">
+                                <img class="img-preview" id="imgPreview" alt="Preview">
                             </div>
                         </div>
+                        
                         <div class="form-group">
-                            <label>Analisis *</label>
-                            <textarea id="desc" placeholder="Jelaskan analisis..." required></textarea>
+                            <label>Analisis & Deskripsi <span>*</span></label>
+                            <textarea id="desc" placeholder="Jelaskan analisis teknikal, alasan entry, risk management, dll..." required></textarea>
                         </div>
+                        
                         <button type="submit" class="btn-primary" id="pubBtn">
-                            <i class="fas fa-paper-plane"></i> Publish
+                            <i class="fas fa-paper-plane"></i> Publish Signal
                         </button>
-                        <div style="margin-top:10px;text-align:center;">
+                        
+                        <div style="margin-top: 15px; text-align: center;">
                             <button type="button" class="btn-secondary" onclick="resetForm()">
-                                <i class="fas fa-redo"></i> Reset
+                                <i class="fas fa-redo"></i> Reset Form
                             </button>
                         </div>
                     </form>
 
-                    <!-- Console -->
+                    <!-- Debug Console -->
                     <div class="console">
                         <div class="console-header">
-                            <span>📋 Log</span>
+                            <span><i class="fas fa-terminal"></i> Debug Console</span>
                             <button onclick="clearLog()">Clear</button>
                         </div>
                         <div class="console-logs" id="logs">
-                            <div class="log info">Ready...</div>
+                            <div class="log info">🚀 System ready...</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- List -->
+                <!-- Signal List -->
                 <div class="card">
                     <h2 class="card-title">
-                        <i class="fas fa-list"></i> Signals 
-                        <span style="margin-left:auto;font-size:0.8rem;color:var(--text-secondary)" id="cnt">(0)</span>
+                        <i class="fas fa-list"></i> Kelola Signals
+                        <span id="cnt">(0)</span>
                     </h2>
                     <div class="signal-list" id="sigList">
                         <div class="empty-list">
                             <i class="fas fa-spinner fa-spin"></i>
-                            <p>Loading...</p>
+                            <p>Memuat data...</p>
                         </div>
                     </div>
                 </div>
@@ -616,164 +728,160 @@
     <!-- Toast -->
     <div class="toast" id="toast">
         <i class="fas fa-check-circle" id="toastIcon"></i>
-        <span id="toastMsg">OK</span>
+        <span id="toastMsg">Success!</span>
     </div>
 
     <script>
-    // ================================================================
-    // 🔧 KONFIGURASI - ISI SEMUA INI!
-    // ================================================================
-    const CONFIG = {
-        ADMIN_PASSWORD: 'admin123',
-        
-        // JSONBin (dari sebelumnya)
-        JSONBIN_BIN_ID: '694074e743b1c97be9f09448',      // ← ISI!
-        JSONBIN_API_KEY: '$2a$10$8dydQ2cR6l/L9sTc8Rh5Pu2ip865LXWi3Re5hU55X7Ej499kxTiaW',     // ← ISI!
-        
-        // ImgBB (WAJIB untuk upload gambar)
-        IMGBB_API_KEY: '813a9454d27c3d6ae0b9bb0dabf2c07d',       // ← ISI! Dapat dari https://api.imgbb.com/
-    };
-    // ================================================================
+        // ================================================================
+        // 🔧 KONFIGURASI - SUDAH DIISI DENGAN API ANDA!
+        // ================================================================
+        const CONFIG = {
+            // Password Admin
+            ADMIN_PASSWORD: 'admin123',
+            
+            // JSONBin.io
+            JSONBIN_BIN_ID: '69411b80ae596e708f9d794f',
+            JSONBIN_API_KEY: '$2a$10$6t7ya1ByAyvz9DsYpFnZBuidHGngvlVfhFBCmwwCVvx7PdOFdIqqC',
+            
+            // Freeimage.host (untuk upload gambar)
+            FREEIMAGE_API_KEY: '6d207e02198a847aa98d0a2a901485a5',
+        };
+        // ================================================================
 
-    let signals = [];
-    let imageFile = null;
-    let imageBase64 = null;
+        let signals = [];
+        let imageFile = null;
+        let imageBase64 = null;
 
-    document.getElementById('pwInput').addEventListener('keypress', e => {
-        if (e.key === 'Enter') login();
-    });
+        // Enter key untuk login
+        document.getElementById('pwInput').addEventListener('keypress', e => {
+            if (e.key === 'Enter') login();
+        });
 
-    // ==================== LOGIN ====================
-    function login() {
-        if (document.getElementById('pwInput').value === CONFIG.ADMIN_PASSWORD) {
-            document.getElementById('loginScreen').style.display = 'none';
-            document.getElementById('adminPanel').style.display = 'block';
-            log('✅ Login berhasil!', 'ok');
-            checkConfig();
-            loadSignals();
-        } else {
-            document.getElementById('loginErr').style.display = 'block';
-            setTimeout(() => document.getElementById('loginErr').style.display = 'none', 2000);
-        }
-    }
-
-    function logout() {
-        document.getElementById('adminPanel').style.display = 'none';
-        document.getElementById('loginScreen').style.display = 'flex';
-        document.getElementById('pwInput').value = '';
-    }
-
-    // ==================== CHECK CONFIG ====================
-    function checkConfig() {
-        const box = document.getElementById('statusBox');
-        const title = document.getElementById('statusTitle');
-        const desc = document.getElementById('statusDesc');
-
-        let issues = [];
-        
-        if (!CONFIG.JSONBIN_BIN_ID) {
-            issues.push('JSONBIN_BIN_ID kosong');
-            log('❌ JSONBIN_BIN_ID belum diisi!', 'err');
-        }
-        if (!CONFIG.JSONBIN_API_KEY) {
-            issues.push('JSONBIN_API_KEY kosong');
-            log('❌ JSONBIN_API_KEY belum diisi!', 'err');
-        }
-        if (!CONFIG.IMGBB_API_KEY) {
-            issues.push('IMGBB_API_KEY kosong');
-            log('❌ IMGBB_API_KEY belum diisi! Gambar tidak akan terupload!', 'err');
-        }
-
-        if (issues.length > 0) {
-            box.className = 'status-box warning';
-            title.textContent = '⚠️ Config Belum Lengkap';
-            desc.textContent = issues.join(' | ');
-        } else {
-            log('✅ Semua config terisi', 'ok');
-            testConnection();
-        }
-    }
-
-    async function testConnection() {
-        const box = document.getElementById('statusBox');
-        const title = document.getElementById('statusTitle');
-        const desc = document.getElementById('statusDesc');
-
-        if (!CONFIG.JSONBIN_BIN_ID || !CONFIG.JSONBIN_API_KEY) {
-            toast('Isi JSONBin config dulu!', 'err');
-            return;
-        }
-
-        title.textContent = '🔄 Testing koneksi...';
-        log('Testing JSONBin...', 'info');
-
-        try {
-            // Test JSONBin
-            const res = await fetch(`https://api.jsonbin.io/v3/b/${CONFIG.JSONBIN_BIN_ID}/latest`, {
-                headers: { 'X-Master-Key': CONFIG.JSONBIN_API_KEY }
-            });
-
-            if (res.ok) {
-                log('✅ JSONBin OK!', 'ok');
-                
-                // Test ImgBB (optional)
-                if (CONFIG.IMGBB_API_KEY) {
-                    log('✅ ImgBB API Key terisi', 'ok');
-                    box.className = 'status-box success';
-                    title.textContent = '✅ Semua Terhubung';
-                    desc.textContent = 'JSONBin & ImgBB siap!';
+        // ==================== LOGIN ====================
+        function login() {
+            const pw = document.getElementById('pwInput').value;
+            const btn = document.getElementById('loginBtn');
+            
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Checking...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                if (pw === CONFIG.ADMIN_PASSWORD) {
+                    document.getElementById('loginScreen').style.display = 'none';
+                    document.getElementById('adminPanel').style.display = 'block';
+                    log('✅ Login berhasil!', 'ok');
+                    checkConfig();
+                    loadSignals();
                 } else {
-                    box.className = 'status-box warning';
-                    title.textContent = '⚠️ ImgBB Belum Diisi';
-                    desc.textContent = 'Gambar akan pakai base64 (mungkin error)';
+                    document.getElementById('loginErr').style.display = 'block';
+                    document.getElementById('pwInput').value = '';
+                    document.getElementById('pwInput').focus();
+                    setTimeout(() => {
+                        document.getElementById('loginErr').style.display = 'none';
+                    }, 3000);
                 }
-                
-                toast('Koneksi OK!');
-            } else {
-                throw new Error(`HTTP ${res.status}`);
-            }
-        } catch (err) {
-            box.className = 'status-box error';
-            title.textContent = '❌ Koneksi Gagal';
-            desc.textContent = err.message;
-            log('❌ Error: ' + err.message, 'err');
-            toast('Gagal!', 'err');
+                btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login';
+                btn.disabled = false;
+            }, 500);
         }
-    }
 
-    // ==================== LOAD ====================
-    async function loadSignals() {
-        log('📥 Loading signals...', 'info');
+        function logout() {
+            document.getElementById('adminPanel').style.display = 'none';
+            document.getElementById('loginScreen').style.display = 'flex';
+            document.getElementById('pwInput').value = '';
+        }
 
-        try {
-            if (CONFIG.JSONBIN_BIN_ID && CONFIG.JSONBIN_API_KEY) {
+        // ==================== CHECK CONFIG ====================
+        function checkConfig() {
+            log('🔍 Memeriksa konfigurasi...', 'info');
+            
+            let issues = [];
+            if (!CONFIG.JSONBIN_BIN_ID) issues.push('JSONBIN_BIN_ID');
+            if (!CONFIG.JSONBIN_API_KEY) issues.push('JSONBIN_API_KEY');
+            if (!CONFIG.FREEIMAGE_API_KEY) issues.push('FREEIMAGE_API_KEY');
+
+            if (issues.length > 0) {
+                const box = document.getElementById('statusBox');
+                box.className = 'status-box warning';
+                document.getElementById('statusTitle').textContent = '⚠️ Config belum lengkap';
+                document.getElementById('statusDesc').textContent = 'Kosong: ' + issues.join(', ');
+                issues.forEach(i => log('❌ ' + i + ' kosong!', 'err'));
+            } else {
+                log('✅ Semua config terisi', 'ok');
+                testConnection();
+            }
+        }
+
+        async function testConnection() {
+            const box = document.getElementById('statusBox');
+            const title = document.getElementById('statusTitle');
+            const desc = document.getElementById('statusDesc');
+
+            title.textContent = '🔄 Testing koneksi...';
+            desc.textContent = 'Menghubungkan ke JSONBin & Freeimage';
+            log('🔌 Testing JSONBin...', 'info');
+
+            try {
                 const res = await fetch(`https://api.jsonbin.io/v3/b/${CONFIG.JSONBIN_BIN_ID}/latest`, {
                     headers: { 'X-Master-Key': CONFIG.JSONBIN_API_KEY }
                 });
+
+                if (res.ok) {
+                    const data = await res.json();
+                    const count = (data.record.signals || []).length;
+                    
+                    box.className = 'status-box success';
+                    title.textContent = '✅ Semua Terhubung!';
+                    desc.textContent = `JSONBin OK (${count} signals) | Freeimage Ready`;
+                    
+                    log('✅ JSONBin connected!', 'ok');
+                    log('✅ Freeimage API key tersedia', 'ok');
+                    toast('Database terhubung!');
+                } else {
+                    throw new Error(`HTTP ${res.status}`);
+                }
+            } catch (err) {
+                box.className = 'status-box error';
+                title.textContent = '❌ Koneksi Gagal';
+                desc.textContent = err.message;
+                log('❌ Error: ' + err.message, 'err');
+                toast('Koneksi gagal!', 'err');
+            }
+        }
+
+        // ==================== LOAD SIGNALS ====================
+        async function loadSignals() {
+            log('📥 Memuat signals...', 'info');
+
+            try {
+                const res = await fetch(`https://api.jsonbin.io/v3/b/${CONFIG.JSONBIN_BIN_ID}/latest`, {
+                    headers: { 'X-Master-Key': CONFIG.JSONBIN_API_KEY }
+                });
+                
                 if (res.ok) {
                     const data = await res.json();
                     signals = data.record.signals || [];
-                    log(`✅ Loaded ${signals.length} signals dari JSONBin`, 'ok');
+                    log(`✅ Loaded ${signals.length} signals`, 'ok');
+                } else {
+                    throw new Error('Failed to load');
                 }
-            } else {
-                signals = JSON.parse(localStorage.getItem('signals') || '[]');
+            } catch (err) {
+                log('⚠️ Load dari JSONBin gagal, coba localStorage...', 'warn');
+                signals = JSON.parse(localStorage.getItem('cryptosignals') || '[]');
                 log(`📦 Loaded ${signals.length} signals dari localStorage`, 'info');
             }
-        } catch (err) {
-            log('❌ Load error: ' + err.message, 'err');
-            signals = JSON.parse(localStorage.getItem('signals') || '[]');
+
+            renderList();
+            updateStats();
         }
 
-        renderList();
-        updateStats();
-    }
+        // ==================== SAVE SIGNALS ====================
+        async function saveSignals() {
+            // Simpan ke localStorage dulu
+            localStorage.setItem('cryptosignals', JSON.stringify(signals));
+            log('💾 Saved to localStorage', 'info');
 
-    // ==================== SAVE ====================
-    async function saveSignals() {
-        localStorage.setItem('signals', JSON.stringify(signals));
-        log('💾 Saved to localStorage', 'info');
-
-        if (CONFIG.JSONBIN_BIN_ID && CONFIG.JSONBIN_API_KEY) {
+            // Simpan ke JSONBin
             log('☁️ Saving to JSONBin...', 'info');
             try {
                 const res = await fetch(`https://api.jsonbin.io/v3/b/${CONFIG.JSONBIN_BIN_ID}`, {
@@ -789,244 +897,277 @@
                     log('✅ Saved to JSONBin!', 'ok');
                     return true;
                 } else {
-                    const errText = await res.text();
-                    throw new Error(`HTTP ${res.status}: ${errText}`);
+                    throw new Error(`HTTP ${res.status}`);
                 }
             } catch (err) {
                 log('❌ JSONBin error: ' + err.message, 'err');
                 return false;
             }
         }
-        return true;
-    }
 
-    // ==================== UPLOAD IMAGE ====================
-    async function uploadImage(file) {
-        // Cek API Key
-        if (!CONFIG.IMGBB_API_KEY) {
-            log('⚠️ IMGBB_API_KEY kosong! Pakai base64...', 'warn');
-            // Fallback ke base64
-            return imageBase64;
+        // ==================== UPLOAD IMAGE KE FREEIMAGE ====================
+        async function uploadImage(file) {
+            log('📤 Uploading ke Freeimage.host...', 'info');
+
+            try {
+                const formData = new FormData();
+                formData.append('source', file);
+                formData.append('type', 'file');
+                formData.append('action', 'upload');
+                formData.append('key', CONFIG.FREEIMAGE_API_KEY);
+
+                const res = await fetch('https://freeimage.host/api/1/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await res.json();
+                
+                log('📦 Freeimage response: ' + JSON.stringify(data).substring(0, 150) + '...', 'info');
+
+                if (data.status_code === 200 && data.image) {
+                    // Gunakan URL langsung dari response
+                    const imageUrl = data.image.url;
+                    log('✅ Image uploaded: ' + imageUrl, 'ok');
+                    return imageUrl;
+                } else {
+                    throw new Error(data.error?.message || data.status_txt || 'Upload failed');
+                }
+            } catch (err) {
+                log('❌ Upload error: ' + err.message, 'err');
+                log('⚠️ Menggunakan base64 sebagai fallback...', 'warn');
+                return imageBase64;
+            }
         }
 
-        log('📤 Uploading ke ImgBB...', 'info');
+        // ==================== CREATE SIGNAL ====================
+        async function createSignal(e) {
+            e.preventDefault();
 
-        try {
-            const formData = new FormData();
-            formData.append('image', file);
-
-            const res = await fetch(`https://api.imgbb.com/1/upload?key=${CONFIG.IMGBB_API_KEY}`, {
-                method: 'POST',
-                body: formData
-            });
-
-            const data = await res.json();
-            
-            if (data.success) {
-                const url = data.data.url;
-                log('✅ Image uploaded: ' + url, 'ok');
-                return url;
-            } else {
-                throw new Error(data.error?.message || 'Upload failed');
+            if (!imageFile && !imageBase64) {
+                toast('Upload gambar chart dulu!', 'err');
+                log('❌ Tidak ada gambar', 'err');
+                return;
             }
-        } catch (err) {
-            log('❌ ImgBB error: ' + err.message, 'err');
-            log('⚠️ Fallback ke base64...', 'warn');
-            return imageBase64;
+
+            const btn = document.getElementById('pubBtn');
+            btn.disabled = true;
+
+            try {
+                // Step 1: Upload image
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading image...';
+                log('🖼️ Processing image...', 'info');
+                
+                const imageUrl = await uploadImage(imageFile);
+                
+                if (!imageUrl) {
+                    throw new Error('Gagal mendapatkan URL gambar');
+                }
+
+                // Step 2: Create signal object
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating signal...';
+                
+                const signal = {
+                    id: Date.now(),
+                    pair: document.getElementById('pair').value.toUpperCase().trim(),
+                    marketType: document.getElementById('market').value,
+                    timeframe: document.getElementById('tf').value,
+                    type: document.getElementById('sType').value,
+                    entry: document.getElementById('entry').value.trim(),
+                    takeProfit: document.getElementById('tp').value.trim(),
+                    stopLoss: document.getElementById('sl').value.trim(),
+                    description: document.getElementById('desc').value.trim(),
+                    image: imageUrl,
+                    timestamp: Date.now()
+                };
+
+                log('📊 Signal: ' + signal.pair + ' ' + signal.type.toUpperCase(), 'info');
+
+                // Step 3: Add & Save
+                signals.unshift(signal);
+                
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving to database...';
+                const saved = await saveSignals();
+
+                // Step 4: Update UI
+                renderList();
+                updateStats();
+                resetForm();
+
+                if (saved) {
+                    toast('🚀 Signal published!');
+                    log('🎉 Signal published successfully!', 'ok');
+                } else {
+                    toast('⚠️ Saved locally only', 'warn');
+                }
+
+            } catch (err) {
+                log('❌ Error: ' + err.message, 'err');
+                toast('Error: ' + err.message, 'err');
+            }
+
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-paper-plane"></i> Publish Signal';
         }
-    }
 
-    // ==================== CREATE SIGNAL ====================
-    async function createSignal(e) {
-        e.preventDefault();
+        // ==================== DELETE SIGNAL ====================
+        async function deleteSig(id) {
+            if (!confirm('Yakin ingin menghapus signal ini?')) return;
 
-        if (!imageFile && !imageBase64) {
-            toast('Upload gambar!', 'err');
-            log('❌ Tidak ada gambar', 'err');
-            return;
-        }
-
-        const btn = document.getElementById('pubBtn');
-        btn.disabled = true;
-        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
-
-        try {
-            // Upload gambar
-            log('🖼️ Processing image...', 'info');
-            let imageUrl;
+            signals = signals.filter(s => s.id !== id);
+            log('🗑️ Signal ' + id + ' dihapus', 'info');
             
-            if (imageFile && CONFIG.IMGBB_API_KEY) {
-                imageUrl = await uploadImage(imageFile);
-            } else {
-                imageUrl = imageBase64;
-                log('⚠️ Menggunakan base64 (tidak recommended)', 'warn');
-            }
-
-            if (!imageUrl) {
-                throw new Error('Gagal mendapatkan URL gambar');
-            }
-
-            log('🔗 Image URL: ' + imageUrl.substring(0, 50) + '...', 'info');
-
-            // Buat signal
-            const signal = {
-                id: Date.now(),
-                pair: document.getElementById('pair').value.toUpperCase().trim(),
-                marketType: document.getElementById('market').value,
-                timeframe: document.getElementById('tf').value,
-                type: document.getElementById('sType').value,
-                entry: document.getElementById('entry').value.trim(),
-                takeProfit: document.getElementById('tp').value.trim(),
-                stopLoss: document.getElementById('sl').value.trim(),
-                description: document.getElementById('desc').value.trim(),
-                image: imageUrl,
-                timestamp: Date.now()
-            };
-
-            log('📊 Signal: ' + signal.pair + ' ' + signal.type.toUpperCase(), 'info');
-
-            signals.unshift(signal);
-            
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
-            const saved = await saveSignals();
-
+            await saveSignals();
             renderList();
             updateStats();
-            resetForm();
+            toast('Signal dihapus');
+        }
 
-            if (saved) {
-                toast('✅ Published!');
-                log('🎉 Signal published successfully!', 'ok');
-            } else {
-                toast('⚠️ Saved locally', 'warn');
+        // ==================== RENDER LIST ====================
+        function renderList() {
+            const list = document.getElementById('sigList');
+            document.getElementById('cnt').textContent = `(${signals.length})`;
+
+            if (signals.length === 0) {
+                list.innerHTML = `
+                    <div class="empty-list">
+                        <i class="fas fa-inbox"></i>
+                        <p>Belum ada signal</p>
+                    </div>
+                `;
+                return;
             }
 
-        } catch (err) {
-            log('❌ Error: ' + err.message, 'err');
-            toast('Error: ' + err.message, 'err');
-        }
-
-        btn.disabled = false;
-        btn.innerHTML = '<i class="fas fa-paper-plane"></i> Publish';
-    }
-
-    // ==================== DELETE ====================
-    async function deleteSig(id) {
-        if (!confirm('Hapus signal ini?')) return;
-        signals = signals.filter(s => s.id !== id);
-        await saveSignals();
-        renderList();
-        updateStats();
-        toast('Deleted');
-        log('🗑️ Signal deleted', 'info');
-    }
-
-    // ==================== RENDER ====================
-    function renderList() {
-        const list = document.getElementById('sigList');
-        document.getElementById('cnt').textContent = `(${signals.length})`;
-
-        if (signals.length === 0) {
-            list.innerHTML = '<div class="empty-list"><i class="fas fa-inbox"></i><p>Belum ada signal</p></div>';
-            return;
-        }
-
-        list.innerHTML = signals.map(s => `
-            <div class="signal-item">
-                <img src="${s.image}" onerror="this.onerror=null; this.src='https://via.placeholder.com/45x45?text=Err'; console.log('Image error:', '${s.image?.substring(0,30)}...')">
-                <div class="signal-item-info">
-                    <div class="signal-item-pair">
-                        ${s.pair}
-                        <span class="badge ${s.type}">${s.type.toUpperCase()}</span>
+            list.innerHTML = signals.map(s => `
+                <div class="signal-item">
+                    <img 
+                        src="${s.image}" 
+                        alt="${s.pair}"
+                        loading="lazy"
+                        referrerpolicy="no-referrer"
+                        onerror="this.onerror=null; this.src='https://via.placeholder.com/60x60/1a1a2e/00d4aa?text=${s.pair.substring(0,3)}';"
+                    >
+                    <div class="signal-item-info">
+                        <div class="signal-item-pair">
+                            ${s.pair}
+                            <span class="badge ${s.type}">${s.type.toUpperCase()}</span>
+                        </div>
+                        <div class="signal-item-details">
+                            Entry: ${s.entry} | TP: ${s.takeProfit} | SL: ${s.stopLoss}
+                        </div>
+                        <div class="signal-item-time">
+                            <i class="fas fa-clock"></i> ${timeAgo(s.timestamp)}
+                        </div>
                     </div>
-                    <div class="signal-item-details">E:${s.entry} TP:${s.takeProfit} SL:${s.stopLoss}</div>
-                    <div class="signal-item-time">${timeAgo(s.timestamp)}</div>
+                    <button class="btn-danger" onclick="deleteSig(${s.id})" title="Hapus">
+                        <i class="fas fa-trash"></i>
+                    </button>
                 </div>
-                <button class="btn-danger" onclick="deleteSig(${s.id})"><i class="fas fa-trash"></i></button>
-            </div>
-        `).join('');
-    }
-
-    function updateStats() {
-        const today = new Date().setHours(0,0,0,0);
-        document.getElementById('sTotal').textContent = signals.length;
-        document.getElementById('sBuy').textContent = signals.filter(s => s.type === 'buy').length;
-        document.getElementById('sSell').textContent = signals.filter(s => s.type === 'sell').length;
-        document.getElementById('sToday').textContent = signals.filter(s => s.timestamp >= today).length;
-    }
-
-    // ==================== HELPERS ====================
-    function selType(t) {
-        document.querySelectorAll('.type-opt').forEach(o => o.classList.remove('sel'));
-        document.querySelector(`.type-opt.${t}`).classList.add('sel');
-        document.getElementById('sType').value = t;
-    }
-
-    function previewImg(e) {
-        const file = e.target.files[0];
-        if (!file) return;
-
-        log('📁 File selected: ' + file.name + ' (' + (file.size/1024).toFixed(1) + 'KB)', 'info');
-
-        if (file.size > 2 * 1024 * 1024) {
-            toast('Max 2MB!', 'err');
-            log('❌ File terlalu besar!', 'err');
-            return;
+            `).join('');
         }
 
-        imageFile = file;
-        
-        const reader = new FileReader();
-        reader.onload = ev => {
-            imageBase64 = ev.target.result;
-            document.getElementById('imgPreview').src = imageBase64;
-            document.getElementById('imgUpload').classList.add('has-img');
-            log('✅ Image loaded', 'ok');
-        };
-        reader.readAsDataURL(file);
-    }
+        // ==================== UPDATE STATS ====================
+        function updateStats() {
+            const today = new Date().setHours(0, 0, 0, 0);
+            document.getElementById('sTotal').textContent = signals.length;
+            document.getElementById('sBuy').textContent = signals.filter(s => s.type === 'buy').length;
+            document.getElementById('sSell').textContent = signals.filter(s => s.type === 'sell').length;
+            document.getElementById('sToday').textContent = signals.filter(s => s.timestamp >= today).length;
+        }
 
-    function resetForm() {
-        document.getElementById('signalForm').reset();
-        document.getElementById('imgPreview').src = '';
-        document.getElementById('imgUpload').classList.remove('has-img');
-        imageFile = null;
-        imageBase64 = null;
-        selType('buy');
-    }
+        // ==================== HELPER FUNCTIONS ====================
+        function selType(type) {
+            document.querySelectorAll('.type-opt').forEach(o => o.classList.remove('sel'));
+            document.querySelector(`.type-opt.${type}`).classList.add('sel');
+            document.getElementById('sType').value = type;
+        }
 
-    function timeAgo(ts) {
-        const m = Math.floor((Date.now() - ts) / 60000);
-        if (m < 1) return 'Baru saja';
-        if (m < 60) return m + ' menit lalu';
-        const h = Math.floor(m / 60);
-        if (h < 24) return h + ' jam lalu';
-        return Math.floor(h / 24) + ' hari lalu';
-    }
+        function previewImg(e) {
+            const file = e.target.files[0];
+            if (!file) return;
 
-    function toast(msg, type = 'ok') {
-        const t = document.getElementById('toast');
-        const icon = document.getElementById('toastIcon');
-        document.getElementById('toastMsg').textContent = msg;
-        t.className = 'toast';
-        if (type === 'err') t.classList.add('err');
-        if (type === 'warn') t.classList.add('warn');
-        icon.className = type === 'err' ? 'fas fa-times-circle' : type === 'warn' ? 'fas fa-exclamation-triangle' : 'fas fa-check-circle';
-        t.classList.add('show');
-        setTimeout(() => t.classList.remove('show'), 3000);
-    }
+            log('📁 File: ' + file.name + ' (' + (file.size / 1024).toFixed(1) + ' KB)', 'info');
 
-    function log(msg, type = 'info') {
-        const logs = document.getElementById('logs');
-        const time = new Date().toLocaleTimeString();
-        logs.innerHTML += `<div class="log ${type}">[${time}] ${msg}</div>`;
-        logs.scrollTop = logs.scrollHeight;
-        console.log(`[${type.toUpperCase()}] ${msg}`);
-    }
+            if (file.size > 2 * 1024 * 1024) {
+                toast('File terlalu besar! Max 2MB', 'err');
+                log('❌ File terlalu besar!', 'err');
+                return;
+            }
 
-    function clearLog() {
-        document.getElementById('logs').innerHTML = '<div class="log info">Log cleared</div>';
-    }
-</script>
+            imageFile = file;
+            
+            const reader = new FileReader();
+            reader.onload = ev => {
+                imageBase64 = ev.target.result;
+                document.getElementById('imgPreview').src = imageBase64;
+                document.getElementById('imgUpload').classList.add('has-img');
+                log('✅ Image preview ready', 'ok');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function resetForm() {
+            document.getElementById('signalForm').reset();
+            document.getElementById('imgPreview').src = '';
+            document.getElementById('imgUpload').classList.remove('has-img');
+            imageFile = null;
+            imageBase64 = null;
+            selType('buy');
+            log('🔄 Form reset', 'info');
+        }
+
+        function timeAgo(ts) {
+            const diff = Date.now() - ts;
+            const mins = Math.floor(diff / 60000);
+            const hours = Math.floor(mins / 60);
+            const days = Math.floor(hours / 24);
+
+            if (days > 0) return days + ' hari lalu';
+            if (hours > 0) return hours + ' jam lalu';
+            if (mins > 0) return mins + ' menit lalu';
+            return 'Baru saja';
+        }
+
+        function toast(msg, type = 'ok') {
+            const t = document.getElementById('toast');
+            const icon = document.getElementById('toastIcon');
+            
+            document.getElementById('toastMsg').textContent = msg;
+            
+            t.className = 'toast';
+            if (type === 'err') {
+                t.classList.add('err');
+                icon.className = 'fas fa-times-circle';
+            } else if (type === 'warn') {
+                t.classList.add('warn');
+                icon.className = 'fas fa-exclamation-triangle';
+            } else {
+                icon.className = 'fas fa-check-circle';
+            }
+            
+            t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), 3500);
+        }
+
+        function log(msg, type = 'info') {
+            const logs = document.getElementById('logs');
+            const time = new Date().toLocaleTimeString('id-ID', {
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            });
+            
+            const typeClass = type === 'ok' ? 'ok' : type === 'err' ? 'err' : type === 'warn' ? 'warn' : 'info';
+            logs.innerHTML += `<div class="log ${typeClass}">[${time}] ${msg}</div>`;
+            logs.scrollTop = logs.scrollHeight;
+            
+            // Also log to browser console
+            console.log(`[${type.toUpperCase()}] ${msg}`);
+        }
+
+        function clearLog() {
+            document.getElementById('logs').innerHTML = '<div class="log info">🧹 Console cleared</div>';
+        }
+    </script>
 </body>
 </html>
