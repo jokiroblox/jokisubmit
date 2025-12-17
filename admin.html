@@ -10,6 +10,7 @@
         :root {
             --primary: #00d4aa;
             --secondary: #7c3aed;
+            --accent: #f59e0b;
             --bg-dark: #0a0a0f;
             --bg-card: #12121a;
             --text-primary: #fff;
@@ -17,6 +18,7 @@
             --success: #10b981;
             --danger: #ef4444;
             --warning: #f59e0b;
+            --info: #3b82f6;
             --border: #2a2a3a;
         }
         body {
@@ -26,6 +28,7 @@
             min-height: 100vh;
         }
 
+        /* Login */
         .login-screen {
             min-height: 100vh;
             display: flex;
@@ -100,6 +103,7 @@
             color: var(--primary);
         }
 
+        /* Admin Panel */
         .admin-panel { display: none; }
 
         header {
@@ -111,7 +115,7 @@
             z-index: 1000;
         }
         .header-content {
-            max-width: 1300px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 0 20px;
             display: flex;
@@ -164,248 +168,345 @@
         .header-btn:hover { border-color: var(--primary); color: var(--primary); }
         .header-btn.danger:hover { border-color: var(--danger); color: var(--danger); }
 
-        .container { max-width: 1300px; margin: 0 auto; padding: 25px 20px; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 25px 20px; }
 
-        .status-box {
-            padding: 18px 22px;
-            border-radius: 14px;
+        /* Main Tabs */
+        .main-tabs {
+            display: flex;
+            gap: 10px;
             margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+        .main-tab {
+            padding: 14px 28px;
+            background: var(--bg-card);
+            border: 2px solid var(--border);
+            border-radius: 14px;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 15px;
-            flex-wrap: wrap;
+            gap: 10px;
+            transition: all 0.3s;
+        }
+        .main-tab:hover { border-color: var(--primary); color: var(--primary); }
+        .main-tab.active {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-color: transparent;
+            color: white;
+        }
+        .main-tab.active.airdrop {
+            background: linear-gradient(135deg, var(--warning), #ea580c);
+        }
+        .main-tab.active.apps {
+            background: linear-gradient(135deg, var(--info), var(--secondary));
+        }
+        .main-tab .count {
+            background: rgba(255,255,255,0.2);
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+        }
+
+        /* Status Box */
+        .status-box {
+            padding: 15px 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
         .status-box.success { background: rgba(16,185,129,0.12); border: 1px solid var(--success); }
         .status-box.warning { background: rgba(245,158,11,0.12); border: 1px solid var(--warning); }
         .status-box.error { background: rgba(239,68,68,0.12); border: 1px solid var(--danger); }
-        .status-box i { font-size: 1.5rem; }
+        .status-box i { font-size: 1.3rem; }
         .status-box.success i { color: var(--success); }
         .status-box.warning i { color: var(--warning); }
         .status-box.error i { color: var(--danger); }
         .status-text { flex: 1; }
-        .status-text strong { display: block; margin-bottom: 3px; }
+        .status-text strong { display: block; }
         .status-text small { color: var(--text-secondary); font-size: 0.8rem; }
 
+        /* Stats Row */
         .stats-row {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 12px;
             margin-bottom: 25px;
         }
         .stat-box {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 22px;
+            border-radius: 14px;
+            padding: 18px;
             text-align: center;
         }
-        .stat-box i { font-size: 1.5rem; color: var(--primary); margin-bottom: 10px; display: block; }
-        .stat-box .num { font-size: 2rem; font-weight: 700; color: var(--primary); }
-        .stat-box .lbl { font-size: 0.8rem; color: var(--text-secondary); margin-top: 5px; }
+        .stat-box i { font-size: 1.3rem; margin-bottom: 8px; display: block; }
+        .stat-box.signal i { color: var(--primary); }
+        .stat-box.airdrop i { color: var(--warning); }
+        .stat-box.apps i { color: var(--info); }
+        .stat-box .num { font-size: 1.8rem; font-weight: 700; }
+        .stat-box.signal .num { color: var(--primary); }
+        .stat-box.airdrop .num { color: var(--warning); }
+        .stat-box.apps .num { color: var(--info); }
+        .stat-box .lbl { font-size: 0.75rem; color: var(--text-secondary); margin-top: 3px; }
 
+        /* Content Sections */
+        .content-section { display: none; }
+        .content-section.active { display: block; }
+
+        /* Main Grid */
         .main-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 25px;
         }
 
+        /* Card */
         .card {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 25px;
+            border-radius: 18px;
+            padding: 22px;
         }
         .card-title {
-            font-size: 1.2rem;
-            margin-bottom: 22px;
+            font-size: 1.15rem;
+            margin-bottom: 20px;
             display: flex;
             align-items: center;
             gap: 10px;
-            padding-bottom: 15px;
+            padding-bottom: 12px;
             border-bottom: 1px solid var(--border);
         }
-        .card-title i { color: var(--primary); }
+        .card-title i { font-size: 1.1rem; }
+        .card-title.signal i { color: var(--primary); }
+        .card-title.airdrop i { color: var(--warning); }
+        .card-title.apps i { color: var(--info); }
         .card-title span { margin-left: auto; font-size: 0.85rem; color: var(--text-secondary); }
 
-        .form-group { margin-bottom: 18px; }
+        /* Form */
+        .form-group { margin-bottom: 16px; }
         .form-group label {
             display: block;
             color: var(--text-secondary);
             font-size: 0.85rem;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
         .form-group input, .form-group select, .form-group textarea {
             width: 100%;
-            padding: 14px 16px;
+            padding: 12px 14px;
             background: var(--bg-dark);
             border: 1px solid var(--border);
-            border-radius: 12px;
+            border-radius: 10px;
             color: var(--text-primary);
-            font-size: 1rem;
+            font-size: 0.95rem;
         }
         .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
             outline: none;
             border-color: var(--primary);
         }
-        .form-group textarea { resize: vertical; min-height: 80px; }
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .form-group textarea { resize: vertical; min-height: 70px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
+        /* Image Upload */
         .img-upload {
             border: 2px dashed var(--border);
-            border-radius: 14px;
-            padding: 30px;
+            border-radius: 12px;
+            padding: 25px;
             text-align: center;
             cursor: pointer;
             background: var(--bg-dark);
             transition: all 0.3s;
         }
         .img-upload:hover { border-color: var(--primary); }
-        .img-upload.has-img { padding: 10px; border-style: solid; border-color: var(--success); }
+        .img-upload.has-img { padding: 8px; border-style: solid; border-color: var(--success); }
         .img-upload input { display: none; }
-        .img-upload .upload-icon { font-size: 2.5rem; color: var(--primary); margin-bottom: 12px; }
-        .img-upload p { color: var(--text-secondary); }
-        .img-upload small { color: #555; }
-        .img-preview { max-width: 100%; max-height: 180px; border-radius: 10px; display: none; }
+        .img-upload .upload-icon { font-size: 2rem; color: var(--primary); margin-bottom: 8px; }
+        .img-upload p { color: var(--text-secondary); font-size: 0.85rem; }
+        .img-preview { max-width: 100%; max-height: 150px; border-radius: 8px; display: none; }
         .img-upload.has-img .upload-ph { display: none; }
         .img-upload.has-img .img-preview { display: block; margin: 0 auto; }
 
-        .type-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        /* Type Grid */
+        .type-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
         .type-opt {
-            padding: 18px;
+            padding: 14px;
             background: var(--bg-dark);
             border: 2px solid var(--border);
-            border-radius: 14px;
+            border-radius: 12px;
             cursor: pointer;
             text-align: center;
+            transition: all 0.3s;
         }
+        .type-opt:hover { border-color: var(--text-secondary); }
         .type-opt.sel.buy { border-color: var(--success); background: rgba(16,185,129,0.12); }
         .type-opt.sel.sell { border-color: var(--danger); background: rgba(239,68,68,0.12); }
-        .type-opt i { font-size: 1.8rem; margin-bottom: 8px; display: block; }
+        .type-opt.sel.easy { border-color: var(--success); background: rgba(16,185,129,0.12); }
+        .type-opt.sel.medium { border-color: var(--warning); background: rgba(245,158,11,0.12); }
+        .type-opt.sel.hard { border-color: var(--danger); background: rgba(239,68,68,0.12); }
+        .type-opt i { font-size: 1.5rem; margin-bottom: 5px; display: block; }
         .type-opt.buy i { color: var(--success); }
         .type-opt.sell i { color: var(--danger); }
-        .type-opt span { font-weight: 700; }
+        .type-opt span { font-weight: 600; font-size: 0.85rem; }
 
+        /* Difficulty Grid */
+        .diff-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+        .diff-opt {
+            padding: 12px 8px;
+            background: var(--bg-dark);
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            cursor: pointer;
+            text-align: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .diff-opt:hover { border-color: var(--text-secondary); }
+        .diff-opt.sel.easy { border-color: var(--success); background: rgba(16,185,129,0.12); color: var(--success); }
+        .diff-opt.sel.medium { border-color: var(--warning); background: rgba(245,158,11,0.12); color: var(--warning); }
+        .diff-opt.sel.hard { border-color: var(--danger); background: rgba(239,68,68,0.12); color: var(--danger); }
+
+        /* Buttons */
         .btn-primary {
             width: 100%;
-            padding: 16px;
+            padding: 14px;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             border: none;
-            border-radius: 14px;
+            border-radius: 12px;
             color: white;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 600;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 8px;
         }
         .btn-primary:hover { transform: translateY(-2px); }
         .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+        .btn-primary.airdrop { background: linear-gradient(135deg, var(--warning), #ea580c); }
+        .btn-primary.apps { background: linear-gradient(135deg, var(--info), var(--secondary)); }
         .btn-secondary {
-            padding: 12px 22px;
+            padding: 10px 20px;
             background: transparent;
             border: 1px solid var(--border);
-            border-radius: 10px;
+            border-radius: 8px;
             color: var(--text-secondary);
             cursor: pointer;
         }
         .btn-secondary:hover { border-color: var(--primary); color: var(--primary); }
         .btn-danger {
-            padding: 8px 14px;
+            padding: 6px 12px;
             background: transparent;
             border: 1px solid var(--danger);
-            border-radius: 8px;
+            border-radius: 6px;
             color: var(--danger);
             cursor: pointer;
+            font-size: 0.8rem;
         }
         .btn-danger:hover { background: var(--danger); color: white; }
 
-        .signal-list { max-height: 520px; overflow-y: auto; }
-        .signal-item {
+        /* Item List */
+        .item-list { max-height: 480px; overflow-y: auto; }
+        .item-card {
             display: flex;
-            gap: 14px;
-            padding: 14px;
+            gap: 12px;
+            padding: 12px;
             background: var(--bg-dark);
-            border-radius: 14px;
-            margin-bottom: 12px;
+            border-radius: 12px;
+            margin-bottom: 10px;
             align-items: center;
         }
-        .signal-item img {
-            width: 60px; height: 60px;
+        .item-card img {
+            width: 55px; height: 55px;
             border-radius: 10px;
             object-fit: cover;
             background: var(--border);
         }
-        .signal-item-info { flex: 1; }
-        .signal-item-pair {
+        .item-info { flex: 1; min-width: 0; }
+        .item-title {
             font-weight: 700;
+            font-size: 0.95rem;
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin-bottom: 5px;
+            gap: 8px;
+            margin-bottom: 4px;
         }
         .badge {
-            padding: 3px 10px;
-            border-radius: 8px;
-            font-size: 0.65rem;
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-size: 0.6rem;
             font-weight: 700;
         }
         .badge.buy { background: rgba(16,185,129,0.2); color: var(--success); }
         .badge.sell { background: rgba(239,68,68,0.2); color: var(--danger); }
-        .signal-item-details { font-size: 0.8rem; color: var(--text-secondary); }
-        .signal-item-time { font-size: 0.75rem; color: #555; }
+        .badge.easy { background: rgba(16,185,129,0.2); color: var(--success); }
+        .badge.medium { background: rgba(245,158,11,0.2); color: var(--warning); }
+        .badge.hard { background: rgba(239,68,68,0.2); color: var(--danger); }
+        .badge.active { background: rgba(16,185,129,0.2); color: var(--success); }
+        .badge.ended { background: rgba(107,114,128,0.2); color: #9ca3af; }
+        .badge.free { background: rgba(16,185,129,0.2); color: var(--success); }
+        .badge.paid { background: rgba(124,58,237,0.2); color: var(--secondary); }
+        .item-details { font-size: 0.75rem; color: var(--text-secondary); }
+        .item-time { font-size: 0.7rem; color: #555; margin-top: 2px; }
 
-        .empty-list { text-align: center; padding: 50px; color: var(--text-secondary); }
-        .empty-list i { font-size: 3rem; margin-bottom: 15px; opacity: 0.3; display: block; }
+        .empty-list { text-align: center; padding: 40px; color: var(--text-secondary); }
+        .empty-list i { font-size: 2.5rem; margin-bottom: 12px; opacity: 0.3; display: block; }
 
+        /* Console */
         .console {
             background: #0d0d12;
             border: 1px solid var(--border);
-            border-radius: 14px;
-            margin-top: 20px;
+            border-radius: 12px;
+            margin-top: 18px;
             overflow: hidden;
         }
         .console-header {
             background: #151520;
-            padding: 12px 16px;
-            font-size: 0.85rem;
+            padding: 10px 14px;
+            font-size: 0.8rem;
             display: flex;
             justify-content: space-between;
             border-bottom: 1px solid var(--border);
         }
         .console-header button {
-            padding: 5px 12px;
+            padding: 4px 10px;
             background: var(--border);
             border: none;
-            border-radius: 6px;
+            border-radius: 5px;
             color: var(--text-secondary);
             cursor: pointer;
+            font-size: 0.7rem;
         }
         .console-logs {
-            padding: 12px;
-            max-height: 180px;
+            padding: 10px;
+            max-height: 140px;
             overflow-y: auto;
             font-family: monospace;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
         }
-        .log { padding: 4px 10px; margin-bottom: 4px; border-radius: 6px; }
+        .log { padding: 3px 8px; margin-bottom: 3px; border-radius: 4px; }
         .log.ok { background: rgba(16,185,129,0.12); color: var(--success); }
         .log.err { background: rgba(239,68,68,0.12); color: var(--danger); }
         .log.info { background: rgba(0,212,170,0.08); color: var(--primary); }
         .log.warn { background: rgba(245,158,11,0.12); color: var(--warning); }
 
+        /* Toast */
         .toast {
             position: fixed;
             bottom: 30px; right: 30px;
-            padding: 16px 26px;
+            padding: 14px 24px;
             background: var(--success);
             color: white;
-            border-radius: 14px;
+            border-radius: 12px;
             font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             transform: translateX(150%);
             transition: transform 0.4s cubic-bezier(0.68,-0.55,0.265,1.55);
             z-index: 3000;
@@ -414,10 +515,14 @@
         .toast.err { background: var(--danger); }
         .toast.warn { background: var(--warning); }
 
+        /* Responsive */
         @media (max-width: 900px) { .main-grid { grid-template-columns: 1fr; } }
-        @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
+        @media (max-width: 600px) { 
+            .form-row { grid-template-columns: 1fr; }
+            .main-tabs { justify-content: center; }
+        }
 
-        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar { width: 5px; }
         ::-webkit-scrollbar-track { background: var(--bg-dark); }
         ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
     </style>
@@ -435,9 +540,7 @@
                 <i class="fas fa-sign-in-alt"></i> Login
             </button>
             <p class="login-error" id="loginErr">Password salah!</p>
-            <div class="login-hint">
-                💡 Default: <code>admin123</code>
-            </div>
+            <div class="login-hint">💡 Default: <code>admin123</code></div>
         </div>
     </div>
 
@@ -465,157 +568,297 @@
         </header>
 
         <div class="container">
+            <!-- Status -->
             <div class="status-box warning" id="statusBox">
                 <i class="fas fa-database"></i>
                 <div class="status-text">
                     <strong id="statusTitle">Memeriksa koneksi...</strong>
-                    <small id="statusDesc">Menghubungkan ke Cloudinary & JSONBin</small>
+                    <small id="statusDesc">Menghubungkan ke database</small>
                 </div>
             </div>
 
+            <!-- Main Tabs -->
+            <div class="main-tabs">
+                <button class="main-tab active" onclick="switchTab('signals')">
+                    <i class="fas fa-chart-line"></i> Signals
+                    <span class="count" id="signalCount">0</span>
+                </button>
+                <button class="main-tab airdrop" onclick="switchTab('airdrops')">
+                    <i class="fas fa-parachute-box"></i> Airdrops
+                    <span class="count" id="airdropCount">0</span>
+                </button>
+                <button class="main-tab apps" onclick="switchTab('apps')">
+                    <i class="fas fa-mobile-alt"></i> Aplikasi
+                    <span class="count" id="appsCount">0</span>
+                </button>
+            </div>
+
+            <!-- Stats -->
             <div class="stats-row">
-                <div class="stat-box">
+                <div class="stat-box signal">
                     <i class="fas fa-chart-line"></i>
-                    <div class="num" id="sTotal">0</div>
-                    <div class="lbl">Total</div>
+                    <div class="num" id="sSignals">0</div>
+                    <div class="lbl">Signals</div>
                 </div>
-                <div class="stat-box">
+                <div class="stat-box signal">
                     <i class="fas fa-arrow-trend-up"></i>
                     <div class="num" id="sBuy">0</div>
                     <div class="lbl">Buy</div>
                 </div>
-                <div class="stat-box">
+                <div class="stat-box signal">
                     <i class="fas fa-arrow-trend-down"></i>
                     <div class="num" id="sSell">0</div>
                     <div class="lbl">Sell</div>
                 </div>
-                <div class="stat-box">
-                    <i class="fas fa-calendar-day"></i>
-                    <div class="num" id="sToday">0</div>
-                    <div class="lbl">Today</div>
+                <div class="stat-box airdrop">
+                    <i class="fas fa-parachute-box"></i>
+                    <div class="num" id="sAirdrops">0</div>
+                    <div class="lbl">Airdrops</div>
+                </div>
+                <div class="stat-box apps">
+                    <i class="fas fa-mobile-alt"></i>
+                    <div class="num" id="sApps">0</div>
+                    <div class="lbl">Apps</div>
                 </div>
             </div>
 
-            <div class="main-grid">
-                <!-- Form -->
-                <div class="card">
-                    <h2 class="card-title">
-                        <i class="fas fa-plus-circle"></i> Buat Signal Baru
-                    </h2>
-                    
-                    <form id="signalForm" onsubmit="createSignal(event)">
-                        <div class="form-group">
-                            <label>Trading Pair *</label>
-                            <input type="text" id="pair" placeholder="BTC/USDT, EUR/USD, XAU/USD" required>
-                        </div>
-                        
-                        <div class="form-row">
+            <!-- ==================== SIGNALS SECTION ==================== -->
+            <div class="content-section active" id="signalsSection">
+                <div class="main-grid">
+                    <div class="card">
+                        <h2 class="card-title signal"><i class="fas fa-plus-circle"></i> Buat Signal Baru</h2>
+                        <form id="signalForm" onsubmit="createSignal(event)">
                             <div class="form-group">
-                                <label>Market</label>
-                                <select id="market">
-                                    <option value="crypto">🪙 Crypto</option>
-                                    <option value="forex">💱 Forex</option>
-                                    <option value="stocks">📈 Stocks</option>
-                                    <option value="commodities">🛢️ Commodities</option>
-                                </select>
+                                <label>Trading Pair *</label>
+                                <input type="text" id="s_pair" placeholder="BTC/USDT, EUR/USD" required>
                             </div>
-                            <div class="form-group">
-                                <label>Timeframe</label>
-                                <select id="tf">
-                                    <option value="1m">1 Min</option>
-                                    <option value="5m">5 Min</option>
-                                    <option value="15m">15 Min</option>
-                                    <option value="30m">30 Min</option>
-                                    <option value="1h" selected>1 Hour</option>
-                                    <option value="4h">4 Hours</option>
-                                    <option value="1d">1 Day</option>
-                                </select>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label>Signal Type *</label>
-                            <div class="type-grid">
-                                <div class="type-opt buy sel" onclick="selType('buy')">
-                                    <i class="fas fa-arrow-trend-up"></i>
-                                    <span>BUY / LONG</span>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Market</label>
+                                    <select id="s_market">
+                                        <option value="crypto">🪙 Crypto</option>
+                                        <option value="forex">💱 Forex</option>
+                                        <option value="stocks">📈 Stocks</option>
+                                    </select>
                                 </div>
-                                <div class="type-opt sell" onclick="selType('sell')">
-                                    <i class="fas fa-arrow-trend-down"></i>
-                                    <span>SELL / SHORT</span>
+                                <div class="form-group">
+                                    <label>Timeframe</label>
+                                    <select id="s_tf">
+                                        <option value="5m">5 Min</option>
+                                        <option value="15m">15 Min</option>
+                                        <option value="1h" selected>1 Hour</option>
+                                        <option value="4h">4 Hours</option>
+                                        <option value="1d">1 Day</option>
+                                    </select>
                                 </div>
                             </div>
-                            <input type="hidden" id="sType" value="buy">
-                        </div>
-                        
-                        <div class="form-row">
                             <div class="form-group">
-                                <label>Entry Price *</label>
-                                <input type="text" id="entry" placeholder="67500" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Take Profit *</label>
-                                <input type="text" id="tp" placeholder="72000" required>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label>Stop Loss *</label>
-                            <input type="text" id="sl" placeholder="65000" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label>Chart Image *</label>
-                            <div class="img-upload" id="imgUpload" onclick="document.getElementById('imgFile').click()">
-                                <input type="file" id="imgFile" accept="image/*" onchange="previewImg(event)">
-                                <div class="upload-ph">
-                                    <i class="fas fa-cloud-upload-alt upload-icon"></i>
-                                    <p>Klik untuk upload gambar</p>
-                                    <small>JPG, PNG (Max 10MB)</small>
+                                <label>Signal Type *</label>
+                                <div class="type-grid">
+                                    <div class="type-opt buy sel" onclick="selType('buy')">
+                                        <i class="fas fa-arrow-trend-up"></i>
+                                        <span>BUY</span>
+                                    </div>
+                                    <div class="type-opt sell" onclick="selType('sell')">
+                                        <i class="fas fa-arrow-trend-down"></i>
+                                        <span>SELL</span>
+                                    </div>
                                 </div>
-                                <img class="img-preview" id="imgPreview" alt="Preview">
+                                <input type="hidden" id="s_type" value="buy">
                             </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label>Analisis & Deskripsi *</label>
-                            <textarea id="desc" placeholder="Jelaskan analisis teknikal..." required></textarea>
-                        </div>
-                        
-                        <button type="submit" class="btn-primary" id="pubBtn">
-                            <i class="fas fa-paper-plane"></i> Publish Signal
-                        </button>
-                        
-                        <div style="margin-top: 15px; text-align: center;">
-                            <button type="button" class="btn-secondary" onclick="resetForm()">
-                                <i class="fas fa-redo"></i> Reset Form
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Entry *</label>
+                                    <input type="text" id="s_entry" placeholder="67500" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Take Profit *</label>
+                                    <input type="text" id="s_tp" placeholder="72000" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Stop Loss *</label>
+                                <input type="text" id="s_sl" placeholder="65000" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Chart Image *</label>
+                                <div class="img-upload" onclick="document.getElementById('s_img').click()">
+                                    <input type="file" id="s_img" accept="image/*" onchange="previewImg(event, 's_preview', this.parentElement)">
+                                    <div class="upload-ph">
+                                        <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                                        <p>Upload chart (Max 10MB)</p>
+                                    </div>
+                                    <img class="img-preview" id="s_preview">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Analisis *</label>
+                                <textarea id="s_desc" placeholder="Jelaskan analisis..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn-primary" id="signalBtn">
+                                <i class="fas fa-paper-plane"></i> Publish Signal
                             </button>
-                        </div>
-                    </form>
-
-                    <div class="console">
-                        <div class="console-header">
-                            <span><i class="fas fa-terminal"></i> Debug Console</span>
-                            <button onclick="clearLog()">Clear</button>
-                        </div>
-                        <div class="console-logs" id="logs">
-                            <div class="log info">🚀 Ready...</div>
-                        </div>
+                        </form>
+                    </div>
+                    <div class="card">
+                        <h2 class="card-title signal"><i class="fas fa-list"></i> Signals <span id="signalListCount">(0)</span></h2>
+                        <div class="item-list" id="signalList"></div>
                     </div>
                 </div>
+            </div>
 
-                <!-- List -->
-                <div class="card">
-                    <h2 class="card-title">
-                        <i class="fas fa-list"></i> Signals
-                        <span id="cnt">(0)</span>
-                    </h2>
-                    <div class="signal-list" id="sigList">
-                        <div class="empty-list">
-                            <i class="fas fa-spinner fa-spin"></i>
-                            <p>Loading...</p>
-                        </div>
+            <!-- ==================== AIRDROPS SECTION ==================== -->
+            <div class="content-section" id="airdropsSection">
+                <div class="main-grid">
+                    <div class="card">
+                        <h2 class="card-title airdrop"><i class="fas fa-parachute-box"></i> Tambah Airdrop</h2>
+                        <form id="airdropForm" onsubmit="createAirdrop(event)">
+                            <div class="form-group">
+                                <label>Nama Project *</label>
+                                <input type="text" id="a_name" placeholder="Contoh: LayerZero, zkSync" required>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Estimasi Reward</label>
+                                    <input type="text" id="a_reward" placeholder="$100 - $5000">
+                                </div>
+                                <div class="form-group">
+                                    <label>Deadline</label>
+                                    <input type="date" id="a_deadline">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Tingkat Kesulitan *</label>
+                                <div class="diff-grid">
+                                    <div class="diff-opt sel easy" onclick="selDiff('easy')">🟢 Easy</div>
+                                    <div class="diff-opt medium" onclick="selDiff('medium')">🟡 Medium</div>
+                                    <div class="diff-opt hard" onclick="selDiff('hard')">🔴 Hard</div>
+                                </div>
+                                <input type="hidden" id="a_diff" value="easy">
+                            </div>
+                            <div class="form-group">
+                                <label>Link Airdrop *</label>
+                                <input type="url" id="a_link" placeholder="https://..." required>
+                            </div>
+                            <div class="form-group">
+                                <label>Image/Logo *</label>
+                                <div class="img-upload" onclick="document.getElementById('a_img').click()">
+                                    <input type="file" id="a_img" accept="image/*" onchange="previewImg(event, 'a_preview', this.parentElement)">
+                                    <div class="upload-ph">
+                                        <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                                        <p>Upload logo/banner</p>
+                                    </div>
+                                    <img class="img-preview" id="a_preview">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Deskripsi & Cara Ikut *</label>
+                                <textarea id="a_desc" placeholder="Jelaskan cara mengikuti airdrop..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn-primary airdrop" id="airdropBtn">
+                                <i class="fas fa-parachute-box"></i> Publish Airdrop
+                            </button>
+                        </form>
                     </div>
+                    <div class="card">
+                        <h2 class="card-title airdrop"><i class="fas fa-list"></i> Airdrops <span id="airdropListCount">(0)</span></h2>
+                        <div class="item-list" id="airdropList"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== APPS SECTION ==================== -->
+            <div class="content-section" id="appsSection">
+                <div class="main-grid">
+                    <div class="card">
+                        <h2 class="card-title apps"><i class="fas fa-mobile-alt"></i> Tambah Aplikasi</h2>
+                        <form id="appsForm" onsubmit="createApp(event)">
+                            <div class="form-group">
+                                <label>Nama Aplikasi *</label>
+                                <input type="text" id="app_name" placeholder="Contoh: Binance, TradingView" required>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Kategori</label>
+                                    <select id="app_cat">
+                                        <option value="exchange">🏦 Exchange</option>
+                                        <option value="wallet">👛 Wallet</option>
+                                        <option value="trading">📊 Trading Tool</option>
+                                        <option value="bot">🤖 Trading Bot</option>
+                                        <option value="defi">🌐 DeFi</option>
+                                        <option value="other">📱 Lainnya</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Platform</label>
+                                    <select id="app_platform">
+                                        <option value="all">📱 All Platform</option>
+                                        <option value="android">🤖 Android</option>
+                                        <option value="ios">🍎 iOS</option>
+                                        <option value="web">🌐 Web</option>
+                                        <option value="desktop">💻 Desktop</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Harga</label>
+                                    <select id="app_price">
+                                        <option value="free">✅ Gratis</option>
+                                        <option value="freemium">⭐ Freemium</option>
+                                        <option value="paid">💰 Berbayar</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Rating (1-5)</label>
+                                    <select id="app_rating">
+                                        <option value="5">⭐⭐⭐⭐⭐ (5)</option>
+                                        <option value="4">⭐⭐⭐⭐ (4)</option>
+                                        <option value="3">⭐⭐⭐ (3)</option>
+                                        <option value="2">⭐⭐ (2)</option>
+                                        <option value="1">⭐ (1)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Link Download/Website *</label>
+                                <input type="url" id="app_link" placeholder="https://..." required>
+                            </div>
+                            <div class="form-group">
+                                <label>Logo Aplikasi *</label>
+                                <div class="img-upload" onclick="document.getElementById('app_img').click()">
+                                    <input type="file" id="app_img" accept="image/*" onchange="previewImg(event, 'app_preview', this.parentElement)">
+                                    <div class="upload-ph">
+                                        <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                                        <p>Upload logo</p>
+                                    </div>
+                                    <img class="img-preview" id="app_preview">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Deskripsi *</label>
+                                <textarea id="app_desc" placeholder="Jelaskan tentang aplikasi..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn-primary apps" id="appsBtn">
+                                <i class="fas fa-mobile-alt"></i> Publish Aplikasi
+                            </button>
+                        </form>
+                    </div>
+                    <div class="card">
+                        <h2 class="card-title apps"><i class="fas fa-list"></i> Aplikasi <span id="appsListCount">(0)</span></h2>
+                        <div class="item-list" id="appsList"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Console -->
+            <div class="console">
+                <div class="console-header">
+                    <span><i class="fas fa-terminal"></i> Debug Console</span>
+                    <button onclick="clearLog()">Clear</button>
+                </div>
+                <div class="console-logs" id="logs">
+                    <div class="log info">🚀 Ready...</div>
                 </div>
             </div>
         </div>
@@ -631,27 +874,25 @@
         // 🔧 KONFIGURASI - ISI SEMUA INI!
         // ================================================================
         const CONFIG = {
-            // Password Admin
-            ADMIN_PASSWORD: 'ikan',
+            ADMIN_PASSWORD: 'admin123',
             
-            // Cloudinary (untuk upload gambar) - GRATIS!
-            // 1. Daftar di https://cloudinary.com
-            // 2. Lihat Cloud Name di Dashboard
-            // 3. Buat Upload Preset: Settings > Upload > Add upload preset > Signing Mode: Unsigned
-            CLOUDINARY_CLOUD_NAME: 'dx7e12cj2',     // Contoh: 'dxyz123abc'
-            CLOUDINARY_UPLOAD_PRESET: 'cryptosignals',  // Contoh: 'signals' (yang dibuat tadi)
+            // Cloudinary
+            CLOUDINARY_CLOUD_NAME: 'dx7e12cj2',     // Dari dashboard cloudinary
+            CLOUDINARY_UPLOAD_PRESET: 'cryptosignals',  // Upload preset (unsigned)
             
-            // JSONBin (untuk simpan data signal)
-            // 1. Buat akun di https://jsonbin.io
-            // 2. Buat Bin baru dengan isi: {"signals":[]}
-            // 3. Copy Bin ID dan API Key
-            JSONBIN_BIN_ID: '6941215fae596e708f9d854a',            // Contoh: '6941215fae596e708f9d854a'
-            JSONBIN_API_KEY: '$2a$10$Stl8nnHuNvN0U0egY.a8I.Hp4uWpBo8wBbSxQ7MN1IvGyf2jHsssi',           // Contoh: '$2a$10$Stl8nnHuNvN0U0egY.a8I.Hp4uWpBo8wBbSxQ7MN1IvGyf2jHsssi'
+            // JSONBin
+            JSONBIN_BIN_ID: '6941215fae596e708f9d854a',
+            JSONBIN_API_KEY: '$2a$10$Stl8nnHuNvN0U0egY.a8I.Hp4uWpBo8wBbSxQ7MN1IvGyf2jHsssi',
         };
         // ================================================================
 
-        let signals = [];
-        let selectedFile = null;
+        // Data
+        let data = {
+            signals: [],
+            airdrops: [],
+            apps: []
+        };
+        let selectedFiles = { signal: null, airdrop: null, app: null };
 
         document.getElementById('pwInput').addEventListener('keypress', e => {
             if (e.key === 'Enter') login();
@@ -660,328 +901,440 @@
         // ==================== LOGIN ====================
         function login() {
             const pw = document.getElementById('pwInput').value;
-            const btn = document.getElementById('loginBtn');
-            
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Checking...';
-            btn.disabled = true;
-            
-            setTimeout(() => {
-                if (pw === CONFIG.ADMIN_PASSWORD) {
-                    document.getElementById('loginScreen').style.display = 'none';
-                    document.getElementById('adminPanel').style.display = 'block';
-                    log('✅ Login berhasil!', 'ok');
-                    checkConfig();
-                    loadSignals();
-                } else {
-                    document.getElementById('loginErr').style.display = 'block';
-                    document.getElementById('pwInput').value = '';
-                    setTimeout(() => document.getElementById('loginErr').style.display = 'none', 3000);
-                }
-                btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login';
-                btn.disabled = false;
-            }, 500);
+            if (pw === CONFIG.ADMIN_PASSWORD) {
+                document.getElementById('loginScreen').style.display = 'none';
+                document.getElementById('adminPanel').style.display = 'block';
+                log('✅ Login berhasil!', 'ok');
+                checkConfig();
+                loadData();
+            } else {
+                document.getElementById('loginErr').style.display = 'block';
+                setTimeout(() => document.getElementById('loginErr').style.display = 'none', 3000);
+            }
         }
 
         function logout() {
             document.getElementById('adminPanel').style.display = 'none';
             document.getElementById('loginScreen').style.display = 'flex';
-            document.getElementById('pwInput').value = '';
         }
 
         // ==================== CONFIG CHECK ====================
         function checkConfig() {
-            const box = document.getElementById('statusBox');
-            const title = document.getElementById('statusTitle');
-            const desc = document.getElementById('statusDesc');
-
             let issues = [];
-            
             if (!CONFIG.CLOUDINARY_CLOUD_NAME) issues.push('CLOUDINARY_CLOUD_NAME');
             if (!CONFIG.CLOUDINARY_UPLOAD_PRESET) issues.push('CLOUDINARY_UPLOAD_PRESET');
             if (!CONFIG.JSONBIN_BIN_ID) issues.push('JSONBIN_BIN_ID');
             if (!CONFIG.JSONBIN_API_KEY) issues.push('JSONBIN_API_KEY');
 
+            const box = document.getElementById('statusBox');
             if (issues.length > 0) {
                 box.className = 'status-box error';
-                title.textContent = '❌ Config Belum Lengkap!';
-                desc.innerHTML = `Kosong: ${issues.join(', ')}. Lihat panduan di atas kode.`;
+                document.getElementById('statusTitle').textContent = '❌ Config Belum Lengkap';
+                document.getElementById('statusDesc').textContent = issues.join(', ');
                 issues.forEach(i => log('❌ ' + i + ' kosong!', 'err'));
             } else {
-                log('✅ Semua config terisi', 'ok');
                 testConnection();
             }
         }
 
         async function testConnection() {
-            const box = document.getElementById('statusBox');
-            const title = document.getElementById('statusTitle');
-            const desc = document.getElementById('statusDesc');
-
-            title.textContent = '🔄 Testing...';
-            
             try {
-                // Test JSONBin
-                log('🔌 Testing JSONBin...', 'info');
                 const res = await fetch(`https://api.jsonbin.io/v3/b/${CONFIG.JSONBIN_BIN_ID}/latest`, {
                     headers: { 'X-Master-Key': CONFIG.JSONBIN_API_KEY }
                 });
-
-                if (!res.ok) throw new Error(`JSONBin HTTP ${res.status}`);
-                
-                log('✅ JSONBin OK!', 'ok');
-                log('✅ Cloudinary ready (akan ditest saat upload)', 'ok');
-
-                box.className = 'status-box success';
-                title.textContent = '✅ Semua Terhubung!';
-                desc.textContent = 'Cloudinary & JSONBin siap digunakan';
-                toast('Connected!');
-
-            } catch (err) {
-                box.className = 'status-box error';
-                title.textContent = '❌ Koneksi Gagal';
-                desc.textContent = err.message;
-                log('❌ ' + err.message, 'err');
-                toast('Error!', 'err');
+                if (res.ok) {
+                    document.getElementById('statusBox').className = 'status-box success';
+                    document.getElementById('statusTitle').textContent = '✅ Terhubung!';
+                    document.getElementById('statusDesc').textContent = 'Cloudinary & JSONBin ready';
+                    log('✅ Connected!', 'ok');
+                } else throw new Error('HTTP ' + res.status);
+            } catch (e) {
+                document.getElementById('statusBox').className = 'status-box error';
+                document.getElementById('statusTitle').textContent = '❌ Error';
+                document.getElementById('statusDesc').textContent = e.message;
+                log('❌ ' + e.message, 'err');
             }
         }
 
-        // ==================== UPLOAD TO CLOUDINARY ====================
-        async function uploadToCloudinary(file) {
-            log('📤 Uploading ke Cloudinary...', 'info');
-
-            const formData = new FormData();
-            formData.append('file', file);
-            formData.append('upload_preset', CONFIG.CLOUDINARY_UPLOAD_PRESET);
-
-            try {
-                const res = await fetch(
-                    `https://api.cloudinary.com/v1_1/${CONFIG.CLOUDINARY_CLOUD_NAME}/image/upload`,
-                    {
-                        method: 'POST',
-                        body: formData
-                    }
-                );
-
-                const data = await res.json();
-
-                if (data.secure_url) {
-                    log('✅ Upload OK: ' + data.secure_url.substring(0, 50) + '...', 'ok');
-                    return data.secure_url;
-                } else {
-                    throw new Error(data.error?.message || 'Upload failed');
-                }
-            } catch (err) {
-                log('❌ Cloudinary error: ' + err.message, 'err');
-                throw err;
-            }
-        }
-
-        // ==================== LOAD ====================
-        async function loadSignals() {
-            log('📥 Loading signals...', 'info');
+        // ==================== TAB SWITCHING ====================
+        function switchTab(tab) {
+            document.querySelectorAll('.main-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
             
+            event.target.closest('.main-tab').classList.add('active');
+            document.getElementById(tab + 'Section').classList.add('active');
+        }
+
+        // ==================== LOAD DATA ====================
+        async function loadData() {
+            log('📥 Loading data...', 'info');
             try {
                 if (CONFIG.JSONBIN_BIN_ID && CONFIG.JSONBIN_API_KEY) {
                     const res = await fetch(`https://api.jsonbin.io/v3/b/${CONFIG.JSONBIN_BIN_ID}/latest`, {
                         headers: { 'X-Master-Key': CONFIG.JSONBIN_API_KEY }
                     });
-                    
                     if (res.ok) {
-                        const data = await res.json();
-                        signals = data.record.signals || [];
-                        log(`✅ Loaded ${signals.length} signals`, 'ok');
-                    } else {
-                        throw new Error(`HTTP ${res.status}`);
+                        const json = await res.json();
+                        data = {
+                            signals: json.record.signals || [],
+                            airdrops: json.record.airdrops || [],
+                            apps: json.record.apps || []
+                        };
+                        log(`✅ Loaded: ${data.signals.length} signals, ${data.airdrops.length} airdrops, ${data.apps.length} apps`, 'ok');
                     }
                 } else {
-                    signals = JSON.parse(localStorage.getItem('signals') || '[]');
+                    data = JSON.parse(localStorage.getItem('cryptoData') || '{"signals":[],"airdrops":[],"apps":[]}');
                 }
-            } catch (err) {
-                log('⚠️ ' + err.message, 'warn');
-                signals = JSON.parse(localStorage.getItem('signals') || '[]');
+            } catch (e) {
+                log('⚠️ ' + e.message, 'warn');
+                data = JSON.parse(localStorage.getItem('cryptoData') || '{"signals":[],"airdrops":[],"apps":[]}');
             }
-            
-            renderList();
-            updateStats();
+            renderAll();
         }
 
-        // ==================== SAVE ====================
-        async function saveSignals() {
-            localStorage.setItem('signals', JSON.stringify(signals));
-            log('💾 Saved to localStorage', 'info');
+        // ==================== SAVE DATA ====================
+        async function saveData() {
+            localStorage.setItem('cryptoData', JSON.stringify(data));
+            log('💾 Saved locally', 'info');
 
-            if (!CONFIG.JSONBIN_BIN_ID || !CONFIG.JSONBIN_API_KEY) {
-                return false;
-            }
-
-            log('☁️ Saving to JSONBin...', 'info');
-            
-            try {
-                const res = await fetch(`https://api.jsonbin.io/v3/b/${CONFIG.JSONBIN_BIN_ID}`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-Master-Key': CONFIG.JSONBIN_API_KEY
-                    },
-                    body: JSON.stringify({ signals: signals })
-                });
-
-                if (res.ok) {
-                    log('✅ Saved to JSONBin!', 'ok');
-                    return true;
-                } else {
-                    throw new Error(`HTTP ${res.status}`);
+            if (CONFIG.JSONBIN_BIN_ID && CONFIG.JSONBIN_API_KEY) {
+                log('☁️ Saving to JSONBin...', 'info');
+                try {
+                    const res = await fetch(`https://api.jsonbin.io/v3/b/${CONFIG.JSONBIN_BIN_ID}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-Master-Key': CONFIG.JSONBIN_API_KEY
+                        },
+                        body: JSON.stringify(data)
+                    });
+                    if (res.ok) {
+                        log('✅ Saved to JSONBin!', 'ok');
+                        return true;
+                    }
+                    throw new Error('HTTP ' + res.status);
+                } catch (e) {
+                    log('❌ ' + e.message, 'err');
+                    return false;
                 }
-            } catch (err) {
-                log('❌ Save error: ' + err.message, 'err');
-                return false;
             }
+            return true;
+        }
+
+        // ==================== UPLOAD TO CLOUDINARY ====================
+        async function uploadToCloudinary(file) {
+            log('📤 Uploading to Cloudinary...', 'info');
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('upload_preset', CONFIG.CLOUDINARY_UPLOAD_PRESET);
+
+            const res = await fetch(`https://api.cloudinary.com/v1_1/${CONFIG.CLOUDINARY_CLOUD_NAME}/image/upload`, {
+                method: 'POST',
+                body: formData
+            });
+            const json = await res.json();
+            if (json.secure_url) {
+                log('✅ Uploaded: ' + json.secure_url.substring(0, 40) + '...', 'ok');
+                return json.secure_url;
+            }
+            throw new Error(json.error?.message || 'Upload failed');
         }
 
         // ==================== CREATE SIGNAL ====================
         async function createSignal(e) {
             e.preventDefault();
+            if (!selectedFiles.signal) { toast('Upload gambar!', 'err'); return; }
 
-            if (!selectedFile) {
-                toast('Upload gambar!', 'err');
-                log('❌ Tidak ada gambar', 'err');
-                return;
-            }
-
-            const btn = document.getElementById('pubBtn');
+            const btn = document.getElementById('signalBtn');
             btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
 
             try {
-                // Step 1: Upload image ke Cloudinary
-                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading image...';
-                const imageUrl = await uploadToCloudinary(selectedFile);
-
-                // Step 2: Buat signal
-                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating signal...';
+                const imageUrl = await uploadToCloudinary(selectedFiles.signal);
                 
                 const signal = {
                     id: Date.now(),
-                    pair: document.getElementById('pair').value.toUpperCase().trim(),
-                    marketType: document.getElementById('market').value,
-                    timeframe: document.getElementById('tf').value,
-                    type: document.getElementById('sType').value,
-                    entry: document.getElementById('entry').value.trim(),
-                    takeProfit: document.getElementById('tp').value.trim(),
-                    stopLoss: document.getElementById('sl').value.trim(),
-                    description: document.getElementById('desc').value.trim(),
-                    image: imageUrl,  // URL dari Cloudinary (bukan base64!)
+                    pair: document.getElementById('s_pair').value.toUpperCase().trim(),
+                    marketType: document.getElementById('s_market').value,
+                    timeframe: document.getElementById('s_tf').value,
+                    type: document.getElementById('s_type').value,
+                    entry: document.getElementById('s_entry').value.trim(),
+                    takeProfit: document.getElementById('s_tp').value.trim(),
+                    stopLoss: document.getElementById('s_sl').value.trim(),
+                    description: document.getElementById('s_desc').value.trim(),
+                    image: imageUrl,
                     timestamp: Date.now()
                 };
 
-                log('📊 Signal: ' + signal.pair + ' ' + signal.type.toUpperCase(), 'info');
-
-                // Step 3: Simpan
-                signals.unshift(signal);
-                
-                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
-                const saved = await saveSignals();
-
-                renderList();
-                updateStats();
-                resetForm();
-
-                if (saved) {
-                    toast('🚀 Published!');
-                    log('🎉 Signal published successfully!', 'ok');
-                } else {
-                    toast('⚠️ Saved locally', 'warn');
-                }
-
-            } catch (err) {
-                log('❌ Error: ' + err.message, 'err');
-                toast('Error: ' + err.message, 'err');
+                data.signals.unshift(signal);
+                await saveData();
+                renderAll();
+                resetForm('signal');
+                toast('🚀 Signal published!');
+                log('🎉 Signal: ' + signal.pair, 'ok');
+            } catch (e) {
+                log('❌ ' + e.message, 'err');
+                toast('Error!', 'err');
             }
 
             btn.disabled = false;
             btn.innerHTML = '<i class="fas fa-paper-plane"></i> Publish Signal';
         }
 
-        // ==================== DELETE ====================
-        async function deleteSig(id) {
-            if (!confirm('Hapus signal ini?')) return;
-            
-            signals = signals.filter(s => s.id !== id);
-            await saveSignals();
-            renderList();
-            updateStats();
-            toast('Deleted');
-            log('🗑️ Signal deleted', 'info');
+        // ==================== CREATE AIRDROP ====================
+        async function createAirdrop(e) {
+            e.preventDefault();
+            if (!selectedFiles.airdrop) { toast('Upload gambar!', 'err'); return; }
+
+            const btn = document.getElementById('airdropBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
+
+            try {
+                const imageUrl = await uploadToCloudinary(selectedFiles.airdrop);
+                
+                const airdrop = {
+                    id: Date.now(),
+                    name: document.getElementById('a_name').value.trim(),
+                    reward: document.getElementById('a_reward').value.trim() || 'TBA',
+                    deadline: document.getElementById('a_deadline').value || null,
+                    difficulty: document.getElementById('a_diff').value,
+                    link: document.getElementById('a_link').value.trim(),
+                    description: document.getElementById('a_desc').value.trim(),
+                    image: imageUrl,
+                    status: 'active',
+                    timestamp: Date.now()
+                };
+
+                data.airdrops.unshift(airdrop);
+                await saveData();
+                renderAll();
+                resetForm('airdrop');
+                toast('🎁 Airdrop published!');
+                log('🎉 Airdrop: ' + airdrop.name, 'ok');
+            } catch (e) {
+                log('❌ ' + e.message, 'err');
+                toast('Error!', 'err');
+            }
+
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-parachute-box"></i> Publish Airdrop';
         }
 
-        // ==================== RENDER ====================
-        function renderList() {
-            const list = document.getElementById('sigList');
-            document.getElementById('cnt').textContent = `(${signals.length})`;
+        // ==================== CREATE APP ====================
+        async function createApp(e) {
+            e.preventDefault();
+            if (!selectedFiles.app) { toast('Upload gambar!', 'err'); return; }
 
-            if (signals.length === 0) {
+            const btn = document.getElementById('appsBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
+
+            try {
+                const imageUrl = await uploadToCloudinary(selectedFiles.app);
+                
+                const app = {
+                    id: Date.now(),
+                    name: document.getElementById('app_name').value.trim(),
+                    category: document.getElementById('app_cat').value,
+                    platform: document.getElementById('app_platform').value,
+                    price: document.getElementById('app_price').value,
+                    rating: parseInt(document.getElementById('app_rating').value),
+                    link: document.getElementById('app_link').value.trim(),
+                    description: document.getElementById('app_desc').value.trim(),
+                    image: imageUrl,
+                    timestamp: Date.now()
+                };
+
+                data.apps.unshift(app);
+                await saveData();
+                renderAll();
+                resetForm('app');
+                toast('📱 App published!');
+                log('🎉 App: ' + app.name, 'ok');
+            } catch (e) {
+                log('❌ ' + e.message, 'err');
+                toast('Error!', 'err');
+            }
+
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-mobile-alt"></i> Publish Aplikasi';
+        }
+
+        // ==================== DELETE FUNCTIONS ====================
+        async function deleteSignal(id) {
+            if (!confirm('Hapus signal ini?')) return;
+            data.signals = data.signals.filter(s => s.id !== id);
+            await saveData();
+            renderAll();
+            toast('Deleted');
+        }
+
+        async function deleteAirdrop(id) {
+            if (!confirm('Hapus airdrop ini?')) return;
+            data.airdrops = data.airdrops.filter(a => a.id !== id);
+            await saveData();
+            renderAll();
+            toast('Deleted');
+        }
+
+        async function deleteApp(id) {
+            if (!confirm('Hapus app ini?')) return;
+            data.apps = data.apps.filter(a => a.id !== id);
+            await saveData();
+            renderAll();
+            toast('Deleted');
+        }
+
+        // ==================== RENDER ALL ====================
+        function renderAll() {
+            renderSignals();
+            renderAirdrops();
+            renderApps();
+            updateStats();
+        }
+
+        function renderSignals() {
+            const list = document.getElementById('signalList');
+            document.getElementById('signalListCount').textContent = `(${data.signals.length})`;
+            document.getElementById('signalCount').textContent = data.signals.length;
+
+            if (data.signals.length === 0) {
                 list.innerHTML = '<div class="empty-list"><i class="fas fa-inbox"></i><p>Belum ada signal</p></div>';
                 return;
             }
 
-            list.innerHTML = signals.map(s => `
-                <div class="signal-item">
-                    <img src="${s.image}" alt="${s.pair}" onerror="this.src='https://via.placeholder.com/60?text=${s.pair.substring(0,3)}'">
-                    <div class="signal-item-info">
-                        <div class="signal-item-pair">
+            list.innerHTML = data.signals.map(s => `
+                <div class="item-card">
+                    <img src="${s.image}" onerror="this.src='https://via.placeholder.com/55?text=${s.pair.substring(0,3)}'">
+                    <div class="item-info">
+                        <div class="item-title">
                             ${s.pair}
                             <span class="badge ${s.type}">${s.type.toUpperCase()}</span>
                         </div>
-                        <div class="signal-item-details">E:${s.entry} TP:${s.takeProfit} SL:${s.stopLoss}</div>
-                        <div class="signal-item-time"><i class="fas fa-clock"></i> ${timeAgo(s.timestamp)}</div>
+                        <div class="item-details">E:${s.entry} TP:${s.takeProfit} SL:${s.stopLoss}</div>
+                        <div class="item-time">${timeAgo(s.timestamp)}</div>
                     </div>
-                    <button class="btn-danger" onclick="deleteSig(${s.id})"><i class="fas fa-trash"></i></button>
+                    <button class="btn-danger" onclick="deleteSignal(${s.id})"><i class="fas fa-trash"></i></button>
+                </div>
+            `).join('');
+        }
+
+        function renderAirdrops() {
+            const list = document.getElementById('airdropList');
+            document.getElementById('airdropListCount').textContent = `(${data.airdrops.length})`;
+            document.getElementById('airdropCount').textContent = data.airdrops.length;
+
+            if (data.airdrops.length === 0) {
+                list.innerHTML = '<div class="empty-list"><i class="fas fa-parachute-box"></i><p>Belum ada airdrop</p></div>';
+                return;
+            }
+
+            list.innerHTML = data.airdrops.map(a => `
+                <div class="item-card">
+                    <img src="${a.image}" onerror="this.src='https://via.placeholder.com/55?text=A'">
+                    <div class="item-info">
+                        <div class="item-title">
+                            ${a.name}
+                            <span class="badge ${a.difficulty}">${a.difficulty.toUpperCase()}</span>
+                            <span class="badge ${a.status}">${a.status.toUpperCase()}</span>
+                        </div>
+                        <div class="item-details">💰 ${a.reward} ${a.deadline ? '| ⏰ ' + a.deadline : ''}</div>
+                        <div class="item-time">${timeAgo(a.timestamp)}</div>
+                    </div>
+                    <button class="btn-danger" onclick="deleteAirdrop(${a.id})"><i class="fas fa-trash"></i></button>
+                </div>
+            `).join('');
+        }
+
+        function renderApps() {
+            const list = document.getElementById('appsList');
+            document.getElementById('appsListCount').textContent = `(${data.apps.length})`;
+            document.getElementById('appsCount').textContent = data.apps.length;
+
+            if (data.apps.length === 0) {
+                list.innerHTML = '<div class="empty-list"><i class="fas fa-mobile-alt"></i><p>Belum ada app</p></div>';
+                return;
+            }
+
+            const catIcons = { exchange: '🏦', wallet: '👛', trading: '📊', bot: '🤖', defi: '🌐', other: '📱' };
+            
+            list.innerHTML = data.apps.map(a => `
+                <div class="item-card">
+                    <img src="${a.image}" onerror="this.src='https://via.placeholder.com/55?text=App'">
+                    <div class="item-info">
+                        <div class="item-title">
+                            ${a.name}
+                            <span class="badge ${a.price}">${a.price.toUpperCase()}</span>
+                        </div>
+                        <div class="item-details">${catIcons[a.category]} ${a.category} | ${'⭐'.repeat(a.rating)}</div>
+                        <div class="item-time">${timeAgo(a.timestamp)}</div>
+                    </div>
+                    <button class="btn-danger" onclick="deleteApp(${a.id})"><i class="fas fa-trash"></i></button>
                 </div>
             `).join('');
         }
 
         function updateStats() {
-            const today = new Date().setHours(0, 0, 0, 0);
-            document.getElementById('sTotal').textContent = signals.length;
-            document.getElementById('sBuy').textContent = signals.filter(s => s.type === 'buy').length;
-            document.getElementById('sSell').textContent = signals.filter(s => s.type === 'sell').length;
-            document.getElementById('sToday').textContent = signals.filter(s => s.timestamp >= today).length;
+            document.getElementById('sSignals').textContent = data.signals.length;
+            document.getElementById('sBuy').textContent = data.signals.filter(s => s.type === 'buy').length;
+            document.getElementById('sSell').textContent = data.signals.filter(s => s.type === 'sell').length;
+            document.getElementById('sAirdrops').textContent = data.airdrops.length;
+            document.getElementById('sApps').textContent = data.apps.length;
         }
 
         // ==================== HELPERS ====================
         function selType(type) {
             document.querySelectorAll('.type-opt').forEach(o => o.classList.remove('sel'));
             document.querySelector(`.type-opt.${type}`).classList.add('sel');
-            document.getElementById('sType').value = type;
+            document.getElementById('s_type').value = type;
         }
 
-        function previewImg(e) {
+        function selDiff(diff) {
+            document.querySelectorAll('.diff-opt').forEach(o => o.classList.remove('sel'));
+            event.target.classList.add('sel');
+            document.getElementById('a_diff').value = diff;
+        }
+
+        function previewImg(e, previewId, container) {
             const file = e.target.files[0];
             if (!file) return;
+            if (file.size > 10 * 1024 * 1024) { toast('Max 10MB!', 'err'); return; }
 
-            log('📁 File: ' + file.name + ' (' + (file.size / 1024).toFixed(1) + 'KB)', 'info');
+            // Determine which type
+            if (previewId === 's_preview') selectedFiles.signal = file;
+            else if (previewId === 'a_preview') selectedFiles.airdrop = file;
+            else if (previewId === 'app_preview') selectedFiles.app = file;
 
-            if (file.size > 10 * 1024 * 1024) {
-                toast('Max 10MB!', 'err');
-                return;
-            }
-
-            selectedFile = file;
-            
             const reader = new FileReader();
             reader.onload = ev => {
-                document.getElementById('imgPreview').src = ev.target.result;
-                document.getElementById('imgUpload').classList.add('has-img');
-                log('✅ Image ready', 'ok');
+                document.getElementById(previewId).src = ev.target.result;
+                container.classList.add('has-img');
             };
             reader.readAsDataURL(file);
+            log('📁 Image selected', 'ok');
         }
 
-        function resetForm() {
-            document.getElementById('signalForm').reset();
-            document.getElementById('imgPreview').src = '';
-            document.getElementById('imgUpload').classList.remove('has-img');
-            selectedFile = null;
-            selType('buy');
+        function resetForm(type) {
+            if (type === 'signal') {
+                document.getElementById('signalForm').reset();
+                document.getElementById('s_preview').src = '';
+                document.querySelector('#signalForm .img-upload').classList.remove('has-img');
+                selectedFiles.signal = null;
+                selType('buy');
+            } else if (type === 'airdrop') {
+                document.getElementById('airdropForm').reset();
+                document.getElementById('a_preview').src = '';
+                document.querySelector('#airdropForm .img-upload').classList.remove('has-img');
+                selectedFiles.airdrop = null;
+                document.querySelectorAll('.diff-opt').forEach(o => o.classList.remove('sel'));
+                document.querySelector('.diff-opt.easy').classList.add('sel');
+            } else if (type === 'app') {
+                document.getElementById('appsForm').reset();
+                document.getElementById('app_preview').src = '';
+                document.querySelector('#appsForm .img-upload').classList.remove('has-img');
+                selectedFiles.app = null;
+            }
         }
 
         function timeAgo(ts) {
@@ -1008,7 +1361,6 @@
             const time = new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
             logs.innerHTML += `<div class="log ${type}">[${time}] ${msg}</div>`;
             logs.scrollTop = logs.scrollHeight;
-            console.log(`[${type}] ${msg}`);
         }
 
         function clearLog() {
