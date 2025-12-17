@@ -3,338 +3,792 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CryptoSignal Pro - Trading Signals</title>
+    <title>CryptoSignal Pro - Signals, Airdrop & Apps</title>
+    <meta name="description" content="Sinyal trading, info airdrop, dan rekomendasi aplikasi crypto & forex.">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root {
-            --primary: #00d4aa;
-            --secondary: #7c3aed;
-            --bg-dark: #0a0a0f;
-            --bg-card: #12121a;
-            --text-primary: #fff;
-            --text-secondary: #a0a0a0;
-            --success: #10b981;
-            --danger: #ef4444;
-            --warning: #f59e0b;
-            --border: #2a2a3a;
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{
+            --primary:#00d4aa;
+            --secondary:#7c3aed;
+            --accent:#f59e0b;
+            --bg-dark:#0a0a0f;
+            --bg-card:#12121a;
+            --text-primary:#fff;
+            --text-secondary:#a0a0a0;
+            --success:#10b981;
+            --danger:#ef4444;
+            --warning:#f59e0b;
+            --info:#3b82f6;
+            --border:#2a2a3a;
         }
-        body { font-family: 'Segoe UI', sans-serif; background: var(--bg-dark); color: var(--text-primary); min-height: 100vh; }
-        .bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: radial-gradient(circle at 15% 85%, rgba(0,212,170,0.08) 0%, transparent 50%), radial-gradient(circle at 85% 15%, rgba(124,58,237,0.08) 0%, transparent 50%); }
-
-        header { background: rgba(18,18,26,0.95); border-bottom: 1px solid var(--border); padding: 15px 0; position: sticky; top: 0; z-index: 1000; }
-        .header-content { max-width: 1300px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
-        .logo { display: flex; align-items: center; gap: 12px; font-size: 1.4rem; font-weight: 700; text-decoration: none; color: inherit; }
-        .logo-icon { width: 45px; height: 45px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 12px; display: flex; align-items: center; justify-content: center; }
-        .logo-text { background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .live-badge { display: flex; align-items: center; gap: 8px; padding: 8px 18px; background: rgba(16,185,129,0.15); border: 1px solid var(--success); border-radius: 25px; font-size: 0.85rem; color: var(--success); }
-        .live-dot { width: 8px; height: 8px; background: var(--success); border-radius: 50%; animation: pulse 2s infinite; }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
-
-        .container { max-width: 1300px; margin: 0 auto; padding: 30px 20px; }
-        .hero { text-align: center; padding: 50px 20px; margin-bottom: 30px; }
-        .hero h1 { font-size: 2.8rem; margin-bottom: 15px; background: linear-gradient(135deg, #fff, var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .hero p { color: var(--text-secondary); font-size: 1.15rem; max-width: 600px; margin: 0 auto; }
-
-        .stats-bar { display: flex; justify-content: center; gap: 40px; padding: 25px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 18px; margin-bottom: 35px; flex-wrap: wrap; }
-        .stat-item { text-align: center; }
-        .stat-value { font-size: 2rem; font-weight: 700; color: var(--primary); }
-        .stat-label { color: var(--text-secondary); font-size: 0.85rem; }
-
-        .filter-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; flex-wrap: wrap; gap: 15px; }
-        .section-title { font-size: 1.4rem; display: flex; align-items: center; gap: 10px; }
-        .section-title i { color: var(--primary); }
-        .filter-tabs { display: flex; gap: 10px; }
-        .filter-tab { padding: 10px 20px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; color: var(--text-secondary); cursor: pointer; transition: all 0.3s; }
-        .filter-tab:hover { border-color: var(--primary); color: var(--primary); }
-        .filter-tab.active { background: linear-gradient(135deg, var(--primary), var(--secondary)); border-color: transparent; color: white; }
-
-        .signals-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 25px; }
-
-        .signal-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; transition: all 0.3s; }
-        .signal-card:hover { transform: translateY(-5px); border-color: var(--primary); }
-        .card-img-wrap { position: relative; overflow: hidden; cursor: pointer; }
-        .card-img { width: 100%; height: 200px; object-fit: cover; transition: transform 0.5s; }
-        .signal-card:hover .card-img { transform: scale(1.05); }
-        .card-badge { position: absolute; top: 15px; left: 15px; padding: 10px 20px; border-radius: 25px; font-weight: 700; }
-        .card-badge.buy { background: linear-gradient(135deg, #10b981, #059669); color: white; }
-        .card-badge.sell { background: linear-gradient(135deg, #ef4444, #dc2626); color: white; }
-        .card-meta { position: absolute; top: 15px; right: 15px; }
-        .meta-tag { padding: 6px 12px; background: rgba(0,0,0,0.75); border-radius: 20px; font-size: 0.75rem; color: white; }
-        .card-body { padding: 22px; }
-        .card-pair { font-size: 1.5rem; font-weight: 700; margin-bottom: 18px; display: flex; align-items: center; gap: 12px; }
-        .pair-icon { width: 45px; height: 45px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-        .price-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 18px; }
-        .price-box { background: var(--bg-dark); border-radius: 12px; padding: 14px; text-align: center; }
-        .price-lbl { font-size: 0.7rem; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 5px; }
-        .price-val { font-size: 1.1rem; font-weight: 700; }
-        .price-val.entry { color: var(--warning); }
-        .price-val.tp { color: var(--success); }
-        .price-val.sl { color: var(--danger); }
-        .card-desc { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7; padding: 15px; background: var(--bg-dark); border-radius: 12px; border-left: 4px solid var(--primary); margin-bottom: 18px; }
-        .card-actions { display: flex; gap: 12px; }
-        .action-btn { flex: 1; padding: 14px; border: 1px solid var(--border); border-radius: 12px; background: transparent; color: var(--text-secondary); font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.3s; }
-        .action-btn:hover { border-color: var(--primary); color: var(--primary); }
-        .action-btn.primary { background: linear-gradient(135deg, var(--primary), var(--secondary)); border: none; color: white; }
-        .card-time { display: flex; justify-content: center; padding-top: 15px; margin-top: 15px; border-top: 1px solid var(--border); font-size: 0.8rem; color: var(--text-secondary); }
-
-        .loading, .empty-state { text-align: center; padding: 80px 20px; }
-        .spinner { width: 50px; height: 50px; border: 4px solid var(--border); border-top-color: var(--primary); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 20px; }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        .empty-state i { font-size: 5rem; color: var(--primary); opacity: 0.3; margin-bottom: 25px; }
-
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
-        .modal.active { display: flex; }
-        .modal img { max-width: 95%; max-height: 90%; border-radius: 12px; }
-        .modal-close { position: absolute; top: 20px; right: 30px; font-size: 2.5rem; color: white; cursor: pointer; }
-
-        .share-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
-        .share-modal.active { display: flex; }
-        .share-box { background: var(--bg-card); border-radius: 24px; padding: 35px; max-width: 450px; width: 100%; }
-        .share-title { text-align: center; margin-bottom: 25px; }
-        .share-title i { font-size: 3rem; color: var(--primary); margin-bottom: 15px; display: block; }
-        .share-btns { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 20px; }
-        .share-btn { padding: 16px; border: none; border-radius: 14px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; color: white; }
-        .share-btn.wa { background: #25D366; }
-        .share-btn.tg { background: #0088cc; }
-        .share-btn.tw { background: #1DA1F2; }
-        .share-btn.cp { background: var(--secondary); }
-        .share-btn:hover { transform: translateY(-2px); }
-        .share-text { background: var(--bg-dark); border-radius: 12px; padding: 15px; margin-bottom: 20px; }
-        .share-text textarea { width: 100%; background: transparent; border: none; color: var(--text-primary); font-size: 0.85rem; resize: none; height: 120px; }
-        .close-btn { width: 100%; padding: 14px; background: var(--bg-dark); border: 1px solid var(--border); border-radius: 12px; color: var(--text-secondary); cursor: pointer; }
-
-        .toast { position: fixed; bottom: 30px; right: 30px; padding: 16px 28px; background: var(--success); color: white; border-radius: 14px; font-weight: 600; display: flex; align-items: center; gap: 12px; transform: translateX(150%); transition: transform 0.4s; z-index: 3000; }
-        .toast.show { transform: translateX(0); }
-
-        .refresh-btn { position: fixed; bottom: 30px; left: 30px; width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border: none; border-radius: 50%; color: white; font-size: 1.4rem; cursor: pointer; z-index: 100; }
-        .refresh-btn:hover { transform: scale(1.1); }
-        .refresh-btn.spin i { animation: spin 1s linear infinite; }
-
-        footer { background: var(--bg-card); border-top: 1px solid var(--border); padding: 50px 20px; margin-top: 60px; }
-        .footer-content { max-width: 1300px; margin: 0 auto; text-align: center; }
-        .footer-logo { display: flex; align-items: center; justify-content: center; gap: 12px; font-size: 1.5rem; font-weight: 700; margin-bottom: 20px; }
-        .footer-logo span { background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .disclaimer { padding: 20px; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); border-radius: 14px; margin-bottom: 25px; max-width: 600px; margin-left: auto; margin-right: auto; }
-        .disclaimer h4 { color: var(--danger); margin-bottom: 10px; }
-        .disclaimer p { color: var(--text-secondary); font-size: 0.9rem; }
-        .copyright { color: var(--text-secondary); font-size: 0.85rem; }
-
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2rem; }
-            .signals-grid { grid-template-columns: 1fr; }
-            .filter-bar { flex-direction: column; align-items: stretch; }
-            .share-btns { grid-template-columns: 1fr; }
+        body{
+            font-family:'Segoe UI',sans-serif;
+            background:var(--bg-dark);
+            color:var(--text-primary);
+            min-height:100vh;
         }
+        .bg{
+            position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;
+            background:
+                radial-gradient(circle at 15% 85%,rgba(0,212,170,.08)0%,transparent50%),
+                radial-gradient(circle at 85% 15%,rgba(124,58,237,.08)0%,transparent50%);
+        }
+        header{
+            background:rgba(18,18,26,.95);
+            backdrop-filter:blur(20px);
+            border-bottom:1px solid var(--border);
+            padding:15px 0;
+            position:sticky;top:0;z-index:1000;
+        }
+        .header-content{
+            max-width:1300px;margin:0 auto;padding:0 20px;
+            display:flex;justify-content:space-between;align-items:center;
+        }
+        .logo{
+            display:flex;align-items:center;gap:12px;
+            font-size:1.4rem;font-weight:700;text-decoration:none;color:inherit;
+        }
+        .logo-icon{
+            width:45px;height:45px;
+            background:linear-gradient(135deg,var(--primary),var(--secondary));
+            border-radius:12px;display:flex;align-items:center;justify-content:center;
+            font-size:1.4rem;
+        }
+        .logo-text{
+            background:linear-gradient(135deg,var(--primary),var(--secondary));
+            -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+        }
+        .live-badge{
+            display:flex;align-items:center;gap:8px;
+            padding:8px 18px;
+            background:rgba(16,185,129,.15);
+            border:1px solid var(--success);
+            border-radius:25px;
+            font-size:.85rem;color:var(--success);font-weight:600;
+        }
+        .live-dot{
+            width:8px;height:8px;background:var(--success);
+            border-radius:50%;animation:pulse 2s infinite;
+        }
+        @keyframes pulse{
+            0%,100%{opacity:1;transform:scale(1)}
+            50%{opacity:.5;transform:scale(1.2)}
+        }
+        .container{max-width:1300px;margin:0 auto;padding:30px 20px}
+        .hero{text-align:center;padding:50px 20px;margin-bottom:30px}
+        .hero h1{
+            font-size:2.6rem;margin-bottom:15px;
+            background:linear-gradient(135deg,#fff,var(--primary));
+            -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+        }
+        .hero p{
+            color:var(--text-secondary);font-size:1.1rem;
+            max-width:650px;margin:0 auto 20px;line-height:1.6;
+        }
+        .hero-badges{
+            display:flex;justify-content:center;gap:12px;flex-wrap:wrap;
+        }
+        .hero-badge{
+            padding:8px 16px;background:var(--bg-card);border:1px solid var(--border);
+            border-radius:20px;font-size:.85rem;display:flex;align-items:center;gap:6px;
+        }
+        .hero-badge i{color:var(--primary);}
+        .stats-row{
+            display:flex;justify-content:center;gap:30px;
+            padding:20px;background:var(--bg-card);
+            border:1px solid var(--border);border-radius:18px;
+            margin-bottom:30px;flex-wrap:wrap;
+        }
+        .stat-item{text-align:center;min-width:90px;}
+        .stat-value{
+            font-size:1.8rem;font-weight:700;
+            background:linear-gradient(135deg,var(--primary),var(--secondary));
+            -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+        }
+        .stat-label{color:var(--text-secondary);font-size:.8rem;margin-top:4px;}
+        .filter-bar{
+            display:flex;justify-content:space-between;align-items:center;
+            margin-bottom:20px;flex-wrap:wrap;gap:12px;
+        }
+        .section-title{
+            font-size:1.3rem;display:flex;align-items:center;gap:8px;
+        }
+        .section-title i{color:var(--primary);}
+        .type-tabs{display:flex;gap:8px;flex-wrap:wrap;}
+        .type-tab{
+            padding:8px 16px;background:var(--bg-card);border:1px solid var(--border);
+            border-radius:10px;color:var(--text-secondary);font-size:.85rem;
+            cursor:pointer;display:flex;align-items:center;gap:6px;
+            transition:all .3s;
+        }
+        .type-tab:hover{border-color:var(--primary);color:var(--primary);}
+        .type-tab.active{
+            background:linear-gradient(135deg,var(--primary),var(--secondary));
+            border-color:transparent;color:white;
+        }
+        .signals-grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fill,minmax(360px,1fr));
+            gap:22px;
+        }
+        .card{
+            background:var(--bg-card);
+            border:1px solid var(--border);
+            border-radius:20px;
+            overflow:hidden;
+            transition:all .3s;
+        }
+        .card:hover{
+            transform:translateY(-4px);
+            border-color:var(--primary);
+            box-shadow:0 18px 40px rgba(0,0,0,.4);
+        }
+        .card-img-wrap{position:relative;overflow:hidden;cursor:pointer;}
+        .card-img{
+            width:100%;height:200px;object-fit:cover;
+            transition:transform .5s;background:var(--border);
+        }
+        .card:hover .card-img{transform:scale(1.05);}
+        .badge-main{
+            position:absolute;top:14px;left:14px;
+            padding:8px 16px;border-radius:20px;
+            font-size:.8rem;font-weight:700;display:flex;align-items:center;gap:6px;
+        }
+        .badge-signal{background:linear-gradient(135deg,#10b981,#059669);color:#fff;}
+        .badge-airdrop{background:linear-gradient(135deg,#f59e0b,#ea580c);color:#fff;}
+        .badge-app{background:linear-gradient(135deg,#3b82f6,#7c3aed);color:#fff;}
+        .badge-signal.sell{background:linear-gradient(135deg,#ef4444,#dc2626);}
+        .card-meta{
+            position:absolute;top:14px;right:14px;display:flex;gap:6px;
+        }
+        .meta-tag{
+            padding:6px 10px;background:rgba(0,0,0,.75);
+            border-radius:16px;font-size:.7rem;color:#fff;
+        }
+        .card-body{padding:20px;}
+        .card-title-row{
+            display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;
+        }
+        .card-title-main{
+            font-size:1.3rem;font-weight:700;display:flex;align-items:center;gap:10px;
+        }
+        .card-title-main .icon-circle{
+            width:34px;height:34px;border-radius:50%;
+            background:linear-gradient(135deg,var(--primary),var(--secondary));
+            display:flex;align-items:center;justify-content:center;
+            font-size:.9rem;
+        }
+        .pill{
+            padding:4px 10px;border-radius:12px;font-size:.7rem;
+            background:var(--bg-dark);color:var(--text-secondary);
+        }
+        .price-grid{
+            display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px;
+        }
+        .price-box{
+            background:var(--bg-dark);border-radius:10px;padding:10px 8px;text-align:center;
+        }
+        .price-lbl{font-size:.65rem;color:var(--text-secondary);text-transform:uppercase;margin-bottom:4px;}
+        .price-val{font-size:.95rem;font-weight:700;}
+        .price-val.entry{color:var(--warning);}
+        .price-val.tp{color:var(--success);}
+        .price-val.sl{color:var(--danger);}
+        .card-desc{
+            color:var(--text-secondary);font-size:.9rem;
+            line-height:1.6;background:var(--bg-dark);border-radius:10px;
+            padding:12px;border-left:3px solid var(--primary);margin-bottom:12px;
+        }
+        .chip-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;}
+        .chip{
+            padding:4px 10px;border-radius:12px;font-size:.7rem;
+            background:var(--bg-dark);color:var(--text-secondary);
+        }
+        .chip.status-active{background:rgba(16,185,129,.15);color:var(--success);}
+        .chip.status-ended{background:rgba(239,68,68,.15);color:var(--danger);}
+        .card-actions{display:flex;gap:10px;}
+        .btn{
+            flex:1;padding:12px;border-radius:10px;border:1px solid var(--border);
+            background:transparent;color:var(--text-secondary);font-size:.85rem;
+            font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;
+            transition:all .3s;
+        }
+        .btn:hover{border-color:var(--primary);color:var(--primary);background:rgba(0,212,170,.08);}
+        .btn.primary{
+            background:linear-gradient(135deg,var(--primary),var(--secondary));
+            border:none;color:#fff;
+        }
+        .btn.primary:hover{transform:translateY(-2px);}
+        .card-footer{
+            padding-top:12px;margin-top:12px;border-top:1px solid var(--border);
+            font-size:.75rem;color:var(--text-secondary);display:flex;justify-content:space-between;
+        }
+
+        .loading,.empty-state{text-align:center;padding:80px 20px;}
+        .spinner{
+            width:45px;height:45px;border:4px solid var(--border);
+            border-top-color:var(--primary);border-radius:50%;animation:spin 1s linear infinite;
+            margin:0 auto 15px;
+        }
+        @keyframes spin{to{transform:rotate(360deg)}}
+        .empty-state i{font-size:4rem;color:var(--primary);opacity:.3;margin-bottom:20px;}
+
+        .modal{
+            display:none;position:fixed;top:0;left:0;width:100%;height:100%;
+            background:rgba(0,0,0,.95);z-index:2000;align-items:center;justify-content:center;padding:20px;
+        }
+        .modal.active{display:flex;}
+        .modal img{max-width:95%;max-height:90%;border-radius:12px;}
+        .modal-close{
+            position:absolute;top:20px;right:30px;font-size:2.5rem;color:#fff;cursor:pointer;
+        }
+
+        .share-modal{
+            display:none;position:fixed;top:0;left:0;width:100%;height:100%;
+            background:rgba(0,0,0,.85);z-index:2000;align-items:center;justify-content:center;padding:20px;
+        }
+        .share-modal.active{display:flex;}
+        .share-box{
+            background:var(--bg-card);border-radius:20px;padding:28px;max-width:420px;width:100%;
+        }
+        .share-title{text-align:center;margin-bottom:18px;}
+        .share-title i{font-size:2.4rem;color:var(--primary);margin-bottom:8px;}
+        .share-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;}
+        .share-btn{
+            padding:12px;border-radius:10px;border:none;color:#fff;font-weight:600;
+            cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;font-size:.9rem;
+        }
+        .share-btn.wa{background:#25D366;}
+        .share-btn.tg{background:#0088cc;}
+        .share-btn.tw{background:#1DA1F2;}
+        .share-btn.cp{background:var(--secondary);}
+        .share-text{background:var(--bg-dark);border-radius:10px;padding:10px;margin-bottom:10px;}
+        .share-text textarea{
+            width:100%;background:transparent;border:none;color:var(--text-primary);
+            font-size:.8rem;resize:none;height:100px;
+        }
+        .close-btn{
+            width:100%;padding:10px;border-radius:10px;border:1px solid var(--border);
+            background:var(--bg-dark);color:var(--text-secondary);cursor:pointer;
+        }
+
+        .toast{
+            position:fixed;bottom:25px;right:25px;padding:12px 20px;
+            background:var(--success);color:#fff;border-radius:10px;font-weight:600;
+            display:flex;align-items:center;gap:8px;transform:translateX(150%);
+            transition:transform .3s;z-index:3000;font-size:.85rem;
+        }
+        .toast.show{transform:translateX(0);}
+
+        .refresh-btn{
+            position:fixed;bottom:25px;left:25px;width:50px;height:50px;
+            background:linear-gradient(135deg,var(--primary),var(--secondary));
+            border:none;border-radius:50%;color:#fff;font-size:1.2rem;cursor:pointer;
+            z-index:100;box-shadow:0 5px 25px rgba(0,212,170,.4);
+        }
+        .refresh-btn.spin i{animation:spin 1s linear infinite;}
+
+        footer{
+            background:var(--bg-card);border-top:1px solid var(--border);
+            padding:40px 20px;margin-top:50px;
+        }
+        .footer-content{max-width:1300px;margin:0 auto;text-align:center;}
+        .footer-logo{display:flex;align-items:center;justify-content:center;gap:10px;font-size:1.4rem;font-weight:700;margin-bottom:15px;}
+        .footer-logo span{
+            background:linear-gradient(135deg,var(--primary),var(--secondary));
+            -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+        }
+        .disclaimer{
+            padding:16px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);
+            border-radius:12px;margin:0 auto 15px;max-width:600px;
+        }
+        .disclaimer h4{color:var(--danger);margin-bottom:6px;}
+        .disclaimer p{color:var(--text-secondary);font-size:.8rem;}
+        .copyright{color:var(--text-secondary);font-size:.8rem;}
+
+        @media(max-width:768px){
+            .hero h1{font-size:2rem;}
+            .signals-grid{grid-template-columns:1fr;}
+            .filter-bar{flex-direction:column;align-items:stretch;}
+            .share-btns{grid-template-columns:1fr;}
+        }
+        ::-webkit-scrollbar{width:8px}
+        ::-webkit-scrollbar-track{background:var(--bg-dark)}
+        ::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px}
+        ::-webkit-scrollbar-thumb:hover{background:var(--primary)}
     </style>
 </head>
 <body>
-    <div class="bg"></div>
+<div class="bg"></div>
 
-    <header>
-        <div class="header-content">
-            <a href="/" class="logo">
-                <div class="logo-icon">📊</div>
-                <span class="logo-text">CryptoSignal Pro</span>
-            </a>
-            <div class="live-badge">
-                <div class="live-dot"></div>
-                <span>Live Signals</span>
-            </div>
+<header>
+    <div class="header-content">
+        <a href="/" class="logo">
+            <div class="logo-icon">📊</div>
+            <span class="logo-text">CryptoSignal Pro</span>
+        </a>
+        <div class="live-badge">
+            <div class="live-dot"></div>
+            <span>Live Updates</span>
         </div>
-    </header>
-
-    <div class="container">
-        <section class="hero">
-            <h1>🚀 Premium Trading Signals</h1>
-            <p>Dapatkan sinyal trading Crypto & Forex berkualitas dengan analisis teknikal yang akurat</p>
-        </section>
-
-        <div class="stats-bar">
-            <div class="stat-item"><div class="stat-value" id="sTotal">-</div><div class="stat-label">Total</div></div>
-            <div class="stat-item"><div class="stat-value" id="sBuy">-</div><div class="stat-label">Buy</div></div>
-            <div class="stat-item"><div class="stat-value" id="sSell">-</div><div class="stat-label">Sell</div></div>
-        </div>
-
-        <div class="filter-bar">
-            <h2 class="section-title"><i class="fas fa-signal"></i> Latest Signals</h2>
-            <div class="filter-tabs">
-                <button class="filter-tab active" onclick="filter('all', this)">All</button>
-                <button class="filter-tab" onclick="filter('buy', this)"><i class="fas fa-arrow-up"></i> Buy</button>
-                <button class="filter-tab" onclick="filter('sell', this)"><i class="fas fa-arrow-down"></i> Sell</button>
-            </div>
-        </div>
-
-        <div class="loading" id="loading"><div class="spinner"></div><p>Memuat signals...</p></div>
-        <div class="signals-grid" id="grid"></div>
-        <div class="empty-state" id="empty" style="display:none;"><i class="fas fa-inbox"></i><h3>Belum Ada Signal</h3><p>Signal akan segera tersedia</p></div>
     </div>
+</header>
 
-    <button class="refresh-btn" onclick="refresh()"><i class="fas fa-sync-alt"></i></button>
+<div class="container">
+    <section class="hero">
+        <h1>🚀 Signals, Airdrops & Apps</h1>
+        <p>Sinyal trading, info airdrop, dan rekomendasi aplikasi crypto dalam satu halaman. Dibagikan langsung dari admin Anda.</p>
+        <div class="hero-badges">
+            <div class="hero-badge"><i class="fas fa-chart-line"></i> Trading Signals</div>
+            <div class="hero-badge"><i class="fas fa-parachute-box"></i> Airdrop Info</div>
+            <div class="hero-badge"><i class="fas fa-mobile-alt"></i> Crypto Apps</div>
+        </div>
+    </section>
 
-    <div class="modal" id="imgModal" onclick="closeModal()"><span class="modal-close">&times;</span><img id="modalImg"></div>
-
-    <div class="share-modal" id="shareModal" onclick="closeShare()">
-        <div class="share-box" onclick="event.stopPropagation()">
-            <div class="share-title"><i class="fas fa-share-alt"></i><h3>Share Signal</h3></div>
-            <div class="share-btns">
-                <button class="share-btn wa" onclick="shareWA()"><i class="fab fa-whatsapp"></i> WhatsApp</button>
-                <button class="share-btn tg" onclick="shareTG()"><i class="fab fa-telegram"></i> Telegram</button>
-                <button class="share-btn tw" onclick="shareTW()"><i class="fab fa-twitter"></i> Twitter</button>
-                <button class="share-btn cp" onclick="copyTxt()"><i class="fas fa-copy"></i> Copy</button>
-            </div>
-            <div class="share-text"><textarea id="shareTxt" readonly></textarea></div>
-            <button class="close-btn" onclick="closeShare()">Tutup</button>
+    <div class="stats-row">
+        <div class="stat-item">
+            <div class="stat-value" id="statSignals">-</div>
+            <div class="stat-label">Signals</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value" id="statAirdrops">-</div>
+            <div class="stat-label">Airdrops</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value" id="statApps">-</div>
+            <div class="stat-label">Apps</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value" id="statTotal">-</div>
+            <div class="stat-label">Total</div>
         </div>
     </div>
 
-    <div class="toast" id="toast"><i class="fas fa-check-circle"></i><span id="toastMsg">OK</span></div>
-
-    <footer>
-        <div class="footer-content">
-            <div class="footer-logo"><div class="logo-icon">📊</div><span>CryptoSignal Pro</span></div>
-            <div class="disclaimer"><h4><i class="fas fa-exclamation-triangle"></i> Disclaimer</h4><p>Trading mengandung risiko tinggi. Sinyal bukan saran investasi. Kelola risiko dengan bijak.</p></div>
-            <p class="copyright">© 2024 CryptoSignal Pro</p>
+    <div class="filter-bar">
+        <h2 class="section-title"><i class="fas fa-layer-group"></i> Konten Terbaru</h2>
+        <div class="type-tabs">
+            <button class="type-tab active" onclick="setType('all', this)"><i class="fas fa-stream"></i> All</button>
+            <button class="type-tab" onclick="setType('signal', this)"><i class="fas fa-chart-line"></i> Signals</button>
+            <button class="type-tab" onclick="setType('airdrop', this)"><i class="fas fa-parachute-box"></i> Airdrops</button>
+            <button class="type-tab" onclick="setType('app', this)"><i class="fas fa-mobile-alt"></i> Apps</button>
         </div>
-    </footer>
+    </div>
 
-    <script>
-        // ================================================================
-        // 🔧 CONFIG - SAMAKAN DENGAN ADMIN.HTML!
-        // ================================================================
-        const CONFIG = {
-            JSONBIN_BIN_ID: '6941215fae596e708f9d854a',      // SAMA dengan admin.html
-            JSONBIN_API_KEY: '$2a$10$Stl8nnHuNvN0U0egY.a8I.Hp4uWpBo8wBbSxQ7MN1IvGyf2jHsssi',     // SAMA dengan admin.html
-        };
-        // ================================================================
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+        <p>Memuat konten...</p>
+    </div>
 
-        let signals = [];
-        let currentFilter = 'all';
-        let currentSignal = null;
+    <div class="signals-grid" id="grid"></div>
 
-        document.addEventListener('DOMContentLoaded', loadSignals);
+    <div class="empty-state" id="empty" style="display:none;">
+        <i class="fas fa-inbox"></i>
+        <h3>Belum Ada Konten</h3>
+        <p>Signals, airdrop, atau aplikasi akan segera muncul di sini.</p>
+    </div>
+</div>
 
-        async function loadSignals() {
-            document.getElementById('loading').style.display = 'block';
-            document.getElementById('grid').innerHTML = '';
-            document.getElementById('empty').style.display = 'none';
+<button class="refresh-btn" onclick="refresh()"><i class="fas fa-sync-alt"></i></button>
 
-            try {
-                if (CONFIG.JSONBIN_BIN_ID && CONFIG.JSONBIN_API_KEY) {
-                    const res = await fetch(`https://api.jsonbin.io/v3/b/${CONFIG.JSONBIN_BIN_ID}/latest`, {
-                        headers: { 'X-Master-Key': CONFIG.JSONBIN_API_KEY }
-                    });
-                    if (res.ok) {
-                        const data = await res.json();
-                        signals = data.record.signals || [];
-                    }
+<div class="modal" id="imgModal" onclick="closeModal()">
+    <span class="modal-close">&times;</span>
+    <img id="modalImg" alt="Preview">
+</div>
+
+<div class="share-modal" id="shareModal" onclick="closeShare()">
+    <div class="share-box" onclick="event.stopPropagation()">
+        <div class="share-title">
+            <i class="fas fa-share-alt"></i>
+            <h3>Share Konten</h3>
+        </div>
+        <div class="share-btns">
+            <button class="share-btn wa" onclick="shareWA()"><i class="fab fa-whatsapp"></i> WhatsApp</button>
+            <button class="share-btn tg" onclick="shareTG()"><i class="fab fa-telegram"></i> Telegram</button>
+            <button class="share-btn tw" onclick="shareTW()"><i class="fab fa-twitter"></i> Twitter</button>
+            <button class="share-btn cp" onclick="copyText()"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+        <div class="share-text">
+            <textarea id="shareTxt" readonly></textarea>
+        </div>
+        <button class="close-btn" onclick="closeShare()">Tutup</button>
+    </div>
+</div>
+
+<div class="toast" id="toast"><i class="fas fa-check-circle"></i><span id="toastMsg">OK</span></div>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-logo">
+            <div class="logo-icon">📊</div>
+            <span>CryptoSignal Pro</span>
+        </div>
+        <div class="disclaimer">
+            <h4><i class="fas fa-exclamation-triangle"></i> Disclaimer</h4>
+            <p>Konten di halaman ini hanya sebagai informasi. Trading dan investasi mengandung risiko tinggi. Selalu lakukan riset sendiri sebelum mengambil keputusan.</p>
+        </div>
+        <p class="copyright">© 2024 CryptoSignal Pro</p>
+    </div>
+</footer>
+
+<script>
+    // ================================================================
+    // 🔧 CONFIG - SAMAKAN DENGAN admin.html
+    // ================================================================
+    const CONFIG = {
+        JSONBIN_BIN_ID: '6941215fae596e708f9d854a',      // ← isi dengan Bin ID yg sama seperti admin.html
+        JSONBIN_API_KEY: '$2a$10$Stl8nnHuNvN0U0egY.a8I.Hp4uWpBo8wBbSxQ7MN1IvGyf2jHsssi'      // ← isi dengan X-Master-Key yg sama
+    };
+    // ================================================================
+
+    let allContent = [];
+    let currentType = 'all';
+    let currentShareItem = null;
+
+    document.addEventListener('DOMContentLoaded', loadContent);
+
+    async function loadContent() {
+        const loading = document.getElementById('loading');
+        const grid = document.getElementById('grid');
+        const empty = document.getElementById('empty');
+
+        loading.style.display = 'block';
+        grid.innerHTML = '';
+        empty.style.display = 'none';
+
+        try {
+            if (CONFIG.JSONBIN_BIN_ID && CONFIG.JSONBIN_API_KEY) {
+                const res = await fetch(`https://api.jsonbin.io/v3/b/${CONFIG.JSONBIN_BIN_ID}/latest`, {
+                    headers: { 'X-Master-Key': CONFIG.JSONBIN_API_KEY }
+                });
+                if (res.ok) {
+                    const data = await res.json();
+                    const rec = data.record || {};
+                    // Kompatibel: admin lama (signals) & admin baru (content)
+                    allContent = rec.content || rec.signals || [];
                 } else {
-                    signals = JSON.parse(localStorage.getItem('signals') || '[]');
+                    throw new Error('HTTP ' + res.status);
                 }
-            } catch (e) {
-                signals = JSON.parse(localStorage.getItem('signals') || '[]');
+            } else {
+                // fallback ke localStorage (untuk testing lokal)
+                allContent = JSON.parse(localStorage.getItem('content') || localStorage.getItem('signals') || '[]');
             }
-
-            document.getElementById('loading').style.display = 'none';
-            render();
-            updateStats();
+        } catch (e) {
+            console.error('Load error:', e);
+            allContent = JSON.parse(localStorage.getItem('content') || localStorage.getItem('signals') || '[]');
         }
 
-        function render() {
-            const grid = document.getElementById('grid');
-            const empty = document.getElementById('empty');
+        loading.style.display = 'none';
+        render();
+        updateStats();
+    }
 
-            let list = [...signals];
-            if (currentFilter !== 'all') list = list.filter(s => s.type === currentFilter);
-            list.sort((a, b) => b.timestamp - a.timestamp);
+    function render() {
+        const grid = document.getElementById('grid');
+        const empty = document.getElementById('empty');
 
-            if (list.length === 0) { grid.innerHTML = ''; empty.style.display = 'block'; return; }
-            empty.style.display = 'none';
+        if (!Array.isArray(allContent)) allContent = [];
 
-            grid.innerHTML = list.map(s => {
-                const icon = s.marketType === 'crypto' ? '₿' : s.marketType === 'forex' ? '💱' : s.marketType === 'stocks' ? '📈' : '🛢️';
-                return `
-                    <div class="signal-card">
-                        <div class="card-img-wrap" onclick="openModal('${s.image}')">
-                            <img src="${s.image}" class="card-img" alt="${s.pair}" loading="lazy" onerror="this.src='https://via.placeholder.com/400x200?text=${encodeURIComponent(s.pair)}'">
-                            <span class="card-badge ${s.type}"><i class="fas fa-arrow-trend-${s.type === 'buy' ? 'up' : 'down'}"></i> ${s.type.toUpperCase()}</span>
-                            <div class="card-meta"><span class="meta-tag">${s.timeframe}</span></div>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-pair"><span class="pair-icon">${icon}</span>${s.pair}</div>
-                            <div class="price-grid">
-                                <div class="price-box"><div class="price-lbl">Entry</div><div class="price-val entry">${s.entry}</div></div>
-                                <div class="price-box"><div class="price-lbl">Take Profit</div><div class="price-val tp">${s.takeProfit}</div></div>
-                                <div class="price-box"><div class="price-lbl">Stop Loss</div><div class="price-val sl">${s.stopLoss}</div></div>
-                            </div>
-                            <div class="card-desc">${s.description}</div>
-                            <div class="card-actions">
-                                <button class="action-btn primary" onclick='share(${JSON.stringify(s).replace(/'/g, "\\'")})'><i class="fas fa-share"></i> Share</button>
-                                <button class="action-btn" onclick="openModal('${s.image}')"><i class="fas fa-expand"></i></button>
-                            </div>
-                            <div class="card-time"><i class="fas fa-clock"></i>&nbsp; ${timeAgo(s.timestamp)}</div>
-                        </div>
+        let list = allContent.map(item => {
+            // Backward kompatibel: jika tidak ada contentType, anggap signal
+            if (!item.contentType) return { ...item, contentType: 'signal' };
+            return item;
+        });
+
+        // Filter type
+        if (currentType !== 'all') {
+            list = list.filter(i => i.contentType === currentType);
+        }
+
+        // Sort terbaru
+        list.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+
+        if (list.length === 0) {
+            grid.innerHTML = '';
+            empty.style.display = 'block';
+            return;
+        }
+        empty.style.display = 'none';
+
+        grid.innerHTML = list.map(item => renderCard(item)).join('');
+    }
+
+    function renderCard(item) {
+        const t = item.contentType;
+        if (t === 'airdrop') return renderAirdropCard(item);
+        if (t === 'app') return renderAppCard(item);
+        return renderSignalCard(item);
+    }
+
+    function renderSignalCard(s) {
+        const icon = s.marketType === 'crypto' ? '₿' :
+                     s.marketType === 'forex' ? '💱' :
+                     s.marketType === 'stocks' ? '📈' : '🛢️';
+        const img = s.image || 'https://via.placeholder.com/400x200?text=Signal';
+        return `
+        <div class="card">
+            <div class="card-img-wrap" onclick="openModal('${img}')">
+                <img src="${img}" class="card-img" alt="${s.pair}" loading="lazy">
+                <span class="badge-main badge-signal ${s.type === 'sell' ? 'sell' : ''}">
+                    <i class="fas fa-arrow-trend-${s.type === 'sell' ? 'down' : 'up'}"></i> ${s.type?.toUpperCase() || 'SIGNAL'}
+                </span>
+                <div class="card-meta">
+                    <span class="meta-tag">${s.timeframe || '-'}</span>
+                    <span class="meta-tag">${(s.marketType || 'market').toUpperCase()}</span>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="card-title-row">
+                    <div class="card-title-main">
+                        <div class="icon-circle">${icon}</div>
+                        ${s.pair || '-'}
                     </div>
-                `;
-            }).join('');
+                    <span class="pill">Signal</span>
+                </div>
+                <div class="price-grid">
+                    <div class="price-box">
+                        <div class="price-lbl">Entry</div>
+                        <div class="price-val entry">${s.entry || '-'}</div>
+                    </div>
+                    <div class="price-box">
+                        <div class="price-lbl">TP</div>
+                        <div class="price-val tp">${s.takeProfit || '-'}</div>
+                    </div>
+                    <div class="price-box">
+                        <div class="price-lbl">SL</div>
+                        <div class="price-val sl">${s.stopLoss || '-'}</div>
+                    </div>
+                </div>
+                <div class="card-desc">${(s.description || '').replace(/\n/g,'<br>')}</div>
+                <div class="card-actions">
+                    <button class="btn primary" onclick='openShare(${JSON.stringify({ ...s, contentType:"signal" }).replace(/'/g,"\\'")})'>
+                        <i class="fas fa-share"></i> Share
+                    </button>
+                    <button class="btn" onclick="openModal('${img}')">
+                        <i class="fas fa-expand"></i> View Chart
+                    </button>
+                </div>
+                <div class="card-footer">
+                    <span><i class="fas fa-clock"></i> ${timeAgo(s.timestamp)}</span>
+                </div>
+            </div>
+        </div>`;
+    }
+
+    function renderAirdropCard(a) {
+        const img = a.image || 'https://via.placeholder.com/400x200?text=Airdrop';
+        const statusClass = a.status === 'ended' ? 'status-ended' : 'status-active';
+        const statusText = a.status === 'ended' ? 'Ended' : 'Active';
+        return `
+        <div class="card">
+            <div class="card-img-wrap" onclick="openModal('${img}')">
+                <img src="${img}" class="card-img" alt="${a.name}" loading="lazy">
+                <span class="badge-main badge-airdrop">
+                    <i class="fas fa-parachute-box"></i> Airdrop
+                </span>
+                <div class="card-meta">
+                    <span class="meta-tag">${(a.platform || 'Multi').toUpperCase()}</span>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="card-title-row">
+                    <div class="card-title-main">
+                        <div class="icon-circle">🪂</div>
+                        ${a.name || '-'}
+                    </div>
+                    <span class="pill">Reward: ${a.reward || 'TBA'}</span>
+                </div>
+                <div class="chip-row">
+                    <span class="chip ${statusClass}">${statusText}</span>
+                    <span class="chip">Deadline: ${a.deadline || 'TBA'}</span>
+                </div>
+                <div class="card-desc">${(a.description || '').replace(/\n/g,'<br>')}</div>
+                <div class="card-actions">
+                    <button class="btn primary" onclick="window.open('${a.link}','_blank')">
+                        <i class="fas fa-link"></i> Buka Airdrop
+                    </button>
+                    <button class="btn" onclick='openShare(${JSON.stringify({ ...a, contentType:"airdrop" }).replace(/'/g,"\\'")})'>
+                        <i class="fas fa-share"></i> Share
+                    </button>
+                </div>
+                <div class="card-footer">
+                    <span><i class="fas fa-clock"></i> ${timeAgo(a.timestamp)}</span>
+                </div>
+            </div>
+        </div>`;
+    }
+
+    function renderAppCard(app) {
+        const img = app.image || 'https://via.placeholder.com/400x200?text=App';
+        const stars = '⭐'.repeat(app.rating || 0);
+        return `
+        <div class="card">
+            <div class="card-img-wrap" onclick="openModal('${img}')">
+                <img src="${img}" class="card-img" alt="${app.name}" loading="lazy">
+                <span class="badge-main badge-app">
+                    <i class="fas fa-mobile-alt"></i> App
+                </span>
+                <div class="card-meta">
+                    <span class="meta-tag">${(app.platform || 'ALL')}</span>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="card-title-row">
+                    <div class="card-title-main">
+                        <div class="icon-circle">📱</div>
+                        ${app.name || '-'}
+                    </div>
+                    <span class="pill">${app.category || 'Tools'}</span>
+                </div>
+                <div class="chip-row">
+                    <span class="chip">${stars || '⭐'}</span>
+                    <span class="chip">${app.platform || ''}</span>
+                </div>
+                <div class="card-desc">${(app.description || '').replace(/\n/g,'<br>')}</div>
+                <div class="card-actions">
+                    <button class="btn primary" onclick="window.open('${app.link}','_blank')">
+                        <i class="fas fa-download"></i> Download / Open
+                    </button>
+                    <button class="btn" onclick='openShare(${JSON.stringify({ ...app, contentType:"app" }).replace(/'/g,"\\'")})'>
+                        <i class="fas fa-share"></i> Share
+                    </button>
+                </div>
+                <div class="card-footer">
+                    <span><i class="fas fa-clock"></i> ${timeAgo(app.timestamp)}</span>
+                </div>
+            </div>
+        </div>`;
+    }
+
+    function updateStats() {
+        const signals = allContent.filter(c => (c.contentType || 'signal') === 'signal').length;
+        const airdrops = allContent.filter(c => c.contentType === 'airdrop').length;
+        const apps = allContent.filter(c => c.contentType === 'app').length;
+        document.getElementById('statSignals').textContent = signals;
+        document.getElementById('statAirdrops').textContent = airdrops;
+        document.getElementById('statApps').textContent = apps;
+        document.getElementById('statTotal').textContent = allContent.length;
+    }
+
+    function setType(type, btn) {
+        currentType = type;
+        document.querySelectorAll('.type-tab').forEach(t => t.classList.remove('active'));
+        btn.classList.add('active');
+        render();
+    }
+
+    function refresh() {
+        const btn = document.querySelector('.refresh-btn');
+        btn.classList.add('spin');
+        loadContent().finally(() => {
+            setTimeout(() => {
+                btn.classList.remove('spin');
+                toast('Updated!');
+            }, 500);
+        });
+    }
+
+    function openModal(src) {
+        document.getElementById('modalImg').src = src;
+        document.getElementById('imgModal').classList.add('active');
+    }
+    function closeModal() { document.getElementById('imgModal').classList.remove('active'); }
+
+    function openShare(item) {
+        currentShareItem = item;
+        document.getElementById('shareTxt').value = generateShareText(item);
+        document.getElementById('shareModal').classList.add('active');
+    }
+    function closeShare() { document.getElementById('shareModal').classList.remove('active'); }
+
+    function generateShareText(item) {
+        const t = item.contentType || 'signal';
+        if (t === 'airdrop') {
+            return `🪂 *AIRDROP INFO*
+━━━━━━━━━━━━━━━
+📛 Project: ${item.name}
+🌐 Network: ${item.platform || '-'}
+💰 Est. Reward: ${item.reward || 'TBA'}
+📅 Deadline: ${item.deadline || 'TBA'}
+📌 Status: ${item.status === 'ended' ? 'Ended' : 'Active'}
+━━━━━━━━━━━━━━━
+📝 Cara Ikut:
+${item.description || '-'}
+━━━━━━━━━━━━━━━
+🔗 Link: ${item.link}
+⚠️ Always DYOR!`;
         }
-
-        function updateStats() {
-            document.getElementById('sTotal').textContent = signals.length;
-            document.getElementById('sBuy').textContent = signals.filter(s => s.type === 'buy').length;
-            document.getElementById('sSell').textContent = signals.filter(s => s.type === 'sell').length;
+        if (t === 'app') {
+            return `📱 *CRYPTO APP RECOMMENDATION*
+━━━━━━━━━━━━━━━
+📛 App: ${item.name}
+📂 Category: ${item.category || '-'}
+📲 Platform: ${item.platform || '-'}
+⭐ Rating: ${item.rating || '-'}
+━━━━━━━━━━━━━━━
+📝 Description:
+${item.description || '-'}
+━━━━━━━━━━━━━━━
+🔗 Download/Open: ${item.link}`;
         }
+        // signal
+        return `🚀 *TRADING SIGNAL*
+━━━━━━━━━━━━━━━
+📊 Pair: ${item.pair}
+${item.type === 'sell' ? '🔴 SELL' : '🟢 BUY'}
+⏰ TF: ${item.timeframe || '-'}
+━━━━━━━━━━━━━━━
+💰 Entry: ${item.entry}
+🎯 TP: ${item.takeProfit}
+🛑 SL: ${item.stopLoss}
+━━━━━━━━━━━━━━━
+📝 Analysis:
+${item.description || '-'}
+━━━━━━━━━━━━━━━
+⚠️ Trade at your own risk!`;
+    }
 
-        function filter(type, btn) {
-            currentFilter = type;
-            document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
-            btn.classList.add('active');
-            render();
-        }
+    function shareWA() {
+        const txt = encodeURIComponent(document.getElementById('shareTxt').value);
+        window.open(`https://wa.me/?text=${txt}`,'_blank');
+    }
+    function shareTG() {
+        const txt = encodeURIComponent(document.getElementById('shareTxt').value);
+        window.open(`https://t.me/share/url?text=${txt}`,'_blank');
+    }
+    function shareTW() {
+        const txt = encodeURIComponent(document.getElementById('shareTxt').value.substring(0, 260));
+        window.open(`https://twitter.com/intent/tweet?text=${txt}`,'_blank');
+    }
+    function copyText() {
+        navigator.clipboard.writeText(document.getElementById('shareTxt').value);
+        toast('Copied!');
+    }
 
-        function refresh() {
-            const btn = document.querySelector('.refresh-btn');
-            btn.classList.add('spin');
-            loadSignals().finally(() => {
-                setTimeout(() => { btn.classList.remove('spin'); toast('Updated!'); }, 500);
-            });
-        }
+    function timeAgo(ts) {
+        if (!ts) return '-';
+        const diff = Date.now() - ts;
+        const m = Math.floor(diff/60000);
+        const h = Math.floor(m/60);
+        const d = Math.floor(h/24);
+        if (d>0) return d+'d ago';
+        if (h>0) return h+'h ago';
+        if (m>0) return m+'m ago';
+        return 'Just now';
+    }
 
-        function timeAgo(ts) {
-            const diff = Date.now() - ts;
-            const mins = Math.floor(diff / 60000);
-            const hours = Math.floor(mins / 60);
-            const days = Math.floor(hours / 24);
-            if (days > 0) return days + ' hari lalu';
-            if (hours > 0) return hours + ' jam lalu';
-            if (mins > 0) return mins + ' menit lalu';
-            return 'Baru saja';
-        }
+    function toast(msg) {
+        const t = document.getElementById('toast');
+        document.getElementById('toastMsg').textContent = msg;
+        t.classList.add('show');
+        setTimeout(()=>t.classList.remove('show'),3000);
+    }
 
-        function openModal(src) { document.getElementById('modalImg').src = src; document.getElementById('imgModal').classList.add('active'); }
-        function closeModal() { document.getElementById('imgModal').classList.remove('active'); }
+    document.addEventListener('keydown', e=>{
+        if(e.key==='Escape'){closeModal();closeShare();}
+    });
 
-        function share(signal) {
-            currentSignal = signal;
-            const text = `🚀 *TRADING SIGNAL*\n━━━━━━━━━━━━━━━\n📊 Pair: ${signal.pair}\n${signal.type === 'buy' ? '🟢' : '🔴'} Type: ${signal.type.toUpperCase()}\n⏰ Timeframe: ${signal.timeframe}\n━━━━━━━━━━━━━━━\n💰 Entry: ${signal.entry}\n🎯 Take Profit: ${signal.takeProfit}\n🛑 Stop Loss: ${signal.stopLoss}\n━━━━━━━━━━━━━━━\n📝 *Analysis:*\n${signal.description}\n━━━━━━━━━━━━━━━\n⚠️ _Trade at your own risk!_`;
-            document.getElementById('shareTxt').value = text;
-            document.getElementById('shareModal').classList.add('active');
-        }
-        function closeShare() { document.getElementById('shareModal').classList.remove('active'); }
-        function shareWA() { window.open(`https://wa.me/?text=${encodeURIComponent(document.getElementById('shareTxt').value)}`, '_blank'); }
-        function shareTG() { window.open(`https://t.me/share/url?text=${encodeURIComponent(document.getElementById('shareTxt').value)}`, '_blank'); }
-        function shareTW() { window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(document.getElementById('shareTxt').value.substring(0, 280))}`, '_blank'); }
-        function copyTxt() { navigator.clipboard.writeText(document.getElementById('shareTxt').value); toast('Copied!'); }
-
-        function toast(msg) {
-            const t = document.getElementById('toast');
-            document.getElementById('toastMsg').textContent = msg;
-            t.classList.add('show');
-            setTimeout(() => t.classList.remove('show'), 3000);
-        }
-
-        document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); closeShare(); } });
-        setInterval(loadSignals, 30000);
-    </script>
+    // Auto refresh setiap 30 detik
+    setInterval(loadContent,30000);
+</script>
 </body>
 </html>
