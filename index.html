@@ -1,654 +1,427 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>DarkPortrait · Biodata & Progress Journey</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>ZVER</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        body {
-            font-family: 'Space Grotesk', 'Inter', sans-serif;
-            background: #0B0E14;
-            color: #E9EDF2;
-            line-height: 1.45;
-            padding: 20px 16px 40px 16px;
-            max-width: 480px;
-            margin: 0 auto;
-            background-image: radial-gradient(circle at 25% 10%, rgba(45, 85, 120, 0.2) 1.5%, transparent 2.5%);
-            background-size: 32px 32px;
-        }
+    body {
+      background-color: #020502;
+      font-family: 'Courier New', 'Fira Code', 'JetBrains Mono', monospace;
+      color: #b7ffb7;
+      line-height: 1.5;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
 
-        .app-container {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
+    /* LAPISAN MATRIX RAIN (SAMAR) */
+    #matrix-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      opacity: 0.12;
+      pointer-events: none;
+    }
 
-        .card {
-            background: rgba(18, 24, 34, 0.85);
-            backdrop-filter: blur(2px);
-            border-radius: 36px;
-            padding: 1.5rem;
-            box-shadow: 0 12px 28px -8px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(72, 90, 110, 0.25);
-            transition: all 0.2s ease;
-            border: 1px solid rgba(70, 90, 110, 0.3);
-        }
+    .content {
+      position: relative;
+      z-index: 2;
+      max-width: 1300px;
+      margin: 1.5rem auto;
+      padding: 1rem 2rem;
+    }
 
-        .profile-row {
-            display: flex;
-            align-items: center;
-            gap: 18px;
-            flex-wrap: wrap;
-            margin-bottom: 16px;
-        }
-        .avatar-large {
-            background: linear-gradient(145deg, #1E2A3A, #0F1620);
-            width: 80px;
-            height: 80px;
-            border-radius: 48px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.4rem;
-            color: #5F9EF0;
-            box-shadow: 0 10px 18px rgba(0,0,0,0.3);
-            border: 1px solid #2F3E55;
-            cursor: pointer;
-            transition: 0.1s;
-        }
-        .info h2 {
-            font-size: 1.6rem;
-            font-weight: 700;
-            letter-spacing: -0.3px;
-            background: linear-gradient(135deg, #FFFFFF, #A0C4FF);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        .info p {
-            font-size: 0.8rem;
-            color: #9AAEC5;
-            margin-top: 4px;
-        }
-        .badge-detail {
-            background: #1C2538;
-            color: #A9C9FF;
-            padding: 6px 12px;
-            border-radius: 40px;
-            font-size: 0.7rem;
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
+    /* TERMINAL UTAMA */
+    .terminal-window {
+      background: #051005e0;
+      backdrop-filter: blur(2px);
+      border: 1px solid #1e4a1e;
+      box-shadow: 6px 6px 0px #0c2a0c;
+      padding: 1.8rem;
+      transition: all 0.2s;
+    }
 
-        .biodata-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-top: 16px;
-            background: #0F151F;
-            border-radius: 28px;
-            padding: 16px;
-        }
-        .biodata-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 0.85rem;
-            border-bottom: 1px solid #1E2A38;
-            padding-bottom: 8px;
-        }
-        .biodata-item i {
-            width: 28px;
-            color: #5F9EF0;
-        }
+    /* BAR ATAS */
+    .terminal-bar {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #1d5a1d;
+      padding-bottom: 0.6rem;
+      margin-bottom: 1.8rem;
+      flex-wrap: wrap;
+      font-size: 0.85rem;
+    }
 
-        /* SOSIAL MEDIA SECTION */
-        .social-section {
-            margin-top: 8px;
-        }
-        .social-title {
-            font-size: 0.8rem;
-            color: #9AAEC5;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .social-icons-grid {
-            display: flex;
-            justify-content: space-around;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-        .social-btn {
-            background: #131C2A;
-            border-radius: 60px;
-            padding: 10px 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-            color: #E9EDF2;
-            font-size: 0.85rem;
-            font-weight: 500;
-            transition: all 0.2s ease;
-            border: 1px solid #263040;
-            flex: 1;
-            justify-content: center;
-            min-width: 100px;
-        }
-        .social-btn i {
-            font-size: 1.2rem;
-            margin-right: 0;
-        }
-        .social-btn:hover {
-            transform: translateY(-2px);
-            border-color: #5F9EF0;
-        }
-        .social-btn.tiktok:hover { background: #010101; border-color: #25F4EE; color: #25F4EE; }
-        .social-btn.instagram:hover { background: linear-gradient(45deg, #f09433, #d62976, #962fbf); border-color: transparent; color: white; }
-        .social-btn.facebook:hover { background: #1877F2; border-color: #1877F2; color: white; }
-        .social-btn.github:hover { background: #333; border-color: #fff; color: white; }
+    .menu {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
 
-        .section-title {
-            font-weight: 700;
-            font-size: 1.25rem;
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            letter-spacing: -0.2px;
-            color: #D6E6FF;
-        }
-        .stats-panel {
-            background: #0C111C;
-            border-radius: 28px;
-            padding: 14px 16px;
-            margin-bottom: 20px;
-        }
-        .stat-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-            font-size: 0.8rem;
-        }
-        .progress-bar-bg {
-            background: #222C3C;
-            border-radius: 20px;
-            height: 10px;
-            width: 100%;
-            overflow: hidden;
-            margin: 8px 0;
-        }
-        .progress-fill {
-            background: linear-gradient(90deg, #5F9EF0, #3B6CB7);
-            width: 0%;
-            height: 100%;
-            border-radius: 20px;
-            transition: width 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-        }
+    .menu a {
+      color: #8ed68e;
+      text-decoration: none;
+      border-bottom: 1px dashed #267a26;
+      transition: 0.2s;
+    }
 
-        .exp-list {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            margin: 16px 0 8px;
-        }
-        .exp-item {
-            display: flex;
-            gap: 14px;
-        }
-        .exp-icon {
-            width: 44px;
-            height: 44px;
-            background: #131C2A;
-            border-radius: 28px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.3rem;
-            color: #5F9EF0;
-        }
-        .exp-content {
-            flex: 1;
-        }
-        .exp-title {
-            font-weight: 700;
-            font-size: 0.95rem;
-        }
-        .exp-meta {
-            font-size: 0.7rem;
-            color: #8196B0;
-            margin: 4px 0;
-        }
-        .exp-desc {
-            font-size: 0.75rem;
-            color: #B7C7E0;
-        }
+    .menu a:hover {
+      color: #9eff9e;
+      border-bottom: 1px solid #68ff68;
+      text-shadow: 0 0 3px #33ff33;
+    }
 
-        .admin-check {
-            display: none;
-            justify-content: flex-end;
-            margin-top: 6px;
-            cursor: pointer;
-            font-size: 0.9rem;
-        }
-        .admin-check.visible {
-            display: flex;
-        }
-        .check-done {
-            color: #5F9EF0;
-        }
-        .check-pending {
-            color: #37465C;
-        }
-        .admin-badge {
-            position: fixed;
-            bottom: 10px;
-            right: 10px;
-            background: #1E2A3C;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 0.6rem;
-            color: #6C8DB0;
-            z-index: 999;
-            opacity: 0.6;
-        }
+    /* GLITCH UTAMA */
+    .glitch-main {
+      font-size: 2.8rem;
+      font-weight: bold;
+      letter-spacing: -1px;
+      color: #caffca;
+      text-shadow: 3px 0 #116611, -2px -1px 0 #2f9f2f;
+      transition: 0.08s linear;
+      display: inline-block;
+    }
 
-        .milestone-list {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-            margin-top: 12px;
-        }
-        .milestone-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            background: #0E141F;
-            padding: 10px 12px;
-            border-radius: 28px;
-        }
-        .milestone-icon {
-            font-size: 1.2rem;
-            width: 36px;
-        }
-        .milestone-info {
-            flex: 1;
-        }
-        .milestone-title {
-            font-weight: 600;
-            font-size: 0.85rem;
-        }
-        .target-check {
-            display: none;
-            cursor: pointer;
-        }
-        .target-check.visible {
-            display: block;
-        }
+    .glitch-main:hover {
+      animation: brutalGlitch 0.18s infinite;
+    }
 
-        .footer-note {
-            text-align: center;
-            font-size: 0.65rem;
-            color: #60758E;
-        }
-        button {
-            background: none;
-            border: none;
-            cursor: pointer;
-        }
-        i {
-            margin-right: 6px;
-        }
-        hr {
-            border-color: #1E2A3A;
-            margin: 12px 0;
-        }
-        .hidden-reset-btn {
-            background: #1E2A3C;
-            border: none;
-            padding: 8px 0;
-            border-radius: 40px;
-            font-weight: 600;
-            font-size: 0.7rem;
-            width: 100%;
-            color: #A9C9FF;
-            transition: 0.2s;
-            margin-top: 12px;
-            display: none;
-        }
-        .hidden-reset-btn.visible {
-            display: block;
-        }
-    </style>
+    @keyframes brutalGlitch {
+      0% { transform: translate(0); text-shadow: -3px 0 #0f0; }
+      25% { transform: translate(2px, -1px); text-shadow: 2px 1px #040; }
+      50% { transform: translate(-2px, 1px); text-shadow: -1px -2px #3eff3e; }
+      75% { transform: translate(1px, -1px); text-shadow: 1px 1px #146414; }
+      100% { transform: translate(0); text-shadow: 0 0 #2aff2a; }
+    }
+
+    /* ROTATING LINE (TIGA KATA BERJALAN) */
+    .dynamic-line {
+      background: #081a08;
+      padding: 0.8rem 1rem;
+      margin: 1rem 0;
+      border-left: 8px solid #42f55c;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0.5rem;
+      font-size: 1.2rem;
+    }
+
+    .prompt {
+      color: #5eff6b;
+      background: #0e260e;
+      padding: 0 0.3rem;
+    }
+
+    #rotatingWord {
+      background: #0c1c0c;
+      padding: 0 0.4rem;
+      font-weight: bold;
+      color: #dbffdb;
+      border: 1px solid #2f762f;
+      min-width: 240px;
+    }
+
+    .blinking-cursor {
+      background: #53ff53;
+      width: 12px;
+      height: 1.4rem;
+      display: inline-block;
+      animation: blinkStep 1s step-end infinite;
+      margin-left: 4px;
+    }
+
+    @keyframes blinkStep {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    /* BIO DENGAN TYPING EFFECT */
+    .typed-bio {
+      background: #041104;
+      padding: 0.8rem;
+      margin: 1rem 0;
+      font-size: 0.95rem;
+      border: 1px solid #1c571c;
+      color: #bef5be;
+      max-width: 700px;
+    }
+
+    /* SKILL CHIP */
+    .skill-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin: 1rem 0;
+    }
+    .skill-chip {
+      border: 1px solid #2c772c;
+      background: #0a140a;
+      padding: 0.3rem 0.8rem;
+      font-size: 0.85rem;
+    }
+
+    /* PROJECT CARD - RUSAK/GLITCH */
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+    .hack-card {
+      background: #061006;
+      border: 1px dashed #2f872f;
+      padding: 1.2rem;
+      transition: 0.1s linear;
+      position: relative;
+    }
+    .hack-card:hover {
+      border-style: solid;
+      border-color: #6eff6e;
+      box-shadow: 0 0 4px #22ff22;
+      transform: translate(-2px, -2px);
+    }
+    .card-tag {
+      color: #91f091;
+      font-size: 0.7rem;
+      border-top: 1px solid #217021;
+      margin-top: 0.7rem;
+      padding-top: 0.4rem;
+      display: inline-block;
+    }
+
+    /* FORM TERMINAL */
+    .terminal-form {
+      background: #031003;
+      padding: 1rem;
+      margin: 1.5rem 0;
+      border: 1px solid #206e20;
+    }
+    input, textarea {
+      width: 100%;
+      background: #0f1f0f;
+      border: 1px solid #1a591a;
+      padding: 0.6rem;
+      margin: 0.5rem 0;
+      color: #ceffce;
+      font-family: monospace;
+    }
+    button {
+      background: #154015;
+      border: 1px solid #49e649;
+      padding: 0.5rem 1.2rem;
+      color: #baffba;
+      font-family: monospace;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #216621;
+      text-shadow: 0 0 3px #00ff00;
+    }
+
+    /* scanning effect (random garis hijau) */
+    .scan-effect {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: #23ff23;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 10;
+      animation: scanline 6s linear infinite;
+    }
+    @keyframes scanline {
+      0% { top: -5%; opacity: 0.2; }
+      10% { opacity: 0.7; }
+      90% { opacity: 0.1; }
+      100% { top: 105%; opacity: 0; }
+    }
+
+    footer {
+      border-top: 1px solid #256d25;
+      margin-top: 2rem;
+      padding: 1rem;
+      text-align: center;
+      font-size: 0.7rem;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 700px) {
+      .content {
+        padding: 0.5rem;
+      }
+      .glitch-main {
+        font-size: 1.7rem;
+      }
+      .dynamic-line {
+        font-size: 0.9rem;
+      }
+      .terminal-window {
+        padding: 1rem;
+      }
+      .menu {
+        gap: 1rem;
+      }
+    }
+  </style>
 </head>
 <body>
-<div class="app-container">
-    
-    <!-- CARD BIODATA DIRI -->
-    <div class="card">
-        <div class="profile-row">
-            <div class="avatar-large" id="adminToggleAvatar">
-                <i class="fas fa-user-astronaut"></i>
-            </div>
-            <div class="info">
-                <h2>Rohim</h2>
-                <p>Pengen menjadi orang </p>
-                <div class="badge-detail" style="margin-top: 6px;"><i class="fas fa-map-pin"></i> Pontianak, ID</div>
-            </div>
+  <canvas id="matrix-bg"></canvas>
+  <div class="scan-effect"></div>
+  <div class="content">
+    <div class="terminal-window">
+      <div class="terminal-bar">
+        <span>zverhim@d3f4ult:~$</span>
+        <div class="menu">
+          <a href="#">[inject]</a>
+          <a href="#">[bypass]</a>
+          <a href="#">[scraper]</a>
+          <a href="#">[contact]</a>
         </div>
-        <div class="biodata-grid">
-            <div class="biodata-item"><i class="fas fa-briefcase"></i> <span>Mobile Legend</span></div>
-            <div class="biodata-item"><i class="fas fa-graduation-cap"></i> <span>Adan</span></div>
-            <div class="biodata-item"><i class="fas fa-heart"></i> <span>UI/UX, menulis, eksplorasi teknologi</span></div>
-            <div class="biodata-item"><i class="fas fa-globe"></i> <span>Portfolio: rohim.my.id</span></div>
-        </div>
-        
-        <!-- SOSIAL MEDIA SECTION (TAMBAHAN) -->
-        <div class="social-section">
-            <div class="social-title">
-                <i class="fas fa-share-alt"></i> Temukan saya di sosial media
-            </div>
-            <div class="social-icons-grid">
-                <a href="#" class="social-btn tiktok" id="tiktokLink" target="_blank">
-                    <i class="fab fa-tiktok"></i> TikTok
-                </a>
-                <a href="#" class="social-btn instagram" id="instagramLink" target="_blank">
-                    <i class="fab fa-instagram"></i> Instagram
-                </a>
-                <a href="#" class="social-btn facebook" id="facebookLink" target="_blank">
-                    <i class="fab fa-facebook-f"></i> Facebook
-                </a>
-                <a href="#" class="social-btn github" id="githubLink" target="_blank">
-                    <i class="fab fa-github"></i> GitHub
-                </a>
-            </div>
-        </div>
+      </div>
+
+      <!-- Glitch title -->
+      <div>
+        <span class="glitch-main">>_ EL CIENCO // root://0x7C4</span>
+      </div>
+
+      <!-- Tiga kata bergantian -->
+      <div class="dynamic-line">
+        <span class="prompt">⦿ exec&gt;</span>
+        <span id="rotatingWord">(initializing)</span>
+        <span class="blinking-cursor"></span>
+      </div>
+
+      <!-- Bio dengan typing effect ramping -->
+      <div class="typed-bio" id="typewriterBio"></div>
+
+      <div class="skill-group">
+        <span class="skill-chip">✦ AKU CINTA MBG</span>
+        <span class="skill-chip">✦ MBG SEHAT</span>
+        <span class="skill-chip">✦ UDAH PERNAH IMO NIHH BOSS</span>
+        <span class="skill-chip">✦ PERNAH SAVAGE</span>
+      </div>
+
+      <!-- projects -->
+      <h3 style="margin: 2rem 0 0.5rem 0">⛁ deployed payloads</h3>
+      <div class="project-grid">
+        <div class="hack-card"><strong>ghost_tunnel</strong><br>traffic masking over tor+obfs4<div class="card-tag">#c2</div></div>
+        <div class="hack-card"><strong>mem_spray_py</strong><br>bypass EDR with dynamic injection<div class="card-tag">#exploit</div></div>
+        <div class="hack-card"><strong>dark_vision</strong><br>network sweeper + silent listener<div class="card-tag">#recon</div></div>
+      </div>
+
+      <!-- terminal form -->
+      <div class="terminal-form">
+        <span style="color:#9aff9a;">&gt; send encrypted message</span>
+        <input type="text" placeholder="handle / key">
+        <textarea rows="2" placeholder="message . . ."></textarea>
+        <button>encrypt & send</button>
+      </div>
+      <footer>⚡ offline-first // no cloud storage // 0x7C4 // operational security</footer>
     </div>
+  </div>
 
-    <!-- PROGRESS PENGALAMAN & KARIER -->
-    <div class="card">
-        <div class="section-title">
-            <i class="fas fa-chart-simple"></i> Progress Experience
-            <span style="font-size:0.7rem; background:#1F2C40; padding:2px 8px; border-radius:30px;">live track</span>
-        </div>
-        <div class="stats-panel">
-            <div class="stat-row"><span><i class="fas fa-code"></i> Project selesai</span><span id="projectCount">12</span></div>
-            <div class="stat-row"><span><i class="fas fa-award"></i> Sertifikasi & kursus</span><span id="certCount">4</span></div>
-            <div class="stat-row"><span><i class="fas fa-calendar-week"></i> Tahun aktif berkarya</span><span id="activeYears">4</span></div>
-            <div class="progress-bar-bg"><div class="progress-fill" id="careerProgressFill" style="width: 0%;"></div></div>
-            <div class="stat-row"><span>Capai target expert level</span><span id="careerPercent">0</span>%</div>
-        </div>
+  <script>
+    (function matrixBackground() {
+      const canvas = document.getElementById('matrix-bg');
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      const cols = Math.floor(canvas.width / 22);
+      const drops = Array(cols).fill(1);
+      const str = "010010101001110100101010";
+      function draw() {
+        ctx.fillStyle = 'rgba(0, 4, 0, 0.04)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = '#0f8f0f';
+        ctx.font = '14px monospace';
+        for (let i = 0; i < drops.length; i++) {
+          const text = str[Math.floor(Math.random() * str.length)];
+          ctx.fillText(text, i * 22, drops[i] * 18);
+          if (drops[i] * 18 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+          drops[i]++;
+        }
+        requestAnimationFrame(draw);
+      }
+      draw();
+      window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      });
+    })();
 
-        <div style="font-weight:600; font-size:0.85rem; margin: 4px 0 8px;"><i class="fas fa-timeline"></i> Riwayat & milestone karier</div>
-        <div class="exp-list" id="experienceContainer"></div>
-        <button id="resetExpBtn" class="hidden-reset-btn"><i class="fas fa-rotate-left"></i> Reset progress pengalaman (admin only)</button>
-    </div>
-
-    <!-- TARGET PENGEMBANGAN DIRI -->
-    <div class="card">
-        <div class="section-title">
-            <i class="fas fa-flag-checkered"></i> Target Pengembangan
-        </div>
-        <div class="milestone-list" id="targetMilestoneList"></div>
-        <div style="display: flex; justify-content: space-between; margin-top: 16px;">
-            <span id="targetStats" style="font-size:0.7rem;">0/5 tercapai</span>
-            <button id="resetTargetsBtn" class="hidden-reset-btn" style="width:auto; padding:5px 12px; margin-top:0;">reset target</button>
-        </div>
-    </div>
-
-    <div class="footer-note">
-        <i class="fas fa-chart-line"></i> Setiap progress adalah langkah nyata. Terus tumbuh dalam kegelapan, bintang tetap bersinar.
-    </div>
-    <div class="admin-badge" id="adminBadge">🔒 mode tamu</div>
-</div>
-
-<script>
-    // ==================== KONFIGURASI SOSIAL MEDIA ====================
-    // GANTI LINK DIBAWAH INI DENGAN AKUN SOSMED KAMU
-    const SOCIAL_LINKS = {
-        tiktok: "https://www.tiktok.com/@rhmdev",
-        instagram: "https://www.instagram.com/rohimmm_m/",
-        facebook: "https://www.facebook.com/rohimzver121",
-        github: "https://github.com/usernamekamu"
-    };
-    
-    // Set link sosial media
-    document.getElementById('tiktokLink')?.setAttribute('href', SOCIAL_LINKS.tiktok);
-    document.getElementById('instagramLink')?.setAttribute('href', SOCIAL_LINKS.instagram);
-    document.getElementById('facebookLink')?.setAttribute('href', SOCIAL_LINKS.facebook);
-    document.getElementById('githubLink')?.setAttribute('href', SOCIAL_LINKS.github);
-    // ================================================================
-
-    // ------------------- DATA AWAL (STATIS UNTUK PUBLIK) -------------------
-    const experiencesData = [
-        { id: 1, title: "Freelance Web Developer", period: "2021 - 2022", desc: "Mengerjakan 5+ website responsif untuk UMKM.", achieved: true, icon: "💻" },
-        { id: 2, title: "Junior Frontend Dev (Startup)", period: "2022 - 2023", desc: "Migrasi design system, optimasi performa.", achieved: true, icon: "🚀" },
-        { id: 3, title: "Menguasai React & Next.js secara profesional", period: "2024 target", desc: "Sertifikasi dan proyek kompleks.", achieved: false, icon: "⚛️" },
-        { id: 4, title: "Menulis artikel teknik & berkontribusi open source", period: "2025 ongoing", desc: "Membangun portofolio & dampak.", achieved: false, icon: "📘" },
-        { id: 5, title: "Mentor junior developer / mengajar", period: "Progres 50%", desc: "Berbagi pengalaman dan membangun komunitas.", achieved: false, icon: "👥" }
+    // ========= TIGA KATA BERJALAN (LOOPING) =========
+    const rotatingWords = [
+      "> security research",
+      "> reverse engineering",
+      "> zero-day simulation",
+      "> firmware dissection",
+      "> protocol abuse"
     ];
-
-    const targetsData = [
-        { id: 1, title: "Mempunyai Usaha Pribadi", achieved: false },
-        { id: 2, title: "Mendapakan Uang 3/4 Digit", achieved: false },
-        { id: 3, title: "Membangun Relasi dan Personal Branding", achieved: false },
-        { id: 4, title: "Mengusahai Teknik Trading", achieved: false },
-        { id: 5, title: "Mempunyai MBG dan Koperasi Merah Putih", achieved: false }
-    ];
-
-    let experiences = [];
-    let targets = [];
-    let isAdminMode = false;
-
-    function loadData() {
-        const storedExp = localStorage.getItem("dark_portfolio_exp_admin");
-        if (storedExp && isAdminMode) {
-            experiences = JSON.parse(storedExp);
+    let wordIndex = 0;
+    const rotatingSpan = document.getElementById("rotatingWord");
+    let isErasing = false;
+    let currentText = "";
+    let charPos = 0;
+    function typeRotating() {
+      const full = rotatingWords[wordIndex % rotatingWords.length];
+      if (!isErasing) {
+        if (charPos <= full.length) {
+          rotatingSpan.textContent = full.substring(0, charPos);
+          charPos++;
+          setTimeout(typeRotating, 85);
         } else {
-            experiences = JSON.parse(JSON.stringify(experiencesData));
+          isErasing = true;
+          setTimeout(typeRotating, 1900);
         }
-
-        const storedTargets = localStorage.getItem("dark_portfolio_targets_admin");
-        if (storedTargets && isAdminMode) {
-            targets = JSON.parse(storedTargets);
+      } else {
+        if (charPos >= 0) {
+          rotatingSpan.textContent = full.substring(0, charPos);
+          charPos--;
+          setTimeout(typeRotating, 45);
         } else {
-            targets = JSON.parse(JSON.stringify(targetsData));
+          isErasing = false;
+          wordIndex++;
+          charPos = 0;
+          setTimeout(typeRotating, 200);
         }
+      }
     }
+    typeRotating();
 
-    function saveExperiences() { if(isAdminMode) localStorage.setItem("dark_portfolio_exp_admin", JSON.stringify(experiences)); }
-    function saveTargets() { if(isAdminMode) localStorage.setItem("dark_portfolio_targets_admin", JSON.stringify(targets)); }
-
-    function updateCareerStats() {
-        const achievedExp = experiences.filter(exp => exp.achieved).length;
-        const totalExp = experiences.length;
-        const careerPercent = totalExp === 0 ? 0 : Math.round((achievedExp / totalExp) * 100);
-        document.getElementById("careerPercent").innerText = careerPercent;
-        document.getElementById("careerProgressFill").style.width = careerPercent + "%";
-        
-        let projectsDone = 3;
-        let certs = 0;
-        if (achievedExp >= 1) projectsDone = 5 + (achievedExp * 2);
-        if (achievedExp >= 2) certs = 2;
-        if (achievedExp >= 3) certs = 4;
-        if (achievedExp >= 4) certs = 6;
-        document.getElementById("projectCount").innerText = projectsDone;
-        document.getElementById("certCount").innerText = certs;
-        const activeYear = 2021;
-        const currentYear = new Date().getFullYear();
-        let years = currentYear - activeYear;
-        if (years < 1) years = 1;
-        document.getElementById("activeYears").innerText = years;
+    // TYPING EFFECT UNTUK BIO
+    const bioText = `> autonomous security core | no cloud, no mercy\n> offline-first analyst & red team ops\n> “breaking to rebuild, never to exploit innocents”`;
+    const bioElement = document.getElementById("typewriterBio");
+    let bioIdx = 0;
+    function typeBio() {
+      if (bioIdx < bioText.length) {
+        bioElement.innerHTML += bioText.charAt(bioIdx);
+        bioIdx++;
+        setTimeout(typeBio, 35);
+      }
     }
+    typeBio();
 
-    function renderExperiences() {
-        const container = document.getElementById("experienceContainer");
-        if (!container) return;
-        container.innerHTML = "";
-        experiences.forEach(exp => {
-            const expDiv = document.createElement("div");
-            expDiv.className = "exp-item";
-            expDiv.innerHTML = `
-                <div class="exp-icon">${exp.icon || '📌'}</div>
-                <div class="exp-content">
-                    <div class="exp-title">${escapeHtml(exp.title)}</div>
-                    <div class="exp-meta">${escapeHtml(exp.period)}</div>
-                    <div class="exp-desc">${escapeHtml(exp.desc)}</div>
-                    <div class="admin-check" data-id="${exp.id}">
-                        ${exp.achieved ? '<i class="fas fa-check-circle check-done"></i> Selesai' : '<i class="far fa-circle check-pending"></i> Tandai selesai'}
-                    </div>
-                </div>
-            `;
-            const checkDiv = expDiv.querySelector('.admin-check');
-            if (checkDiv && isAdminMode) {
-                checkDiv.classList.add('visible');
-                checkDiv.addEventListener("click", (e) => {
-                    e.stopPropagation();
-                    toggleExpAchieved(exp.id);
-                });
-            } else if (checkDiv) {
-                checkDiv.classList.remove('visible');
-            }
-            container.appendChild(expDiv);
-        });
-        updateCareerStats();
-    }
-
-    function toggleExpAchieved(id) {
-        if (!isAdminMode) return;
-        const idx = experiences.findIndex(e => e.id === id);
-        if (idx !== -1) {
-            experiences[idx].achieved = !experiences[idx].achieved;
-            saveExperiences();
-            renderExperiences();
-            updateCareerStats();
-            renderTargets();
-        }
-    }
-
-    function resetExperiences() {
-        if (!isAdminMode) return;
-        if (confirm("Reset semua progress pengalaman?")) {
-            experiences = JSON.parse(JSON.stringify(experiencesData));
-            saveExperiences();
-            renderExperiences();
-            updateCareerStats();
-        }
-    }
-
-    function renderTargets() {
-        const container = document.getElementById("targetMilestoneList");
-        if (!container) return;
-        let achievedCount = 0;
-        targets.forEach(t => { if (t.achieved) achievedCount++; });
-        document.getElementById("targetStats").innerHTML = `${achievedCount}/${targets.length} tercapai`;
-        container.innerHTML = "";
-        targets.forEach(target => {
-            const targetDiv = document.createElement("div");
-            targetDiv.className = "milestone-item";
-            targetDiv.innerHTML = `
-                <div class="milestone-icon"><i class="fas fa-bullseye"></i></div>
-                <div class="milestone-info">
-                    <div class="milestone-title">${escapeHtml(target.title)}</div>
-                </div>
-                <div class="target-check" data-id="${target.id}">
-                    ${target.achieved ? '<i class="fas fa-check-circle check-done"></i>' : '<i class="far fa-circle check-pending"></i>'}
-                </div>
-            `;
-            const checkDiv = targetDiv.querySelector('.target-check');
-            if (checkDiv && isAdminMode) {
-                checkDiv.classList.add('visible');
-                checkDiv.addEventListener("click", (e) => {
-                    e.stopPropagation();
-                    toggleTarget(target.id);
-                });
-            }
-            container.appendChild(targetDiv);
-        });
-        updateCareerStats();
-    }
-
-    function toggleTarget(id) {
-        if (!isAdminMode) return;
-        const idx = targets.findIndex(t => t.id === id);
-        if (idx !== -1) {
-            targets[idx].achieved = !targets[idx].achieved;
-            saveTargets();
-            renderTargets();
-        }
-    }
-
-    function resetTargets() {
-        if (!isAdminMode) return;
-        if (confirm("Reset semua target pengembangan?")) {
-            targets = JSON.parse(JSON.stringify(targetsData));
-            saveTargets();
-            renderTargets();
-        }
-    }
-
-    let clickCount = 0;
-    let timeout;
-    function enableAdminMode() {
-        if (isAdminMode) return;
-        isAdminMode = true;
-        document.getElementById("adminBadge").innerHTML = "👑 mode admin (centang aktif)";
-        document.getElementById("adminBadge").style.opacity = "1";
-        document.getElementById("adminBadge").style.background = "#2C405C";
-        loadData();
-        renderExperiences();
-        renderTargets();
-        updateCareerStats();
-        document.getElementById("resetExpBtn")?.classList.add("visible");
-        document.getElementById("resetTargetsBtn")?.classList.add("visible");
-        alert("Mode Admin aktif! Sekarang Anda bisa mencentang progress. Centang hanya tampil untuk Anda.");
-    }
-
-    function onAvatarClick() {
-        clickCount++;
-        clearTimeout(timeout);
-        timeout = setTimeout(() => { clickCount = 0; }, 800);
-        if (clickCount >= 5) {
-            enableAdminMode();
-            clickCount = 0;
-        }
-    }
-
-    function escapeHtml(str) {
-        if (!str) return "";
-        return str.replace(/[&<>]/g, function(m) {
-            if(m === '&') return '&amp;';
-            if(m === '<') return '&lt;';
-            if(m === '>') return '&gt;';
-            return m;
-        });
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-        isAdminMode = false;
-        loadData();
-        renderExperiences();
-        renderTargets();
-        updateCareerStats();
-
-        document.getElementById("adminToggleAvatar")?.addEventListener("click", onAvatarClick);
-        document.getElementById("resetExpBtn")?.addEventListener("click", resetExperiences);
-        document.getElementById("resetTargetsBtn")?.addEventListener("click", resetTargets);
-        
-        document.getElementById("resetExpBtn")?.classList.remove("visible");
-        document.getElementById("resetTargetsBtn")?.classList.remove("visible");
-    });
-</script>
+    // EFFECT SCANNING (GLITCH ACACIK)
+    setInterval(() => {
+      const glitchTitle = document.querySelector('.glitch-main');
+      if (glitchTitle && Math.random() > 0.85) {
+        glitchTitle.style.transform = 'skew(1deg)';
+        setTimeout(() => { glitchTitle.style.transform = ''; }, 80);
+      }
+    }, 2000);
+  </script>
 </body>
 </html>
